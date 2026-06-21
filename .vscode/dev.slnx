@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="..\TheWicken.csproj" />
+  <Project Path="..\gamedata\sts2.csproj" />
+</Solution>

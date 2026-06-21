@@ -1,4 +1,8 @@
 {
   "THEWICKEN-CONCOCT.title": "Concoct",
-  "THEWICKEN-CONCOCT.description": "Create a [gold]Wicked Brew[/gold]."
+  "THEWICKEN-CONCOCT.description": "Create a [gold]Wicked Brew[/gold].",
+  "THEWICKEN-STRIKE_WICKEN.description": "",
+  "THEWICKEN-STRIKE_WICKEN.title": "Strike",
+  "THEWICKEN-DEFEND_WICKEN.description": "",
+  "THEWICKEN-DEFEND_WICKEN.title": "Defend"
 }

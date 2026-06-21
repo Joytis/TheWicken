@@ -21,16 +21,16 @@ public class TheWicken : PlaceholderCharacterModel
     public override int StartingHp => 70;
     
     public override IEnumerable<CardModel> StartingDeck => [
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
+        ModelDb.Card<StrikeWicken>(),
+        ModelDb.Card<StrikeWicken>(),
+        ModelDb.Card<StrikeWicken>(),
+        ModelDb.Card<StrikeWicken>(),
+        ModelDb.Card<StrikeWicken>(),
+        ModelDb.Card<DefendWicken>(),
+        ModelDb.Card<DefendWicken>(),
+        ModelDb.Card<DefendWicken>(),
+        ModelDb.Card<DefendWicken>(),
+        ModelDb.Card<DefendWicken>(),
         ModelDb.Card<Concoct>(),
     ];
 

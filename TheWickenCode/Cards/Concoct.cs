@@ -22,7 +22,7 @@ public sealed class Concoct : TheWickenCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PotionCmd.TryToProcure<WickedBrew>(base.Owner);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await PotionCmd.TryToProcure<WickedBrew>(Owner);
     }
 }

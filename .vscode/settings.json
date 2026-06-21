@@ -1,9 +1,26 @@
 {
-    "dotnet.defaultSolution": "TheWicken.slnx",
+    "dotnet.defaultSolution": ".vscode/dev.slnx",
     "files.exclude": {
         "**/*.rpyc": true,
         "**/*.rpa": true,
         "**/*.rpymc": true,
         "**/cache/": true
+    },
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "**/.godot": true,
+        "**/.import": true,
+        "**/bin": true,
+        "**/obj": true,
+        "**/.git": true,
+        "**/.idea": true,
+        "**/.vs": true,
+        "publish": true,
+        "packages": true,
+        "gamedata/.autoconverted": true,
+        "gamedata/**/*.uid": true
+    },
+    "files.readonlyInclude": {
+        "gamedata/**": true
     }
 }

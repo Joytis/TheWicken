@@ -29,8 +29,8 @@ public sealed class WickedBrew : TheWickenPotion
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-        PotionModel.AssertValidForTargetedPotion(target);
-        DamageVar damage = base.DynamicVars.Damage;
-        await CreatureCmd.Damage(choiceContext, target, damage.BaseValue, damage.Props, base.Owner.Creature, null);
+        AssertValidForTargetedPotion(target);
+        DamageVar damage = DynamicVars.Damage;
+        await CreatureCmd.Damage(choiceContext, target, damage.BaseValue, damage.Props, Owner.Creature, null);
     }
 }
