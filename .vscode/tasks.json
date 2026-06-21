@@ -1,0 +1,108 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "MP: Launch (prompt for player count)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Players", "${input:playerCount}"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch a host + (N-1) clients of Slay the Spire 2 for local multiplayer."
+        },
+        {
+            "label": "MP: Launch 2 players",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Players", "2"
+            ],
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "Launch 1 host + 1 client."
+        },
+        {
+            "label": "MP: Launch 4 players",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Players", "4"
+            ],
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "Launch 1 host + 3 clients."
+        },
+        {
+            "label": "MP: Build + Launch (prompt for player count)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Players", "${input:playerCount}"
+            ],
+            "dependsOn": "dotnet build",
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "dotnet build (deploys mod) then launch host + (N-1) clients."
+        },
+        {
+            "label": "dotnet build",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["build"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": "$msCompile",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        },
+        {
+            "label": "dotnet publish",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["publish"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": "$msCompile",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        },
+        {
+            "label": "Publish and Run",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Solo"
+            ],
+            "dependsOn": "dotnet publish",
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "dotnet publish (export .pck + deploy) then launch a single Slay the Spire 2 instance."
+        }
+    ],
+    "inputs": [
+        {
+            "id": "playerCount",
+            "type": "promptString",
+            "description": "Total players to launch (1 host + rest clients)",
+            "default": "2"
+        }
+    ]
+}
