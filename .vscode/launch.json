@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Launches Slay the Spire 2 (with the freshly built mod) and attaches
+            // the .NET debugger to the game process so breakpoints in the mod hit.
+            "name": "Launch STS2 + Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "SlayTheSpire2.exe",
+            "preLaunchTask": "Publish + Launch STS2 (debug)",
+            "justMyCode": false,
+            "symbolOptions": {
+                "searchMicrosoftSymbolServer": false
+            }
+        },
+        {
+            // Attach only (game already running). Pick the process manually.
+            "name": "Attach to STS2 (running)",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}",
+            "justMyCode": false
+        }
+    ]
+}

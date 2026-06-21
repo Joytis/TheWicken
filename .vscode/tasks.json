@@ -73,6 +73,22 @@
             "presentation": { "reveal": "always", "panel": "shared" }
         },
         {
+            "label": "Publish + Launch STS2 (debug)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Solo",
+                "-DelayMs", "4000"
+            ],
+            "dependsOn": "dotnet publish",
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "Publish (exports .pck + deploys .dll/.pdb), launch one STS2 instance, then wait so the debugger can attach."
+        },
+        {
             "label": "dotnet publish",
             "type": "process",
             "command": "dotnet",

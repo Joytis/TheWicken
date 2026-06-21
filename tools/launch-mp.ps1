@@ -24,7 +24,8 @@
 param(
     [int]$Players = 2,
     [string]$Sts2Path = "",
-    [switch]$Solo
+    [switch]$Solo,
+    [int]$DelayMs = 0
 )
 
 $ErrorActionPreference = "Stop"
@@ -65,6 +66,10 @@ Write-Host "Game dir : $gameDir"
 if ($Solo) {
     Write-Host "[solo ] launching single instance (no -fastmp)"
     Start-Process -FilePath $exe -WorkingDirectory $gameDir
+    if ($DelayMs -gt 0) {
+        Write-Host "Waiting ${DelayMs}ms for the runtime to come up (debugger attach)..."
+        Start-Sleep -Milliseconds $DelayMs
+    }
     Write-Host "Launched 1 solo instance."
     return
 }
