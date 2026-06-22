@@ -4,10 +4,12 @@
 Card portraits and powers each ship in two sizes: a small portrait and a
 "big" full-art version under a ``big/`` subfolder, sharing the same filename:
 
-    TheWicken/images/card_portraits/foo.png        (small)
-    TheWicken/images/card_portraits/big/foo.png     (big)
-    TheWicken/images/powers/foo.png                 (small)
-    TheWicken/images/powers/big/foo.png             (big)
+    TheWicken/images/card_portraits/foo.png             (small)
+    TheWicken/images/card_portraits/big/foo.png         (big)
+    TheWicken/images/card_portraits/familiar/foo.png     (small)
+    TheWicken/images/card_portraits/familiar/big/foo.png (big)
+    TheWicken/images/powers/foo.png                     (small)
+    TheWicken/images/powers/big/foo.png                 (big)
 
 This script fills in whichever side is missing:
 
@@ -19,8 +21,8 @@ Variants are scaled by a fixed factor (default 4x), which matches the project's
 existing assets (250x190 <-> 1000x760, 64x64 <-> 256x256). Aspect ratio is
 preserved, so odd prototype sizes round-trip cleanly.
 
-After generating new PNGs, run the "Godot: Import assets" task (or
-tools/import-assets.ps1) so Godot writes the .import sidecars before packing.
+New PNGs are imported automatically; `dotnet publish` invokes Godot, which
+writes the .import sidecars before packing the .pck.
 
 Usage:
     py tools/gen-image-sizes.py                 # both categories, scale 4
@@ -48,6 +50,7 @@ IMAGES_ROOT = REPO_ROOT / "TheWicken" / "images"
 # the "big" subfolder of that same directory.
 CATEGORIES = {
     "card_portraits": IMAGES_ROOT / "card_portraits",
+    "familiar": IMAGES_ROOT / "card_portraits" / "familiar",
     "powers": IMAGES_ROOT / "powers",
 }
 
@@ -138,8 +141,6 @@ def main() -> int:
         print(f"Dry run: {total} variant(s) would be generated.")
     else:
         print(f"Generated {total} variant(s).")
-        if total:
-            print("Next: run the 'Godot: Import assets' task to write .import sidecars.")
     return 0
 
 

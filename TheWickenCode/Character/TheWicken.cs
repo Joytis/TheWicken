@@ -12,7 +12,7 @@ namespace TheWicken.TheWickenCode.Character;
 
 public class TheWicken : PlaceholderCharacterModel
 {
-    public const string CharacterId = "TheWicken";
+    public const string CharacterId = "Wicken";
     
     public static readonly Color Color = new("ffffff");
 

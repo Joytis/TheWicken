@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
-using TheWicken.TheWickenCode.Potions;
 
 namespace TheWicken.TheWickenCode.Cards;
 
@@ -18,17 +14,20 @@ public sealed class OwlFamiliar : TheWickenCard
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5m, ValueProp.Move)
+		new CardsVar(2)
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromPotion<WickedBrew>()
-    };
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromCard<Wisdom>(IsUpgraded)
+    ];
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await PotionCmd.TryToProcure<WickedBrew>(Owner);
-    }
+	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
+
+		List<Wisdom> cards = CreateFamiliarCards<Wisdom>(Owner, DynamicVars.Cards.IntValue, CombatState, IsUpgraded).ToList();
+        var cardsGenerated = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, Owner, CardPilePosition.Random);
+		CardCmd.PreviewCardPileAdd(cardsGenerated);
+	}
 }

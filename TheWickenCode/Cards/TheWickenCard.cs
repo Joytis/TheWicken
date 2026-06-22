@@ -4,6 +4,9 @@ using BaseLib.Utils;
 using TheWicken.TheWickenCode.Character;
 using TheWicken.TheWickenCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 
 namespace TheWicken.TheWickenCode.Cards;
 
@@ -29,4 +32,18 @@ public abstract class TheWickenCard(int cost, CardType type, CardRarity rarity, 
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+
+	public static IEnumerable<T> CreateFamiliarCards<T>(Player owner, int amount, ICombatState? combatState, bool isUpgraded)
+        where T : TheWickenFamiliarCard
+	{
+		ArgumentNullException.ThrowIfNull(combatState, "combatState");
+		List<T> list = new List<T>();
+		for (int i = 0; i < amount; i++)
+		{
+            var newCard = combatState.CreateCard<T>(owner);
+			list.Add(newCard);
+            CardCmd.Upgrade(newCard);
+		}
+		return list;
+	}
 }
