@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using TheWicken.TheWickenCode.Monsters;
 
 namespace TheWicken.TheWickenCode.Cards;
 
@@ -24,6 +25,7 @@ public sealed class CatFamiliar : WickenCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
+		await SummonFamiliarPet<CatPet>(Owner);
 		List<Ferocity> cards = CreateFamiliarCards<Ferocity>(Owner, 1, CombatState, IsUpgraded).ToList();
         var cardsGenerated = await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, Owner, CardPilePosition.Random);
 		CardCmd.PreviewCardPileAdd(cardsGenerated);
