@@ -21,7 +21,7 @@ public sealed class ExtractEssence : WickenCard
     ];
 
     public ExtractEssence()
-        : base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+        : base(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
     {
     }
 

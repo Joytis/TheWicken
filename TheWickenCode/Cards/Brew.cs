@@ -22,4 +22,9 @@ public sealed class Brew : WickenCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await PotionMerge.MergeBeltPotions(Owner, Owner.RunState.Rng.CombatPotionGeneration);
     }
+
+    protected override void OnUpgrade()
+	{
+		EnergyCost.UpgradeBy(-1);
+	}
 }

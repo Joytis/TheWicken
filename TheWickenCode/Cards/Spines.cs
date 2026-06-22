@@ -19,7 +19,7 @@ public sealed class Spines : WickenCard
     ];
 
 	public Spines()
-		: base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 

@@ -31,4 +31,11 @@ public class WickenFamiliarCardPool : CustomCardPoolModel
     public override Color DeckEntryCardColor => new("ffffff");
     
     public override bool IsColorless => true;
+
+    /* Familiar cards (e.g. Wisdom) are Token-rarity spawned cards not tied to the character's
+       random reward pool. This pool is referenced by no character's CardPool, so it must be a
+       shared pool to land in ModelDb.AllCardPools. Without this, CardModel.Pool can't find the
+       familiar's pool, falls back to MockCardPool, and crashes ("You monster!") the moment a
+       familiar card is rendered/hovered (e.g. OwlFamiliar's HoverTipFactory.FromCard<Wisdom>). */
+    public override bool IsShared => true;
 }
