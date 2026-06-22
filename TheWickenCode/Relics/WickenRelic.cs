@@ -15,8 +15,8 @@ namespace TheWicken.TheWickenCode.Relics;
 /// The [Pool] annotation marks this relic as being tied to your specific character. Inheriting from this class means
 /// that your relics don't need to invidually say which pool they should be in.
 /// </summary>
-[Pool(typeof(TheWickenRelicPool))]
-public abstract class TheWickenRelic : CustomRelicModel
+[Pool(typeof(WickenRelicPool))]
+public abstract class WickenRelic : CustomRelicModel
 {
     public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
     protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();

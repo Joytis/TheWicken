@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-public sealed class DefendWicken : TheWickenCard
+public sealed class DefendWicken : WickenCard
 {
 	public override bool GainsBlock => true;
 

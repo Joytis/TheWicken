@@ -9,7 +9,7 @@ using TheWicken.TheWickenCode.Powers;
 
 namespace MegaCrit.Sts2.Core.Models.Powers;
 
-public sealed class BramblesPower : TheWickenPower
+public sealed class BramblesPower : WickenPower
 {
 	public override PowerType Type => PowerType.Buff;
 

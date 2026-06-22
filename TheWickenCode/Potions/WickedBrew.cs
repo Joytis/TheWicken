@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TheWicken.TheWickenCode.Potions;
 
-public sealed class WickedBrew : TheWickenPotion
+public sealed class WickedBrew : WickenPotion
 {
     // Token rarity keeps WickedBrew out of the random drop/shop pool (PotionFactory
     // only rolls Common/Uncommon/Rare) while staying registered so Concoct's

@@ -4,9 +4,9 @@ using Godot;
 
 namespace TheWicken.TheWickenCode.Character;
 
-public class TheWickenFamiliarCardPool : CustomCardPoolModel
+public class WickenFamiliarCardPool : CustomCardPoolModel
 {
-    public override string Title => TheWicken.CharacterId; //This is not a display name.
+    public override string Title => Wicken.CharacterId; //This is not a display name.
     
     public override string BigEnergyIconPath => "charui/big_energy.png".ImagePath();
     public override string TextEnergyIconPath => "charui/text_energy.png".ImagePath();

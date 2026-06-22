@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-public sealed class OwlFamiliar : TheWickenCard
+public sealed class OwlFamiliar : WickenCard
 {
     public OwlFamiliar()
         : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)

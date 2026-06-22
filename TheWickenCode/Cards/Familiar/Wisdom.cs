@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-public sealed class Wisdom : TheWickenFamiliarCard
+public sealed class Wisdom : WickenFamiliarCard
 {
     public Wisdom()
         : base(0, CardType.Skill, CardRarity.Token, TargetType.Self)

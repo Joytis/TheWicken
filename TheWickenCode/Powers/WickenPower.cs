@@ -11,7 +11,7 @@ namespace TheWicken.TheWickenCode.Powers;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-public abstract class TheWickenPower : CustomPowerModel
+public abstract class WickenPower : CustomPowerModel
 {
     //Loads from TheWicken/images/powers/your_power.png
     public override string CustomPackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();

@@ -9,11 +9,9 @@ using TheWicken.TheWickenCode.Extensions;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-public sealed class Spines : TheWickenCard
+public sealed class Spines : WickenCard
 {
 	public override bool GainsBlock => true;
-
-	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(5m, ValueProp.Move),
@@ -28,6 +26,7 @@ public sealed class Spines : TheWickenCard
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+		await PowerCmd.Apply<BramblesPower>(choiceContext, Owner.Creature, DynamicVars.Brambles().BaseValue, Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

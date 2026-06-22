@@ -4,9 +4,9 @@ using Godot;
 
 namespace TheWicken.TheWickenCode.Character;
 
-public class TheWickenPotionPool : CustomPotionPoolModel
+public class WickenPotionPool : CustomPotionPoolModel
 {
-    public override Color LabOutlineColor => TheWicken.Color;
+    public override Color LabOutlineColor => Wicken.Color;
     
 
     public override string BigEnergyIconPath => "charui/big_energy.png".ImagePath();

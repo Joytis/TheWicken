@@ -9,7 +9,7 @@ namespace TheWicken.TheWickenCode.Cards;
 /// <summary>
 /// The only difference between the starting Strike cards are portrait, attack vfx, and color.
 /// </summary>
-public sealed class StrikeWicken : TheWickenCard
+public sealed class StrikeWicken : WickenCard
 {
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 

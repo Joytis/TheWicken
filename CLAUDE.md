@@ -26,14 +26,14 @@ The mod assembly is **not** the game's assembly. Game types live under `MegaCrit
 **Entry point:** [MainFile.cs](TheWickenCode/MainFile.cs) is marked `[ModInitializer]`. Its only job is `harmony.PatchAll()` — all integration with the game happens through BaseLib's model registration + Harmony patches, not a main loop.
 
 **Content model pattern.** Each content type has an abstract mod-base class that wires up asset paths, then concrete content subclasses it:
-- [Cards/TheWickenCard.cs](TheWickenCode/Cards/TheWickenCard.cs) → `CustomCardModel`
-- [Powers/TheWickenPower.cs](TheWickenCode/Powers/TheWickenPower.cs) → `CustomPowerModel`
-- [Relics/TheWickenRelic.cs](TheWickenCode/Relics/TheWickenRelic.cs) → `CustomRelicModel`
-- [Potions/TheWickenPotion.cs](TheWickenCode/Potions/TheWickenPotion.cs) → `CustomPotionModel`
+- [Cards/WickenCard.cs](TheWickenCode/Cards/WickenCard.cs) → `CustomCardModel`
+- [Powers/WickenPower.cs](TheWickenCode/Powers/WickenPower.cs) → `CustomPowerModel`
+- [Relics/WickenRelic.cs](TheWickenCode/Relics/WickenRelic.cs) → `CustomRelicModel`
+- [Potions/WickenPotion.cs](TheWickenCode/Potions/WickenPotion.cs) → `CustomPotionModel`
 
 Create new content by subclassing the relevant base in its folder (the BaseLib `ModAnalyzers` and IDE templates assist). Models are looked up at runtime via `ModelDb.Card<T>()`, `ModelDb.Relic<T>()`, etc.
 
-**Pools.** [Character/](TheWickenCode/Character/) defines the character and its `CardPool`/`RelicPool`/`PotionPool`. Content is bound to a pool with the `[Pool(typeof(...))]` attribute on the base class — so individual cards/relics inherit pool membership and don't declare it themselves. [Character/TheWicken.cs](TheWickenCode/Character/TheWicken.cs) (`PlaceholderCharacterModel`) defines starting HP/deck/relics and references the pools; it currently uses base-game Ironclad placeholders.
+**Pools.** [Character/](TheWickenCode/Character/) defines the character and its `CardPool`/`RelicPool`/`PotionPool`. Content is bound to a pool with the `[Pool(typeof(...))]` attribute on the base class — so individual cards/relics inherit pool membership and don't declare it themselves. [Character/Wicken.cs](TheWickenCode/Character/Wicken.cs) (`PlaceholderCharacterModel`) defines starting HP/deck/relics and references the pools; it currently uses base-game Ironclad placeholders.
 
 **Asset path convention (important).** Content classes derive their image path from `Id.Entry` — the model id, lowercased with the mod prefix stripped (`RemovePrefix().ToLowerInvariant()`). So a card with id `THEWICKEN-Foo` loads `TheWicken/images/card_portraits/foo.png` (and `big/foo.png` for full art). Path helpers live in [Extensions/StringExtensions.cs](TheWickenCode/Extensions/StringExtensions.cs); they fall back to a default placeholder image and log when a file is missing. Add art at the matching path rather than overriding the path methods.
 
@@ -56,6 +56,14 @@ The mod's `Custom{Card,Relic,Potion,Power}Model` bases are thin wrappers over th
 **Effects go through `Cmd` families, never raw state writes:** `DamageCmd.Attack(n).FromCard(this).Targeting(t).Execute(ctx)`, `PowerCmd.Apply<TPower>(...)`, `CreatureCmd.GainBlock(...)`, `CardCmd`/`CardPileCmd`/`CardSelectCmd`. State mutation is guarded by `AssertMutable()` (canonical instances are immutable; real instances are mutable clones).
 
 **Decompiled game source is the reference.** A full decompile lives at `gamedata/` (**gitignored** — local-only, not committed; it's proprietary game code). The ~400 base-game content classes under `gamedata/src/Core/Models/{Cards,Relics,Potions,Powers}/` are the authoritative examples. Workflow: find the closest base-game class, copy its pattern into a `CustomXModel` subclass here, swap the pool + localization keys. Do **not** paste verbatim decompiled code into tracked files.
+
+## Potion traits & brewing
+
+Potions are a core character identity, so there's a dedicated system to **query potions by what they do** and **brew** two into a higher-rarity one — see [Docs/potion-brewing-system.md](Docs/potion-brewing-system.md) for the full design record. Code: [TheWickenCode/Potions/Brewing/](TheWickenCode/Potions/Brewing/).
+
+- **`PotionTrait`** is a `[Flags]` effect taxonomy (Damage/Block/Buff/Debuff/Poison/Heal/Energy/Draw/CardGen/…) with `Offensive`/`Defensive`/`Utility` masks. `PotionTraits.Of(potion)` classifies *any* potion (base-game or modded) — **hybrid**: auto-derived from the potion's typed `DynamicVars` + `TargetType`, with a manual `Overrides` table (keyed by model `Type`) for the ~17 var-less potions (Fortifier, AttackPotion, EntropicBrew, …). When you add a potion whose effect isn't visible in its `DynamicVars`, add an `Overrides` entry **and** update the doc's table.
+- **`PotionCatalog`** queries `ModelDb.AllPotions` by trait/rarity/usage/orientation; **`BrewBook.Brew(a, b, rng)`** combines two potions (output rarity = highest + 1; trait **union** → shared-orientation → rarity-only fallback) and returns a real existing potion. Both return *canonical* models — `.ToMutable()` + `PotionCmd.TryToProcure` to grant.
+- **Dev console** (mods register commands just by subclassing `AbstractConsoleCmd` — picked up via `ReflectionHelper.GetSubtypesInMods`; debug-console only): `potiontraits` dumps every potion's classification; `mergepotions` brews the first two belt potions (one potion → `WickedBrew`). Code in [TheWickenCode/DevConsole/](TheWickenCode/DevConsole/).
 
 ## Conventions & gotchas
 

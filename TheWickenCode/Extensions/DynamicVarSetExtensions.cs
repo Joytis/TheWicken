@@ -7,5 +7,5 @@ namespace TheWicken.TheWickenCode.Extensions;
 //Mostly utilities to get asset paths.
 public static class DynamicVarSetExtensions
 {
-    public static PowerVar<BramblesPower> Brambles(this DynamicVarSet set) => (PowerVar<BramblesPower>)set["DoomPower"];
+    public static PowerVar<BramblesPower> Brambles(this DynamicVarSet set) => (PowerVar<BramblesPower>)set["BramblesPower"];
 }

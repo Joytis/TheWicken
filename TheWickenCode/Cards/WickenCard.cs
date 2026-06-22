@@ -16,8 +16,8 @@ namespace TheWicken.TheWickenCode.Cards;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-[Pool(typeof(TheWickenCardPool))]
-public abstract class TheWickenCard(int cost, CardType type, CardRarity rarity, TargetType target) :
+[Pool(typeof(WickenCardPool))]
+public abstract class WickenCard(int cost, CardType type, CardRarity rarity, TargetType target) :
     CustomCardModel(cost, type, rarity, target)
 {
     //Image size:
@@ -34,7 +34,7 @@ public abstract class TheWickenCard(int cost, CardType type, CardRarity rarity, 
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
 	public static IEnumerable<T> CreateFamiliarCards<T>(Player owner, int amount, ICombatState? combatState, bool isUpgraded)
-        where T : TheWickenFamiliarCard
+        where T : WickenFamiliarCard
 	{
 		ArgumentNullException.ThrowIfNull(combatState, "combatState");
 		List<T> list = new List<T>();

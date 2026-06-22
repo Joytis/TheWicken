@@ -8,7 +8,7 @@ using TheWicken.TheWickenCode.Potions;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-public sealed class Concoct : TheWickenCard
+public sealed class Concoct : WickenCard
 {
     public Concoct()
         : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)

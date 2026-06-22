@@ -10,7 +10,7 @@ using TheWicken.TheWickenCode.Cards;
 
 namespace TheWicken.TheWickenCode.Character;
 
-public class TheWicken : PlaceholderCharacterModel
+public class Wicken : PlaceholderCharacterModel
 {
     public const string CharacterId = "Wicken";
     
@@ -31,7 +31,8 @@ public class TheWicken : PlaceholderCharacterModel
         ModelDb.Card<DefendWicken>(),
         ModelDb.Card<DefendWicken>(),
         ModelDb.Card<DefendWicken>(),
-        ModelDb.Card<Concoct>(),
+        ModelDb.Card<ExtractEssence>(),
+        ModelDb.Card<Bush>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
@@ -39,9 +40,9 @@ public class TheWicken : PlaceholderCharacterModel
         ModelDb.Relic<BurningBlood>()
     ];
     
-    public override CardPoolModel CardPool => ModelDb.CardPool<TheWickenCardPool>();
-    public override RelicPoolModel RelicPool => ModelDb.RelicPool<TheWickenRelicPool>();
-    public override PotionPoolModel PotionPool => ModelDb.PotionPool<TheWickenPotionPool>();
+    public override CardPoolModel CardPool => ModelDb.CardPool<WickenCardPool>();
+    public override RelicPoolModel RelicPool => ModelDb.RelicPool<WickenRelicPool>();
+    public override PotionPoolModel PotionPool => ModelDb.PotionPool<WickenPotionPool>();
     
     /*  PlaceholderCharacterModel will utilize placeholder basegame assets for most of your character assets until you
         override all the other methods that define those assets. 

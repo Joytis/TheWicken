@@ -13,8 +13,8 @@ namespace TheWicken.TheWickenCode.Cards;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-[Pool(typeof(TheWickenFamiliarCardPool))]
-public abstract class TheWickenFamiliarCard(int cost, CardType type, CardRarity rarity, TargetType target) :
+[Pool(typeof(WickenFamiliarCardPool))]
+public abstract class WickenFamiliarCard(int cost, CardType type, CardRarity rarity, TargetType target) :
     CustomCardModel(cost, type, rarity, target)
 {
     //Image size:
