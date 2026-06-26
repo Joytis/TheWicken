@@ -1,5 +1,11 @@
 {
   "MEGACRIT-BRAMBLES_POWER.description": "",
   "MEGACRIT-BRAMBLES_POWER.smartDescription": "",
-  "MEGACRIT-BRAMBLES_POWER.title": "Brambles"
+  "MEGACRIT-BRAMBLES_POWER.title": "Brambles",
+  "THEWICKEN-OWL_FAMILIAR_POWER.description": "",
+  "THEWICKEN-OWL_FAMILIAR_POWER.smartDescription": "",
+  "THEWICKEN-OWL_FAMILIAR_POWER.title": "Owl Familiar",
+  "THEWICKEN-CAT_FAMILIAR_POWER.description": "",
+  "THEWICKEN-CAT_FAMILIAR_POWER.smartDescription": "",
+  "THEWICKEN-CAT_FAMILIAR_POWER.title": "Cat Familiar"
 }

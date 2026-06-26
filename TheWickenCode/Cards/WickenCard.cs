@@ -4,10 +4,12 @@ using BaseLib.Utils;
 using TheWicken.TheWickenCode.Character;
 using TheWicken.TheWickenCode.Extensions;
 using TheWicken.TheWickenCode.Monsters;
+using TheWicken.TheWickenCode.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace TheWicken.TheWickenCode.Cards;
 
@@ -64,5 +66,16 @@ public abstract class WickenCard(int cost, CardType type, CardRarity rarity, Tar
         {
             await PlayerCmd.AddPet<TPet>(owner);
         }
+    }
+
+    /// <summary>
+    /// Register that this card summoned a familiar by applying one stack of its <typeparamref name="TPower" />
+    /// counter to the player. The total of all <see cref="FamiliarPower" /> stacks is the player's familiar
+    /// count (see <see cref="Familiars" />), which familiar-scaling cards read and which "sacrifice" effects
+    /// consume. Call this from a familiar Power card's <c>OnPlay</c> alongside the pet/token-card spawn.
+    /// </summary>
+    protected async Task GainFamiliar<TPower>(PlayerChoiceContext choiceContext) where TPower : FamiliarPower
+    {
+        await PowerCmd.Apply<TPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
     }
 }
