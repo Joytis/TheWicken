@@ -20,6 +20,13 @@ public static class FamiliarCardRegistry
         ModelDb.AllCards.OfType<WickenFamiliarCard>().ToList();
 
     /// <summary>
+    /// Canonical models for every familiar *summon* card — the <see cref="IFamiliarSummon" /> Power cards
+    /// (Owl, Cat, Rat, Porcupine, Bear, Crow, Wolf, Sloth, Chimera). Backs Embrace the Wilds.
+    /// </summary>
+    public static IReadOnlyList<CardModel> AllSummonCanonical =>
+        ModelDb.AllCards.OfType<IFamiliarSummon>().Cast<CardModel>().ToList();
+
+    /// <summary>
     /// Create <paramref name="amount" /> real familiar cards for <paramref name="owner" />, each a
     /// random familiar type rolled from <paramref name="rng" /> (upgraded if <paramref name="isUpgraded" />).
     /// </summary>

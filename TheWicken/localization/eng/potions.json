@@ -1,6 +1,14 @@
 {
   "THEWICKEN-WICKED_BREW.title": "Wicked Brew",
   "THEWICKEN-WICKED_BREW.description": "Deal [blue]{Damage}[/blue] damage.",
+  "THEWICKEN-VILLAINOUS_BREW.title": "Villainous Brew",
+  "THEWICKEN-VILLAINOUS_BREW.description": "Deal [blue]{Damage}[/blue] damage.",
   "THEWICKEN-THE_CAULDRON.title": "The Cauldron",
-  "THEWICKEN-THE_CAULDRON.description": "Deal [blue]{Damage}[/blue] damage to ALL enemies. Gain [blue]{Block}[/blue] Block and [blue]{BramblesPower}[/blue] Brambles. Apply [blue]{WeakPower}[/blue] Weak to ALL enemies."
+  "THEWICKEN-THE_CAULDRON.description": "Deal [blue]{Damage}[/blue] damage to ALL enemies. Gain [blue]{Block}[/blue] Block and [blue]{BramblesPower}[/blue] Brambles. Apply [blue]{WeakPower}[/blue] Weak to ALL enemies.",
+  "THEWICKEN-FERTILIZER.title": "Fertilizer",
+  "THEWICKEN-FERTILIZER.description": "Gain [blue]{BramblesPower}[/blue] [gold]Brambles[/gold].",
+  "THEWICKEN-BOTTLED_ROT.title": "Bottled Rot",
+  "THEWICKEN-BOTTLED_ROT.description": "Apply [blue]{PoisonPower}[/blue] [gold]Poison[/gold] to ALL enemies.",
+  "THEWICKEN-BUDDY_IN_A_BOTTLE.title": "Buddy in a Bottle",
+  "THEWICKEN-BUDDY_IN_A_BOTTLE.description": "Add a random [gold]Familiar[/gold] to your hand. It is free to play this turn."
 }

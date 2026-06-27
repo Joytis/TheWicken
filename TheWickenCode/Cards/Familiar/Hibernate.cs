@@ -11,6 +11,8 @@ public sealed class Hibernate : WickenFamiliarCard
 {
     public override bool GainsBlock => true;
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(15m, ValueProp.Move),
         new DynamicVar("Heal", 3m)

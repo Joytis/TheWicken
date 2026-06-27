@@ -23,9 +23,9 @@ mod code, layered over `ModelDb.AllPotions`.
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
 | Trait model | `[Flags] PotionTrait` (multi-tag) + derived `PotionOrientation` | A potion can be several things at once (damage + debuff). |
-| Classification source | **Hybrid**: auto-derive from `DynamicVars`/`TargetType`, plus a manual override table | Auto covers ~80% (47/64 potions) and future DLC; the table patches the var-less rest. Least maintenance. |
-| Override key | concrete model **`Type`** | Compile-checked against the game assembly — a renamed class breaks the build instead of silently mis-tagging. |
-| Override semantics | full **replace** of the auto result | Var-less potions auto-derive to `None`; the table is authoritative for them. |
+| Classification source | **Manual table primary** (`PotionTraits.Manual`), auto-derive from `DynamicVars`/`TargetType` as **fallback** | A hand-curated table is the source of truth so the loot table can be tuned directly; inference keeps un-listed / future-DLC potions classified automatically. |
+| Table key | concrete model **`Type`** | Compile-checked against the game assembly — a renamed class breaks the build instead of silently mis-tagging. |
+| Table semantics | a `Manual` entry fully **replaces** the inferred result; **every shipped potion must have an entry** | Loot-table behavior is then explicit and editable, not emergent. |
 | Brew inputs | exactly **2** | Simplest, cleanest UI. Expand later if needed. |
 | Brew output rarity | **highest input rarity + 1**, capped at Rare (always ≥ Uncommon) | "Brewing improves" feel; predictable. |
 | Brew trait combine | **union** of inputs' traits (primary), **shared orientation** fallback, **rarity-only** last resort | Union is thematic but may not match a real potion; orientation fallback almost always resolves. |
@@ -36,8 +36,8 @@ mod code, layered over `ModelDb.AllPotions`.
 `PotionTrait` ([PotionTrait.cs](../TheWickenCode/Potions/Brewing/PotionTrait.cs)):
 
 - **Offensive**: `Damage`, `Debuff`, `Poison`
-- **Defensive**: `Block`, `Buff`, `Heal`, `MaxHp`
-- **Utility**: `Energy`, `Draw`, `CardGen`, `CardManip`, `PotionGen`, `Upgrade`
+- **Defensive**: `Block`, `Heal`, `MaxHp`
+- **Utility**: `Buff`, `Energy`, `Draw`, `CardGen`, `CardManip`, `PotionGen`, `Upgrade`
 - **Modifier**: `Aoe` (derived from `TargetType.AllEnemies`)
 - **Masks**: `Offensive`, `Defensive`, `Utility` (OR of the above groups)
 
@@ -64,22 +64,22 @@ Plus `Aoe` when `TargetType == AllEnemies`.
 `PowerVar<T>` is detected by walking the var's type hierarchy for the open generic `PowerVar<>`, then reading the
 power type argument — so the disambiguation is robust to new powers.
 
-## Override table (var-less potions)
+## Manual classification table (`PotionTraits.Manual`)
 
-These express their effect in code with no canonical var, so they're tagged explicitly in `PotionTraits.Overrides`:
+The authoritative, hand-curated table (best-guess values — tune freely). Anything **not** listed falls back to
+auto-derivation. Grouped by primary orientation; fine-grained flags drive both the orientation queries
+(Something Wicked = `Offensive`, Toil and Trouble = `Utility`, Stone Skin = `Defensive`) and brew trait-union.
 
-| Potion | Trait | Effect |
-|--------|-------|--------|
-| AttackPotion, SkillPotion, PowerPotion, ColorlessPotion, OrobicAcid | `CardGen` | generate new card(s) |
-| DropletOfPrecognition, GamblersBrew, LiquidMemories | `Draw` | pull/cycle cards into hand |
-| Ashwater, TouchOfInsanity | `CardManip` | exhaust / cost-reduce existing cards |
-| Duplicator, EssenceOfDarkness, SoldiersStew | `Buff` | self power / orbs / replay |
-| Fortifier | `Block` | doubles current block |
-| FairyInABottle | `Heal` | heal on lethal |
-| EntropicBrew | `PotionGen` | fills empty potion slots |
-| BlessingOfTheForge | `Upgrade` | upgrades cards in hand |
+| Group | Potions → trait |
+|-------|-----------------|
+| **Offensive** | FirePotion, PotionShapedRock → `Damage`; ExplosiveAmpoule, FoulPotion → `Damage\|Aoe`; WeakPotion, VulnerablePotion, BeetleJuice, PowderedDemise, PotionOfDoom → `Debuff`; ShacklingPotion, PotionOfBinding → `Debuff\|Aoe`; PoisonPotion → `Poison` |
+| **Defensive** | BlockPotion, ShipInABottle, Fortifier → `Block`; HeartOfIron → `Block\|Buff`; StrengthPotion, DexterityPotion, FocusPotion, FlexPotion, SpeedPotion, FyshOil, GigantificationPotion, LiquidBronze, LuckyTonic, MazalethsGift, GhostInAJar, Duplicator, EssenceOfDarkness, SoldiersStew, StableSerum, BoneBrew, PotionOfCapacity → `Buff`; RegenPotion, BloodPotion, FairyInABottle → `Heal`; FruitJuice → `MaxHp` |
+| **Utility** | EnergyPotion, RadiantTincture, StarPotion → `Energy`; SwiftPotion, BottledPotential, Clarity, DropletOfPrecognition, GamblersBrew, LiquidMemories → `Draw`; CureAll → `Energy\|Draw`; AttackPotion, SkillPotion, PowerPotion, ColorlessPotion, CosmicConcoction, CunningPotion, OrobicAcid, PotOfGhouls → `CardGen`; Ashwater, TouchOfInsanity, DistilledChaos → `CardManip`; SneckoOil, GlowwaterPotion → `Draw\|CardManip`; EntropicBrew → `PotionGen`; BlessingOfTheForge, KingsCourage → `Upgrade` |
+| **Modded** | WickedBrew, VillainousBrew, **Fertilizer** (gains Brambles, tagged offensive by design) → `Damage`; **BottledRot** → `Poison\|Aoe`; **BuddyInABottle** (adds a random Familiar summon card) → `CardGen`; TheCauldron → `Damage\|Block\|Buff\|Debuff\|Aoe` |
 
-**To extend**: add a `[typeof(SomePotion)] = PotionTrait.X` entry. Update this table when you do.
+**To extend**: add a `[typeof(SomePotion)] = PotionTrait.X` entry (combine flags with `\|` for cross-orientation
+potions) and update this table. Every potion the mod ships **must** be listed here. Best-guess values are
+expected to get a manual balance pass.
 
 ## API
 

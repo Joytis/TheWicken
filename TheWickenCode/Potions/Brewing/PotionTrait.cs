@@ -25,14 +25,14 @@ public enum PotionTrait
     // --- Defensive ---
     /// <summary>Grants Block (BlockPotion, Fortifier, HeartOfIron).</summary>
     Block = 1 << 3,
-    /// <summary>Applies a beneficial power to self/ally (StrengthPotion, Duplicator, SoldiersStew).</summary>
-    Buff = 1 << 4,
     /// <summary>Restores HP (FruitJuice via maxHp, FairyInABottle, RegenPotion).</summary>
     Heal = 1 << 5,
     /// <summary>Raises max HP (FruitJuice, BloodPotion).</summary>
     MaxHp = 1 << 6,
 
     // --- Utility ---
+    /// <summary>Applies a beneficial power to self/ally (StrengthPotion, Duplicator, SoldiersStew). Classified Utility.</summary>
+    Buff = 1 << 4,
     /// <summary>Grants energy (EnergyPotion).</summary>
     Energy = 1 << 7,
     /// <summary>Draws / pulls cards into hand (DropletOfPrecognition, GamblersBrew, LiquidMemories).</summary>
@@ -50,8 +50,8 @@ public enum PotionTrait
 
     // --- Convenience masks (orientation axes) ---
     Offensive = Damage | Debuff | Poison,
-    Defensive = Block | Buff | Heal | MaxHp,
-    Utility = Energy | Draw | CardGen | CardManip | PotionGen | Upgrade,
+    Defensive = Block | Heal | MaxHp,
+    Utility = Buff | Energy | Draw | CardGen | CardManip | PotionGen | Upgrade,
 }
 
 /// <summary>Broad orientation of a potion, derived from its <see cref="PotionTrait" /> flags.</summary>

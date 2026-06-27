@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace TheWicken.TheWickenCode.Cards;
 
-/// <summary>Transform every card in your hand into a random familiar token-card, free for the rest of combat.</summary>
+/// <summary>Transform every card in your hand into a random familiar summon (Power) card, free for the rest of combat.</summary>
 public sealed class EmbraceTheWilds : WickenCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -24,10 +24,10 @@ public sealed class EmbraceTheWilds : WickenCard
             .ToList();
         foreach (CardModel original in handCards)
         {
-            WickenFamiliarCard canonical = rng.NextItem(FamiliarCardRegistry.AllCanonical)!;
-            CardModel familiar = CombatState!.CreateCard(canonical, Owner);
-            familiar.EnergyCost.SetThisCombat(0);
-            await CardCmd.Transform(original, familiar);
+            CardModel canonical = rng.NextItem(FamiliarCardRegistry.AllSummonCanonical)!;
+            CardModel summon = CombatState!.CreateCard(canonical, Owner);
+            summon.EnergyCost.SetThisCombat(0);
+            await CardCmd.Transform(original, summon);
         }
     }
 

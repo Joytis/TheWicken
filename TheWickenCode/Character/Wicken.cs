@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
 using TheWicken.TheWickenCode.Cards;
+using TheWicken.TheWickenCode.Relics;
 
 namespace TheWicken.TheWickenCode.Character;
 
@@ -37,7 +38,7 @@ public class Wicken : PlaceholderCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
-        ModelDb.Relic<BurningBlood>()
+        ModelDb.Relic<LargePockets>()
     ];
     
     public override CardPoolModel CardPool => ModelDb.CardPool<WickenCardPool>();

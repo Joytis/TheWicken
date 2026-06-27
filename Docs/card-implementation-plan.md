@@ -6,6 +6,18 @@ not 57.
 
 ## Progress log
 
+- **2026-06-26 (feedback pass, compiles clean):**
+  - **Embrace the Wilds** now transforms hand cards into random familiar **summon Power cards** (the
+    `IFamiliarSummon` cards: Owl/Cat/Rat/…/Chimera), not token cards. New registry method
+    `FamiliarCardRegistry.AllSummonCanonical` (`ModelDb.AllCards.OfType<IFamiliarSummon>().Cast<CardModel>()`).
+  - **Sloth Familiar** → Uncommon (was Common).
+  - **Bottomless Cauldron** now skips when the used potion **is** a `WickedBrew` (`potion is not WickedBrew`),
+    closing an infinite-potion loop (using a created Wicked Brew would have created another).
+  - **Power tooltips:** filled `description` + `smartDescription` (with `{Amount}`/`[blue]`/`[gold]` tokens,
+    `{Amount:plural:…}`) for every power in `powers.json` so all powers show real tooltips. Counter powers use
+    `{Amount}`; Single toggles (Hedge Prison, Bottomless, Cloak, Dance, Witch's Curse) omit it.
+  - **Note:** deploy-copy to the game's mods/ folder is blocked while Slay the Spire 2 is running (DLL locked);
+    the compile + BaseLib analyzers pass. Close the game to redeploy.
 - **2026-06-26 (Rancid Smoke — 🎉 ALL 56 CARDS DONE, 0/0):** Q4 resolved (source = your own debuffs).
   `Cards/RancidSmoke.cs` mirrors base-game `Misery`: clone each `PowerType.Debuff` power on the Wicken
   (`ClonePreservingMutability`) and apply to all enemies — stacking onto enemies that already have it
@@ -297,7 +309,7 @@ Cost / rarity / type from the CSV. "Ref" = closest base-game class in `gamedata/
 | Woe and Whimsy | 1 / Common / Skill | Create a random familiar card | upgraded | random familiar pick | ✅ |
 | Find Familiar | 1 / Uncommon / Skill | Tutor a familiar card from deck → hand | -1 energy | card search | ✅ |
 | Pact of Beasts | 2 / Rare / Skill | All created familiar cards → hand | -1 energy | pile search | ✅ |
-| Embrace the Wilds | 3 / Rare / Skill | Transform hand → random familiars, free. Exhaust | -1 energy | hand transform | ✅ |
+| Embrace the Wilds | 3 / Rare / Skill | Transform hand → random familiar **summon powers**, free. Exhaust | -1 energy | hand transform | ✅ |
 | Pillage | 1 / Common / Attack | 5 dmg, draw per familiar | +3 dmg | 0a FamiliarCount (Q1) | ✅ |
 | Stampede | 1 / Common / Attack | Each familiar deals 5 dmg | +3 dmg | 0a FamiliarCount (Q1) | ✅ |
 | Ritual Sacrifice | 1 / Uncommon / Skill | Sacrifice a familiar, gain 20 block | +5 block | sacrifice (Q1) | ✅ |
@@ -308,7 +320,7 @@ Cost / rarity / type from the CSV. "Ref" = closest base-game class in `gamedata/
 | Bear Familiar | 2 / Rare / Power | Add Hibernate + Mutilate | both+ | new familiar + 2 tokens | ✅ |
 | Crow Familiar | 1 / Rare / Power | Add 2 Scout | +5 gold | new familiar + Scout | ✅ |
 | Wolf Familiar | 1 / Uncommon / Power | Add 3 Gnash | +3 dmg | new familiar + Gnash + Pack Tactics (Q2) | ✅ |
-| Sloth Familiar | 2 / Common / Power | Add 2 Laze | Laze+ | new familiar + Laze | ✅ |
+| Sloth Familiar | 2 / Uncommon / Power | Add 2 Laze | Laze+ | new familiar + Laze | ✅ |
 | Pocket Rats! | 1 / Rare / Skill | Add 3 Rats → hand. Exhaust | +1 rat | Rats token | ✅ |
 
 ### No special mechanic (quick wins)

@@ -18,7 +18,7 @@ public sealed class SlothFamiliar : WickenCard, IFamiliarSummon
     ];
 
     public SlothFamiliar()
-        : base(2, CardType.Power, CardRarity.Common, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

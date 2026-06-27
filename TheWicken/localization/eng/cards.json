@@ -1,6 +1,6 @@
 {
   "THEWICKEN-CONCOCT.title": "Concoct",
-  "THEWICKEN-CONCOCT.description": "Create a [gold]Wicked Brew[/gold].",
+  "THEWICKEN-CONCOCT.description": "Create a [gold]Villainous Brew[/gold].",
   "THEWICKEN-BREW.title": "Brew",
   "THEWICKEN-BREW.description": "[gold]Merge[/gold] two potions into a [gold]Stronger Potion[/gold]",
   "THEWICKEN-EXTRACT_ESSENCE.title": "Extract Essence",
@@ -134,7 +134,7 @@
   "THEWICKEN-PACT_OF_BEASTS.title": "Pact of Beasts",
   "THEWICKEN-PACT_OF_BEASTS.description": "Put all [gold]Familiar[/gold] cards from your draw and discard piles into your hand.",
   "THEWICKEN-EMBRACE_THE_WILDS.title": "Embrace the Wilds",
-  "THEWICKEN-EMBRACE_THE_WILDS.description": "Transform all cards in your hand into random [gold]Familiar[/gold] cards. They cost 0 this combat.",
+  "THEWICKEN-EMBRACE_THE_WILDS.description": "Transform all cards in your hand into random [gold]Familiar[/gold] powers. They cost 0 this combat.",
   "THEWICKEN-CIRCLE_OF_ROT.title": "Circle of Rot",
   "THEWICKEN-CIRCLE_OF_ROT.description": "You and your allies gain {Block:diff()} [gold]Block[/gold] and {WeakPower:diff()} [gold]Weak[/gold]. Apply {WeakPower:diff()} [gold]Weak[/gold] to ALL enemies.",
   "THEWICKEN-CREEPING_VINES.title": "Creeping Vines",
@@ -149,6 +149,8 @@
   "THEWICKEN-WITCHS_CURSE.description": "The targeted enemy takes double [gold]Potion[/gold] damage this turn.",
   "THEWICKEN-GATHER_HERBS.title": "Gather Herbs",
   "THEWICKEN-GATHER_HERBS.description": "The next [gold]Potion[/gold] you create is one rarity higher.",
+  "THEWICKEN-DOUBLE_DOUBLE.title": "Double, Double",
+  "THEWICKEN-DOUBLE_DOUBLE.description": "Deal {Damage:diff()} damage twice. When you use your next [gold]Potion[/gold] this turn, add a copy of it to your belt.",
   "THEWICKEN-RANCID_SMOKE.title": "Rancid Smoke",
   "THEWICKEN-RANCID_SMOKE.description": "Apply a copy of each of your [gold]Debuffs[/gold] to ALL enemies."
 }

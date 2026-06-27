@@ -17,12 +17,12 @@ public sealed class Concoct : WickenCard
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
     {
-        HoverTipFactory.FromPotion<WickedBrew>()
+        HoverTipFactory.FromPotion<VillainousBrew>()
     };
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await PotionCmd.TryToProcure<WickedBrew>(Owner);
+        await PotionCmd.TryToProcure<VillainousBrew>(Owner);
     }
 }

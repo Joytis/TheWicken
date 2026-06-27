@@ -1,3 +1,5 @@
 {
-  
+  "THEWICKEN-LARGE_POCKETS.title": "Large Pockets",
+  "THEWICKEN-LARGE_POCKETS.description": "Upon pickup, gain [blue]{PotionSlots}[/blue] potion {PotionSlots:plural:slot|slots}.",
+  "THEWICKEN-LARGE_POCKETS.flavor": "Deep pockets, deeper secrets — always room for one more bottle."
 }
