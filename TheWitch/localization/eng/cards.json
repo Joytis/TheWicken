@@ -39,7 +39,7 @@
   "THEWITCH-OWL_FAMILIAR.description": "Summon an [gold]{IfUpgraded:show:Owl Familiar+|Owl Familiar}[/gold].",
   "THEWITCH-OWL_FAMILIAR.title": "Owl Familiar",
   "THEWITCH-WISDOM.description": "Draw {Cards:diff()} {Cards:plural:card|cards}, then discard a card.",
-  "THEWITCH-WISDOM.title": "Wisdom",
+  "THEWITCH-WISDOM.title": "Wisdom", 
   "THEWITCH-STONY_BREW.description": "Create a defensive [gold]{IfUpgraded:show:Potion+|Potion}[/gold].",
   "THEWITCH-STONY_BREW.title": "Stony Brew",
   "THEWITCH-CAT_FAMILIAR.description": "Summon a [gold]{IfUpgraded:show:Cat Familiar+|Cat Familiar}[/gold].",

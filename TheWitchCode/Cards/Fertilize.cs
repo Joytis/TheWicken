@@ -36,5 +36,9 @@ public sealed class Fertilize : WitchCard
         await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["EnergyNextTurnPower"].BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Brambles().UpgradeValueBy(3m);
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Brambles().UpgradeValueBy(1m);
+        DynamicVars["EnergyNextTurnPower"].UpgradeValueBy(1m);
+    } 
 }

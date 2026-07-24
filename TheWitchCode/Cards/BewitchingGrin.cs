@@ -19,7 +19,7 @@ public sealed class BewitchingGrin : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(5m, ValueProp.Move),
-        new PowerVar<WeakPower>(2m)
+        new PowerVar<WeakPower>(1m)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

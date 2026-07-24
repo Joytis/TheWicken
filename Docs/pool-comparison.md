@@ -99,8 +99,8 @@ A ratio far from 1.0 is a *scrutiny flag*, not a verdict — riders (debuffs, dr
 
 | mechanic | Gen | Payoff | Enabler | Token | gen:payoff |
 |---|---|---|---|---|---|
+| Potions | 16 | 9 | 6 | 0 | 1.8:1 |
 | Debuff/Buff | 13 | 5 | 0 | 1 | 2.6:1 |
-| Potions | 15 | 9 | 6 | 0 | 1.7:1 |
 | Familiars | 15 | 7 | 5 | 12 | 2.1:1 |
 | Brambles | 9 | 3 | 2 | 0 | 3.0:1 |
 

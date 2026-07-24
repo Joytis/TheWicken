@@ -15,7 +15,7 @@ public sealed class Tinder : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(2)
+        new EnergyVar(1)
     ];
 
     protected override bool IsPlayable => Owner.Creature.GetPower<BramblesPower>() is { Amount: > 0 };
