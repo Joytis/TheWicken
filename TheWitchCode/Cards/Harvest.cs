@@ -13,53 +13,35 @@ using TheWitch.TheWitchCode.Potions.Brewing;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// ExtractEssence: deal damage; on unblocked damage, create a random potion from a HARD-CODED
+/// Harvest: deal damage; on unblocked damage, create a random potion from a HARD-CODED
 /// loot table (Herbal Brew pattern — not a live catalog query), so the pool is tuned per card.
 /// </summary>
-public sealed class ExtractEssence : WitchCard
+public sealed class Harvest : WitchCard
 {
     // First pass: every Common the card could previously roll (shared pool + Witch pool).
     // Trim/add freely — this list IS the card's roll pool.
-    private static IEnumerable<PotionModel> LootTable => [
+    private static List<PotionModel> LootTable => [
         // Common
-        ModelDb.Potion<AttackPotion>(),
-        ModelDb.Potion<BlockPotion>(),
-        ModelDb.Potion<ColorlessPotion>(),
-        ModelDb.Potion<DexterityPotion>(),
-        ModelDb.Potion<EnergyPotion>(),
-        ModelDb.Potion<ExplosiveAmpoule>(),
-        ModelDb.Potion<FirePotion>(),
-        ModelDb.Potion<FlexPotion>(),
-        ModelDb.Potion<PowerPotion>(),
-        ModelDb.Potion<SkillPotion>(),
-        ModelDb.Potion<SpeedPotion>(),
-        ModelDb.Potion<StrengthPotion>(),
-        ModelDb.Potion<SwiftPotion>(),
-        ModelDb.Potion<VulnerablePotion>(),
-        ModelDb.Potion<WeakPotion>(),
-        ModelDb.Potion<Fertilizer>(),
-        ModelDb.Potion<CursedBottle>(),
+        ModelDb.Potion<PuffOfSmoke>(),
+        ModelDb.Potion<PricklyVial>(),
+        ModelDb.Potion<OminousFlask>(),
+        
+    ];
 
-        // Uncommon
-        ModelDb.Potion<FyshOil>(),
-        ModelDb.Potion<HeartOfIron>(),
-        ModelDb.Potion<LiquidMemories>(),
-        ModelDb.Potion<ShipInABottle>(),
-        ModelDb.Potion<ShacklingPotion>(),
-        ModelDb.Potion<CureAll>(),
-
-        // Rare
-        ModelDb.Potion<OrobicAcid>(),
-        ModelDb.Potion<BuddyInABottle>(),
-        ModelDb.Potion<Duplicator>(),
-        ModelDb.Potion<LiquidBronze>()
+    private static List<PotionModel> SecondaryLootTable => [
+        ModelDb.Potion<CatWhisker>(),
+        ModelDb.Potion<CrowTalon>(),
+        ModelDb.Potion<OwlFeather>(),
+        ModelDb.Potion<WolfFang>(),
+        ModelDb.Potion<RatTail>(),
+        ModelDb.Potion<BearFur>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(10m, ValueProp.Move)
+        new DamageVar(12m, ValueProp.Move)
     ];
 
-    public ExtractEssence()
+    public Harvest()
         : base(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
     {
     }
@@ -85,7 +67,13 @@ public sealed class ExtractEssence : WitchCard
             return;
         }
 
-        PotionModel? potion = PotionCatalog.Random(LootTable, Owner.RunState.Rng.CombatPotionGeneration);
+        var rng = Owner.RunState.Rng.CombatPotionGeneration;
+        var roll = rng.NextInt(LootTable.Count + 1);
+
+        PotionModel potion = roll == LootTable.Count ? 
+            SecondaryLootTable[rng.NextInt(SecondaryLootTable.Count)] :
+            LootTable[roll];
+
         if (potion != null)
         {
             await PotionCmd.TryToProcure(potion.ToMutable(), Owner);

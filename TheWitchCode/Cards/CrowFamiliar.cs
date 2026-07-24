@@ -15,7 +15,7 @@ public sealed class CrowFamiliar : WitchCard, IFamiliarSummon
     ];
 
     public CrowFamiliar()
-        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

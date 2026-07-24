@@ -21,7 +21,7 @@ public sealed class HideInABush : WitchCard
     ];
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7m, ValueProp.Move),
+        new BlockVar(6m, ValueProp.Move),
         new PowerVar<BramblesPower>(3m)
     ];
 
@@ -38,7 +38,7 @@ public sealed class HideInABush : WitchCard
 
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Block.UpgradeValueBy(3m);
+		DynamicVars.Block.UpgradeValueBy(2m);
 		DynamicVars.Brambles().UpgradeValueBy(1m);
 	}
 }

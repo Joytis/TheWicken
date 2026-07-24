@@ -23,7 +23,7 @@ public sealed class MessageInABottle : WitchCard
     ];
 
     public MessageInABottle()
-        : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+        : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
     }
 

@@ -85,6 +85,86 @@
           "orientation": "Utility",
           "effect": "Put the bottled card into your Hand. (Card-only payload: Message in a Bottle)",
           "path": "TheWitch/images/potions/bottled_message.png"
+        },
+        {
+          "name": "Ominous Flask",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Apply 1 Hex. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/ominous_flask.png"
+        },
+        {
+          "name": "Prickly Vial",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Gain 3 Brambles. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/prickly_vial.png"
+        },
+        {
+          "name": "Cat Whisker",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Ferocity. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/cat_whisker.png"
+        },
+        {
+          "name": "Crow Talon",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Shiny. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/crow_talon.png"
+        },
+        {
+          "name": "Owl Feather",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Wisdom. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/owl_feather.png"
+        },
+        {
+          "name": "Wolf Fang",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Gnash. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/wolf_fang.png"
+        },
+        {
+          "name": "Rat Tail",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Rats. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/rat_tail.png"
+        },
+        {
+          "name": "Bear Fur",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Utility",
+          "effect": "Create a Mutilate. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/bear_fur.png"
         }
       ]
     },
@@ -262,15 +342,6 @@
           "dims": "24x24",
           "effect": "Small inline energy icon used in card text.",
           "path": "TheWitch/images/charui/text_energy.png"
-        },
-        {
-          "name": "Combat Body Sprite / Animations",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "dims": "TBD — full animated sprite set",
-          "effect": "The in-combat character body. No override exists yet (PlaceholderCharacterModel) — renders as base-game Ironclad. Biggest missing asset.",
-          "path": ""
         },
         {
           "name": "Card Frame Fallbacks",

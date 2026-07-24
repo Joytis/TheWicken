@@ -7,7 +7,7 @@ using TheWitch.TheWitchCode.Potions;
 namespace TheWitch.TheWitchCode.Powers;
 
 /// <summary>
-/// Hidden in Smoke: at the start of the owner's turn, brew a <see cref="VialOfSmoke" /> potion. Passive toggle
+/// Hidden in Smoke: at the start of the owner's turn, brew a <see cref="PuffOfSmoke" /> potion. Passive toggle
 /// (Single stack) — playing the card again doesn't make more per turn.
 /// </summary>
 public sealed class HiddenInSmokePower : WitchPower
@@ -24,6 +24,6 @@ public sealed class HiddenInSmokePower : WitchPower
         }
 
         Flash();
-        await PotionCmd.TryToProcure<VialOfSmoke>(player);
+        await PotionCmd.TryToProcure<PuffOfSmoke>(player);
     }
 }

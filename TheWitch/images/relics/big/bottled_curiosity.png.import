@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dph3ciu8e63f5"
-path="res://.godot/imported/extract_essence.png-b5c0ae1ef14192946190186a77d24142.ctex"
+uid="uid://cdlheoothatft"
+path="res://.godot/imported/bottled_curiosity.png-4bcd733826514815ad4426591cd52234.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/card_portraits/extract_essence.png"
-dest_files=["res://.godot/imported/extract_essence.png-b5c0ae1ef14192946190186a77d24142.ctex"]
+source_file="res://TheWitch/images/relics/big/bottled_curiosity.png"
+dest_files=["res://.godot/imported/bottled_curiosity.png-4bcd733826514815ad4426591cd52234.ctex"]
 
 [params]
 

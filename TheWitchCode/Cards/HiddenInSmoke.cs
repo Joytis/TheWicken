@@ -12,7 +12,7 @@ public sealed class HiddenInSmoke : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HiddenInSmokePower>(),
-        HoverTipFactory.FromPotion<VialOfSmoke>(),
+        HoverTipFactory.FromPotion<PuffOfSmoke>(),
     ];
 
     public HiddenInSmoke()

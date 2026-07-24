@@ -30,5 +30,5 @@ public sealed class WildGrowth : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => RemoveKeyword(CardKeyword.Exhaust);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

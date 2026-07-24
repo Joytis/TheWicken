@@ -17,7 +17,7 @@ public sealed class Brambleburst : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(8m),
+        new CalculationBaseVar(12m),
 		new ExtraDamageVar(1m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() ?? 0)
     ];
@@ -35,5 +35,5 @@ public sealed class Brambleburst : WitchCard
             .Execute(choiceContext);
     }
 
-    protected override void OnUpgrade() => DynamicVars.CalculationBase.UpgradeValueBy(3m);
+    protected override void OnUpgrade() => DynamicVars.CalculationBase.UpgradeValueBy(6m);
 }

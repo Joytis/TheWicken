@@ -55,6 +55,9 @@ public static class WitchCardTrailPatch
                     vfx.AddChild(child);
                 }
                 source.QueueFree();
+                // Owners still point at the freed source scene root; ReplaceBy copies them
+                // onto the new nodes and Godot rejects a non-ancestor owner (error spam).
+                ClearOwners(vfx);
                 ConvertLinesToTrails(vfx);
             }
 
@@ -68,6 +71,15 @@ public static class WitchCardTrailPatch
         }
 
         return false;
+    }
+
+    private static void ClearOwners(Node root)
+    {
+        foreach (Node child in root.GetChildren())
+        {
+            child.Owner = null;
+            ClearOwners(child);
+        }
     }
 
     /// <summary>Replaces every plain Line2D in the subtree with an NCardTrail clone.</summary>

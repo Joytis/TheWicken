@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://day60k0as8rc0"
-path="res://.godot/imported/extract_essence.png-c43b9d3494b70495bef2865ea9e03c55.ctex"
+uid="uid://bd26ef1hp3i1c"
+path="res://.godot/imported/cozy_nest.png-2978c7d727e96eea25a474c3e29ccbc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/card_portraits/big/extract_essence.png"
-dest_files=["res://.godot/imported/extract_essence.png-c43b9d3494b70495bef2865ea9e03c55.ctex"]
+source_file="res://TheWitch/images/relics/big/cozy_nest.png"
+dest_files=["res://.godot/imported/cozy_nest.png-2978c7d727e96eea25a474c3e29ccbc2.ctex"]
 
 [params]
 

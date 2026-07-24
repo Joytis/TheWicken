@@ -143,11 +143,11 @@ Debug-only console commands (auto-registered in the mod via `AbstractConsoleCmd`
   `BrewBook.Brew`, consuming both. If the player holds exactly one potion, it's replaced with a `WickedBrew`
   (Token-rarity card-only potion). Errors on an empty belt. Networked (multiplayer-safe).
 
-## Enemy essence (ExtractEssence card)
+## Enemy essence (Harvest card)
 
 A second consumer of the classification layer: [`EnemyEssence`](../TheWitchCode/Potions/Brewing/EnemyEssence.cs)
 turns a *defeated-ish enemy's behavior* into a thematic potion, used by the
-[ExtractEssence card](../TheWitchCode/Cards/ExtractEssence.cs) ("deal damage; on unblocked damage, create a potion
+[Harvest card](../TheWitchCode/Cards/Harvest.cs) ("deal damage; on unblocked damage, create a potion
 themed after the enemy").
 
 - **`EnemyEssence.Classify(Creature)`** → `PotionOrientation`. It tallies the enemy's intent types across its

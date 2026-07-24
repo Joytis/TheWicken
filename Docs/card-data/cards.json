@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23",
+  "generated": "2026-07-24",
   "cards": [
     {
       "name": "Defend",
@@ -27,19 +27,19 @@
       "threads": []
     },
     {
-      "name": "Extract Essence",
-      "entry": "EXTRACT_ESSENCE",
-      "file": "TheWitchCode/Cards/ExtractEssence.cs",
+      "name": "Harvest",
+      "entry": "HARVEST",
+      "file": "TheWitchCode/Cards/Harvest.cs",
       "cost": 2,
       "type": "Attack",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. On unblocked damage, create a Potion.",
+      "text": "Deal 12 damage. Harvest a Potion.",
       "numbers": {
-        "Damage": 10
+        "Damage": 12
       },
       "upgrade": "Damage +4",
-      "note": "ExtractEssence: deal damage; on unblocked damage, create a random potion from a HARD-CODED loot table (Herbal Brew pattern — not a live catalog query), so the pool is tuned per card.",
+      "note": "Harvest: deal damage; on unblocked damage, create a random potion from a HARD-CODED loot table (Herbal Brew pattern — not a live catalog query), so the pool is tuned per card.",
       "tested": false,
       "artFinal": false,
       "mechanics": [
@@ -316,14 +316,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 7 Block. Gain 3 Brambles.",
+      "text": "Gain 6 Block. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Block": 7
+        "Block": 6
       },
-      "upgrade": "Block +3, Brambles +1",
+      "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -893,6 +893,34 @@
       ]
     },
     {
+      "name": "Crow Familiar",
+      "entry": "CROW_FAMILIAR",
+      "file": "TheWitchCode/Cards/CrowFamiliar.cs",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Uncommon",
+      "target": "Self",
+      "text": "Summon a Crow Familiar.",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "Familiars"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Familiars:Summon"
+      ],
+      "threads": [
+        "CardGen",
+        "TurnEngine"
+      ]
+    },
+    {
       "name": "Deep Roots",
       "entry": "DEEP_ROOTS",
       "file": "TheWitchCode/Cards/DeepRoots.cs",
@@ -900,9 +928,9 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, gain 4 Brambles.",
+      "text": "At the start of your turn, gain 3 Brambles.",
       "numbers": {
-        "DeepRoots": 4
+        "DeepRoots": 3
       },
       "upgrade": "DeepRoots +2",
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
@@ -1010,7 +1038,7 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, create a Vial of Smoke.",
+      "text": "At the start of your turn, create a Puff of Smoke.",
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
@@ -1110,34 +1138,6 @@
       "sub": [],
       "threads": [
         "PlayVolume"
-      ]
-    },
-    {
-      "name": "Owl Familiar",
-      "entry": "OWL_FAMILIAR",
-      "file": "TheWitchCode/Cards/OwlFamiliar.cs",
-      "cost": 1,
-      "type": "Power",
-      "rarity": "Uncommon",
-      "target": "Self",
-      "text": "Summon an Owl Familiar.",
-      "numbers": {},
-      "upgrade": "none",
-      "note": "Summons a cosmetic owl pet alongside the familiar power.",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Familiars"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Familiars:Summon"
-      ],
-      "threads": [
-        "CardGen",
-        "TurnEngine"
       ]
     },
     {
@@ -1652,9 +1652,9 @@
       "target": "Self",
       "text": "Double your Brambles.",
       "numbers": {},
-      "upgrade": "custom (see code)",
+      "upgrade": "Cost -1",
       "note": "Exhausts (until upgraded).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -1850,10 +1850,10 @@
       "target": "AnyEnemy",
       "text": "Deal {CalculatedDamage:diff()} damage. Deals 1 additional damage for each of your Brambles.",
       "numbers": {
-        "CalculationBase": 8,
+        "CalculationBase": 12,
         "ExtraDamage": 1
       },
-      "upgrade": "CalculationBase +3",
+      "upgrade": "CalculationBase +6",
       "note": "Hits once per Bramble; does nothing if you have no Brambles.",
       "tested": false,
       "artFinal": false,
@@ -1959,34 +1959,6 @@
         "Draw",
         "SelfExhaust",
         "SkillsMatter"
-      ]
-    },
-    {
-      "name": "Crow Familiar",
-      "entry": "CROW_FAMILIAR",
-      "file": "TheWitchCode/Cards/CrowFamiliar.cs",
-      "cost": 1,
-      "type": "Power",
-      "rarity": "Rare",
-      "target": "Self",
-      "text": "Summon a Crow Familiar.",
-      "numbers": {},
-      "upgrade": "none",
-      "note": "",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Familiars"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Familiars:Summon"
-      ],
-      "threads": [
-        "CardGen",
-        "TurnEngine"
       ]
     },
     {
@@ -2171,7 +2143,7 @@
         "Hex": 2,
         "Damage": 8
       },
-      "upgrade": "Hex +1",
+      "upgrade": "Damage +2, Hex +1",
       "note": "Hexblast: blast every enemy, then lay Hex on all of them.",
       "tested": false,
       "artFinal": false,
@@ -2194,7 +2166,7 @@
       "name": "Message in a Bottle",
       "entry": "MESSAGE_IN_A_BOTTLE",
       "file": "TheWitchCode/Cards/MessageInABottle.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
@@ -2246,6 +2218,34 @@
       ],
       "threads": [
         "ExhaustOutlet"
+      ]
+    },
+    {
+      "name": "Owl Familiar",
+      "entry": "OWL_FAMILIAR",
+      "file": "TheWitchCode/Cards/OwlFamiliar.cs",
+      "cost": 1,
+      "type": "Power",
+      "rarity": "Rare",
+      "target": "Self",
+      "text": "Summon an Owl Familiar.",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Summons a cosmetic owl pet alongside the familiar power.",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "Familiars"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Familiars:Summon"
+      ],
+      "threads": [
+        "CardGen",
+        "TurnEngine"
       ]
     },
     {
@@ -2405,11 +2405,11 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Whenever you play a card, gain 2 Brambles.",
+      "text": "Whenever you play a card, gain 3 Brambles.",
       "numbers": {
-        "WickerForm": 2
+        "WickerForm": 3
       },
-      "upgrade": "WickerForm +1",
+      "upgrade": "WickerForm +2",
       "note": "Wicker Form: become the wicker — every card you play sprouts Brambles.",
       "tested": false,
       "artFinal": false,

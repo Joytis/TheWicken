@@ -9,7 +9,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class OwlFamiliar : WitchCard, IFamiliarSummon
 {
     public OwlFamiliar()
-        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 
