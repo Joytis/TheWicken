@@ -1,0 +1,57 @@
+{
+  "items": {
+    "main": "3752517967",
+    "beta": "3768831080"
+  },
+  "updated": "2026-07-25T01:45:52Z",
+  "samples": [
+    {
+      "time": "2026-07-25T01:43:58Z",
+      "branch": "main",
+      "publishedfileid": "3752517967",
+      "subscriptions": 384,
+      "lifetimeSubscriptions": 554,
+      "favorited": 57,
+      "lifetimeFavorited": 59,
+      "followers": 0,
+      "views": 1966,
+      "timeUpdated": 1784933658
+    },
+    {
+      "time": "2026-07-25T01:43:58Z",
+      "branch": "beta",
+      "publishedfileid": "3768831080",
+      "subscriptions": 804,
+      "lifetimeSubscriptions": 1210,
+      "favorited": 114,
+      "lifetimeFavorited": 120,
+      "followers": 0,
+      "views": 6293,
+      "timeUpdated": 1784933824
+    },
+    {
+      "time": "2026-07-25T01:45:52Z",
+      "branch": "main",
+      "publishedfileid": "3752517967",
+      "subscriptions": 385,
+      "lifetimeSubscriptions": 555,
+      "favorited": 57,
+      "lifetimeFavorited": 59,
+      "followers": 0,
+      "views": 1967,
+      "timeUpdated": 1784933658
+    },
+    {
+      "time": "2026-07-25T01:45:52Z",
+      "branch": "beta",
+      "publishedfileid": "3768831080",
+      "subscriptions": 805,
+      "lifetimeSubscriptions": 1211,
+      "favorited": 114,
+      "lifetimeFavorited": 120,
+      "followers": 0,
+      "views": 6298,
+      "timeUpdated": 1784933824
+    }
+  ]
+}

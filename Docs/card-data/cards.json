@@ -117,14 +117,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "AllEnemies",
-      "text": "Gain 5 Block. Apply 2 Weak to ALL enemies.",
+      "text": "Gain 5 Block. Apply 1 Weak to ALL enemies.",
       "numbers": {
-        "Weak": 2,
+        "Weak": 1,
         "Block": 5
       },
       "upgrade": "Weak +1",
       "note": "Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -235,9 +235,9 @@
       "numbers": {
         "Brambles": 5
       },
-      "upgrade": "Brambles +3",
+      "upgrade": "Brambles +1, EnergyNextTurn +1",
       "note": "Fertilize: sow now, reap next turn — gain Brambles and bank 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -519,13 +519,13 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Lose 1 Brambles. Gain 2.",
+      "text": "Lose 1 Brambles. Gain 1.",
       "numbers": {
-        "Energy": 2
+        "Energy": 1
       },
       "upgrade": "Energy +1",
       "note": "Tinder: burn a bramble as kindling for Energy.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
