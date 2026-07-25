@@ -25,7 +25,5 @@ public sealed class StonyBrew : OrientationBrewCard
     ];
 
     // Potions the upgraded card can NO LONGER brew — dropped from the base table on upgrade.
-    protected override IEnumerable<PotionModel> UpgradedRemovals => [
-        ModelDb.Potion<BlockPotion>(),
-    ];
+    protected override IEnumerable<PotionModel> UpgradedRemovals => [ ];
 }

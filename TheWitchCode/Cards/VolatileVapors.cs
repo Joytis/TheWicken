@@ -15,7 +15,7 @@ public sealed class VolatileVapors : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VolatileVaporsPower>(6m)
+        new PowerVar<VolatileVaporsPower>(3m)
     ];
 
     public VolatileVapors()
@@ -29,5 +29,5 @@ public sealed class VolatileVapors : WitchCard
         await PowerCmd.Apply<VolatileVaporsPower>(choiceContext, Owner.Creature, DynamicVars["VolatileVaporsPower"].BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars["VolatileVaporsPower"].UpgradeValueBy(3m);
+    protected override void OnUpgrade() => DynamicVars["VolatileVaporsPower"].UpgradeValueBy(1m);
 }

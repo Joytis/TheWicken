@@ -4,7 +4,7 @@
   "THEWITCH-CAPTURE_SOUL.title": "Capture Soul",
   "THEWITCH-CAPTURE_SOUL.description": "Deal {Damage:diff()} damage.\nApply {CalculatedHex:diff()} [gold]Hex[/gold].\nIf [gold]Fatal[/gold], Permanently increase this card's hex by 1.",
   "THEWITCH-TORMENT.title": "Torment",
-  "THEWITCH-TORMENT.description": "Deal {Damage:diff()} damage.\nThis turn, whenever you play a [gold]Potion[/gold], apply {TormentPower:diff()} [gold]Hex[/gold] to a random enemy.",
+  "THEWITCH-TORMENT.description": "Deal {Damage:diff()} damage.\nWhenever you play a [gold]Potion[/gold] this turn, apply {TormentPower:diff()} [gold]Hex[/gold] to a random enemy.",
   "THEWITCH-MOONBEAM.title": "Moonbeam",
   "THEWITCH-MOONBEAM.description": "Deal {Damage:diff()} damage.\nDeal {BeamDamage:diff()} damage at the start of each of your turns.",
   "THEWITCH-PLAGUESTORM.title": "Plaguestorm",

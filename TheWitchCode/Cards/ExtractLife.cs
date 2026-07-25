@@ -17,6 +17,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class ExtractLife : WitchCard
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.Static(StaticHoverTip.ReplayStatic),
     ];

@@ -51,7 +51,7 @@ public sealed class Moonbeam : WitchCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
-        DynamicVars[_beamDamageKey].UpgradeValueBy(3m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars[_beamDamageKey].UpgradeValueBy(2m);
     }
 }

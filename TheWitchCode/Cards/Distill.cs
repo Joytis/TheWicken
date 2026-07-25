@@ -16,6 +16,9 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Distill : WitchCard
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Potions", 1m)
     ];

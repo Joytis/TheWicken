@@ -51,21 +51,11 @@ public sealed class Harvest : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         Creature target = cardPlay.Target;
 
-        AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-
-        int unblocked = attack.Results
-            .SelectMany(hit => hit)
-            .Where(d => d.Receiver == target)
-            .Sum(d => d.UnblockedDamage);
-
-        if (unblocked <= 0)
-        {
-            return;
-        }
 
         var rng = Owner.RunState.Rng.CombatPotionGeneration;
         var roll = rng.NextInt(LootTable.Count + 1);

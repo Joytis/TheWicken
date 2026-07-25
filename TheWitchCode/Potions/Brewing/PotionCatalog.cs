@@ -10,7 +10,7 @@ namespace TheWitch.TheWitchCode.Potions.Brewing;
 
 /// <summary>
 /// Query layer over every registered potion (<see cref="ModelDb.AllPotions" />), filtering by
-/// <see cref="PotionOrientation" />, <see cref="PotionRarity" /> and <see cref="PotionUsage" />.
+/// <see cref="PotionOrientation" /> and <see cref="PotionRarity" />.
 /// Returns canonical potion models; call <c>.ToMutable()</c> + <c>PotionCmd.TryToProcure</c> to actually grant one.
 /// </summary>
 public static class PotionCatalog
@@ -35,16 +35,9 @@ public static class PotionCatalog
     public static IEnumerable<PotionModel> Randomizable =>
         WitchAndShared.Where(p => p.Rarity is PotionRarity.Common or PotionRarity.Uncommon or PotionRarity.Rare);
 
-    public static IEnumerable<PotionModel> OfRarity(PotionRarity rarity) =>
-        All.Where(p => p.Rarity == rarity);
-
-    public static IEnumerable<PotionModel> OfOrientation(PotionOrientation orientation) =>
-        All.Where(p => PotionTraits.OrientationOf(p) == orientation);
-
     /// <summary>Master filter. All arguments are optional and AND-ed together.</summary>
     /// <param name="orientation">Restrict to this orientation if set.</param>
     /// <param name="rarity">Restrict to this rarity if set.</param>
-    /// <param name="usage">Restrict to this usage if set.</param>
     /// <param name="randomizableOnly">When true, exclude Token/Event payload-only potions.</param>
     /// <param name="excludeHealing">
     /// When true (default), exclude potions that can heal the player (<see cref="PotionTraits.IsHealing" />).
@@ -54,7 +47,6 @@ public static class PotionCatalog
     public static IEnumerable<PotionModel> Query(
         PotionOrientation? orientation = null,
         PotionRarity? rarity = null,
-        PotionUsage? usage = null,
         bool randomizableOnly = true,
         bool excludeHealing = true)
     {
@@ -62,7 +54,6 @@ public static class PotionCatalog
 
         if (orientation.HasValue) q = q.Where(p => PotionTraits.OrientationOf(p) == orientation.Value);
         if (rarity.HasValue) q = q.Where(p => p.Rarity == rarity.Value);
-        if (usage.HasValue) q = q.Where(p => p.Usage == usage.Value);
         if (excludeHealing) q = q.Where(p => !PotionTraits.IsHealing(p));
 
         return q;
