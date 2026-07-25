@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: '0 7 * * *'   # 07:00 UTC daily (best-effort; GitHub may delay or skip)
   workflow_dispatch:
+    inputs:
+      min_interval_hours:
+        description: 'Skip a branch sampled within this many hours (0 = force a sample)'
+        default: '12'
 
 permissions:
   contents: write
@@ -23,7 +27,7 @@ jobs:
       # No API key needed -- GetPublishedFileDetails is keyless.
       # 12h guard so a manual dispatch on top of the daily run does not double-sample.
       - name: Poll Steam Workshop
-        run: python3 tools/poll_workshop_stats.py --min-interval-hours 12
+        run: python3 tools/poll_workshop_stats.py --min-interval-hours "${{ inputs.min_interval_hours || '12' }}"
 
       - name: Commit sample
         run: |
