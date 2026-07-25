@@ -39,5 +39,9 @@ public sealed class NeedleWhip : WitchCard
         await PowerCmd.Apply<BramblesPower>(choiceContext, Owner.Creature, DynamicVars.Brambles().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Brambles().UpgradeValueBy(3m);
+    protected override void OnUpgrade() 
+    {
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Brambles().UpgradeValueBy(1m);
+    }
 }
