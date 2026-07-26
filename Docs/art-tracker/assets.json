@@ -220,6 +220,15 @@
           "path": "TheWitch/images/relics/big/large_pockets.png"
         },
         {
+          "name": "Morganne",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Uncommon",
+          "effect": "Every 10th card you play returns to your hand.",
+          "path": "TheWitch/images/relics/big/morganne.png"
+        },
+        {
           "name": "Wormy's Apple",
           "artist": "",
           "done": false,
