@@ -3,7 +3,7 @@
     "main": "3752517967",
     "beta": "3768831080"
   },
-  "updated": "2026-07-25T01:59:58Z",
+  "updated": "2026-07-26T09:06:57Z",
   "samples": [
     {
       "time": "2026-07-25T01:43:58Z",
@@ -76,6 +76,30 @@
       "followers": 0,
       "views": 6341,
       "timeUpdated": 1784933824
+    },
+    {
+      "time": "2026-07-26T09:06:57Z",
+      "branch": "main",
+      "publishedfileid": "3752517967",
+      "subscriptions": 531,
+      "lifetimeSubscriptions": 813,
+      "favorited": 80,
+      "lifetimeFavorited": 83,
+      "followers": 0,
+      "views": 2924,
+      "timeUpdated": 1785042268
+    },
+    {
+      "time": "2026-07-26T09:06:57Z",
+      "branch": "beta",
+      "publishedfileid": "3768831080",
+      "subscriptions": 1309,
+      "lifetimeSubscriptions": 2024,
+      "favorited": 184,
+      "lifetimeFavorited": 201,
+      "followers": 0,
+      "views": 10681,
+      "timeUpdated": 1785042417
     }
   ]
 }
