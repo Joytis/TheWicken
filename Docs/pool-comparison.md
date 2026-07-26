@@ -29,8 +29,8 @@
 |---|---|---|---|---|---|---|
 | 0 | 10 | 16 | 9 | 11 | 15 | 20 |
 | 1 | 42 | 43 | 54 | 48 | 49 | 49 |
-| 2 | 20 | 17 | 14 | 19 | 15 | 14 |
-| 3 | 9 | 10 | 7 | 7 | 6 | 3 |
+| 2 | 21 | 17 | 14 | 19 | 15 | 14 |
+| 3 | 8 | 10 | 7 | 7 | 6 | 3 |
 | 4+ | 0 | 0 | 2 | 0 | 1 | 1 |
 | X | 3 | 2 | 2 | 2 | 2 | 1 |
 
@@ -46,7 +46,7 @@ Effective damage = per-hit × hits. Cells: energy cost × single-target/AoE. Bas
 | 1 | AoE | 11 | 8 | 11 | 1 | 12 | 17 |
 | 2 | single | 20 | 13 | 17 | 7 | 12 | 15 |
 | 2 | AoE | 1 | 28 | 36 | 1 | 10 | 13 |
-| 3 | single | 9 | 19 | 24 | 2 | 12 | 16 |
+| 3 | single | 9 | 19 | 24 | 2 | 9.5 | 13.5 |
 | 3 | AoE | 2 | 14 | 18 | 1 | 16 | 20 |
 
 Non-flat damage cards per class (not averaged — counted):
@@ -86,6 +86,7 @@ Non-flat block cards per class:
 | Moonbeam | dmg | 2 | 8 | 13 | 0.62 |  |
 | Overrun | dmg | 1 | 5 | 8 | 0.63 |  |
 | Taste of Blood | dmg | 3 | 9 | 19 | 0.47 |  |
+| Rattling Bottles | dmg | 3 | 10 | 19 | 0.53 | SelfExhaust |
 | Circle of Rot | block | 2 | 20 | 11 | 1.82 | Drawback, SelfDebuff |
 | Salt and Ash | block | 1 | 8 | 6 | 1.33 | SelfDebuff |
 | Sprouts | block | 0 | 3 | 6 | 0.50 |  |

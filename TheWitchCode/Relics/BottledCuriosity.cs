@@ -18,7 +18,7 @@ namespace TheWitch.TheWitchCode.Relics;
 /// </summary>
 public sealed class BottledCuriosity : WitchRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon;
+    public override RelicRarity Rarity => RelicRarity.Common;
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {

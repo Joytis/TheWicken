@@ -1127,7 +1127,7 @@
       },
       "upgrade": "Damage +2, ExtraDamage +2",
       "note": "Overrun: mark one enemy for the pack — every Familiar card played this turn tramples it again.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2348,13 +2348,13 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 15 damage. Fill your empty potion slots with Rocks.",
+      "text": "Deal 10 damage. Fill your empty potion slots with Rocks.",
       "numbers": {
-        "Damage": 15
+        "Damage": 10
       },
       "upgrade": "Damage +5",
       "note": "Rattling Bottles: an attack that also crams every empty potion slot full of rocks.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2374,7 +2374,7 @@
       "name": "Ritual Casting",
       "entry": "RITUAL_CASTING",
       "file": "TheWitchCode/Cards/RitualCasting.cs",
-      "cost": 3,
+      "cost": 2,
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
@@ -2382,7 +2382,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Ritual Casting: a Power — big Skills each unlock a random free card this turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "None"
