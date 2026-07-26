@@ -157,6 +157,16 @@
           "path": "TheWitch/images/potions/rat_tail.png"
         },
         {
+          "name": "Potion-Shaped Pebble",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Deal 10 damage. (Card-only payload: Rattling Bottles)",
+          "path": "TheWitch/images/potions/potion_shaped_pebble.png"
+        },
+        {
           "name": "Bear Fur",
           "artist": "",
           "done": false,

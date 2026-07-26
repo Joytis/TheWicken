@@ -14,7 +14,7 @@ public sealed class HiddenInSmokePower : WitchPower
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
@@ -24,6 +24,10 @@ public sealed class HiddenInSmokePower : WitchPower
         }
 
         Flash();
-        await PotionCmd.TryToProcure<PuffOfSmoke>(player);
+        for(int i = 0; i < Amount; i++)
+        {
+            await PotionCmd.TryToProcure<PuffOfSmoke>(player);
+            await Cmd.Wait(0.1f);            
+        }
     }
 }

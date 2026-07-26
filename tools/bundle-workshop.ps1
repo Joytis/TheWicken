@@ -127,25 +127,6 @@ $mod = Get-Content $manifest -Raw | ConvertFrom-Json
 $modId = $mod.id
 if (-not $modId) { throw "Manifest has no 'id': $manifest" }
 
-# --- Bump patch version on upload runs --------------------------------------
-# Deployments auto-increment the last version segment (v0.0.2 -> v0.0.3) in the
-# repo manifest BEFORE publish/stage so the uploaded build carries the new
-# number. If the upload later fails, the bump remains (harmless; next attempt
-# bumps again -- version gaps are fine).
-if ($Upload) {
-    $ver = $mod.version
-    if ($ver -match '^(.*?)(\d+)$') {
-        $newVer = $Matches[1] + ([int]$Matches[2] + 1)
-        Write-Step "Bumping version: $ver -> $newVer"
-        $raw = Get-Content $manifest -Raw
-        $raw = $raw -replace ('"version":\s*"' + [regex]::Escape($ver) + '"'), ('"version": "' + $newVer + '"')
-        [System.IO.File]::WriteAllText($manifest, $raw, (New-Object System.Text.UTF8Encoding($false)))
-        $mod = Get-Content $manifest -Raw | ConvertFrom-Json
-    } else {
-        Write-Warn2 "Version '$ver' doesn't end in a number; skipping auto-bump."
-    }
-}
-
 # --- Resolve the ModUploader executable ------------------------------------
 if (-not $Uploader) {
     $Uploader = Join-Path $PSScriptRoot 'ModUploader-win-x64/ModUploader.exe'

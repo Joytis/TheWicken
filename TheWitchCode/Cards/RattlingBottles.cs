@@ -4,8 +4,12 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Config;
+using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -14,13 +18,10 @@ public sealed class RattlingBottles : WitchCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPotion<PotionShapedRock>(),
-    ];
+    private PotionModel CanonicalPotion => Witch.Turbo ? ModelDb.Potion<PotionShapedRock>() : ModelDb.Potion<PotionShapedPebble>();
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(15m, ValueProp.Move)
-    ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromPotion(CanonicalPotion) ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [ new DamageVar(10m, ValueProp.Move) ];
 
     public RattlingBottles()
         : base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
@@ -36,10 +37,13 @@ public sealed class RattlingBottles : WitchCard
             .WithHitFx("vfx/vfx_rock_shatter", null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
+        await Cmd.Wait(0.2f);
+
         int empty = Owner.PotionSlots.Count(p => p == null);
         for (int i = 0; i < empty; i++)
         {
-            await PotionCmd.TryToProcure<PotionShapedRock>(Owner);
+            await PotionCmd.TryToProcure(CanonicalPotion.ToMutable(), Owner);
+            await Cmd.Wait(0.1f);
         }
     }
 

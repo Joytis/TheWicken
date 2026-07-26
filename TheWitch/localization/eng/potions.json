@@ -32,5 +32,7 @@
   "THEWITCH-RAT_TAIL.title": "Rat Tail",
   "THEWITCH-RAT_TAIL.description": "Create a [gold]Rats[/gold].",
   "THEWITCH-BEAR_FUR.title": "Bear Fur",
-  "THEWITCH-BEAR_FUR.description": "Create a [gold]Mutilate[/gold]."
+  "THEWITCH-BEAR_FUR.description": "Create a [gold]Mutilate[/gold].",
+  "THEWITCH-POTION_SHAPED_PEBBLE.description": "Deal [blue]{Damage}[/blue] damage.",
+  "THEWITCH-POTION_SHAPED_PEBBLE.title": "Potion-Shaped Pebble"
 }

@@ -15,6 +15,12 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
+**When asked to review existing code, "is this correct?" is a question, not a request for changes.** Answer it. Don't edit.
+
+**Never call code broken without verifying it against `gamedata/`.** Trace the actual execution path and check the arithmetic. A defect claim needs a concrete failing case you have confirmed — not a plausible-sounding edge case. If you can't demonstrate the failure, you haven't found one.
+
+**Game design decisions are the user's, not yours.** Behavior that looks wrong (a relic bypassing Exhaust, a Power card returning to hand, an effect silently wasted at the hand cap) is usually intended. Ask what the intent is before labeling it a bug. Never mix design opinions into a correctness review.
+
 ## 2. Simplicity First
 
 **Minimum code that solves the problem. Nothing speculative.**

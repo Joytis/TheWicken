@@ -251,19 +251,6 @@
             "detail": "Bundle, then upload to the Steam Workshop. Requires Steam running & logged in. First upload creates a new item and writes workshop/mod_id.txt (commit it)."
         },
         {
-            "label": "Workshop: Poll stats",
-            "type": "process",
-            "command": "py",
-            "args": [
-                "${workspaceFolder}/tools/poll_workshop_stats.py",
-                "--min-interval-hours", "12"
-            ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Sample subscriber/favorite/view counts for the Main + Beta Workshop items and append to Docs/workshop-stats.json (skips branches sampled in the last 12h)."
-        },
-        {
             "label": "Card Data: Regen",
             "type": "process",
             "command": "node",

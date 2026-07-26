@@ -17,7 +17,7 @@ public sealed class CauldronDancePower : WitchPower
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     private CardModel? sourceCard;
 
@@ -41,7 +41,7 @@ public sealed class CauldronDancePower : WitchPower
         }
 
         Flash();
-        await CardPileCmd.Draw(choiceContext, 1m, player);
+        await CardPileCmd.Draw(choiceContext, Amount, player);
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

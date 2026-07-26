@@ -19,6 +19,12 @@ public partial class MainFile : Node
         // can bind mod C# scripts (PetVisuals, PetConfig, ...) by res:// path.
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
 
+        Config.WitchConfig config = new();
+        BaseLib.Config.ModConfigRegistry.Register(ModId, config);
+        // If the host changes settings mid-run, rebroadcast so clients stay in lockstep.
+        config.ConfigChanged += (_, _) =>
+            Config.TurboWitcherySyncPatch.SendIfHost(MegaCrit.Sts2.Core.Runs.RunManager.Instance.NetService);
+
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();

@@ -14,7 +14,7 @@ public sealed class RitualCasting : WitchCard
     ];
 
     public RitualCasting()
-        : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 

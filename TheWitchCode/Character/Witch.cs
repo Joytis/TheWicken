@@ -4,10 +4,11 @@ using TheWitch.TheWitchCode.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
-using MegaCrit.Sts2.Core.Models.Relics;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Relics;
+using TheWitch.TheWitchCode.Config;
+using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
 
 namespace TheWitch.TheWitchCode.Character;
 
@@ -26,6 +27,8 @@ public class Witch : PlaceholderCharacterModel
 
     public override CharacterGender Gender => CharacterGender.Neutral;
     public override int StartingHp => 68;
+
+    public static bool Turbo => WitchConfig.EffectiveTurboWitchery;
     
     public override IEnumerable<CardModel> StartingDeck => [
         ModelDb.Card<StrikeWitch>(),
