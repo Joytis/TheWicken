@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using TheWitch.TheWitchCode.Character;
 using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Potions.Brewing;
 using TheWitch.TheWitchCode.Powers;
@@ -31,7 +32,7 @@ public abstract class OrientationBrewCard : WitchCard
     /// <summary>Entries the upgraded card REMOVES from <see cref="LootTable" />.</summary>
     protected virtual IEnumerable<PotionModel> UpgradedRemovals => [];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => Witch.Turbo ? [] : [CardKeyword.Exhaust];
 
     private IEnumerable<PotionModel> CurrentTable =>
         IsUpgraded ? LootTable.Except(UpgradedRemovals).Concat(UpgradedExtras) : LootTable;

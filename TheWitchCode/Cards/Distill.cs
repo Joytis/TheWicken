@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWitch.TheWitchCode.Potions.Brewing;
 
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Character;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -16,7 +17,7 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Distill : WitchCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => Witch.Turbo ? [] : [CardKeyword.Exhaust];
 
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
