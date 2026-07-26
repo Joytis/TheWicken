@@ -11,7 +11,7 @@ public sealed class HerbalBrew : OrientationBrewCard
     // First pass: every utility potion the Witch could previously roll (shared pool + Witch pool,
     // all rarities, no healers). Trim freely — this list IS the card's roll pool.
     protected override IEnumerable<PotionModel> LootTable => [
-        ModelDb.Potion<PowerPotion>(),
+        ModelDb.Potion<VulnerablePotion>(),
         ModelDb.Potion<CureAll>(),
         ModelDb.Potion<SwiftPotion>(),
     ];
@@ -19,7 +19,7 @@ public sealed class HerbalBrew : OrientationBrewCard
 
     // Potions only the upgraded card can brew — none yet; new potions land here.
     protected override IEnumerable<PotionModel> UpgradedExtras => [        
-        ModelDb.Potion<GamblersBrew>(),
+        ModelDb.Potion<PowerPotion>(),
         ModelDb.Potion<DropletOfPrecognition>(),
     ];
 

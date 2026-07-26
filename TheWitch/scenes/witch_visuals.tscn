@@ -1,13 +1,185 @@
-[gd_scene load_steps=2 format=3 uid="uid://btcqkv2sr5amu"]
+[gd_scene load_steps=11 format=3 uid="uid://btcqkv2sr5amu"]
 
-[ext_resource type="Texture2D" uid="uid://clqf3tkt46use" path="res://TheWitch/textures/witch.png" id="1_hni02"]
+[ext_resource type="Texture2D" uid="uid://eliyyn5nk1c" path="res://TheWitch/textures/witch_idle.png" id="1_hni02"]
+[ext_resource type="Texture2D" uid="uid://ds3vpnagm15nb" path="res://TheWitch/textures/witch_attack.png" id="1_yxqrw"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yxqrw"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8jdyg"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_et516"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3hfbp"]
+states/Attack/node = SubResource("AnimationNodeAnimation_yxqrw")
+states/Attack/position = Vector2(388, 200)
+states/Idle/node = SubResource("AnimationNodeAnimation_8jdyg")
+states/Idle/position = Vector2(208, 200)
+transitions = ["Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_et516")]
+graph_offset = Vector2(-218, -14)
+
+[sub_resource type="Animation" id="Animation_3hfbp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_hni02")]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.1256349, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.1256349, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_et516"]
+resource_name = "Attack"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_yxqrw"), ExtResource("1_hni02")]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 3, 3, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 59.325565, 65.40696, -0.03333333, 18.244179, 0.03333333, -18.244179, 10.034292, -0.06666666, 6.721537, 0.06666666, -6.721537, 0, -0.06666666, 0.3200732, 0, 0),
+"times": PackedFloat32Array(0, 0.06666667, 0.33333334, 0.6333333)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.029221421, 0, 0, 0, 0, -0.054268356, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.17532852, 0.50093865)
+}
+
+[sub_resource type="Animation" id="Animation_8jdyg"]
+resource_name = "Idle"
+length = 3.1333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_hni02")]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2),
+"points": PackedFloat32Array(0.1256349, 0, 0, 0.16666667, 0, 0.1256349, -0.16666667, 0, 0, 0, 0.1256349, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(3, 3, 3),
+"points": PackedFloat32Array(0.1256349, -0.2, -0.0025462508, 0.2, 0.0025462508, 0.12542628, -0.23333335, 0.0021426752, 0.23333335, -0.0021426752, 0.126, -0.23333335, -0.0030224845, 0.23333335, 0.0030224845),
+"times": PackedFloat32Array(0, 1.2533334, 3.1333337)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dno7a"]
+_data = {
+&"Attack": SubResource("Animation_et516"),
+&"Idle": SubResource("Animation_8jdyg"),
+&"RESET": SubResource("Animation_3hfbp")
+}
 
 [node name="WitchVisuals" type="Node2D"]
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_3hfbp")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dno7a")
+}
+autoplay = "Idle"
+
 [node name="Visuals" type="Sprite2D" parent="."]
-position = Vector2(-4, -131)
-scale = Vector2(0.05818544, 0.05818544)
+scale = Vector2(0.1256349, 0.1256349)
 texture = ExtResource("1_hni02")
+offset = Vector2(-180, -1000)
 
 [node name="Bounds" type="Control" parent="."]
 layout_mode = 3

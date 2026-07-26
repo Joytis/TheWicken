@@ -25,7 +25,7 @@ public class Witch : PlaceholderCharacterModel
     public override Color EnergyLabelOutlineColor => DarkColor;
 
     public override CharacterGender Gender => CharacterGender.Neutral;
-    public override int StartingHp => 70;
+    public override int StartingHp => 68;
     
     public override IEnumerable<CardModel> StartingDeck => [
         ModelDb.Card<StrikeWitch>(),
