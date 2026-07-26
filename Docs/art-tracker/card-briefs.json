@@ -192,6 +192,18 @@
     "Rotting Roots": {
       "artist": "",
       "brief": "This one's a more general card - enemies rot and wither away, their fates turning sour. Frankly, the thematic of the card effect vs the current name and visuals are a bit suspect, but this one should depict soemthing withering away slowly."
+    },
+    "Torment": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Capture Soul": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Bonfire": {
+      "artist": "Joytis",
+      "brief": ""
     }
   }
 }
