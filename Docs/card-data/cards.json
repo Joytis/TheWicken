@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24",
+  "generated": "2026-07-26",
   "cards": [
     {
       "name": "Defend",
@@ -40,7 +40,7 @@
       },
       "upgrade": "Damage +4",
       "note": "Harvest: deal damage; on unblocked damage, create a random potion from a HARD-CODED loot table (Herbal Brew pattern — not a live catalog query), so the pool is tuned per card.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -124,7 +124,7 @@
       },
       "upgrade": "Weak +1",
       "note": "Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -237,7 +237,7 @@
       },
       "upgrade": "Brambles +1, EnergyNextTurn +1",
       "note": "Fertilize: sow now, reap next turn — gain Brambles and bank 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -295,7 +295,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -323,7 +323,7 @@
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -379,7 +379,7 @@
         "Brambles": 3,
         "Damage": 9
       },
-      "upgrade": "Brambles +3",
+      "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
       "tested": true,
       "artFinal": false,
@@ -409,7 +409,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Pact of Agony: clog your deck with Wounds for a heavy strike on every enemy.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -439,7 +439,7 @@
       },
       "upgrade": "Cards +1",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -470,7 +470,7 @@
       },
       "upgrade": "BlockNextTurn +2",
       "note": "Read the Bones: curse the enemy now, foresee the blow to come — apply Hex, then gain Block next turn (base-game <see cref=\"BlockNextTurnPower\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -498,7 +498,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -525,7 +525,7 @@
       },
       "upgrade": "Energy +1",
       "note": "Tinder: burn a bramble as kindling for Energy.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -586,7 +586,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -640,7 +640,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -818,7 +818,7 @@
       },
       "upgrade": "CloakOfMoonlight +1",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars",
@@ -871,9 +871,9 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 7 Brambles X times.",
+      "text": "Gain 6 Brambles X times.",
       "numbers": {
-        "Brambles": 7
+        "Brambles": 6
       },
       "upgrade": "Brambles +2",
       "note": "Spend X energy to pile Brambles on yourself, 7 at a time, X times — a fast way to stack a big Bramble count.",
@@ -904,7 +904,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -934,7 +934,7 @@
       },
       "upgrade": "DeepRoots +2",
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -963,7 +963,7 @@
       },
       "upgrade": "EyeOfNewt +1",
       "note": "Eye of Newt (was Experiment): a Power that makes your potions hit harder.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1042,7 +1042,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1071,7 +1071,7 @@
       },
       "upgrade": "Cards +2",
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1097,9 +1097,9 @@
       "numbers": {
         "Damage": 8
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "Moonbeam: strike, then leave the beam on the target — it takes the same damage again at the start of each of your turns (<see cref=\"MoonbeamPower\" />, stacks on repeat plays).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1185,7 +1185,7 @@
       },
       "upgrade": "Damage +3",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1214,7 +1214,7 @@
       },
       "upgrade": "none",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into a Noxious Brew.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1237,10 +1237,10 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 12 Block. Add 2 Rats into your Draw Pile and Discard Pile.",
+      "text": "Gain 12 Block. Add 1 Rats into your Draw Pile and Discard Pile.",
       "numbers": {
         "Block": 12,
-        "Cards": 2
+        "Cards": 1
       },
       "upgrade": "Block +4",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
@@ -1307,7 +1307,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Rot Bloom: heavy hit, then every debuff on the target blooms — each debuff power's stacks are duplicated (applied again at its current amount, Rend's debuff filter: temporary powers excluded).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -1421,7 +1421,7 @@
       },
       "upgrade": "Block +2",
       "note": "Sprouts: a small guard that reseeds itself — block + Brambles, and a copy of this card sprouts in your Discard pile (Anger pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -1451,7 +1451,7 @@
       },
       "upgrade": "Damage +2, Vulnerable +1",
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -1510,7 +1510,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1537,9 +1537,9 @@
       "numbers": {
         "Damage": 5
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1560,15 +1560,15 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 12 damage. This turn, whenever you play a Potion, apply 1 Hex to a random enemy.",
+      "text": "Deal 12 damage. Whenever you play a Potion this turn, apply 1 Hex to a random enemy.",
       "numbers": {
         "Torment": 1,
         "Damage": 12
       },
       "upgrade": "Damage +4",
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
-      "tested": false,
-      "artFinal": false,
+      "tested": true,
+      "artFinal": true,
       "mechanics": [
         "Debuff/Buff",
         "Potions"
@@ -1591,11 +1591,11 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 6 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 3 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 6
+        "VolatileVapors": 3
       },
-      "upgrade": "VolatileVapors +3",
+      "upgrade": "VolatileVapors +1",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
       "tested": true,
       "artFinal": false,
@@ -1626,7 +1626,7 @@
       },
       "upgrade": "Block +2",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -1654,7 +1654,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Exhausts (until upgraded).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -1741,7 +1741,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1770,8 +1770,8 @@
       },
       "upgrade": "Energy +2",
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
-      "tested": false,
-      "artFinal": false,
+      "tested": true,
+      "artFinal": true,
       "mechanics": [
         "None"
       ],
@@ -1855,7 +1855,7 @@
       },
       "upgrade": "CalculationBase +6",
       "note": "Hits once per Bramble; does nothing if you have no Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -1886,7 +1886,7 @@
       },
       "upgrade": "Strength +2",
       "note": "Broken Pact: end a familiar's service and take its strength for your own.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1918,8 +1918,8 @@
       },
       "upgrade": "Damage +4",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern).",
-      "tested": false,
-      "artFinal": false,
+      "tested": true,
+      "artFinal": true,
       "mechanics": [
         "Debuff/Buff"
       ],
@@ -2034,7 +2034,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Distill (renamed from Brew): replace a random belt potion (non-Rares prioritized) with a random RARE non-healing potion of the same orientation (see <see cref=\"PotionUpgrade\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2145,7 +2145,7 @@
       },
       "upgrade": "Damage +2, Hex +1",
       "note": "Hexblast: blast every enemy, then lay Hex on all of them.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff"
@@ -2174,7 +2174,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Message in a Bottle: bottle a chosen card from your hand into a Bottled Message potion; using the potion returns the card to your hand.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2205,7 +2205,7 @@
       },
       "upgrade": "CalculationExtra +1",
       "note": "Mulch: compost the whole discard pile — EXHAUST it for Brambles and Block per card.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -2232,7 +2232,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Summons a cosmetic owl pet alongside the familiar power.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2265,7 +2265,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff",
@@ -2411,7 +2411,7 @@
       },
       "upgrade": "WickerForm +2",
       "note": "Wicker Form: become the wicker — every card you play sprouts Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -2467,7 +2467,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex a single target.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars",
@@ -2564,7 +2564,7 @@
       },
       "upgrade": "Block +3, VigorNextTurn +3",
       "note": "Bear familiar token: den up — block now, wake up swinging with Vigor next turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2592,7 +2592,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Owl familiar token: memorize a card — copy a card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2623,7 +2623,7 @@
       },
       "upgrade": "Damage +7",
       "note": "Bear familiar token: heavy hit that ignores Block.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2685,7 +2685,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Rat familiar token (was Scavengers): tiny attack that cycles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2774,7 +2774,7 @@
       },
       "upgrade": "Cards +1",
       "note": "Rat familiar token: flood the deck — shuffle Rats into the draw pile (Call the Pack pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2866,7 +2866,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and ONE potent potion from a hard-coded loot table (Extract Essence pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Debuff/Buff",
