@@ -16,10 +16,10 @@ public class Witch : PlaceholderCharacterModel
     public const string CharacterId = "Witch";
     
     // Colors
-    public static readonly Color Color = new("BC8F8F");
+    public static readonly Color Color = new("5E2626");
     public static readonly Color DarkColor = new("3D1714FF");
     public override Color NameColor => Color;
-    public override Color MapDrawingColor => Color;                            
+    public override Color MapDrawingColor => new("846464"); // Color darkened 30% for map-pen legibility
     public override Color RemoteTargetingLineColor => Color;
     public override Color RemoteTargetingLineOutline => DarkColor;
     public override Color EnergyLabelOutlineColor => DarkColor;
