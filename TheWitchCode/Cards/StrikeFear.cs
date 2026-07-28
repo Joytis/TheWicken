@@ -23,7 +23,7 @@ public sealed class StrikeFear : WitchCard
     ];
 
     public StrikeFear()
-        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 

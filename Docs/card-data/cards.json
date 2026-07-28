@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26",
+  "generated": "2026-07-28",
   "cards": [
     {
       "name": "Defend",
@@ -96,13 +96,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Payoff"
       ],
       "sub": [
-        "Debuff/Buff:HexExploit"
+        "Hex:Exploit"
       ],
       "threads": [
         "MultiHit",
@@ -127,14 +127,12 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "None"
       ],
       "role": [
-        "Generator"
+        "Standalone"
       ],
-      "sub": [
-        "Debuff/Buff:Weak"
-      ],
+      "sub": [],
       "threads": [
         "Weak",
         "SelfExhaust"
@@ -262,51 +260,30 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 15 damage. Gain 2 Weak.",
+      "text": "Deal 7 damage. If the enemy is Hexed, gain 1 and draw a card.",
       "numbers": {
-        "Weak": 2,
-        "Damage": 15
+        "Damage": 7,
+        "Energy": 1,
+        "Cards": 1
       },
-      "upgrade": "Damage +5",
+      "upgrade": "Damage +3",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
-        "None"
+        "Hex"
       ],
       "role": [
-        "Standalone"
-      ],
-      "sub": [],
-      "threads": [
-        "Drawback",
-        "SelfDebuff"
-      ]
-    },
-    {
-      "name": "Herbal Brew",
-      "entry": "HERBAL_BREW",
-      "file": "TheWitchCode/Cards/HerbalBrew.cs",
-      "cost": "energyCost",
-      "type": "Skill",
-      "rarity": "Common",
-      "target": "Self",
-      "text": "Create a utility Potion.",
-      "numbers": {},
-      "upgrade": "none",
-      "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Potions"
-      ],
-      "role": [
-        "Generator"
+        "Payoff"
       ],
       "sub": [
-        "Potions:Brew"
+        "Hex:Exploit"
       ],
-      "threads": []
+      "threads": [
+        "DebuffPayoff",
+        "Energy",
+        "Draw"
+      ]
     },
     {
       "name": "Hide in a Bush",
@@ -398,29 +375,31 @@
       "name": "Pact of Agony",
       "entry": "PACT_OF_AGONY",
       "file": "TheWitchCode/Cards/PactOfAgony.cs",
-      "cost": 1,
-      "type": "Attack",
+      "cost": 0,
+      "type": "Skill",
       "rarity": "Common",
       "target": "AllEnemies",
-      "text": "Deal 12 damage to ALL enemies. Add 1 Wound to your Discard Pile.",
+      "text": "Gain 1 Hex. Apply 1 Hex to ALL enemies.",
       "numbers": {
-        "Cards": 1,
-        "Damage": 12
+        "Hex": 1
       },
-      "upgrade": "Damage +5",
-      "note": "Pact of Agony: clog your deck with Wounds for a heavy strike on every enemy.",
-      "tested": true,
+      "upgrade": "Hex +1",
+      "note": "Pact of Agony: hex yourself to hex the whole board.",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
-        "None"
+        "Hex"
       ],
       "role": [
-        "Standalone"
+        "Generator"
       ],
-      "sub": [],
+      "sub": [
+        "Hex:Apply",
+        "Hex:Self"
+      ],
       "threads": [
         "AoE",
-        "SelfStatus",
+        "SelfDebuff",
         "SelfExhaust"
       ]
     },
@@ -473,13 +452,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff",
@@ -490,7 +469,7 @@
       "name": "Stony Brew",
       "entry": "STONY_BREW",
       "file": "TheWitchCode/Cards/StonyBrew.cs",
-      "cost": "energyCost",
+      "cost": 1,
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
@@ -498,7 +477,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -510,6 +489,34 @@
         "Potions:Brew"
       ],
       "threads": []
+    },
+    {
+      "name": "Strike Fear",
+      "entry": "STRIKE_FEAR",
+      "file": "TheWitchCode/Cards/StrikeFear.cs",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "target": "AnyEnemy",
+      "text": "Deal 9 damage. Apply 1 Vulnerable.",
+      "numbers": {
+        "Vulnerable": 1,
+        "Damage": 9
+      },
+      "upgrade": "Damage +2, Vulnerable +1",
+      "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "None"
+      ],
+      "role": [
+        "Standalone"
+      ],
+      "sub": [],
+      "threads": [
+        "Vulnerable"
+      ]
     },
     {
       "name": "Tinder",
@@ -589,13 +596,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff"
@@ -632,7 +639,7 @@
       "name": "Wicked Brew",
       "entry": "WICKED_BREW",
       "file": "TheWitchCode/Cards/WickedBrew.cs",
-      "cost": "energyCost",
+      "cost": 1,
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
@@ -640,7 +647,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -699,13 +706,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff",
@@ -790,14 +797,12 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "None"
       ],
       "role": [
         "Standalone"
       ],
-      "sub": [
-        "Debuff/Buff:Weak"
-      ],
+      "sub": [],
       "threads": [
         "Weak",
         "Drawback",
@@ -1029,6 +1034,31 @@
       "threads": [
         "Energy"
       ]
+    },
+    {
+      "name": "Herbal Brew",
+      "entry": "HERBAL_BREW",
+      "file": "TheWitchCode/Cards/HerbalBrew.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "target": "Self",
+      "text": "Create a utility Potion.",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "Potions"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Potions:Brew"
+      ],
+      "threads": []
     },
     {
       "name": "Hidden in Smoke",
@@ -1278,7 +1308,7 @@
       "artFinal": false,
       "mechanics": [
         "Familiars",
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Payoff",
@@ -1286,7 +1316,7 @@
       ],
       "sub": [
         "Familiars:Sacrifice",
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "Draw",
@@ -1310,13 +1340,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Payoff"
       ],
       "sub": [
-        "Debuff/Buff:HexExploit"
+        "Hex:Exploit"
       ],
       "threads": [
         "DebuffPayoff",
@@ -1340,13 +1370,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "TurnEngine",
@@ -1434,34 +1464,6 @@
       ],
       "threads": [
         "CardGen"
-      ]
-    },
-    {
-      "name": "Strike Fear",
-      "entry": "STRIKE_FEAR",
-      "file": "TheWitchCode/Cards/StrikeFear.cs",
-      "cost": 1,
-      "type": "Attack",
-      "rarity": "Uncommon",
-      "target": "AnyEnemy",
-      "text": "Deal 9 damage. Apply 1 Vulnerable.",
-      "numbers": {
-        "Vulnerable": 1,
-        "Damage": 9
-      },
-      "upgrade": "Damage +2, Vulnerable +1",
-      "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Debuff/Buff"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [],
-      "threads": [
-        "Vulnerable"
       ]
     },
     {
@@ -1570,7 +1572,7 @@
       "tested": true,
       "artFinal": true,
       "mechanics": [
-        "Debuff/Buff",
+        "Hex",
         "Potions"
       ],
       "role": [
@@ -1578,7 +1580,7 @@
         "Payoff"
       ],
       "sub": [
-        "Debuff/Buff:HexApply",
+        "Hex:Apply",
         "Potions:UsePayoff"
       ],
       "threads": []
@@ -1591,13 +1593,13 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 3 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 5 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 3
+        "VolatileVapors": 5
       },
-      "upgrade": "VolatileVapors +1",
+      "upgrade": "VolatileVapors +2",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1629,13 +1631,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff",
@@ -1921,13 +1923,13 @@
       "tested": true,
       "artFinal": true,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff",
@@ -2009,12 +2011,14 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "None"
+        "Hex"
       ],
       "role": [
         "Enabler"
       ],
-      "sub": [],
+      "sub": [
+        "Hex:Self"
+      ],
       "threads": [
         "Energy",
         "Draw",
@@ -2148,13 +2152,13 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Generator"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "AoE",
@@ -2268,7 +2272,7 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff",
+        "Hex",
         "Familiars"
       ],
       "role": [
@@ -2276,7 +2280,7 @@
         "Payoff"
       ],
       "sub": [
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "AoE",
@@ -2471,14 +2475,14 @@
       "artFinal": false,
       "mechanics": [
         "Familiars",
-        "Debuff/Buff"
+        "Hex"
       ],
       "role": [
         "Token"
       ],
       "sub": [
         "Familiars:Token",
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff",
@@ -2869,7 +2873,7 @@
       "tested": true,
       "artFinal": false,
       "mechanics": [
-        "Debuff/Buff",
+        "Hex",
         "Potions"
       ],
       "role": [
@@ -2877,7 +2881,7 @@
       ],
       "sub": [
         "Potions:Brew",
-        "Debuff/Buff:HexApply"
+        "Hex:Apply"
       ],
       "threads": [
         "OtherDebuff"

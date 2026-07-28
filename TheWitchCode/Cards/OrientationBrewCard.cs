@@ -41,8 +41,8 @@ public abstract class OrientationBrewCard : WitchCard
         CurrentTable.Select(HoverTipFactory.FromPotion);
 
 
-    protected OrientationBrewCard(int energyCost = 1)
-        : base(energyCost, CardType.Skill, CardRarity.Common, TargetType.Self)
+    protected OrientationBrewCard(int energyCost = 1, CardRarity rarity = CardRarity.Common)
+        : base(energyCost, CardType.Skill, rarity, TargetType.Self)
     {
     }
 

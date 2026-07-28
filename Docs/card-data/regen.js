@@ -95,6 +95,35 @@ function parseSummary(src) {
   return sentence.trim();
 }
 
+const splitArgs = (s) => s.split(",").map((a) => a.trim()).filter(Boolean);
+
+// Resolve the card ctor's ultimate base(cost, CardType.X, CardRarity.X, TargetType.X) args,
+// following pass-through ctor params on intermediate bases (e.g. the Brew trio :
+// OrientationBrewCard, whose ctor forwards `energyCost`/`rarity` with defaults).
+function resolveCtorArgs(childSrc, parent, srcByClass) {
+  const isResolved = (a) => a && a.length === 4 && a[1].startsWith("CardType.");
+  const call = childSrc.match(/:\s*base\(([^)]*)\)/);
+  let args = call ? splitArgs(call[1]) : null; // null = child has no ctor; use parent defaults
+  for (let hops = 0; hops < 5 && !isResolved(args); hops++) {
+    const p = srcByClass && srcByClass[parent];
+    if (!p) return null;
+    const ctor = p.src.match(
+      new RegExp(String.raw`(?:protected|public)\s+${parent}\s*\(([^)]*)\)\s*:\s*base\(([^)]*)\)`)
+    );
+    if (!ctor) return null;
+    // param map: declared defaults, overridden positionally by the child's base(...) args
+    const map = {};
+    splitArgs(ctor[1]).forEach((decl, i) => {
+      const m = decl.match(/(\w+)\s*(?:=\s*(.+))?$/);
+      if (!m) return;
+      map[m[1]] = args && args[i] !== undefined ? args[i] : (m[2] || "").trim();
+    });
+    args = splitArgs(ctor[2]).map((a) => (a in map ? map[a] : a));
+    parent = p.parent;
+  }
+  return isResolved(args) ? args : null;
+}
+
 function parseCard(file, srcByClass) {
   let src = fs.readFileSync(file, "utf8");
   const cls = src.match(/public\s+sealed\s+class\s+(\w+)\s*:\s*(\w+)/) || src.match(/public\s+class\s+(\w+)\s*:\s*(\w+)/);
@@ -102,7 +131,10 @@ function parseCard(file, srcByClass) {
   const className = cls[1];
   if (SKIP.has(className)) return null;
 
-  // A card may inherit its ctor/vars/OnUpgrade from an intermediate abstract base
+  const ctorArgs = resolveCtorArgs(src, cls[2], srcByClass);
+  if (!ctorArgs) return null; // not a card model (no card ctor)
+
+  // A card may inherit its vars/OnUpgrade/summary from an intermediate abstract base
   // (e.g. the Brew trio : OrientationBrewCard). Append base-class source so the
   // field regexes below can fall through to it; child declarations match first.
   let parent = cls[2];
@@ -111,23 +143,18 @@ function parseCard(file, srcByClass) {
     parent = srcByClass[parent].parent;
   }
 
-  const ctor = src.match(
-    /:\s*base\(\s*([^,]+?)\s*,\s*CardType\.(\w+)\s*,\s*CardRarity\.(\w+)\s*,\s*TargetType\.(\w+)\s*\)/
-  );
-  if (!ctor) return null; // not a card model (no card ctor)
-
   const hasX = /HasEnergyCostX\s*=>\s*true/.test(src);
-  const rarityRaw = ctor[3];
+  const rarityRaw = ctorArgs[2].replace("CardRarity.", "");
   const vars = parseCanonicalVars(src);
 
   return {
     className,
     entry: pascalToSnake(className),
     file: path.relative(ROOT, file).split(path.sep).join("/"),
-    cost: hasX ? "X" : ctor[1].trim(),
-    type: ctor[2],
+    cost: hasX ? "X" : ctorArgs[0],
+    type: ctorArgs[1].replace("CardType.", ""),
     rarity: RAR_MAP[rarityRaw] || rarityRaw,
-    target: ctor[4],
+    target: ctorArgs[3].replace("TargetType.", ""),
     vars,
     numbers: Object.fromEntries(vars.map((v) => [v.name, v.value])),
     upgrade: parseUpgrade(src),

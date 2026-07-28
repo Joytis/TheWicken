@@ -235,14 +235,14 @@ than many pillars spread thin.
 
 ## How this maps onto Witch (the reason for the study)
 
-Witch pillars: **Brambles · Potions · Familiars · Debuff/Buff** (103 cards incl. 14 tokens, 18% None).
+Witch pillars: **Brambles · Potions · Familiars · Hex** (103 cards incl. 14 tokens, 18% None). *(Pillar renamed from Debuff/Buff 2026-07-27: hex-specific cards only; generic Weak/Vulnerable cards moved to None.)*
 
 | mech \ role | Gen | Payoff | Enabler | Token | Σ |
 |---|---|---|---|---|---|
 | Familiars | 12 | 5 | 5 | 13 | 32 |
 | Potions | 14 | 6 | 7 | 0 | 24 |
 | Brambles | 12 | 5 | 2 | 1 | 17 |
-| Debuff/Buff | 10 | 3 | 1 | 3 | 17 |
+| Hex | 10 | 3 | 1 | 3 | 17 |
 | None | 0 | 0 | 3 | 0 | 19 |
 
 - **Familiars** (12 gen : 5 payoff : 5 enabler, +13 token cards) is a summon archetype — its
@@ -253,7 +253,7 @@ Witch pillars: **Brambles · Potions · Familiars · Debuff/Buff** (103 cards in
   payoffs, à la Osty/Exhaust). Decide which, then size accordingly.
 - **Potions** (14 : 6 : 7) remains the healthiest pillar — generators, payoffs, and enablers all
   present.
-- **Debuff/Buff** (Hex enemies / gain Vigor → big multi-attacks and Strength drain) is the 4th
+- **Hex** (hex enemies / hex yourself → multi-attacks milk the stacks) is the 4th
   pillar, added 2026-07. 10 gen : 3 payoff looks lopsided, but the resource is *half self-acting*:
   stolen Strength and Vigor amplify every attack on their own (Strength/Poison logic), so only the
   debuff-exploit half (Hexblast, Soul Knot, Bag of Teeth) needs dedicated payoffs. Another 1–2
