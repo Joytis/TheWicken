@@ -147,7 +147,7 @@ const ROLES = ["Generator","Payoff","Enabler","Token","Standalone"];
 // Per-tab config. `dev` = the mod's own cards (cards.json) with art/tested tooling + server writes.
 // `ref` = read-only base-game reference pulled from decompiled source.
 const CLASSES = {
-  witch:      { label:"Witch",      file:"cards.json",       mode:"dev", mechanics:["Brambles","Potions","Familiars","Debuff/Buff","None"], note:"Living design doc — toggle TESTED only after verifying a card in-game." },
+  witch:      { label:"Witch",      file:"cards.json",       mode:"dev", mechanics:["Brambles","Potions","Familiars","Hex","None"], note:"Living design doc — toggle TESTED only after verifying a card in-game." },
   silent:      { label:"Silent",      file:"silent.json",      mode:"ref", mechanics:["Poison","Shivs","Discard","None"],       note:"Base-game reference (decompiled). Pillars: Poison · Shivs · Discard." },
   necrobinder: { label:"Necrobinder", file:"necrobinder.json", mode:"ref", mechanics:["Osty","Soul","Doom","Ethereal","None"], note:"Base-game reference (decompiled). Pillars: Osty (summons) · Soul · Doom · Ethereal." },
   ironclad:    { label:"Ironclad",    file:"ironclad.json",    mode:"ref", mechanics:["Strength","Exhaust","Self-Harm","Vulnerable","None"], note:"Base-game reference (decompiled). Pillars: Strength · Exhaust · Self-Harm · Vulnerable." },

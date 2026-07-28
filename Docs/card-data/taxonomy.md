@@ -111,7 +111,7 @@ Format: `Pillar:Sub` — definition (count).
 - `Potions:Brew` — creates potions in combat (16) · `Potions:UsePayoff` — triggers when a potion is USED (6) · `Potions:CreatePayoff` — scales off potions CREATED this combat (3) · `Potions:Economy` — improves stock quality: rarity-upgrade, copy-next (2). *UsePayoff vs CreatePayoff are different hooks — only Volatile Vapors bridges both.*
 - `Familiars:Summon` — applies a FamiliarPower stack (7) · `Familiars:TokenGen` — injects token cards directly (7) · `Familiars:CountPayoff` — scales per active familiar (3) · `Familiars:Sacrifice` — consumes a familiar for a payout (2) · `Familiars:Token` — the generated payload cards (12).
 - `Brambles:Rider` — small gain stapled to a normal card (5) · `Brambles:Ramp` — big one-shot stacking (3) · `Brambles:Engine` — repeatable passive generation (2) · `Brambles:Spend` — consumes Brambles as currency (3).
-- `Debuff/Buff:HexApply` — applies Hex (13) · `Debuff/Buff:HexExploit` — dedicated debuff payoff (2) · `Debuff/Buff:Weak` — AoE Weak (2).
+- `Hex:Apply` — applies Hex to enemies (13) · `Hex:Exploit` — dedicated hex/debuff payoff (3) · `Hex:Self` — gains Hex on the PLAYER as a cost (2). *(Pillar renamed from `Debuff/Buff` 2026-07-27; non-hex Weak/Vulnerable cards are now generic `None`.)*
 
 ### Silent
 - `Poison:Burst` (5) · `Poison:Engine` — repeating application (3) · `Poison:Payoff` (4).

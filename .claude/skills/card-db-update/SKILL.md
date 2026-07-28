@@ -26,7 +26,7 @@ Worklist = every card that is **(a)** newly added (empty `mechanics`/`role`), or
 - `Potions` — creates, uses, upgrades, copies, or scales off potions/slots.
 - `Familiars` — summons familiars, is a familiar token, or scales off/tutors/sacrifices familiars.
 - `Brambles` — gains, doubles, spends, or scales off Brambles.
-- `Debuff/Buff` — Hex/Weak/Vulnerable/Vigor application or payoff as the card's point (a minor rider on a pillar card does not earn the tag).
+- `Hex` — Hex-specific: applies Hex (to enemies or self) or pays off Hex/debuffs as the card's point (a minor rider on a pillar card does not earn the tag). Generic Weak/Vulnerable/Vigor cards with no Hex interaction are `None`.
 - `None` — no pillar interaction.
 
 `role[]` — what the card does for its mechanic(s):

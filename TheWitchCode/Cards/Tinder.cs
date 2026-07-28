@@ -35,7 +35,8 @@ public sealed class Tinder : WitchCard
             return; // IsPlayable gates this; guard for forced plays
         }
         await PowerCmd.Decrement(brambles);
-
+        SfxCmd.Play("event:/sfx/characters/attack_fire");
+        VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/fire_impact/vfx_fire_burst_center_flipbook");
         await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
     }
 
