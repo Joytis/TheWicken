@@ -16,11 +16,11 @@ public sealed class PactOfAgony : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<HexPower>(1m)
+        new PowerVar<HexPower>(2m)
     ];
 
     public PactOfAgony()
-        : base(0, CardType.Skill, CardRarity.Common, TargetType.AllEnemies)
+        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
 

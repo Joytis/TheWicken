@@ -7,7 +7,6 @@ namespace TheWitch.TheWitchCode.Cards;
 
 public sealed class CauldronDance : WitchCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public CauldronDance()
         : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)

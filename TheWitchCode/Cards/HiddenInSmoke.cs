@@ -16,7 +16,7 @@ public sealed class HiddenInSmoke : WitchCard
     ];
 
     public HiddenInSmoke()
-        : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
@@ -26,5 +26,5 @@ public sealed class HiddenInSmoke : WitchCard
         await PowerCmd.Apply<HiddenInSmokePower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => AddKeyword(CardKeyword.Innate);
 }

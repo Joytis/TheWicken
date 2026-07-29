@@ -39,7 +39,7 @@ public sealed class CaptureSoul : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         new CalculationBaseVar(1m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHexKey)

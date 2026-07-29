@@ -15,7 +15,7 @@ public sealed class Ambush : WitchCard
     ];
 
     public Ambush()
-        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+        : base(1, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
     }
 

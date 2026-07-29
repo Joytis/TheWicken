@@ -1,2 +1,24 @@
 # TODO — Staging / Inbox
 - Capture Soul is currently bugged - it just doesn't keep the Hex Bonus in the deck preview, once it's in your hand it DOES show up. It should also show up in the Deck Preview. 
+- User Report: Herbal brew+ seems to cause a multiplayer state divergence when it makes a power potion atm
+- User Report: Morganne doesn't work with powers currently - but it SHOULD put them back into your hand. . 
+- Card Change: Fertalize -> Frenzy - 1e, Common, Attack: 4x2 damage, gain 1 mana next turn. Upgrade - +2 damage
+- Card Change: Read the Bones - 1e, Uncommon, Skill: Apply 2 Hex, Next turn, Gain 1e and draw 1. Upgrade: +1e 
+- Card Change: Command - Deal 3 damage. Up to TWO familiars create a card
+- Card Change: Taste of Blood - 3e, Attack, Uncommon: Deal 24 damage. Costs 1 less for each attack played this turn. Upgrade: +6 damage. 
+- Card Change: Mutilate - Deal 16 Damage - Apply 2 Vulnerable. 
+- Card Change: Wisdom - Draw two cards, discard one. Upgrade - Remove 'Discard One.'
+- Card Change: Knowledge - Copy a card in your hand. Upgrade - Copy a card in your hand - it costs 1 less. 
+- Card Change: Swarm - 1 rat in hand. One rat in discard, one rat in draw pile. Upgrade - 1 rat in hand, 2 rats in draw, 2 rats in discard. 
+- Card Change: Ritual Casting - 1e. Whenever you play a card that costs 2 or more, a random card in your hand is free. 
+- Card Change: Wicker Form -> Primal Form - 3e, Rare, Enchantment - Ethereal - Attacks you play are played an additional time.   
+- Card Change: Mulch - X, Rare, Skill - Exhaust X cards. Add X cards to your hand. They are free to play this combat. Exhaust. Upgrade: X+1 cards. 
+- Card Change: Prices Paid - 1e, Uncommon, Attack - Lose 1 HP. Deal 6 damage. Create a Noxious Brew. Upgrade: +1HP loss, +1 Noxious Brew (Back to the original version) 
+- Card Change: A Little Sip - 3e, Rare, Power - Whenever you use a potion, gain 1 strength and draw a card. Upgrade: -1e. 
+- Card Change: Rot Bloom - 2e, Uncommon, Attack - Deal 10 Damage. Apply 2 Weak. Apply 2 Hex. Upgrade: +3 damage - +1 Hex/
+- Card Change: Polymorph - Choose two cards instead of one - they each become 2 rats (total of 4)
+- Card Change: Torment - 0e, Uncommon, Attack - Deal 5 damage. Draw a card. Does not consume Hex. Upgrade - +2 damage. 
+- Card Change: Pact of Agony: 0e, Uncommon, Attack - Gain 1 Hex. Deal 13 damage to ALL enemies.  
+- Card Change: Salt and Ash: 
+
+- New Relic: Common - Tasty Herbs: At the end of combat, Heal 3 HP if you used a potion. 

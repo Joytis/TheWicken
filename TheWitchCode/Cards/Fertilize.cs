@@ -20,7 +20,7 @@ public sealed class Fertilize : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<BramblesPower>(5m),
+        new PowerVar<BramblesPower>(1m),
         new EnergyVar("EnergyNextTurnPower", 1)
     ];
 

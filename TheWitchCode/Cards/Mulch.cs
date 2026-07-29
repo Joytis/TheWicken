@@ -22,7 +22,7 @@ public sealed class Mulch : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
+        new CalculationExtraVar(2m),
         new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count),
         new CalculatedVar("CalculatedBrambles").WithMultiplier((card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count)
     ];
