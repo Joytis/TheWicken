@@ -178,7 +178,7 @@
       },
       "upgrade": "Hex +2",
       "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -208,7 +208,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Broom Strike: swat with the broom; the follow-through sweeps your next Skill in cheaper.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -268,7 +268,7 @@
       },
       "upgrade": "Damage +3",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -299,7 +299,7 @@
       },
       "upgrade": "Damage +2",
       "note": "Frenzy: two quick swipes now, and the rush banks 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -329,7 +329,7 @@
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -415,7 +415,7 @@
       },
       "upgrade": "Cards +1",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -443,7 +443,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -471,7 +471,7 @@
       },
       "upgrade": "Damage +2, Vulnerable +1",
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -559,7 +559,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -589,7 +589,7 @@
       },
       "upgrade": "Block +2",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -644,7 +644,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -819,7 +819,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random distinct familiars each do their card production once (a single roll, regardless of stacks).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1013,7 +1013,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1038,7 +1038,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1123,7 +1123,7 @@
       },
       "upgrade": "Damage +2, ExtraDamage +2",
       "note": "Overrun: mark one enemy for the pack — every Familiar card played this turn tramples it again.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1151,7 +1151,7 @@
       },
       "upgrade": "Damage +4",
       "note": "Pact of Agony: hex yourself to lash the whole board.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1242,7 +1242,7 @@
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1272,7 +1272,7 @@
       },
       "upgrade": "EnergyNextTurn +1",
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1304,7 +1304,7 @@
       },
       "upgrade": "Block +4",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1369,7 +1369,7 @@
       },
       "upgrade": "Damage +3, Hex +1",
       "note": "Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1542,7 +1542,7 @@
       },
       "upgrade": "Damage +6",
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1599,7 +1599,7 @@
       },
       "upgrade": "Damage +2",
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "mechanics": [
         "Hex"
@@ -1626,7 +1626,7 @@
       },
       "upgrade": "VolatileVapors +3",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1709,7 +1709,7 @@
       },
       "upgrade": "Cost -1",
       "note": "A Little Sip: a Power that heals 1 HP whenever you use a potion.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1739,7 +1739,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -1915,7 +1915,7 @@
       },
       "upgrade": "Damage +4",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "mechanics": [
         "Hex"
@@ -2003,7 +2003,7 @@
       },
       "upgrade": "Cards +2",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -2089,7 +2089,7 @@
       },
       "upgrade": "Damage +4",
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2201,7 +2201,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2262,7 +2262,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex",
@@ -2294,7 +2294,7 @@
       },
       "upgrade": "Cost -1",
       "note": "Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2321,7 +2321,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Primal Form: shed the skin, keep the fury — Attacks you play are played an additional time.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2378,7 +2378,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Rattling Bottles: an attack that also crams every empty potion slot full of rocks.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2406,7 +2406,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Ritual Casting: a Power — big Skills each unlock a random free card this turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2586,7 +2586,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2618,7 +2618,7 @@
       },
       "upgrade": "Damage +6",
       "note": "Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2770,7 +2770,7 @@
       },
       "upgrade": "Cards +1",
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2802,7 +2802,7 @@
       },
       "upgrade": "custom (see code)",
       "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"

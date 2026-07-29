@@ -44,6 +44,7 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 ### 282. Mulch — X-cost compost/sprout rework
 - **Done:** 2026-07-28 (claude) — [Mulch.cs](../TheWitchCode/Cards/Mulch.cs): discard-pile Brambles/Block composter → **X-cost Rare Skill: choose and Exhaust X cards from hand, add X random Witch-pool cards to hand, free to play this combat** (`SetToFreeThisCombat`, TouchOfInsanity precedent), Exhaust. Upgrade: X+1 (both counts — Witchcraft `times++` shape). Random cards via `CardFactory.GetDistinctForCombat` over the Witch pool (PowerPotion pattern, synced `Rng.CombatCardGeneration`), through the generated-card funnel. User confirmed source = random Witch cards. `CardPileTweenSpeedPatch` no longer used by Mulch (still used? — it was Mulch-only: **left in place**, other cards may want it; flag if dead).
 - **Verified:** build 0/0 (shared gate). ⚠️ In-game: X=0 no-op; selection screen count when hand < X.
+- **Addendum (2026-07-28):** user repro — X=99 with 4 in hand locked the game. Hand side is safe (hand ≤ MinSelect auto-selects, `CardSelectCmd.FromHand` line 708) and `TakeRandom` clamps the sprout count to pool size (~86); the lock suspect was ~86 *individually awaited* `AddGeneratedCardToCombat` hand-adds (tween + HAND_FULL reroute each). Switched to one batched `AddGeneratedCardsToCombat` (Swarm pattern). ⚠️ Retest X=99.
 - **Files:** `TheWitchCode/Cards/Mulch.cs`, `TheWitch/localization/eng/cards.json`
 
 ### 281. Wicker Form → Primal Form — rename + double-attack rework

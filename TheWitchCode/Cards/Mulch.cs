@@ -1,4 +1,5 @@
 using System.Linq;
+using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,8 +16,6 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class Mulch : WitchCard
 {
     protected override bool HasEnergyCostX => true;
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public Mulch()
         : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
@@ -46,6 +45,9 @@ public sealed class Mulch : WitchCard
             await CardCmd.Exhaust(choiceContext, pick);
         }
 
+        // TakeRandom clamps to the pool size, so a huge X (debug energy) can't over-ask; the adds go
+        // through ONE batched call — per-card awaited adds stall/lock the game when X is large.
+        x = Mathf.Min(x, picks.Count());
         List<CardModel> sprouted = CardFactory.GetDistinctForCombat(
             Owner,
             Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint),
@@ -54,7 +56,7 @@ public sealed class Mulch : WitchCard
         foreach (CardModel card in sprouted)
         {
             card.SetToFreeThisCombat();
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
         }
+        await CardPileCmd.AddGeneratedCardsToCombat(sprouted, PileType.Hand, Owner);
     }
 }
