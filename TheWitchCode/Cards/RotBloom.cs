@@ -1,26 +1,27 @@
 using System;
-using System.Linq;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Extensions;
+using HexPower = TheWitch.TheWitchCode.Powers.HexPower;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>
-/// Rot Bloom: heavy hit, then every debuff on the target blooms — each debuff power's stacks are
-/// duplicated (applied again at its current amount, Rend's debuff filter: temporary powers excluded).
-/// </summary>
+/// <summary>Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.</summary>
 public sealed class RotBloom : WitchCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<HexPower>(),
+    ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(10m, ValueProp.Move)
+        new DamageVar(10m, ValueProp.Move),
+        new PowerVar<WeakPower>(2m),
+        new PowerVar<HexPower>(2m)
     ];
 
     public RotBloom()
@@ -43,22 +44,14 @@ public sealed class RotBloom : WitchCard
             return;
         }
 
-        // Snapshot first — applying while iterating would mutate the power list.
-        var debuffs = cardPlay.Target.Powers
-            .Where(p => p.TypeForCurrentAmount == PowerType.Debuff && p is not ITemporaryPower && p.Amount > 0)
-            .Select(p => (Power: p, p.Amount))
-            .ToList();
-        if (debuffs.Count == 0)
-        {
-            return;
-        }
-
         WitchFx.GreenGas(cardPlay.Target);
-        foreach ((PowerModel power, decimal amount) in debuffs)
-        {
-            await PowerCmd.Apply(choiceContext, power, cardPlay.Target, amount, Owner.Creature, this);
-        }
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars["WeakPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(5m);
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars.Hex().UpgradeValueBy(1m);
+    }
 }

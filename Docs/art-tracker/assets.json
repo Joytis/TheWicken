@@ -245,6 +245,15 @@
           "rarity": "Rare",
           "effect": "Your Familiars create ALL of their cards at the start of your turn.",
           "path": "TheWitch/images/relics/big/sack_of_treats.png"
+        },
+        {
+          "name": "Tasty Herbs",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Common",
+          "effect": "At the end of combat, heal 3 HP if you used a potion.",
+          "path": "TheWitch/images/relics/big/tasty_herbs.png"
         }
       ]
     },

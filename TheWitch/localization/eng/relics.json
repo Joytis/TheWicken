@@ -19,5 +19,8 @@
   "THEWITCH-WORMYS_APPLE.flavor": "[red]Details for this relic will be revealed in the future...[/red]",
   "THEWITCH-MORGANNE.description": "Every [blue]10th[/blue] Card you play returns to your hand",
   "THEWITCH-MORGANNE.flavor": "[red]Details for this relic will be revealed in the future...[/red]",
-  "THEWITCH-MORGANNE.title": "Morganne"
+  "THEWITCH-MORGANNE.title": "Morganne",
+  "THEWITCH-TASTY_HERBS.title": "Tasty Herbs",
+  "THEWITCH-TASTY_HERBS.description": "At the end of combat, heal [green]{Heal}[/green] HP if you used a potion.",
+  "THEWITCH-TASTY_HERBS.flavor": "[red]Details for this relic will be revealed in the future...[/red]"
 }

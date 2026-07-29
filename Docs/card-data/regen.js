@@ -178,10 +178,15 @@ function renderText(desc, vars) {
   t = t.replace(/\{(\w+):plural:([^|}]*)\|([^}]*)\}/g, (_, k, a, b) => (byKey[k] === 1 ? a : b));
   // {IfUpgraded:show:A|B} -> base (B)
   t = t.replace(/\{IfUpgraded:show:[^|}]*\|([^}]*)\}/g, "$1");
+  // {Token:energyIcons()} / {Token:energyIcons(N)} -> "[E]" per point (design language for energy)
+  t = t.replace(/\{(\w+):energyIcons\((\d*)\)\}/g, (_, k, arg) => {
+    const n = arg !== "" ? Number(arg) : (k in byKey ? Number(byKey[k]) : 1);
+    return Number.isInteger(n) && n >= 1 && n <= 4 ? Array(n).fill("[E]").join(" ") : `${byKey[k] ?? n} [E]`;
+  });
   // {Token:diff()} / {Token:anything} / {Token}
   t = t.replace(/\{(\w+)(?::[^}]*)?\}/g, (whole, k) => (k in byKey ? byKey[k] : whole));
-  // strip [gold]...[/gold] and any [..] markup tags
-  t = t.replace(/\[[^\]]*\]/g, "");
+  // strip [gold]...[/gold] and any [..] markup tags (keep the [E] energy icon)
+  t = t.replace(/\[(?!E\])[^\]]*\]/g, "");
   return t.replace(/\s+/g, " ").trim();
 }
 

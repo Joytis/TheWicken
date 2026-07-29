@@ -10,8 +10,8 @@
 | | witch | silent | necrobinder | ironclad | defect | regent |
 |---|---|---|---|---|---|---|
 | Starter | 3 | 4 | 4 | 3 | 4 | 4 |
-| Common | 21 | 20 | 20 | 20 | 20 | 20 |
-| Uncommon | 35 | 36 | 36 | 36 | 36 | 36 |
+| Common | 20 | 20 | 20 | 20 | 20 | 20 |
+| Uncommon | 36 | 36 | 36 | 36 | 36 | 36 |
 | Rare | 26 | 26 | 26 | 26 | 26 | 26 |
 | Ancient | 2 | 2 | 2 | 2 | 2 | 2 |
 
@@ -19,18 +19,18 @@
 
 | | witch | silent | necrobinder | ironclad | defect | regent |
 |---|---|---|---|---|---|---|
-| Attack | 27 | 27 | 35 | 37 | 29 | 32 |
-| Skill | 41 | 42 | 35 | 30 | 39 | 37 |
+| Attack | 29 | 27 | 35 | 37 | 29 | 32 |
+| Skill | 39 | 42 | 35 | 30 | 39 | 37 |
 | Power | 19 | 19 | 18 | 20 | 20 | 19 |
 
 ### Energy cost
 
 | | witch | silent | necrobinder | ironclad | defect | regent |
 |---|---|---|---|---|---|---|
-| 0 | 11 | 16 | 9 | 11 | 15 | 20 |
-| 1 | 48 | 43 | 54 | 48 | 49 | 49 |
-| 2 | 18 | 17 | 14 | 19 | 15 | 14 |
-| 3 | 7 | 10 | 7 | 7 | 6 | 3 |
+| 0 | 12 | 16 | 9 | 11 | 15 | 20 |
+| 1 | 50 | 43 | 54 | 48 | 49 | 49 |
+| 2 | 16 | 17 | 14 | 19 | 15 | 14 |
+| 3 | 6 | 10 | 7 | 7 | 6 | 3 |
 | 4+ | 0 | 0 | 2 | 0 | 1 | 1 |
 | X | 3 | 2 | 2 | 2 | 2 | 1 |
 
@@ -40,13 +40,13 @@ Effective damage = per-hit × hits. Cells: energy cost × single-target/AoE. Bas
 
 | cost | shape | base n | base med | base med+ | witch n | witch med | witch med+ |
 |---|---|---|---|---|---|---|---|
-| 0 | single | 15 | 6 | 8 | 2 | 8 | 11.5 |
-| 0 | AoE | 1 | 60 | 75 | 0 | — | — |
-| 1 | single | 48 | 8 | 10 | 11 | 8 | 10 |
+| 0 | single | 15 | 6 | 8 | 3 | 5 | 7 |
+| 0 | AoE | 1 | 60 | 75 | 1 | 13 | 17 |
+| 1 | single | 48 | 8 | 10 | 13 | 8 | 10 |
 | 1 | AoE | 11 | 8 | 11 | 1 | 10 | 13 |
-| 2 | single | 20 | 13 | 17 | 6 | 12 | 16 |
+| 2 | single | 20 | 13 | 17 | 5 | 12 | 16 |
 | 2 | AoE | 1 | 28 | 36 | 0 | — | — |
-| 3 | single | 9 | 19 | 24 | 2 | 9.5 | 13.5 |
+| 3 | single | 9 | 19 | 24 | 2 | 17 | 22.5 |
 | 3 | AoE | 2 | 14 | 18 | 1 | 16 | 20 |
 
 Non-flat damage cards per class (not averaged — counted):
@@ -54,7 +54,7 @@ Non-flat damage cards per class (not averaged — counted):
 | bucket | witch | silent | necrobinder | ironclad | defect | regent |
 |---|---|---|---|---|---|---|
 | scaling | 2 | 2 | 1 | 1 | 3 | 2 |
-| xcost | 1 | 1 | 1 | 1 | 0 | 2 |
+| xcost | 0 | 1 | 1 | 1 | 0 | 2 |
 | conditional | 0 | 0 | 0 | 1 | 0 | 0 |
 | engine | 0 | 0 | 0 | 0 | 0 | 0 |
 
@@ -80,9 +80,9 @@ Non-flat block cards per class:
 | card | metric | cell | value | base med | ratio | priced-in downsides |
 |---|---|---|---|---|---|---|
 | Pocket Rats | dmg | 1 | 3 | 8 | 0.38 | SelfExhaust |
+| Command | dmg | 0 | 3 | 6 | 0.50 |  |
 | Moonbeam | dmg | 2 | 8 | 13 | 0.62 |  |
 | Overrun | dmg | 1 | 5 | 8 | 0.63 |  |
-| Taste of Blood | dmg | 3 | 9 | 19 | 0.47 |  |
 | Capture Soul | dmg | 0 | 10 | 6 | 1.67 | SelfExhaust |
 | Rattling Bottles | dmg | 3 | 10 | 19 | 0.53 | SelfExhaust |
 | Wax and Wane | block | 1 | 8 | 6 | 1.33 | DelayedEffect |
@@ -98,10 +98,10 @@ A ratio far from 1.0 is a *scrutiny flag*, not a verdict — riders (debuffs, dr
 
 | mechanic | Gen | Payoff | Enabler | Token | gen:payoff |
 |---|---|---|---|---|---|
-| Potions | 16 | 9 | 6 | 0 | 1.8:1 |
-| Hex | 12 | 6 | 1 | 1 | 2.0:1 |
+| Potions | 15 | 8 | 6 | 0 | 1.9:1 |
+| Hex | 12 | 4 | 2 | 1 | 3.0:1 |
 | Familiars | 15 | 7 | 5 | 12 | 2.1:1 |
-| Brambles | 9 | 3 | 2 | 0 | 3.0:1 |
+| Brambles | 6 | 3 | 1 | 0 | 2.0:1 |
 
 ### silent
 
@@ -150,34 +150,33 @@ A ratio far from 1.0 is a *scrutiny flag*, not a verdict — riders (debuffs, dr
 
 | thread | witch | silent | necrobinder | ironclad | defect | regent | base med |
 |---|---|---|---|---|---|---|---|
-| SelfExhaust | 28 | 12 | 13 | 11 | 18 | 7 | 12 |
-| CardGen | 16 | 10 | 9 | 5 | 4 | 6 | 6 |
-| Draw | 9 | 11 | 6 | 9 | 12 | 10 | 10 |
-| TurnEngine | 13 | 4 | 5 | 8 | 10 | 6 | 6 |
-| OtherDebuff | 10 | 4 | 4 | 1 | 0 | 4 | 4 |
-| Energy | 8 | 2 | 7 | 6 | 8 | 6 | 6 |
+| SelfExhaust | 27 | 12 | 13 | 11 | 18 | 7 | 12 |
+| CardGen | 17 | 10 | 9 | 5 | 4 | 6 | 6 |
+| Draw | 11 | 11 | 6 | 9 | 12 | 10 | 10 |
+| TurnEngine | 14 | 4 | 5 | 8 | 10 | 6 | 6 |
+| Energy | 9 | 2 | 7 | 6 | 8 | 6 | 6 |
+| MultiHit | 8 | 6 | 3 | 9 | 6 | 7 | 6 |
 | AoE | 6 | 12 | 7 | 8 | 5 | 8 | 8 |
-| MultiHit | 7 | 6 | 3 | 9 | 6 | 7 | 6 |
-| Drawback | 5 | 4 | 12 | 4 | 4 | 1 | 4 |
+| OtherDebuff | 9 | 4 | 4 | 1 | 0 | 4 | 4 |
+| Drawback | 6 | 4 | 12 | 4 | 4 | 1 | 4 |
+| CostReduction | 4 | 4 | 4 | 4 | 4 | 2 | 4 |
 | DelayedEffect | 5 | 5 | 0 | 0 | 3 | 7 | 3 |
-| CostReduction | 3 | 4 | 4 | 4 | 4 | 2 | 4 |
-| Snowball | 4 | 1 | 6 | 5 | 3 | 3 | 3 |
-| DebuffPayoff | 3 | 5 | 3 | 7 | 0 | 0 | 3 |
+| Weak | 3 | 7 | 3 | 1 | 2 | 5 | 3 |
+| Snowball | 3 | 1 | 6 | 5 | 3 | 3 | 3 |
 | SelfDebuff | 6 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Weak | 2 | 7 | 3 | 1 | 2 | 5 | 3 |
+| DebuffPayoff | 2 | 5 | 3 | 7 | 0 | 0 | 3 |
+| Vulnerable | 2 | 2 | 3 | 8 | 1 | 5 | 3 |
 | BlockEngine | 1 | 2 | 4 | 4 | 1 | 5 | 4 |
 | StatRamp | 3 | 2 | 2 | 6 | 3 | 2 | 2 |
-| SkillsMatter | 4 | 7 | 0 | 0 | 0 | 0 | 0 |
-| Vulnerable | 1 | 2 | 3 | 8 | 1 | 5 | 3 |
+| BurstFinisher | 2 | 2 | 5 | 1 | 3 | 5 | 3 |
 | ExhaustOutlet | 4 | 0 | 0 | 10 | 0 | 0 | 0 |
-| BurstFinisher | 1 | 2 | 5 | 1 | 3 | 5 | 3 |
 | HPLoss | 3 | 0 | 1 | 9 | 0 | 0 | 0 |
+| SkillsMatter | 3 | 7 | 0 | 0 | 0 | 0 | 0 |
 | Recursion | 2 | 0 | 3 | 0 | 0 | 0 | 0 |
+| AttacksMatter | 2 | 0 | 0 | 12 | 0 | 0 | 0 |
 | Retain | 1 | 3 | 9 | 0 | 0 | 1 | 1 |
 | Tutor | 0 | 0 | 0 | 2 | 2 | 2 | 2 |
 | PlayVolume | 1 | 4 | 0 | 0 | 0 | 5 | 0 |
-| AttacksMatter | 1 | 0 | 0 | 12 | 0 | 0 | 0 |
-| Heal | 1 | 0 | 0 | 1 | 0 | 0 | 0 |
 | AutoPlay | 1 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Transform | 1 | 0 | 0 | 0 | 0 | 3 | 0 |
 | Discard | 1 | 9 | 0 | 0 | 1 | 0 | 0 |
@@ -189,6 +188,7 @@ A ratio far from 1.0 is a *scrutiny flag*, not a verdict — riders (debuffs, dr
 | DirectHPLoss | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | SelfRecursion | 0 | 0 | 1 | 0 | 0 | 5 | 0 |
 | MaxHP | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+| Heal | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | SelfStatus | 0 | 0 | 0 | 0 | 5 | 2 | 0 |
 | ZeroCostMatters | 0 | 0 | 0 | 0 | 5 | 0 | 0 |
 | PowersMatter | 0 | 0 | 0 | 0 | 6 | 0 | 0 |

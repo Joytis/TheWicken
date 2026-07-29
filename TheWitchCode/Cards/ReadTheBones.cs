@@ -10,8 +10,8 @@ using TheWitch.TheWitchCode.Extensions;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Read the Bones: curse the enemy now, foresee the blow to come — apply Hex, then gain Block next turn
-/// (base-game <see cref="BlockNextTurnPower" />).
+/// Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card
+/// (base-game <see cref="EnergyNextTurnPower" /> + <see cref="DrawCardsNextTurnPower" />).
 /// </summary>
 public sealed class ReadTheBones : WitchCard
 {
@@ -21,11 +21,12 @@ public sealed class ReadTheBones : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(2m),
-        new PowerVar<BlockNextTurnPower>(6m)
+        new EnergyVar("EnergyNextTurnPower", 1),
+        new PowerVar<DrawCardsNextTurnPower>(1m)
     ];
 
     public ReadTheBones()
-        : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -34,11 +35,12 @@ public sealed class ReadTheBones : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);
         VfxCmd.PlayOnCreatureCenter(Owner.Creature, VfxCmd.gazePath); // divination read
-        await PowerCmd.Apply<BlockNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["BlockNextTurnPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["EnergyNextTurnPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["DrawCardsNextTurnPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["BlockNextTurnPower"].UpgradeValueBy(2m);
+        DynamicVars["EnergyNextTurnPower"].UpgradeValueBy(1m);
     }
 }

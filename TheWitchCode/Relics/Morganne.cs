@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace TheWitch.TheWitchCode.Relics;
@@ -86,7 +87,20 @@ public sealed class Morganne : WitchRelic
                 // Activated!
                 _ = TaskHelper.RunSafely(DoActivateVisuals());
 
-                // Move the card back into your hand. 
+				// Power cards: the fly-into-player vfx frees the card's node when it finishes
+				// (fire-and-forget from CardModel.PlayPowerCardFlyVfx) — if we re-add while it's
+				// still animating, Add reuses a node that's scaled to zero and about to be freed,
+				// leaving an invisible card in hand. Wait for the vfx to release the node so Add
+				// builds a fresh one. (Normal speed: already gone by now; fast mode: still flying.)
+				if (cardPlay.Card.Type == CardType.Power)
+				{
+					for (int i = 0; i < 60 && NCard.FindOnTable(cardPlay.Card) != null; i++)
+					{
+						await Cmd.Wait(0.05f);
+					}
+				}
+
+                // Move the card back into your hand.
 				await CardPileCmd.Add(cardPlay.Card, PileType.Hand, CardPilePosition.Bottom);
 			}
 		}

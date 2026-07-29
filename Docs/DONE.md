@@ -6,6 +6,106 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 289. New relic — Tasty Herbs
+- **Done:** 2026-07-28 (claude) — [TastyHerbs.cs](../TheWitchCode/Relics/TastyHerbs.cs): **Common relic — at end of combat, heal 3 HP if you used a potion this combat.** BurningBlood `AfterCombatVictory` shape + alive guard; "used a potion" read from combat history (`PotionUsedEntry` with `Actor == Owner.Creature`) — no instance state, so nothing to reset between combats. `HealVar(3)` drives loc. **No art yet** — path falls back to placeholder + logs (`tasty_herbs.png` both sizes when ready → `Images: Generate missing sizes` → `Godot: Import assets`); also needs an `assets.json` entry if it should appear on the art tracker's Relics tab.
+- **Verified:** build 0/0. ⚠️ In-game: heal fires only after potion use; no heal otherwise.
+- **Files:** `TheWitchCode/Relics/TastyHerbs.cs`, `TheWitch/localization/eng/relics.json`
+
+### 288. Pact of Agony — 0e AoE Attack rework
+- **Done:** 2026-07-28 (claude) — [PactOfAgony.cs](../TheWitchCode/Cards/PactOfAgony.cs): 0e Skill (self 1 Hex + 2 Hex ALL) → **0e Uncommon Attack: gain 1 Hex, deal 13 damage to ALL enemies** (`TargetingAllOpponents`, Hexblast fx). Self-Hex kept the existing pact-style apply. Upgrade: note silent — old bumped enemy Hex; adapted to **+4 damage** (13→17). Loc rewritten.
+- **Verified:** build 0/0 (shared gate 285–288).
+- **Files:** `TheWitchCode/Cards/PactOfAgony.cs`, `TheWitch/localization/eng/cards.json`
+
+### 287. Torment — back to 0e cycler; TormentPower cut
+- **Done:** 2026-07-28 (claude) — [Torment.cs](../TheWitchCode/Cards/Torment.cs): potion-Hex rework (DONE 266) superseded per note → **0e Uncommon Attack: 5 damage, draw 1, does not consume Hex** (card now actually implements `IHexPreserving` — the marker lives in this file; note the pre-rework class did NOT implement it). Upgrade +2 damage. **TormentPower.cs + .uid deleted** (orphaned — only Torment applied it) with its 3 `powers.json` keys; `IHexPreserving`/`HexPower` interaction untouched.
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: attack with Hex on target — stacks persist.
+- **Files:** `TheWitchCode/Cards/Torment.cs`, `TheWitchCode/Powers/TormentPower.cs` (deleted), `TheWitch/localization/eng/{cards,powers}.json`
+
+### 286. Polymorph — two cards, 4 Rats total
+- **Done:** 2026-07-28 (claude) — [Polymorph.cs](../TheWitchCode/Cards/Polymorph.cs): select **2** cards from the draw pile (was 1); each transforms into 2 Rats (`CardCmd.Transform` + one generated extra per choice) — 4 Rats total, both tiers. Upgrade unchanged (-1e, note silent). `CardsVar(2)` = Rats per card. Loc + selection prompt → "two cards".
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: draw pile with only 1 card.
+- **Files:** `TheWitchCode/Cards/Polymorph.cs`, `TheWitch/localization/eng/cards.json`
+
+### 285. Rot Bloom — flat debuff attack (Weak + Hex)
+- **Done:** 2026-07-28 (claude) — [RotBloom.cs](../TheWitchCode/Cards/RotBloom.cs): debuff-duplication effect → **2e Uncommon Attack: 10 damage, apply 2 Weak, apply 2 Hex**; upgrade **+3 damage +1 Hex**. Dropped the old Exhaust keyword (note reads as full card text and lists none — flag if unwanted). Kept thrash hit + green gas fx. Loc rewritten per style (one effect per line).
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Cards/RotBloom.cs`, `TheWitch/localization/eng/cards.json`
+
+### 284. A Little Sip — Strength + draw per potion
+- **Done:** 2026-07-28 (claude) — [ALittleSipPower.cs](../TheWitchCode/Powers/ALittleSipPower.cs): heal-per-potion → **gain Amount Strength and draw Amount cards** per potion used (`ThrowingPlayerChoiceContext` for both, ReptileTrinket pattern — `AfterPotionUsed` has no context). [ALittleSip.cs](../TheWitchCode/Cards/ALittleSip.cs) untouched: 3e Rare Power, upgrade already `EnergyCost.UpgradeBy(-1)` (matches note). Loc rewritten (card + power ×2).
+- **Verified:** build 0/0 (shared gate 282–284). ⚠️ In-game: draw from potion-use mid-turn; MP (throwing context from hook).
+- **Files:** `TheWitchCode/Powers/ALittleSipPower.cs`, `TheWitch/localization/eng/{cards,powers}.json`
+
+### 283. Prices Paid — back to flat 1e version
+- **Done:** 2026-07-28 (claude) — [PricesPaid.cs](../TheWitchCode/Cards/PricesPaid.cs): X-cost bleed → **1e Uncommon Attack: lose 1 HP, deal 6 damage, create 1 Noxious Brew; upgrade +1 HP loss +1 Brew** (damage flat, per note "back to original"). New `IntVar`s `HpLoss`/`Brews` drive text + green diffs; HP loss stays the unblockable/unpowered self-damage shape. Effect order per note: bleed → hit → brew (brews were mid-order before). `HasEnergyCostX` dropped.
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Cards/PricesPaid.cs`, `TheWitch/localization/eng/cards.json`
+
+### 282. Mulch — X-cost compost/sprout rework
+- **Done:** 2026-07-28 (claude) — [Mulch.cs](../TheWitchCode/Cards/Mulch.cs): discard-pile Brambles/Block composter → **X-cost Rare Skill: choose and Exhaust X cards from hand, add X random Witch-pool cards to hand, free to play this combat** (`SetToFreeThisCombat`, TouchOfInsanity precedent), Exhaust. Upgrade: X+1 (both counts — Witchcraft `times++` shape). Random cards via `CardFactory.GetDistinctForCombat` over the Witch pool (PowerPotion pattern, synced `Rng.CombatCardGeneration`), through the generated-card funnel. User confirmed source = random Witch cards. `CardPileTweenSpeedPatch` no longer used by Mulch (still used? — it was Mulch-only: **left in place**, other cards may want it; flag if dead).
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: X=0 no-op; selection screen count when hand < X.
+- **Files:** `TheWitchCode/Cards/Mulch.cs`, `TheWitch/localization/eng/cards.json`
+
+### 281. Wicker Form → Primal Form — rename + double-attack rework
+- **Done:** 2026-07-28 (claude) — [PrimalForm.cs](../TheWitchCode/Cards/PrimalForm.cs) + [PrimalFormPower.cs](../TheWitchCode/Powers/PrimalFormPower.cs) (WickerForm.cs/.uid + WickerFormPower.cs git-mv'd; Brambles-per-card effect deleted with it). Now 3e Rare Power, **Ethereal**: Attacks you play are played an additional time (`ModifyCardPlayCount` +Amount for owner Attacks — OneTwoPunch/EchoForm shape, permanent, Counter stacking so a second copy = +2). Upgrade: `RemoveKeyword(CardKeyword.Ethereal)` (user spec 2026-07-28); keywords auto-render so loc needs no Ethereal line. Loc keys `WICKER_FORM{,_POWER}` → `PRIMAL_FORM{,_POWER}`; art git-mv'd `wicker_form.png` → `primal_form.png` (both sizes), stale `.import` deleted — **run Godot: Import assets**.
+- **Verified:** build 0/0 (shared gate 280–281). ⚠️ In-game: multi-hit/AoE attacks under the power; upgraded card loses Ethereal marker.
+- **Files:** `TheWitchCode/Cards/PrimalForm.cs`, `TheWitchCode/Powers/PrimalFormPower.cs`, `TheWitch/localization/eng/{cards,powers}.json`, `TheWitch/images/card_portraits/{,big/}primal_form.png`
+
+### 280. Ritual Casting — triggers on ANY card costing 2+
+- **Done:** 2026-07-28 (claude) — [RitualCastingPower.cs](../TheWitchCode/Powers/RitualCastingPower.cs): dropped the `CardType.Skill` gate — now any card played for 2+ Energy (`Resources.EnergyValue`) frees a random hand card this turn. Card/cost/rarity/Innate upgrade untouched. Loc "Skill" → "card" (cards.json + powers.json ×2).
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Powers/RitualCastingPower.cs`, `TheWitch/localization/eng/{cards,powers}.json`
+
+### 279. Swarm — Rat to hand + Rats into both piles
+- **Done:** 2026-07-28 (claude) — [Swarm.cs](../TheWitchCode/Cards/Familiar/Swarm.cs) (Rat token): was "shuffle 2 (3+) Rats into Draw". Now: **1 Rat to Hand, plus {Cards} Rats into Draw AND Discard** — base `CardsVar(1)` → totals 3; upgraded +1 per pile → 1 hand / 2 draw / 2 discard = 5 (matches note). All through the generated-card funnel (`AddGeneratedCardsToCombat`) with pile-add previews on the hidden piles. Loc rewritten (Refuse Pile phrasing, `{Cards:diff()}` green upgrade).
+- **Verified:** build 0/0 (shared gate items 277–279).
+- **Files:** `TheWitchCode/Cards/Familiar/Swarm.cs`, `TheWitch/localization/eng/cards.json`
+
+### 278. Knowledge — choose always; upgraded copy costs 1 less
+- **Done:** 2026-07-28 (claude) — [Knowledge.cs](../TheWitchCode/Cards/Familiar/Knowledge.cs) (Owl token): random-unless-upgraded pick → **always player choice** from hand (non-Knowledge filter kept); upgrade now makes the generated copy cost 1 less **for the combat** (`EnergyCost.AddThisCombat(-1, reduceOnly: true)` — BansheesCry/KinglyKick pattern; `reduceOnly` so 0-cost cards don't go weird, applied after the add). Loc: conditional "The copy costs 1 less." line.
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: upgraded copy of a 0-cost card stays 0.
+- **Files:** `TheWitchCode/Cards/Familiar/Knowledge.cs`, `TheWitch/localization/eng/cards.json`
+
+### 277. Wisdom — draw 2 discard 1; upgrade drops the discard
+- **Done:** 2026-07-28 (claude) — [Wisdom.cs](../TheWitchCode/Cards/Familiar/Wisdom.cs) (Owl token): was draw 1 (+1 upgraded) then always discard 1. Now **draw 2 always**; discard-select skipped when `IsUpgraded`. Upgrade bumps nothing numeric. Loc: `{IfUpgraded:show:|\nDiscard a card.}` conditional line.
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Cards/Familiar/Wisdom.cs`, `TheWitch/localization/eng/cards.json`
+
+### 276. Mutilate — 16 damage + 2 Vulnerable (was 20 unblockable)
+- **Done:** 2026-07-28 (claude) — [Mutilate.cs](../TheWitchCode/Cards/Familiar/Mutilate.cs) (Bear token): unblockable `CreatureCmd.Damage` hit → normal `DamageCmd.Attack` 16 + apply 2 Vulnerable (guarded on target alive, CaptureSoul shape). Upgrade: note silent — kept damage-only pattern, +7 → **+6** (16→22). Cost 2 / Token / Exhaust-by-base unchanged. Loc line 2 → Vulnerable.
+- **Verified:** build 0/0 (shared gate items 273–276).
+- **Files:** `TheWitchCode/Cards/Familiar/Mutilate.cs`, `TheWitch/localization/eng/cards.json`
+
+### 275. Taste of Blood — 24 damage, draw dropped
+- **Done:** 2026-07-28 (claude) — [TasteOfBlood.cs](../TheWitchCode/Cards/TasteOfBlood.cs): 9dmg+draw 2 → **24 damage**, no draw (`CardsVar` + `Draw` removed). Kept 3e/Uncommon/Attack + the existing Stomp-shape live discount (1 less per Attack played this turn). Upgrade +3 → **+6** damage. Loc draw line removed.
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Cards/TasteOfBlood.cs`, `TheWitch/localization/eng/cards.json`
+
+### 274. Command — 3 damage, up to TWO familiars create a card
+- **Done:** 2026-07-28 (claude) — [Command.cs](../TheWitchCode/Cards/Command.cs): damage 6 → **3**; single random familiar roll → `UnstableShuffle` the familiar-power list (synced `Rng.CombatCardGeneration`) and `Take(2)` — up to two DISTINCT familiars each `GenerateOneCard` once (one familiar → one card; design call: distinct familiars, not double-trigger of one). Upgrade kept +3 damage (note silent). Loc line 2 → "Up to two of your Familiars each create a card."
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: with 1 vs 2+ familiars summoned.
+- **Files:** `TheWitchCode/Cards/Command.cs`, `TheWitch/localization/eng/cards.json`
+
+### 273. Read the Bones — Hex + next-turn Energy/draw rework
+- **Done:** 2026-07-28 (claude) — [ReadTheBones.cs](../TheWitchCode/Cards/ReadTheBones.cs): now **1e Uncommon** Skill (was Common): Apply 2 Hex; next turn gain 1 Energy and draw 1 card (base-game `EnergyNextTurnPower` + `DrawCardsNextTurnPower`; `BlockNextTurnPower` effect dropped). Upgrade: next-turn Energy +1 (was Block +2). Loc line 2 rewritten with `energyIcons()` + `plural` tags.
+- **Verified:** build 0/0 (shared gate).
+- **Files:** `TheWitchCode/Cards/ReadTheBones.cs`, `TheWitch/localization/eng/cards.json`
+
+### 272. Fertilize → Frenzy — rename + Attack rework
+- **Done:** 2026-07-28 (claude) — [Frenzy.cs](../TheWitchCode/Cards/Frenzy.cs) (Fertilize.cs + .uid git-mv'd): Brambles skill → **1e Common Attack, AnyEnemy: deal 4 damage twice** (`WithHitCount(2)`, scratch vfx), still banks 1 Energy next turn (`EnergyNextTurnPower`). Upgrade: +2 damage only (energy upgrade dropped per note). Brambles effect + hover tip gone. Loc keys `FERTILIZE` → `FRENZY`; art git-mv'd `fertilize.png` → `frenzy.png` (both sizes), stale `.import` deleted — **run Godot: Import assets**.
+- **Verified:** build 0/0.
+- **Files:** `TheWitchCode/Cards/Frenzy.cs`, `TheWitch/localization/eng/cards.json`, `TheWitch/images/card_portraits/{,big/}frenzy.png`
+
+### 271. Morganne — Power cards now return to hand
+- **Done:** 2026-07-28 (claude) — Root cause: a played Power's `NCard` node is owned by the fire-and-forget fly-into-player vfx, whose `PlayAnim` ends with `CardNode.QueueFreeSafely()` (gamedata `NCardFlyPowerVfx.cs:128`). Morganne's `CardPileCmd.Add` back to hand either reused that node (scaled to zero, freed moments later → invisible unusable card) or raced it. Fix in [Morganne.cs](../TheWitchCode/Relics/Morganne.cs): on the 10th-card return, if the card is a Power, wait (bounded 60×0.05s `Cmd.Wait`) until `NCard.FindOnTable` no longer sees the node, then Add — Add's missing-node branch builds a fresh hand node. Deterministic for MP (only delays within the action; remote clients run the same wait).
+- **Verified:** build 0/0. ⚠️ In-game: play 10th card as a Power (normal AND fast mode) → power returns visible + replayable; MP smoke test.
+- **Files:** `TheWitchCode/Relics/Morganne.cs`
+
+### 270. Capture Soul — Hex bonus now shows in deck preview
+- **Done:** 2026-07-28 (claude) — Root cause: `CalculatedVar.Calculate` hard-gates its multiplier behind `CombatManager.IsInProgress && CombatState != null` (gamedata `CalculatedVar.cs:69`), so out-of-combat deck/pile previews always rendered base 1 Hex. That var shape is for *combat-state* scaling; BonusHex is persistent card state. Swapped to the exact GeneticAlgorithm pattern: plain `PowerVar<HexPower>(1 + BonusHex)` + the `[SavedProperty]` setter mutates `DynamicVars.Hex().BaseValue` (deck copy's setter fires on fatal → its var updates → previews correct; save/load restores through the same setter). Loc token `{CalculatedHex}` → `{HexPower}`.
+- **Verified:** build 0/0. ⚠️ In-game: kill with Capture Soul → deck preview shows 2 Hex; save/quit/resume keeps it.
+- **Files:** `TheWitchCode/Cards/CaptureSoul.cs`, `TheWitch/localization/eng/cards.json`
+
 ### 269. Toil and Trouble — Replay enchant moved to Draw Pile
 - **Done:** 2026-07-22 (claude) — [ToilAndTrouble.cs](../TheWitchCode/Cards/ToilAndTrouble.cs): random Replay target `PileType.Hand` → `PileType.Draw` (Unplayable filter + `CardCmd.Preview` kept). Loc: "in your [gold]Draw Pile[/gold]".
 - **Verified:** build 0/0. ⚠️ In-game: Preview popup on a draw-pile card renders sanely.

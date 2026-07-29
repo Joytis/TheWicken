@@ -8,14 +8,12 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace TheWitch.TheWitchCode.Powers;
 
 /// <summary>
-/// A Little Sip: whenever the player uses a potion, heal <see cref="PowerModel.Amount" /> HP and gain
-/// 1 Strength. <c>AfterPotionUsed</c> provides no PlayerChoiceContext, so the Strength apply uses
-/// <c>ThrowingPlayerChoiceContext</c> (the base-game ReptileTrinket pattern).
+/// A Little Sip: whenever the player uses a potion, gain <see cref="PowerModel.Amount" /> Strength and
+/// draw <see cref="PowerModel.Amount" /> cards. <c>AfterPotionUsed</c> provides no PlayerChoiceContext,
+/// so the applies use <c>ThrowingPlayerChoiceContext</c> (the base-game ReptileTrinket pattern).
 /// </summary>
 public sealed class ALittleSipPower : WitchPower
 {
-    private const decimal StrengthPerPotion = 1m;
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -25,8 +23,8 @@ public sealed class ALittleSipPower : WitchPower
         if (potion.Owner == Owner.Player)
         {
             Flash();
-            await CreatureCmd.Heal(Owner, Amount);
-            await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner, StrengthPerPotion, Owner, null);
+            await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
+            await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Amount, potion.Owner);
         }
     }
 }

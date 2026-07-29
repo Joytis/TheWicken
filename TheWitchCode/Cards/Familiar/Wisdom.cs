@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace TheWitch.TheWitchCode.Cards;
 
+/// <summary>Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.</summary>
 public sealed class Wisdom : WitchFamiliarCard
 {
     public Wisdom()
@@ -14,19 +15,24 @@ public sealed class Wisdom : WitchFamiliarCard
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(1)
+        new CardsVar(2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int cardCount = DynamicVars.Cards.IntValue;
-		await CardPileCmd.Draw(choiceContext, cardCount, Owner);
-		await CardCmd.Discard(choiceContext, 
-            await CardSelectCmd.FromHandForDiscard(
-                choiceContext, 
-                Owner, 
-                new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this));
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
+        if (!IsUpgraded)
+        {
+            await CardCmd.Discard(choiceContext,
+                await CardSelectCmd.FromHandForDiscard(
+                    choiceContext,
+                    Owner,
+                    new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this));
+        }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1m);
+    protected override void OnUpgrade()
+    {
+        // Upgrade changes behavior only (no discard); no numbers to bump.
+    }
 }

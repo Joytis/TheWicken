@@ -10,9 +10,9 @@ using TheWitch.TheWitchCode.Extensions;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Owl familiar token: memorize a card — copy a card in your hand (base-game Dual Wield pattern:
-/// <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire). Unupgraded
-/// the copy target is RANDOM; upgraded you choose it.
+/// Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern:
+/// <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire). Upgraded,
+/// the copy costs 1 less for the combat.
 /// </summary>
 public sealed class Knowledge : WitchFamiliarCard
 {
@@ -24,23 +24,12 @@ public sealed class Knowledge : WitchFamiliarCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // Knowledge can't copy Knowledge (by type, not instance — two in hand copying each other is the same infinite loop).
-        CardModel? selection;
-        if (IsUpgraded)
-        {
-            selection = (await CardSelectCmd.FromHand(
-                context: choiceContext,
-                player: Owner,
-                prefs: new CardSelectorPrefs(SelectionScreenPrompt, 1),
-                filter: c => c is not Knowledge,
-                source: this)).FirstOrDefault();
-        }
-        else
-        {
-            List<CardModel> candidates = PileType.Hand.GetPile(Owner).Cards
-                .Where(c => c is not Knowledge)
-                .ToList();
-            selection = Owner.RunState.Rng.CombatCardSelection.NextItem(candidates);
-        }
+        CardModel? selection = (await CardSelectCmd.FromHand(
+            context: choiceContext,
+            player: Owner,
+            prefs: new CardSelectorPrefs(SelectionScreenPrompt, 1),
+            filter: c => c is not Knowledge,
+            source: this)).FirstOrDefault();
 
         if (selection == null)
         {
@@ -48,11 +37,16 @@ public sealed class Knowledge : WitchFamiliarCard
         }
 
         WitchFx.EnchantShimmer();
-        await CardPileCmd.AddGeneratedCardToCombat(selection.CreateClone(), PileType.Hand, Owner);
+        CardModel clone = selection.CreateClone();
+        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Hand, Owner);
+        if (IsUpgraded)
+        {
+            clone.EnergyCost.AddThisCombat(-1, reduceOnly: true);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        // Upgrade changes behavior only (random pick -> player choice); no numbers to bump.
+        // Upgrade changes behavior only (the copy costs 1 less); no numbers to bump.
     }
 }
