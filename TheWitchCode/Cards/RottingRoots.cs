@@ -11,7 +11,6 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class RottingRoots : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<RottingRootsPower>(),
         HoverTipFactory.FromPower<HexPower>(),
     ];
 

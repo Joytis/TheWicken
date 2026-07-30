@@ -95,11 +95,10 @@ public sealed class BottledMessage : WitchPotion
         {
             CardCmd.Enchant(enchantCanonical.ToMutable(), card, _bottledEnchantAmount);
         }
-        _bottledCanonical = null;
-        _bottledUpgrades = 0;
-        _bottledEnchantCanonical = null;
-        _bottledEnchantAmount = 0;
 
+        // Deliberately NOT clearing the bottled state here: a used potion is consumed anyway, and the
+        // one surviving reference — this instance held in NeverendingPotionPower._bottled (Crystal
+        // Bottle) — replays OnUse every turn start and needs the card info to stay for the combat.
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
     }
 }

@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -12,10 +11,6 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Catalyst : WitchCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<CatalystPower>(),
-    ];
-
     public Catalyst()
         : base(1, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {

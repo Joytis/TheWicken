@@ -6,6 +6,11 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 293. Bottled Message × Crystal Bottle — replay gave no card
+- **Done:** 2026-07-29 (claude) — [BottledMessage.cs](../TheWitchCode/Potions/BottledMessage.cs): `OnUse` cleared the bottled-card fields after creating the card, but `OnUse` runs *before* `AfterPotionUsed`, so Crystal Bottle always bottled an already-emptied instance and every `NeverendingPotionPower` turn-start replay hit the null guard and no-oped. Removed the clearing (a used potion is consumed anyway; the only surviving reference is the replay path, which needs the state). Combat-scoped by design: the potion instance lives in the power's `_bottled` list, torn down with the power at combat end.
+- **Verified:** build 0/0. ⚠️ In-game: Crystal Bottle → drink Bottled Message → same card in hand every turn start this combat; gone next combat.
+- **Files:** `TheWitchCode/Potions/BottledMessage.cs`
+
 ### 292. Pocket Rats — upgrade creates Rats+ instead of +1 Rat
 - **Done:** 2026-07-29 (claude) — [PocketRats.cs](../TheWitchCode/Cards/PocketRats.cs): upgrade no longer adds a rat (`OnUpgrade` now empty); instead the 2 created Rats come out **upgraded** when the card is. Plumbed via new optional `upgraded` param on `WitchFamiliarCard.CreateInHand<T>` (`CardCmd.Upgrade` per card — mirrors `FamiliarCardRegistry.CreateFamiliarCards`). Hover tip → `FromCard<Rats>(IsUpgraded)`; loc uses `{IfUpgraded:show:Rats+|Rats}` convention. Damage upgrade not added (kept scope: token quality only).
 - **Verified:** build 0/0 (shared gate 290–292); regen run. ⚠️ In-game: upgraded Pocket Rats hand-adds Rats+.

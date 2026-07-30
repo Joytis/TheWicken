@@ -11,7 +11,6 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class HiddenInSmoke : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<HiddenInSmokePower>(),
         HoverTipFactory.FromPotion<PuffOfSmoke>(),
     ];
 

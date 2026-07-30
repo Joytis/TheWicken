@@ -268,7 +268,7 @@
       },
       "upgrade": "Damage +3",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -329,7 +329,7 @@
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -357,7 +357,7 @@
       },
       "upgrade": "Brambles +2",
       "note": "Lavender and Sage: draw a card and grow a thicket of Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -415,7 +415,7 @@
       },
       "upgrade": "custom (see code)",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -443,7 +443,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -589,7 +589,7 @@
       },
       "upgrade": "Block +3",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -644,7 +644,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -819,7 +819,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random familiars each do their card production once.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1151,7 +1151,7 @@
       },
       "upgrade": "Damage +4",
       "note": "Pact of Agony: hex yourself to lash the whole board.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1243,7 +1243,7 @@
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1627,7 +1627,7 @@
       },
       "upgrade": "VolatileVapors +3",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2202,7 +2202,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2263,7 +2263,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex",
@@ -2587,7 +2587,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"

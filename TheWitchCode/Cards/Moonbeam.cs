@@ -2,7 +2,6 @@ using System;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Powers;
@@ -15,10 +14,6 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Moonbeam : WitchCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<MoonbeamPower>(),
-    ];
-
     private const string _beamDamageKey = "BeamDamage";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [

@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -9,10 +8,6 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Ritual Casting: a Power — big Skills each unlock a random free card this turn.</summary>
 public sealed class RitualCasting : WitchCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<RitualCastingPower>(),
-    ];
-
     public RitualCasting()
         : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {

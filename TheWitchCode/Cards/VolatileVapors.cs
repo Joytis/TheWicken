@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWitch.TheWitchCode.Powers;
 
@@ -10,10 +9,6 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.</summary>
 public sealed class VolatileVapors : WitchCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<VolatileVaporsPower>(),
-    ];
-
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<VolatileVaporsPower>(6m)
     ];

@@ -11,7 +11,6 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class DeepRoots : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<DeepRootsPower>(),
         HoverTipFactory.FromPower<BramblesPower>(),
     ];
 

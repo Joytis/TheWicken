@@ -11,7 +11,6 @@ public sealed class BottomlessCauldron : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPotion<NoxiousBrew>(),
-        HoverTipFactory.FromPower<BottomlessCauldronPower>(),
     ];
 
     public BottomlessCauldron()
