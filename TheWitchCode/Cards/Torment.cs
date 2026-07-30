@@ -15,23 +15,20 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public interface IHexPreserving;
 
-/// <summary>
-/// Torment: a heavy hit that turns every potion you play this turn into a random-enemy Hex
-/// (via <see cref="TormentPower" />, one stack per play, gone at end of turn).
-/// </summary>
-public sealed class Torment : WitchCard
+/// <summary>Torment: a free sting that cycles — and leaves the target's Hex untouched.</summary>
+public sealed class Torment : WitchCard, IHexPreserving
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(12m, ValueProp.Move),
-        new PowerVar<TormentPower>(1m)
+        new DamageVar(5m, ValueProp.Move),
+        new CardsVar(1)
     ];
 
     public Torment()
-        : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -45,8 +42,8 @@ public sealed class Torment : WitchCard
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
 
-        await PowerCmd.Apply<TormentPower>(choiceContext, Owner.Creature, DynamicVars[nameof(TormentPower)].BaseValue, Owner.Creature, this);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
 }

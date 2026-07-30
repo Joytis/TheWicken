@@ -56,5 +56,5 @@ public sealed class ExtractLife : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars["Replay"].UpgradeValueBy(1m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);
 }

@@ -1,2 +1,3 @@
 # TODO — Staging / Inbox
-- Capture Soul is currently bugged - it just doesn't keep the Hex Bonus in the deck preview, once it's in your hand it DOES show up. It should also show up in the Deck Preview. 
+- BUG: Torment - we should play the purple fire vfx even when not consuming the hex (Torment triggers but does not consume.)
+- 

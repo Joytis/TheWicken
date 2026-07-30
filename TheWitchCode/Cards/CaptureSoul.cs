@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -13,12 +14,10 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>
 /// Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has
 /// killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game
-/// GeneticAlgorithm pattern). Live Hex number via the Barrage CalculatedVar shape.
+/// GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).
 /// </summary>
 public sealed class CaptureSoul : WitchCard
 {
-    private const string _calculatedHexKey = "CalculatedHex";
-
     private int _bonusHex;
 
     [SavedProperty]
@@ -29,6 +28,7 @@ public sealed class CaptureSoul : WitchCard
         {
             AssertMutable();
             _bonusHex = value;
+            DynamicVars.Hex().BaseValue = 1 + _bonusHex;
         }
     }
 
@@ -39,11 +39,8 @@ public sealed class CaptureSoul : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
-        new CalculationBaseVar(1m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar(_calculatedHexKey)
-            .WithMultiplier((card, _) => ((CaptureSoul)card).BonusHex)
+        new DamageVar(10m, ValueProp.Move),
+        new PowerVar<HexPower>(1 + BonusHex)
     ];
 
     public CaptureSoul()
@@ -55,7 +52,7 @@ public sealed class CaptureSoul : WitchCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-        decimal hex = ((CalculatedVar)DynamicVars[_calculatedHexKey]).Calculate(cardPlay.Target);
+        decimal hex = DynamicVars.Hex().BaseValue;
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)

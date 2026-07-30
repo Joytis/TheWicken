@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnxnyg43jqr0j"
-path="res://.godot/imported/fertilize.png-2ac7640e31e369ec74823899cdb86190.ctex"
+uid="uid://o1i4qkeeaqym"
+path="res://.godot/imported/frenzy.png-67abc01625d084984c10bbbb6012ed82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/card_portraits/fertilize.png"
-dest_files=["res://.godot/imported/fertilize.png-2ac7640e31e369ec74823899cdb86190.ctex"]
+source_file="res://TheWitch/images/card_portraits/big/frenzy.png"
+dest_files=["res://.godot/imported/frenzy.png-67abc01625d084984c10bbbb6012ed82.ctex"]
 
 [params]
 

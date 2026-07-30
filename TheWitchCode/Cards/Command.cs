@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -10,13 +11,13 @@ using TheWitch.TheWitchCode.Powers;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Command (was Throw Bait): a quick strike and an order barked at the pack — one random familiar
-/// does its card production once (a single roll, regardless of stacks).
+/// Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random
+/// distinct familiars each do their card production once (a single roll, regardless of stacks).
 /// </summary>
 public sealed class Command : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3m, ValueProp.Move)
+        new DamageVar(5m, ValueProp.Move)
     ];
 
     public Command()
@@ -35,9 +36,9 @@ public sealed class Command : WitchCard
             .Execute(choiceContext);
 
         List<FamiliarPower> familiars = Owner.Creature.Powers.OfType<FamiliarPower>().ToList();
-        if (familiars.Count > 0)
+        familiars.UnstableShuffle(Owner.RunState.Rng.CombatCardGeneration);
+        foreach (FamiliarPower chosen in familiars.Take(2))
         {
-            FamiliarPower chosen = Owner.RunState.Rng.CombatCardGeneration.NextItem(familiars)!;
             await chosen.GenerateOneCard(Owner, CombatState!);
         }
     }

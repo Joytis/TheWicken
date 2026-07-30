@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5bi3ceqi2077"
-path="res://.godot/imported/wicker_form.png-e684d5847c705a54331c1d7d8a5e7c5d.ctex"
+uid="uid://cwryas6ro40wx"
+path="res://.godot/imported/primal_form.png-77f01d035edc46d4a911c65817c1c679.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/card_portraits/wicker_form.png"
-dest_files=["res://.godot/imported/wicker_form.png-e684d5847c705a54331c1d7d8a5e7c5d.ctex"]
+source_file="res://TheWitch/images/card_portraits/big/primal_form.png"
+dest_files=["res://.godot/imported/primal_form.png-77f01d035edc46d4a911c65817c1c679.ctex"]
 
 [params]
 

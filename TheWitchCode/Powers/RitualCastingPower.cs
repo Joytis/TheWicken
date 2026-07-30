@@ -8,8 +8,8 @@ using MegaCrit.Sts2.Core.Models;
 namespace TheWitch.TheWitchCode.Powers;
 
 /// <summary>
-/// Ritual Casting: whenever the owner plays a Skill that costs 2 or more (its cost when played,
-/// <see cref="ResourceInfo.EnergyValue" /> — so auto-plays of big Skills count too), a random card
+/// Ritual Casting: whenever the owner plays a card that costs 2 or more (its cost when played,
+/// <see cref="ResourceInfo.EnergyValue" /> — so auto-plays of big cards count too), a random card
 /// in their hand becomes free to play this turn.
 /// </summary>
 public sealed class RitualCastingPower : WitchPower
@@ -22,7 +22,6 @@ public sealed class RitualCastingPower : WitchPower
     {
         if (Owner.Player is not { } player
             || cardPlay.Card.Owner.Creature != Owner
-            || cardPlay.Card.Type != CardType.Skill
             || cardPlay.Resources.EnergyValue < 2)
         {
             return Task.CompletedTask;

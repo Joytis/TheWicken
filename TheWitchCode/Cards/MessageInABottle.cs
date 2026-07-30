@@ -45,5 +45,5 @@ public sealed class MessageInABottle : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => RemoveKeyword(CardKeyword.Exhaust);
+    protected override void OnUpgrade() => AddKeyword(CardKeyword.Retain);
 }

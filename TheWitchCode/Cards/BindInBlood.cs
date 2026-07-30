@@ -22,7 +22,7 @@ public sealed class BindInBlood : WitchCard
     ];
 
     public BindInBlood()
-        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(0, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 

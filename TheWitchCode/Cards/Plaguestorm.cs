@@ -33,7 +33,7 @@ public sealed class Plaguestorm : WitchCard
     ];
 
     public Plaguestorm()
-        : base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
     }
 

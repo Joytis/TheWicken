@@ -10,9 +10,8 @@ using MegaCrit.Sts2.Core.Models;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Polymorph (was Repurpose): choose a card in your draw pile — it becomes a Rats token.
-/// Combat-scoped transform via <c>CardCmd.Transform</c>; upgraded, the card becomes TWO Rats
-/// (the extra Rats is generated into the draw pile).
+/// Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens
+/// (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).
 /// </summary>
 public sealed class Polymorph : WitchCard
 {
@@ -33,24 +32,23 @@ public sealed class Polymorph : WitchCard
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        CardModel? chosen = (await CardSelectCmd.FromCombatPile(
+        var chosen = (await CardSelectCmd.FromCombatPile(
             choiceContext,
             PileType.Draw.GetPile(Owner),
             Owner,
-            new CardSelectorPrefs(SelectionScreenPrompt, 1))).FirstOrDefault();
-        if (chosen == null)
-        {
-            return;
-        }
+            new CardSelectorPrefs(SelectionScreenPrompt, 2))).ToList();
 
-        CardModel replacement = CombatState!.CreateCard<Rats>(Owner);
-        await CardCmd.Transform(chosen, replacement);
-
-        // Upgraded: the card becomes two Rats — generate the extras alongside the transform.
-        for (int i = 1; i < DynamicVars.Cards.IntValue; i++)
+        foreach (CardModel card in chosen)
         {
-            CardModel extra = CombatState!.CreateCard<Rats>(Owner);
-            await CardPileCmd.AddGeneratedCardToCombat(extra, PileType.Draw, Owner, CardPilePosition.Random);
+            CardModel replacement = CombatState!.CreateCard<Rats>(Owner);
+            await CardCmd.Transform(card, replacement);
+
+            // Each choice becomes TWO Rats — generate the extras alongside the transform.
+            for (int i = 1; i < DynamicVars.Cards.IntValue; i++)
+            {
+                CardModel extra = CombatState!.CreateCard<Rats>(Owner);
+                await CardPileCmd.AddGeneratedCardToCombat(extra, PileType.Draw, Owner, CardPilePosition.Random);
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28",
+  "generated": "2026-07-30",
   "cards": [
     {
       "name": "Defend",
@@ -164,6 +164,37 @@
       "threads": []
     },
     {
+      "name": "Bind in Blood",
+      "entry": "BIND_IN_BLOOD",
+      "file": "TheWitchCode/Cards/BindInBlood.cs",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Common",
+      "target": "AnyEnemy",
+      "text": "Lose 2 HP. Apply 3 Hex.",
+      "numbers": {
+        "Hex": 3,
+        "HpLoss": 2
+      },
+      "upgrade": "Hex +2",
+      "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
+      "tested": true,
+      "artFinal": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Hex:Apply"
+      ],
+      "threads": [
+        "OtherDebuff",
+        "HPLoss"
+      ]
+    },
+    {
       "name": "Broom Strike",
       "entry": "BROOM_STRIKE",
       "file": "TheWitchCode/Cards/BroomStrike.cs",
@@ -171,9 +202,9 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 6 damage. Your next Skill costs 1 less.",
+      "text": "Deal 7 damage. Your next Skill costs 1 less.",
       "numbers": {
-        "Damage": 6
+        "Damage": 7
       },
       "upgrade": "Damage +3",
       "note": "Broom Strike: swat with the broom; the follow-through sweeps your next Skill in cheaper.",
@@ -222,37 +253,6 @@
       ]
     },
     {
-      "name": "Fertilize",
-      "entry": "FERTILIZE",
-      "file": "TheWitchCode/Cards/Fertilize.cs",
-      "cost": 1,
-      "type": "Skill",
-      "rarity": "Common",
-      "target": "Self",
-      "text": "Gain 5 Brambles. Next turn, gain {EnergyNextTurnPower:energyIcons()}.",
-      "numbers": {
-        "Brambles": 5
-      },
-      "upgrade": "Brambles +1, EnergyNextTurn +1",
-      "note": "Fertilize: sow now, reap next turn — gain Brambles and bank 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Brambles"
-      ],
-      "role": [
-        "Generator",
-        "Enabler"
-      ],
-      "sub": [
-        "Brambles:Rider"
-      ],
-      "threads": [
-        "Energy",
-        "DelayedEffect"
-      ]
-    },
-    {
       "name": "Forbidden Magic",
       "entry": "FORBIDDEN_MAGIC",
       "file": "TheWitchCode/Cards/ForbiddenMagic.cs",
@@ -260,9 +260,9 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 7 damage. If the enemy is Hexed, gain 1 and draw a card.",
+      "text": "Deal 9 damage. If the enemy is Hexed, gain [E] and draw a card.",
       "numbers": {
-        "Damage": 7,
+        "Damage": 9,
         "Energy": 1,
         "Cards": 1
       },
@@ -286,6 +286,35 @@
       ]
     },
     {
+      "name": "Frenzy",
+      "entry": "FRENZY",
+      "file": "TheWitchCode/Cards/Frenzy.cs",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Common",
+      "target": "AnyEnemy",
+      "text": "Deal 4 damage twice. Next turn, gain [E].",
+      "numbers": {
+        "Damage": 4
+      },
+      "upgrade": "Damage +2",
+      "note": "Frenzy: two quick swipes now, and the rush banks 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
+      "tested": true,
+      "artFinal": false,
+      "mechanics": [
+        "None"
+      ],
+      "role": [
+        "Standalone"
+      ],
+      "sub": [],
+      "threads": [
+        "MultiHit",
+        "Energy",
+        "DelayedEffect"
+      ]
+    },
+    {
       "name": "Hide in a Bush",
       "entry": "HIDE_IN_A_BUSH",
       "file": "TheWitchCode/Cards/HideInABush.cs",
@@ -300,7 +329,7 @@
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -321,14 +350,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Draw 2 cards. Gain 3 Brambles.",
+      "text": "Draw 2 cards. Gain 2 Brambles.",
       "numbers": {
-        "Brambles": 3,
+        "Brambles": 2,
         "Cards": 2
       },
       "upgrade": "Brambles +2",
       "note": "Lavender and Sage: draw a card and grow a thicket of Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -372,53 +401,21 @@
       "threads": []
     },
     {
-      "name": "Pact of Agony",
-      "entry": "PACT_OF_AGONY",
-      "file": "TheWitchCode/Cards/PactOfAgony.cs",
-      "cost": 0,
-      "type": "Skill",
-      "rarity": "Common",
-      "target": "AllEnemies",
-      "text": "Gain 1 Hex. Apply 1 Hex to ALL enemies.",
-      "numbers": {
-        "Hex": 1
-      },
-      "upgrade": "Hex +1",
-      "note": "Pact of Agony: hex yourself to hex the whole board.",
-      "tested": false,
-      "artFinal": false,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Hex:Apply",
-        "Hex:Self"
-      ],
-      "threads": [
-        "AoE",
-        "SelfDebuff",
-        "SelfExhaust"
-      ]
-    },
-    {
       "name": "Pocket Rats",
       "entry": "POCKET_RATS",
       "file": "TheWitchCode/Cards/PocketRats.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage. Add 2 Rats into your Hand.",
+      "text": "Deal 3 damage. Add 2 Rats into your Hand.",
       "numbers": {
-        "Damage": 5,
+        "Damage": 3,
         "Cards": 2
       },
-      "upgrade": "Cards +1",
+      "upgrade": "custom (see code)",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -432,37 +429,6 @@
       "threads": [
         "CardGen",
         "SelfExhaust"
-      ]
-    },
-    {
-      "name": "Read the Bones",
-      "entry": "READ_THE_BONES",
-      "file": "TheWitchCode/Cards/ReadTheBones.cs",
-      "cost": 1,
-      "type": "Skill",
-      "rarity": "Common",
-      "target": "AnyEnemy",
-      "text": "Apply 2 Hex. Next turn, gain 6 Block.",
-      "numbers": {
-        "Hex": 2,
-        "BlockNextTurn": 6
-      },
-      "upgrade": "BlockNextTurn +2",
-      "note": "Read the Bones: curse the enemy now, foresee the blow to come — apply Hex, then gain Block next turn (base-game <see cref=\"BlockNextTurnPower\" />).",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Hex:Apply"
-      ],
-      "threads": [
-        "OtherDebuff",
-        "DelayedEffect"
       ]
     },
     {
@@ -505,7 +471,7 @@
       },
       "upgrade": "Damage +2, Vulnerable +1",
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -526,7 +492,7 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Lose 1 Brambles. Gain 1.",
+      "text": "Lose 1 Brambles. Gain [E].",
       "numbers": {
         "Energy": 1
       },
@@ -586,10 +552,10 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 8 damage. Apply 1 Hex.",
+      "text": "Deal 9 damage. Apply 1 Hex.",
       "numbers": {
         "Hex": 1,
-        "Damage": 8
+        "Damage": 9
       },
       "upgrade": "Hex +1",
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
@@ -606,6 +572,37 @@
       ],
       "threads": [
         "OtherDebuff"
+      ]
+    },
+    {
+      "name": "Wax and Wane",
+      "entry": "WAX_AND_WANE",
+      "file": "TheWitchCode/Cards/WaxAndWane.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Common",
+      "target": "Self",
+      "text": "Gain 8 Block. Next turn, apply 1 Hex to ALL enemies.",
+      "numbers": {
+        "WaxAndWane": 1,
+        "Block": 8
+      },
+      "upgrade": "Block +3",
+      "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Hex:Apply"
+      ],
+      "threads": [
+        "OtherDebuff",
+        "DelayedEffect"
       ]
     },
     {
@@ -686,37 +683,6 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
-    },
-    {
-      "name": "Bind in Blood",
-      "entry": "BIND_IN_BLOOD",
-      "file": "TheWitchCode/Cards/BindInBlood.cs",
-      "cost": 0,
-      "type": "Skill",
-      "rarity": "Uncommon",
-      "target": "AnyEnemy",
-      "text": "Lose 2 HP. Apply 3 Hex.",
-      "numbers": {
-        "Hex": 3,
-        "HpLoss": 2
-      },
-      "upgrade": "Hex +2",
-      "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Hex:Apply"
-      ],
-      "threads": [
-        "OtherDebuff",
-        "HPLoss"
       ]
     },
     {
@@ -847,13 +813,13 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 3 damage. One of your Familiars creates a card.",
+      "text": "Deal 5 damage. Up to two of your Familiars each create a card.",
       "numbers": {
-        "Damage": 3
+        "Damage": 5
       },
       "upgrade": "Damage +3",
-      "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — one random familiar does its card production once (a single roll, regardless of stacks).",
-      "tested": true,
+      "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random familiars each do their card production once.",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1047,7 +1013,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1064,13 +1030,13 @@
       "name": "Hidden in Smoke",
       "entry": "HIDDEN_IN_SMOKE",
       "file": "TheWitchCode/Cards/HiddenInSmoke.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
       "text": "At the start of your turn, create a Puff of Smoke.",
       "numbers": {},
-      "upgrade": "Cost -1",
+      "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
       "tested": true,
       "artFinal": false,
@@ -1157,7 +1123,7 @@
       },
       "upgrade": "Damage +2, ExtraDamage +2",
       "note": "Overrun: mark one enemy for the pack — every Familiar card played this turn tramples it again.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1168,6 +1134,38 @@
       "sub": [],
       "threads": [
         "PlayVolume"
+      ]
+    },
+    {
+      "name": "Pact of Agony",
+      "entry": "PACT_OF_AGONY",
+      "file": "TheWitchCode/Cards/PactOfAgony.cs",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "target": "AllEnemies",
+      "text": "Gain 1 Hex. Deal 12 damage to ALL enemies.",
+      "numbers": {
+        "Hex": 1,
+        "Damage": 12
+      },
+      "upgrade": "Damage +4",
+      "note": "Pact of Agony: hex yourself to lash the whole board.",
+      "tested": false,
+      "artFinal": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Hex:Apply",
+        "Hex:Self"
+      ],
+      "threads": [
+        "AoE",
+        "SelfDebuff"
       ]
     },
     {
@@ -1234,17 +1232,18 @@
       "name": "Prices Paid",
       "entry": "PRICES_PAID",
       "file": "TheWitchCode/Cards/PricesPaid.cs",
-      "cost": "X",
+      "cost": 1,
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Lose X HP. Deal 6 damage. Create X Noxious Brews.",
+      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Noxious Brews.",
       "numbers": {
-        "Damage": 6
+        "Damage": 6,
+        "HpLoss": 1
       },
-      "upgrade": "none",
-      "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into a Noxious Brew.",
-      "tested": true,
+      "upgrade": "HpLoss +1, Brews +1",
+      "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1260,6 +1259,38 @@
       ]
     },
     {
+      "name": "Read the Bones",
+      "entry": "READ_THE_BONES",
+      "file": "TheWitchCode/Cards/ReadTheBones.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "target": "AnyEnemy",
+      "text": "Apply 2 Hex. Next turn, gain [E] and draw 1 card.",
+      "numbers": {
+        "Hex": 2,
+        "DrawCardsNextTurn": 1
+      },
+      "upgrade": "EnergyNextTurn +1",
+      "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
+      "tested": true,
+      "artFinal": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [
+        "Hex:Apply"
+      ],
+      "threads": [
+        "DelayedEffect",
+        "Energy",
+        "Draw"
+      ]
+    },
+    {
       "name": "Refuse Pile",
       "entry": "REFUSE_PILE",
       "file": "TheWitchCode/Cards/RefusePile.cs",
@@ -1267,10 +1298,10 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 12 Block. Add 1 Rats into your Draw Pile and Discard Pile.",
+      "text": "Gain 12 Block. Add 2 Rats into your Draw Pile and Discard Pile.",
       "numbers": {
         "Block": 12,
-        "Cards": 1
+        "Cards": 2
       },
       "upgrade": "Block +4",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
@@ -1331,26 +1362,27 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. Duplicate ALL debuffs.",
+      "text": "Deal 10 damage. Apply 2 Weak. Apply 2 Hex.",
       "numbers": {
+        "Weak": 2,
+        "Hex": 2,
         "Damage": 10
       },
-      "upgrade": "Damage +5",
-      "note": "Rot Bloom: heavy hit, then every debuff on the target blooms — each debuff power's stacks are duplicated (applied again at its current amount, Rend's debuff filter: temporary powers excluded).",
+      "upgrade": "Damage +3, Hex +1",
+      "note": "Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.",
       "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
       ],
       "role": [
-        "Payoff"
+        "Generator"
       ],
       "sub": [
-        "Hex:Exploit"
+        "Hex:Apply"
       ],
       "threads": [
-        "DebuffPayoff",
-        "SelfExhaust"
+        "Weak"
       ]
     },
     {
@@ -1505,12 +1537,11 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. Draw 2 cards. Costs 1 less {energyPrefix:energyIcons(1)} for each Attack played this turn.",
+      "text": "Deal 24 damage. Costs 1 less [E] for each Attack played this turn.",
       "numbers": {
-        "Damage": 9,
-        "Cards": 2
+        "Damage": 24
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +6",
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
       "tested": true,
       "artFinal": false,
@@ -1522,9 +1553,9 @@
       ],
       "sub": [],
       "threads": [
-        "Draw",
         "AttacksMatter",
-        "CostReduction"
+        "CostReduction",
+        "BurstFinisher"
       ]
     },
     {
@@ -1558,32 +1589,29 @@
       "name": "Torment",
       "entry": "TORMENT",
       "file": "TheWitchCode/Cards/Torment.cs",
-      "cost": 2,
+      "cost": 0,
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 12 damage. Whenever you play a Potion this turn, apply 1 Hex to a random enemy.",
+      "text": "Deal 5 damage. Draw 1 card. Does not consume Hex.",
       "numbers": {
-        "Torment": 1,
-        "Damage": 12
+        "Damage": 5,
+        "Cards": 1
       },
-      "upgrade": "Damage +4",
+      "upgrade": "Damage +2",
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
       "tested": true,
       "artFinal": true,
       "mechanics": [
-        "Hex",
-        "Potions"
+        "Hex"
       ],
       "role": [
-        "Generator",
-        "Payoff"
+        "Enabler"
       ],
-      "sub": [
-        "Hex:Apply",
-        "Potions:UsePayoff"
-      ],
-      "threads": []
+      "sub": [],
+      "threads": [
+        "Draw"
+      ]
     },
     {
       "name": "Volatile Vapors",
@@ -1593,11 +1621,11 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 5 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 6 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 5
+        "VolatileVapors": 6
       },
-      "upgrade": "VolatileVapors +2",
+      "upgrade": "VolatileVapors +3",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
       "tested": false,
       "artFinal": false,
@@ -1612,37 +1640,6 @@
         "Potions:CreatePayoff"
       ],
       "threads": []
-    },
-    {
-      "name": "Wax and Wane",
-      "entry": "WAX_AND_WANE",
-      "file": "TheWitchCode/Cards/WaxAndWane.cs",
-      "cost": 1,
-      "type": "Skill",
-      "rarity": "Uncommon",
-      "target": "Self",
-      "text": "Gain 8 Block. At the start of your next turn, apply 1 Hex to ALL enemies.",
-      "numbers": {
-        "WaxAndWane": 1,
-        "Block": 8
-      },
-      "upgrade": "Block +2",
-      "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Hex:Apply"
-      ],
-      "threads": [
-        "OtherDebuff",
-        "DelayedEffect"
-      ]
     },
     {
       "name": "Wild Growth",
@@ -1707,7 +1704,7 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Whenever you use a Potion, heal 1 HP and gain 1 Strength.",
+      "text": "Whenever you use a Potion, gain 1 Strength and draw 1 card.",
       "numbers": {
         "ALittleSip": 1
       },
@@ -1725,15 +1722,15 @@
         "Potions:UsePayoff"
       ],
       "threads": [
-        "Heal",
-        "StatRamp"
+        "StatRamp",
+        "Draw"
       ]
     },
     {
       "name": "Ambush!",
       "entry": "AMBUSH",
       "file": "TheWitchCode/Cards/Ambush.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
@@ -1765,7 +1762,7 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain 4. Exhaust 2 cards from your Hand.",
+      "text": "Gain [E] [E] [E] [E]. Exhaust 2 cards from your Hand.",
       "numbers": {
         "Energy": 4,
         "Cards": 2
@@ -1912,14 +1909,13 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage. Apply {CalculatedHex:diff()} Hex. If Fatal, Permanently increase this card's hex by 1.",
+      "text": "Deal 10 damage. Apply 1 Hex. If Fatal, Permanently increase this card's hex by 1.",
       "numbers": {
-        "Damage": 5,
-        "CalculationBase": 1,
-        "CalculationExtra": 1
+        "Hex": 1,
+        "Damage": 10
       },
       "upgrade": "Damage +4",
-      "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern).",
+      "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
       "tested": true,
       "artFinal": true,
       "mechanics": [
@@ -2000,13 +1996,13 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain 3. Draw 2 cards. Gain 3 Hex.",
+      "text": "Gain [E] [E] [E]. Draw 3 cards. Gain 3 Hex.",
       "numbers": {
         "Hex": 3,
         "Energy": 3,
-        "Cards": 2
+        "Cards": 3
       },
-      "upgrade": "Hex -1",
+      "upgrade": "Cards +2",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
       "tested": true,
       "artFinal": false,
@@ -2092,7 +2088,7 @@
       "numbers": {
         "Damage": 12
       },
-      "upgrade": "Replay +1",
+      "upgrade": "Damage +4",
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
       "tested": true,
       "artFinal": false,
@@ -2198,30 +2194,28 @@
       "name": "Mulch",
       "entry": "MULCH",
       "file": "TheWitchCode/Cards/Mulch.cs",
-      "cost": 3,
+      "cost": "X",
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Exhaust your Discard Pile. Gain 1 Brambles and 1 Block for each card Exhausted.{InCombat: ({CalculatedBrambles:diff()} Damage, {CalculatedBlock:diff()} Block)|}",
-      "numbers": {
-        "CalculationBase": 0,
-        "CalculationExtra": 1
-      },
-      "upgrade": "CalculationExtra +1",
-      "note": "Mulch: compost the whole discard pile — EXHAUST it for Brambles and Block per card.",
-      "tested": true,
+      "text": "Exhaust X cards. Add X random cards to your Hand. They are free to play this combat.",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
-        "Brambles"
+        "None"
       ],
       "role": [
-        "Generator"
+        "Standalone"
       ],
-      "sub": [
-        "Brambles:Ramp"
-      ],
+      "sub": [],
       "threads": [
-        "ExhaustOutlet"
+        "ExhaustOutlet",
+        "CardGen",
+        "CostReduction",
+        "SelfExhaust"
       ]
     },
     {
@@ -2256,7 +2250,7 @@
       "name": "Plaguestorm",
       "entry": "PLAGUESTORM",
       "file": "TheWitchCode/Cards/Plaguestorm.cs",
-      "cost": 3,
+      "cost": 2,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
@@ -2269,7 +2263,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex",
@@ -2295,12 +2289,12 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Transform a card in your Draw Pile into 2 Rats.",
+      "text": "Transform two cards in your Draw Pile into 2 Rats each.",
       "numbers": {
         "Cards": 2
       },
       "upgrade": "Cost -1",
-      "note": "Polymorph (was Repurpose): choose a card in your draw pile — it becomes a Rats token.",
+      "note": "Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).",
       "tested": true,
       "artFinal": false,
       "mechanics": [
@@ -2314,6 +2308,33 @@
       ],
       "threads": [
         "Transform"
+      ]
+    },
+    {
+      "name": "Primal Form",
+      "entry": "PRIMAL_FORM",
+      "file": "TheWitchCode/Cards/PrimalForm.cs",
+      "cost": 3,
+      "type": "Power",
+      "rarity": "Rare",
+      "target": "Self",
+      "text": "Attacks you play are played an additional time.",
+      "numbers": {},
+      "upgrade": "custom (see code)",
+      "note": "Primal Form: shed the skin, keep the fury — Attacks you play are played an additional time.",
+      "tested": true,
+      "artFinal": false,
+      "mechanics": [
+        "None"
+      ],
+      "role": [
+        "Enabler"
+      ],
+      "sub": [],
+      "threads": [
+        "TurnEngine",
+        "AttacksMatter",
+        "Drawback"
       ]
     },
     {
@@ -2358,7 +2379,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Rattling Bottles: an attack that also crams every empty potion slot full of rocks.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2378,15 +2399,15 @@
       "name": "Ritual Casting",
       "entry": "RITUAL_CASTING",
       "file": "TheWitchCode/Cards/RitualCasting.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Whenever you play a Skill that costs 2 or more, a random card in your Hand is free to play this turn.",
+      "text": "Whenever you play a card that costs 2 or more, a random card in your Hand is free to play this turn.",
       "numbers": {},
-      "upgrade": "Cost -1",
+      "upgrade": "custom (see code)",
       "note": "Ritual Casting: a Power — big Skills each unlock a random free card this turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2397,37 +2418,7 @@
       "sub": [],
       "threads": [
         "TurnEngine",
-        "SkillsMatter",
         "CostReduction"
-      ]
-    },
-    {
-      "name": "Wicker Form",
-      "entry": "WICKER_FORM",
-      "file": "TheWitchCode/Cards/WickerForm.cs",
-      "cost": 3,
-      "type": "Power",
-      "rarity": "Rare",
-      "target": "Self",
-      "text": "Whenever you play a card, gain 3 Brambles.",
-      "numbers": {
-        "WickerForm": 3
-      },
-      "upgrade": "WickerForm +2",
-      "note": "Wicker Form: become the wicker — every card you play sprouts Brambles.",
-      "tested": true,
-      "artFinal": false,
-      "mechanics": [
-        "Brambles"
-      ],
-      "role": [
-        "Generator"
-      ],
-      "sub": [
-        "Brambles:Engine"
-      ],
-      "threads": [
-        "Snowball"
       ]
     },
     {
@@ -2592,11 +2583,11 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Copy a random non-Knowledge card in your Hand.",
+      "text": "Copy a non-Knowledge card in your Hand.{IfUpgraded:show: It costs [E] less.|}",
       "numbers": {},
       "upgrade": "custom (see code)",
-      "note": "Owl familiar token: memorize a card — copy a card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
-      "tested": true,
+      "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2621,12 +2612,13 @@
       "type": "Attack",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Deal 20 damage. Ignores Block.",
+      "text": "Deal 16 damage. Apply 2 Vulnerable.",
       "numbers": {
-        "Damage": 20
+        "Vulnerable": 2,
+        "Damage": 16
       },
-      "upgrade": "Damage +7",
-      "note": "Bear familiar token: heavy hit that ignores Block.",
+      "upgrade": "Damage +6",
+      "note": "Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).",
       "tested": true,
       "artFinal": false,
       "mechanics": [
@@ -2639,7 +2631,8 @@
         "Familiars:Token"
       ],
       "threads": [
-        "SelfExhaust"
+        "SelfExhaust",
+        "Vulnerable"
       ]
     },
     {
@@ -2650,7 +2643,7 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain 1. Gain 5 Block.",
+      "text": "Gain [E]. Gain 5 Block.",
       "numbers": {
         "Energy": 1,
         "Block": 5
@@ -2772,12 +2765,12 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Shuffle 2 Rats into your Draw Pile.",
+      "text": "Add a Rats to your Hand. Add 1 into your Draw Pile and Discard Pile.",
       "numbers": {
-        "Cards": 2
+        "Cards": 1
       },
       "upgrade": "Cards +1",
-      "note": "Rat familiar token: flood the deck — shuffle Rats into the draw pile (Call the Pack pattern).",
+      "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
       "tested": true,
       "artFinal": false,
       "mechanics": [
@@ -2804,12 +2797,12 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Draw 1 card, then discard a card.",
+      "text": "Draw 2 cards. Discard a card.",
       "numbers": {
-        "Cards": 1
+        "Cards": 2
       },
-      "upgrade": "Cards +1",
-      "note": "Owl familiar token.",
+      "upgrade": "custom (see code)",
+      "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
       "tested": true,
       "artFinal": false,
       "mechanics": [

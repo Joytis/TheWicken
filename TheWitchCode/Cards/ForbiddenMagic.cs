@@ -15,7 +15,7 @@ public sealed class ForbiddenMagic : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7m, ValueProp.Move),
+        new DamageVar(9m, ValueProp.Move),
         new EnergyVar(1),
         new CardsVar(1)
     ];

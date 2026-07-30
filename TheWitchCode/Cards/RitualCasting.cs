@@ -14,7 +14,7 @@ public sealed class RitualCasting : WitchCard
     ];
 
     public RitualCasting()
-        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 
@@ -24,5 +24,5 @@ public sealed class RitualCasting : WitchCard
         await PowerCmd.Apply<RitualCastingPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => AddKeyword(CardKeyword.Innate);
 }

@@ -1,20 +1,18 @@
-using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>
-/// Bear familiar token: heavy hit that ignores Block. No "ignore block" exists on the attack builder, so
-/// this uses <c>CreatureCmd.Damage</c> with <see cref="ValueProp.Unblockable" /> (still powered via Move).
-/// </summary>
+/// <summary>Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).</summary>
 public sealed class Mutilate : WitchFamiliarCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(20m, ValueProp.Move)
+        new DamageVar(16m, ValueProp.Move),
+        new PowerVar<VulnerablePower>(2m)
     ];
 
     public Mutilate()
@@ -25,12 +23,17 @@ public sealed class Mutilate : WitchFamiliarCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Attack", Owner.Character.AttackAnimDelay);
-        VfxCmd.PlayOnCreatureCenter(cardPlay.Target, "vfx/vfx_heavy_blunt");
-        NDebugAudioManager.Instance?.Play("heavy_attack.mp3");
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage.BaseValue,
-            ValueProp.Move | ValueProp.Unblockable, Owner.Creature, this, cardPlay);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this, cardPlay)
+            .Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
+            .Execute(choiceContext);
+
+        if (cardPlay.Target.IsAlive)
+        {
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
+        }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(7m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(6m);
 }

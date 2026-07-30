@@ -1,68 +1,62 @@
 using System.Linq;
+using Godot;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using TheWitch.TheWitchCode.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
-using TheWitch.TheWitchCode.Extensions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Mulch: compost the whole discard pile — EXHAUST it for Brambles and Block per card.</summary>
+/// <summary>
+/// Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place —
+/// free to play for the rest of the combat.
+/// </summary>
 public sealed class Mulch : WitchCard
 {
-    public override bool GainsBlock => true;
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<BramblesPower>(),
-    ];
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count),
-        new CalculatedVar("CalculatedBrambles").WithMultiplier((card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count)
-    ];
+    protected override bool HasEnergyCostX => true;
 
     public Mulch()
-        : base(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
+        : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        List<CardModel> discard = PileType.Discard.GetPile(Owner).Cards.ToList();
-        if (discard.Count == 0)
+        int x = ResolveEnergyXValue();
+        if (IsUpgraded)
+        {
+            x++;
+        }
+        if (x <= 0)
         {
             return;
         }
 
-        var brambles = ((CalculatedVar)DynamicVars["CalculatedBrambles"]).Calculate(null);
-        var block = DynamicVars.CalculatedBlock.Calculate(null);
-
-        // Cards still exhaust one by one, but the pile-move tweens run at triple speed
-        // (the game's durations are hard-coded — see CardPileTweenSpeedPatch).
-        CardPileTweenSpeedPatch.Scale = 3f;
-        try
+        var picks = await CardSelectCmd.FromHand(
+            context: choiceContext,
+            player: Owner,
+            prefs: new CardSelectorPrefs(SelectionScreenPrompt, x),
+            filter: null,
+            source: this);
+        foreach (CardModel pick in picks)
         {
-            foreach (CardModel card in discard)
-            {
-                await CardCmd.Exhaust(choiceContext, card);
-            }
+            await CardCmd.Exhaust(choiceContext, pick);
         }
-        finally
-        {
-            CardPileTweenSpeedPatch.Scale = 1f;
-        }
-        await PowerCmd.Apply<BramblesPower>(choiceContext, Owner.Creature, brambles, Owner.Creature, this);
-        await CreatureCmd.GainBlock(Owner.Creature, block, DynamicVars.CalculatedBlock.Props, cardPlay);
-    }
 
-    protected override void OnUpgrade()
-    {
-        DynamicVars.CalculationExtra.UpgradeValueBy(1m);
+        // TakeRandom clamps to the pool size, so a huge X (debug energy) can't over-ask; the adds go
+        // through ONE batched call — per-card awaited adds stall/lock the game when X is large.
+        x = Mathf.Min(x, picks.Count());
+        List<CardModel> sprouted = CardFactory.GetDistinctForCombat(
+            Owner,
+            Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint),
+            x,
+            Owner.RunState.Rng.CombatCardGeneration).ToList();
+        foreach (CardModel card in sprouted)
+        {
+            card.SetToFreeThisCombat();
+        }
+        await CardPileCmd.AddGeneratedCardsToCombat(sprouted, PileType.Hand, Owner);
     }
 }
