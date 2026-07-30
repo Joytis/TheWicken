@@ -39,6 +39,16 @@ public partial class MainFile : Node
                 return state;
             });
 
+        // Unstable potions: combat-end sweeper rides the run's hook iteration, and each player's
+        // marked slot indices are baked into the run save / MP sync so save-quit can't defuse them.
+        Potions.UnstablePotionSweeperModel.Register();
+        BaseLib.Patches.Saves.ExtendedSaveTypes.RegisterSavedValue<MegaCrit.Sts2.Core.Entities.Players.Player, string>(
+            "thewitch_unstable_potions",
+            Potions.UnstablePotions.SaveState,
+            (player, csv) => Potions.UnstablePotions.RestoreState(player, csv ?? string.Empty),
+            (csv, writer) => writer.WriteString(csv),
+            reader => reader.ReadString());
+
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();

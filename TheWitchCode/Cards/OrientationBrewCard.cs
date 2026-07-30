@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using TheWitch.TheWitchCode.Character;
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Potions;
 using TheWitch.TheWitchCode.Potions.Brewing;
 using TheWitch.TheWitchCode.Powers;
 
@@ -38,7 +39,7 @@ public abstract class OrientationBrewCard : WitchCard
         IsUpgraded ? LootTable.Except(UpgradedRemovals).Concat(UpgradedExtras) : LootTable;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        CurrentTable.Select(HoverTipFactory.FromPotion);
+        CurrentTable.Select(HoverTipFactory.FromPotion).Prepend(UnstablePotions.UnstableHoverTip);
 
 
     protected OrientationBrewCard(int energyCost = 1, CardRarity rarity = CardRarity.Common)
@@ -67,7 +68,11 @@ public abstract class OrientationBrewCard : WitchCard
                 PotionOrientation.Defensive => new Godot.Color("4a7bd0"),
                 _ => WitchFx.WitchGreen,
             });
-            await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
+            PotionProcureResult result = await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
+            if (result.success)
+            {
+                UnstablePotions.Mark(result.potion);
+            }
         }
     }
 }

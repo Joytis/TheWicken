@@ -439,11 +439,11 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Create a defensive Potion.",
+      "text": "Create an Unstable defensive Potion.",
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -640,11 +640,11 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Create an offensive Potion.",
+      "text": "Create an Unstable offensive Potion.",
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1009,11 +1009,11 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create a utility Potion.",
+      "text": "Create an Unstable utility Potion.",
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
