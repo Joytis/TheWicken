@@ -43,24 +43,6 @@ public static class UnstablePotions
     }
 
     public static bool IsUnstable(PotionModel potion) => _marks.TryGetValue(potion, out _);
-
-    /// <summary>Comma-joined slot indices of this player's Unstable potions (run-save persistence).</summary>
-    public static string SaveState(Player player) =>
-        string.Join(",", player.PotionSlots
-            .Select((p, i) => p != null && IsUnstable(p) ? i.ToString() : null)
-            .OfType<string>());
-
-    public static void RestoreState(Player player, string csv)
-    {
-        foreach (string entry in csv.Split(',', StringSplitOptions.RemoveEmptyEntries))
-        {
-            if (int.TryParse(entry, out int slot) && slot >= 0 && slot < player.PotionSlots.Count
-                && player.PotionSlots[slot] is { } potion)
-            {
-                Mark(potion);
-            }
-        }
-    }
 }
 
 /// <summary>
