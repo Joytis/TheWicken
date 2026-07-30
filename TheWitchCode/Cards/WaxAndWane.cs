@@ -33,5 +33,5 @@ public sealed class WaxAndWane : WitchCard
         await PowerCmd.Apply<WaxAndWanePower>(choiceContext, Owner.Creature, DynamicVars["WaxAndWanePower"].BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3m);
 }

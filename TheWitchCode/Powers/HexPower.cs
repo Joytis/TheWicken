@@ -71,12 +71,6 @@ public sealed class HexPower : WitchPower
             return;
         }
 
-        // Torment-style attacks milk the Hex without burning it.
-        if (command.ModelSource is IHexPreserving)
-        {
-            return;
-        }
-
         if (!command.Results.SelectMany(hit => hit).Any(result => result.Receiver == Owner))
         {
             return;
@@ -84,6 +78,13 @@ public sealed class HexPower : WitchPower
 
         Flash();
         WitchFx.PurpleFlame(Owner);
+
+        // Torment-style attacks milk the Hex without burning it.
+        if (command.ModelSource is IHexPreserving)
+        {
+            return;
+        }
+
         await PowerCmd.Decrement(this);
     }
 
