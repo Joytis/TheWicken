@@ -28,6 +28,6 @@ public sealed class MoonbeamPower : WitchPower
 
         Flash();
         WitchFx.PurpleFlame(Owner);
-        await CreatureCmd.Damage(choiceContext, [Owner], Amount, ValueProp.Unpowered, Applier, null);
+        await CreatureCmd.Damage(choiceContext, [Owner], Amount, ValueProp.Unpowered, Applier, null, null);
     }
 }

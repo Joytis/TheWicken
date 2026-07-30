@@ -13,7 +13,7 @@ public sealed class PocketRats : WitchCard
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<Rats>(),
+        HoverTipFactory.FromCard<Rats>(IsUpgraded),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -32,18 +32,20 @@ public sealed class PocketRats : WitchCard
         ArgumentNullException.ThrowIfNull(CombatState, "CombatState");
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_bite")
             .Execute(choiceContext);
 
-        // Upgrade adds +1 Rat but never upgrades the Rats themselves.
+        // Upgrade keeps the rat count but upgrades the Rats themselves.
         for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 		{
-            await WitchFamiliarCard.CreateInHand<Rats>(Owner, 1, CombatState);
+            await WitchFamiliarCard.CreateInHand<Rats>(Owner, 1, CombatState, IsUpgraded);
 			await Cmd.Wait(0.1f);
 		}
     }
 
-    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1m);
+    protected override void OnUpgrade()
+    {
+    }
 }

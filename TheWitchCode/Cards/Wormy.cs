@@ -33,6 +33,6 @@ public sealed class Wormy : WitchCard
     {
         // Base-game wormy squirm on the player (globally preloaded).
         NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NWormyImpactVfx.Create(Owner.Creature));
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this, cardPlay);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29",
+  "generated": "2026-07-30",
   "cards": [
     {
       "name": "Defend",
@@ -268,7 +268,7 @@
       },
       "upgrade": "Damage +3",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -322,14 +322,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 6 Block. Gain 4 Brambles.",
+      "text": "Gain 6 Block. Gain 3 Brambles.",
       "numbers": {
-        "Brambles": 4,
+        "Brambles": 3,
         "Block": 6
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -350,14 +350,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Draw 2 cards. Gain 3 Brambles.",
+      "text": "Draw 2 cards. Gain 2 Brambles.",
       "numbers": {
-        "Brambles": 3,
+        "Brambles": 2,
         "Cards": 2
       },
       "upgrade": "Brambles +2",
       "note": "Lavender and Sage: draw a card and grow a thicket of Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -413,9 +413,9 @@
         "Damage": 3,
         "Cards": 2
       },
-      "upgrade": "Cards +1",
+      "upgrade": "custom (see code)",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -443,7 +443,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -587,9 +587,9 @@
         "WaxAndWane": 1,
         "Block": 8
       },
-      "upgrade": "Block +2",
+      "upgrade": "Block +3",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -644,7 +644,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -813,13 +813,13 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 3 damage. Up to two of your Familiars each create a card.",
+      "text": "Deal 5 damage. Up to two of your Familiars each create a card.",
       "numbers": {
-        "Damage": 3
+        "Damage": 5
       },
       "upgrade": "Damage +3",
-      "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random distinct familiars each do their card production once (a single roll, regardless of stacks).",
-      "tested": true,
+      "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random familiars each do their card production once.",
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1144,14 +1144,14 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AllEnemies",
-      "text": "Gain 1 Hex. Deal 13 damage to ALL enemies.",
+      "text": "Gain 1 Hex. Deal 12 damage to ALL enemies.",
       "numbers": {
         "Hex": 1,
-        "Damage": 13
+        "Damage": 12
       },
       "upgrade": "Damage +4",
       "note": "Pact of Agony: hex yourself to lash the whole board.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1236,13 +1236,14 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Lose {HpLoss:diff()} HP. Deal 6 damage. Create {Brews:diff()} Noxious Brews.",
+      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Noxious Brews.",
       "numbers": {
-        "Damage": 6
+        "Damage": 6,
+        "HpLoss": 1
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1626,7 +1627,7 @@
       },
       "upgrade": "VolatileVapors +3",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2197,11 +2198,11 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Exhaust X cards. Add X random Witch cards to your Hand. They are free to play this combat.",
+      "text": "Exhaust X cards. Add X random cards to your Hand. They are free to play this combat.",
       "numbers": {},
       "upgrade": "none",
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2249,7 +2250,7 @@
       "name": "Plaguestorm",
       "entry": "PLAGUESTORM",
       "file": "TheWitchCode/Cards/Plaguestorm.cs",
-      "cost": 1,
+      "cost": 2,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
@@ -2262,7 +2263,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex",
@@ -2582,11 +2583,11 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Copy a non-Knowledge card in your Hand.",
+      "text": "Copy a non-Knowledge card in your Hand.{IfUpgraded:show: It costs [E] less.|}",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"

@@ -22,7 +22,7 @@ public sealed class HideInABush : WitchCard
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(6m, ValueProp.Move),
-        new PowerVar<BramblesPower>(4m)
+        new PowerVar<BramblesPower>(3m)
     ];
 
 	public HideInABush()

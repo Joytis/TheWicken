@@ -55,7 +55,7 @@ public sealed class CaptureSoul : WitchCard
         decimal hex = DynamicVars.Hex().BaseValue;
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash", null, "heavy_attack.mp3")
             .Execute(choiceContext);

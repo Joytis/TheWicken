@@ -12,7 +12,8 @@ namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
 /// Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random
-/// distinct familiars each do their card production once (a single roll, regardless of stacks).
+/// familiars each do their card production once. Every stack counts as its own familiar (Crow ×2
+/// is two birds on screen = two entries in the pick pool), so a doubled familiar can produce twice.
 /// </summary>
 public sealed class Command : WitchCard
 {
@@ -30,12 +31,15 @@ public sealed class Command : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
 
-        List<FamiliarPower> familiars = Owner.Creature.Powers.OfType<FamiliarPower>().ToList();
+        // One pool entry per stack, so Crow ×2 counts as two familiars (and can produce twice).
+        List<FamiliarPower> familiars = Owner.Creature.Powers.OfType<FamiliarPower>()
+            .SelectMany(power => Enumerable.Repeat(power, Math.Max((int)power.Amount, 1)))
+            .ToList();
         familiars.UnstableShuffle(Owner.RunState.Rng.CombatCardGeneration);
         foreach (FamiliarPower chosen in familiars.Take(2))
         {

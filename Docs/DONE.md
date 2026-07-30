@@ -6,6 +6,21 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 292. Pocket Rats — upgrade creates Rats+ instead of +1 Rat
+- **Done:** 2026-07-29 (claude) — [PocketRats.cs](../TheWitchCode/Cards/PocketRats.cs): upgrade no longer adds a rat (`OnUpgrade` now empty); instead the 2 created Rats come out **upgraded** when the card is. Plumbed via new optional `upgraded` param on `WitchFamiliarCard.CreateInHand<T>` (`CardCmd.Upgrade` per card — mirrors `FamiliarCardRegistry.CreateFamiliarCards`). Hover tip → `FromCard<Rats>(IsUpgraded)`; loc uses `{IfUpgraded:show:Rats+|Rats}` convention. Damage upgrade not added (kept scope: token quality only).
+- **Verified:** build 0/0 (shared gate 290–292); regen run. ⚠️ In-game: upgraded Pocket Rats hand-adds Rats+.
+- **Files:** `TheWitchCode/Cards/PocketRats.cs`, `TheWitchCode/Cards/WitchFamiliarCard.cs`, `TheWitch/localization/eng/cards.json`
+
+### 291. Command — familiar stacks count as separate familiars
+- **Done:** 2026-07-29 (claude) — [Command.cs](../TheWitchCode/Cards/Command.cs): pick pool now has **one entry per stack** (`SelectMany` × `power.Amount`), so Crow ×2 = two entries and the same familiar can produce twice — matches the two-birds-on-screen expectation (user decision: "stacks count"). Loc text unchanged ("Up to two of your Familiars each create a card" still reads true).
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: with a 2-stack familiar only, Command yields 2 cards.
+- **Files:** `TheWitchCode/Cards/Command.cs`
+
+### 290. Torment vs Hex — purple flame plays even when Hex not consumed
+- **Done:** 2026-07-29 (claude) — [HexPower.cs](../TheWitchCode/Powers/HexPower.cs) `AfterAttack`: moved `Flash()` + `WitchFx.PurpleFlame` above the `IHexPreserving` early return (and after the hit-landed check), so Torment-style attacks show the Hex trigger vfx; only `PowerCmd.Decrement` stays gated behind non-preserving attacks.
+- **Verified:** build 0/0 (shared gate). ⚠️ In-game: Torment on hexed target flashes purple, stacks unchanged.
+- **Files:** `TheWitchCode/Powers/HexPower.cs`
+
 ### 289. New relic — Tasty Herbs
 - **Done:** 2026-07-28 (claude) — [TastyHerbs.cs](../TheWitchCode/Relics/TastyHerbs.cs): **Common relic — at end of combat, heal 3 HP if you used a potion this combat.** BurningBlood `AfterCombatVictory` shape + alive guard; "used a potion" read from combat history (`PotionUsedEntry` with `Actor == Owner.Creature`) — no instance state, so nothing to reset between combats. `HealVar(3)` drives loc. **No art yet** — path falls back to placeholder + logs (`tasty_herbs.png` both sizes when ready → `Images: Generate missing sizes` → `Godot: Import assets`); also needs an `assets.json` entry if it should appear on the art tracker's Relics tab.
 - **Verified:** build 0/0. ⚠️ In-game: heal fires only after potion use; no heal otherwise.

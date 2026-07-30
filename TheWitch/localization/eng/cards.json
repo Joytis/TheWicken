@@ -144,7 +144,7 @@
   "THEWITCH-CROW_FAMILIAR.title": "Crow Familiar",
   "THEWITCH-CROW_FAMILIAR.description": "Summon a [gold]{IfUpgraded:show:Crow Familiar+|Crow Familiar}[/gold].",
   "THEWITCH-POCKET_RATS.title": "Pocket Rats",
-  "THEWITCH-POCKET_RATS.description": "Deal {Damage:diff()} damage.\n Add {Cards:diff()} [gold]Rats[/gold] into your [gold]Hand[/gold].",
+  "THEWITCH-POCKET_RATS.description": "Deal {Damage:diff()} damage.\n Add {Cards:diff()} [gold]{IfUpgraded:show:Rats+|Rats}[/gold] into your [gold]Hand[/gold].",
   "THEWITCH-BROOM_STRIKE.title": "Broom Strike",
   "THEWITCH-BROOM_STRIKE.description": "Deal {Damage:diff()} damage.\nYour next [gold]Skill[/gold] costs 1 less.",
   "THEWITCH-EYE_OF_NEWT.title": "Eye of Newt",

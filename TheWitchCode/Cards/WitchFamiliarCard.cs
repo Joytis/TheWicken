@@ -35,7 +35,7 @@ public abstract class WitchFamiliarCard(int cost, CardType type, CardRarity rari
     public int SourceStackIndex { get; set; }
 
 
-    public static async Task<IEnumerable<T>> CreateInHand<T>(Player owner, int count, ICombatState combatState) 
+    public static async Task<IEnumerable<T>> CreateInHand<T>(Player owner, int count, ICombatState combatState, bool upgraded = false)
         where T : WitchFamiliarCard
 	{
 		if (count == 0)
@@ -49,7 +49,12 @@ public abstract class WitchFamiliarCard(int cost, CardType type, CardRarity rari
 		List<T> familiars = new List<T>();
 		for (int i = 0; i < count; i++)
 		{
-			familiars.Add(combatState.CreateCard<T>(owner));
+			T newCard = combatState.CreateCard<T>(owner);
+			if (upgraded)
+			{
+				CardCmd.Upgrade(newCard);
+			}
+			familiars.Add(newCard);
 		}
 		await CardPileCmd.AddGeneratedCardsToCombat(familiars, PileType.Hand, owner);
 		return familiars;

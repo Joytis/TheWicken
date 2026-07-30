@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -53,7 +54,7 @@ public sealed class HexPower : WitchPower
         await Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (target != Owner || Amount <= 0 || !props.IsPoweredAttack() || !TriggeredBy(dealer))
         {
@@ -70,12 +71,6 @@ public sealed class HexPower : WitchPower
             return;
         }
 
-        // Torment-style attacks milk the Hex without burning it.
-        if (command.ModelSource is IHexPreserving)
-        {
-            return;
-        }
-
         if (!command.Results.SelectMany(hit => hit).Any(result => result.Receiver == Owner))
         {
             return;
@@ -83,6 +78,13 @@ public sealed class HexPower : WitchPower
 
         Flash();
         WitchFx.PurpleFlame(Owner);
+
+        // Torment-style attacks milk the Hex without burning it.
+        if (command.ModelSource is IHexPreserving)
+        {
+            return;
+        }
+
         await PowerCmd.Decrement(this);
     }
 
