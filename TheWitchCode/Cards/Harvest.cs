@@ -52,7 +52,7 @@ public sealed class Harvest : WitchCard
         Creature target = cardPlay.Target;
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

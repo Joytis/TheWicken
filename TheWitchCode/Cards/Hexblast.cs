@@ -33,7 +33,7 @@ public sealed class Hexblast : WitchCard
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(2)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .TargetingAllOpponents(CombatState!)
             // Purple occult flame under the target (preloaded via Witch.ExtraAssetPaths) + heavy sting.
             .WithHitVfxNode(t => NGroundFireVfx.Create(t, VfxColor.Purple))

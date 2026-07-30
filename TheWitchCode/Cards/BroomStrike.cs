@@ -30,7 +30,7 @@ public sealed class BroomStrike : WitchCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
             .Execute(choiceContext);

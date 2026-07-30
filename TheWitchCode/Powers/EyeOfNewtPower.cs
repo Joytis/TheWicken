@@ -53,7 +53,7 @@ public sealed class EyeOfNewtPower : WitchPower
         return Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (!_potionInUse || dealer != Owner)
         {

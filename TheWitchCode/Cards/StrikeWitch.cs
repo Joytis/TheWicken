@@ -29,7 +29,7 @@ public sealed class StrikeWitch : WitchCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_scratch")
 			.Execute(choiceContext);

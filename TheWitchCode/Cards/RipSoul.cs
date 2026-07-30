@@ -50,7 +50,7 @@ public sealed class RipSoul : WitchCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_scream", null, "heavy_attack.mp3")
             .Execute(choiceContext);

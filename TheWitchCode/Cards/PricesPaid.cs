@@ -32,14 +32,14 @@ public sealed class PricesPaid : WitchCard
     {
         // Lose HP.
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue,
-            ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this, cardPlay);
+            ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
         VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_bloody_impact");
         SfxCmd.Play("slash_attack.mp3");
 
         // Deal damage.
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_bloody_impact")
             .Execute(choiceContext);
