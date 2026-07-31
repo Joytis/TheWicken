@@ -30,7 +30,7 @@ public sealed class BramblesPower : WitchPower
 			Flash();
 			// Thorn retaliation visual: swamp-green slice on the attacker (preloaded via Witch.ExtraAssetPaths).
 			WitchFx.BrambleSlice(dealer);
-			await CreatureCmd.Damage(choiceContext, dealer, Amount, ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner, null);
+			await CreatureCmd.Damage(choiceContext, dealer, Amount, ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner, null, null);
 			await PowerCmd.Decrement(this);
 		}
 	}

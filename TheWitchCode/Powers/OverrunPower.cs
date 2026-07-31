@@ -52,7 +52,7 @@ public sealed class OverrunPower : WitchPower
                 continue;
             }
             Flash();
-            await CreatureCmd.Damage(choiceContext, strike.Target, strike.Damage, ValueProp.Unpowered, Owner, strike.Source);
+            await CreatureCmd.Damage(choiceContext, strike.Target, strike.Damage, ValueProp.Unpowered, Owner, strike.Source, null);
         }
     }
 

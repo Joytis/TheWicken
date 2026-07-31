@@ -100,14 +100,14 @@ public sealed class NeverendingPotionPower : WitchPower
 
     private async Task Replay(PlayerChoiceContext replayContext, PotionModel potion, Creature? target, Player player)
     {
-        CombatManager.Instance.BeginCardOrPotionEffect(player);
+        CombatId? combatId = CombatManager.Instance.BeginCardOrPotionEffect(player);
         try
         {
             await (Task)OnUseMethod.Invoke(potion, [replayContext, target])!;
         }
         finally
         {
-            CombatManager.Instance.EndCardOrPotionEffect(player);
+            await CombatManager.Instance.EndCardOrPotionEffect(combatId, player);
         }
     }
 

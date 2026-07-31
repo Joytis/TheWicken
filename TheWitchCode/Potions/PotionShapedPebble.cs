@@ -21,6 +21,6 @@ public sealed class PotionShapedPebble : WitchPotion
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         AssertValidForTargetedPotion(target);
-        await CreatureCmd.Damage(choiceContext, target, DynamicVars.Damage, Owner.Creature, null);
+        await CreatureCmd.Damage(choiceContext, target, DynamicVars.Damage, Owner.Creature, null, null);
     }
 }
