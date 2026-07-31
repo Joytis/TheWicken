@@ -20,7 +20,6 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class LightTheCandle : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<VialOfSmoke>(),
     ];
 
@@ -47,7 +46,7 @@ public sealed class LightTheCandle : WitchCard
             CardCmd.Upgrade(pick);
         }
 
-        await Witch.ProducePotion<VialOfSmoke>(Owner, Witch.PotionMode.Unstable);
+        await Witch.ProducePotion<VialOfSmoke>(Owner);
     }
 
     protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(2m);

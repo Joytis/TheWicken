@@ -27,7 +27,7 @@ public sealed class HiddenInSmokePower : WitchPower
         Flash();
         for(int i = 0; i < Amount; i++)
         {
-            await Witch.ProducePotion<PuffOfSmoke>(player, Witch.PotionMode.Unstable);
+            await Witch.ProducePotion<PuffOfSmoke>(player);
             await Cmd.Wait(0.1f);            
         }
     }

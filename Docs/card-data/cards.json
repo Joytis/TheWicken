@@ -1033,11 +1033,11 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, create an Unstable Puff of Smoke.",
+      "text": "At the start of your turn, create a Puff of Smoke.",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1060,13 +1060,13 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create an Unstable Vial of Smoke. Upgrade 2 cards in your Hand.",
+      "text": "Create a Vial of Smoke. Upgrade 2 cards in your Hand.",
       "numbers": {
         "Cards": 2
       },
       "upgrade": "Cards +2",
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -2681,9 +2681,9 @@
         "Damage": 3,
         "Cards": 1
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "Rat familiar token (was Scavengers): tiny attack that cycles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2766,13 +2766,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Add a Rats to your Hand. Add 1 into your Draw Pile and Discard Pile.",
+      "text": "Add a Rats to your Hand, Draw Pile, and Discard Pile.",
       "numbers": {
         "Cards": 1
       },
       "upgrade": "none",
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
