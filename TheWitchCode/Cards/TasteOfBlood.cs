@@ -18,7 +18,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class TasteOfBlood : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(24m, ValueProp.Move)
+        new DamageVar(18m, ValueProp.Move)
     ];
 
     public TasteOfBlood()

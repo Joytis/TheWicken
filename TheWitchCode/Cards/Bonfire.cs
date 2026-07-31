@@ -16,7 +16,7 @@ public sealed class Bonfire : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(4),
+        new EnergyVar(3),
         new CardsVar(2)
     ];
 
@@ -38,5 +38,5 @@ public sealed class Bonfire : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Energy.UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars.Energy.UpgradeValueBy(1m);
 }

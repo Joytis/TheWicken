@@ -1,3 +1,4 @@
 # TODO — Staging / Inbox
 
-- Can we improve the potion UX? Add keybinds that make using potions easier? Or maybe drag and drop potions? 
+- Add a new potion to the Harvest pool: A Splash of Acid - Deal 4 damage. 
+- 

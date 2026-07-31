@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -16,6 +18,7 @@ public sealed class BottleWall : WitchCard
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<Fortifier>(),
     ];
 
@@ -31,7 +34,7 @@ public sealed class BottleWall : WitchCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
-        await PotionCmd.TryToProcure<Fortifier>(Owner);
+        await Witch.ProducePotion<Fortifier>(Owner, Witch.PotionMode.Unstable);
     }
 
     protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(4m);

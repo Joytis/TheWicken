@@ -19,7 +19,7 @@ public sealed class RefusePile : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(12m, ValueProp.Move),
-        new CardsVar(2)
+        new CardsVar(1)
     ];
 
     public RefusePile()
@@ -38,11 +38,11 @@ public sealed class RefusePile : WitchCard
 
     private async Task AddRats(int count, PileType pile)
     {
-        var rats = FamiliarCardRegistry.CreateFamiliarCards<Rats>(Owner, count, CombatState, false);
+        var rats = FamiliarCardRegistry.CreateFamiliarCards<Rats>(Owner, count, CombatState, IsUpgraded);
         // Preview so the Rats visibly fly into the pile instead of just appearing (Call the Pack pattern).
         var generated = await CardPileCmd.AddGeneratedCardsToCombat(rats, pile, Owner, CardPilePosition.Random);
         CardCmd.PreviewCardPileAdd(generated);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(4m);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(2m);
 }

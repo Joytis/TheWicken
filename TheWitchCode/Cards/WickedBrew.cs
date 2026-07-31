@@ -12,7 +12,6 @@ public sealed class WickedBrew : OrientationBrewCard
     // First pass: every offensive potion the Witch could previously roll (shared pool + Witch pool,
     // all rarities, no healers). Trim freely — this list IS the card's roll pool.
     protected override IEnumerable<PotionModel> LootTable => [
-        ModelDb.Potion<AttackPotion>(),
         ModelDb.Potion<ExplosiveAmpoule>(),
         ModelDb.Potion<FirePotion>(),
     ];
@@ -21,7 +20,6 @@ public sealed class WickedBrew : OrientationBrewCard
     // Potions only the upgraded card can brew — none yet; new potions land here.
     protected override IEnumerable<PotionModel> UpgradedExtras => [
         ModelDb.Potion<PowderedDemise>(),
-        ModelDb.Potion<StrengthPotion>(),
     ];
 
     // Potions the upgraded card can NO LONGER brew — dropped from the base table on upgrade.

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 using TheWitch.TheWitchCode.Potions;
 
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Character;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -19,6 +20,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class LightTheCandle : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<VialOfSmoke>(),
     ];
 
@@ -45,7 +47,7 @@ public sealed class LightTheCandle : WitchCard
             CardCmd.Upgrade(pick);
         }
 
-        await PotionCmd.TryToProcure<VialOfSmoke>(Owner);
+        await Witch.ProducePotion<VialOfSmoke>(Owner, Witch.PotionMode.Unstable);
     }
 
     protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(2m);

@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Random;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Extensions;
@@ -134,15 +136,34 @@ public abstract class FamiliarPower : WitchPower
             return;
         }
 
+        /* Owner death runs this from inside CreatureCmd.KillWithoutCheckingWinCondition's
+           RemoveAllPowersAfterDeath loop. Killing a pet there removes its NCreature node, and any
+           caller still iterating a snapshot that includes the pets then dereferences a null node —
+           The Insatiable's SandpitPower.AfterRemoved does exactly that (player + Target.Pets array
+           captured up front, Visuals.Visible set with no null check), so the NRE aborts the enemy
+           turn and the surviving co-op player's turn never starts. Hide the pets instead; the
+           combat's pet list is torn down with the combat anyway. */
+        bool ownerDied = oldOwner.IsDead;
+
         foreach (Creature pet in FindPets(player))
         {
+            if (ownerDied)
+            {
+                NCreature? petNode = NCombatRoom.Instance?.GetCreatureNode(pet);
+                if (petNode != null)
+                {
+                    petNode.Visuals.Visible = false;
+                }
+                continue;
+            }
+
             await CreatureCmd.Kill(pet, force: true);
         }
     }
 
     private async Task SyncPets()
     {
-        if (Owner.Player is not { PlayerCombatState: not null } player || Owner.CombatState is not { } combat)
+        if (Owner.Player is not { PlayerCombatState: not null } player || Owner.CombatState is not { } combat || Owner.IsDead)
         {
             return;
         }

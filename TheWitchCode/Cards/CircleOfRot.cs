@@ -49,6 +49,6 @@ public sealed class CircleOfRot : WitchCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(10m);
+        DynamicVars.Block.UpgradeValueBy(5m);
     }
 }

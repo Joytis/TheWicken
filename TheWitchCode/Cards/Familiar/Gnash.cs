@@ -16,7 +16,7 @@ public sealed class Gnash : WitchFamiliarCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(3m),
-        new ExtraDamageVar(3m),
+        new ExtraDamageVar(2m),
         new CalculatedDamageVar(ValueProp.Move)
             .WithMultiplier((card, _) =>
                 card.Owner?.Creature is { } creature

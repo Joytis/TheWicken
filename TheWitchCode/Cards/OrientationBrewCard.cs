@@ -68,11 +68,8 @@ public abstract class OrientationBrewCard : WitchCard
                 PotionOrientation.Defensive => new Godot.Color("4a7bd0"),
                 _ => WitchFx.WitchGreen,
             });
-            PotionProcureResult result = await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
-            if (result.success)
-            {
-                UnstablePotions.Mark(result.potion);
-            }
+            
+            await Witch.ProducePotion(potion, Owner, Witch.PotionMode.Unstable);
         }
     }
 }

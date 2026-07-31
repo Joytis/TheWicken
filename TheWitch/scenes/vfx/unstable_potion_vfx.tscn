@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://cts681ds2jvb"]
+
+[ext_resource type="Script" uid="uid://bx8tjsu77e6m0" path="res://TheWitchCode/Potions/NUnstablePotionVfx.cs" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_dot"]
+offsets = PackedFloat32Array(0.22727273, 0.2857143, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.79607844, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dot"]
+gradient = SubResource("Gradient_dot")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_iofwu"]
+offsets = PackedFloat32Array(0, 0.3110048, 0.8995215, 0.9952153)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ll12c"]
+gradient = SubResource("Gradient_iofwu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fizz"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 8.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, -25, 0)
+scale_min = 0.35
+scale_max = 0.7
+color = Color(0.63712966, 0.8930347, 0.56090635, 0.8)
+color_ramp = SubResource("GradientTexture1D_ll12c")
+hue_variation_min = -0.09000002
+hue_variation_max = 0.049999975
+
+[node name="UnstableAmbientVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fizz" type="GPUParticles2D" parent="Center"]
+amount = 5
+texture = SubResource("GradientTexture2D_dot")
+lifetime = 1.1
+preprocess = 1.1
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_fizz")

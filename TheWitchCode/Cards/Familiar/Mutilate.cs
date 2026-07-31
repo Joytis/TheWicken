@@ -11,7 +11,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class Mutilate : WitchFamiliarCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(16m, ValueProp.Move),
+        new DamageVar(12m, ValueProp.Move),
         new PowerVar<VulnerablePower>(2m)
     ];
 

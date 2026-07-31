@@ -13,7 +13,7 @@ public sealed class Nimble : WitchFamiliarCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(1),
-        new BlockVar(5m, ValueProp.Move)
+        new BlockVar(3m, ValueProp.Move)
     ];
 
     public Nimble()
@@ -30,6 +30,5 @@ public sealed class Nimble : WitchFamiliarCard
     protected override void OnUpgrade() 
     {
         DynamicVars.Block.UpgradeValueBy(3m);
-        DynamicVars.Energy.UpgradeValueBy(1m);
     }
 }

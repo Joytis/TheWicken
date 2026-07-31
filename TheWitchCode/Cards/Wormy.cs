@@ -18,6 +18,11 @@ public sealed class Wormy : WitchCard
 {
     public override int MaxUpgradeLevel => 0;
 
+    /* Status rarity keeps Wormy out of card rewards, but in-combat generation (Discovery, Attack Potion)
+       filters only Basic/Ancient/Event rarity out of the character's pool — and Wormy, unlike base-game
+       statuses, lives in WitchCardPool rather than the shared StatusCardPool. Opt out explicitly. */
+    public override bool CanBeGeneratedInCombat => false;
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [

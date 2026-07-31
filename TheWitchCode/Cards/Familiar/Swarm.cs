@@ -41,6 +41,4 @@ public sealed class Swarm : WitchFamiliarCard
         var generatedDiscard = await CardPileCmd.AddGeneratedCardsToCombat(discardRats, PileType.Discard, Owner);
         CardCmd.PreviewCardPileAdd(generatedDiscard);
     }
-
-    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1m);
 }

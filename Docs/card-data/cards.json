@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30",
+  "generated": "2026-07-31",
   "cards": [
     {
       "name": "Defend",
@@ -16,7 +16,7 @@
       "upgrade": "Block +3",
       "note": "",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "mechanics": [
         "None"
       ],
@@ -146,7 +146,7 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Create {Brews:diff()} Noxious Brews.",
+      "text": "Create {Brews:diff()} Unstable Noxious Brews.",
       "numbers": {},
       "upgrade": "Brews +1",
       "note": "Big Batch: one cauldron, many bottles — create a batch of Noxious Brews.",
@@ -260,9 +260,9 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. If the enemy is Hexed, gain [E] and draw a card.",
+      "text": "Deal 7 damage. If the enemy is Hexed, gain [E] and draw a card.",
       "numbers": {
-        "Damage": 9,
+        "Damage": 7,
         "Energy": 1,
         "Cards": 1
       },
@@ -380,10 +380,10 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. Gain 3 Brambles.",
+      "text": "Deal 8 damage. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Damage": 9
+        "Damage": 8
       },
       "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
@@ -405,15 +405,14 @@
       "entry": "POCKET_RATS",
       "file": "TheWitchCode/Cards/PocketRats.cs",
       "cost": 1,
-      "type": "Attack",
+      "type": "Skill",
       "rarity": "Common",
-      "target": "AnyEnemy",
-      "text": "Deal 3 damage. Add 2 Rats into your Hand.",
+      "target": "Self",
+      "text": "Add 2 Rats into your Hand.",
       "numbers": {
-        "Damage": 3,
         "Cards": 2
       },
-      "upgrade": "custom (see code)",
+      "upgrade": "Cards +1",
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
       "tested": true,
       "artFinal": false,
@@ -443,7 +442,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -464,10 +463,10 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. Apply 1 Vulnerable.",
+      "text": "Deal 8 damage. Apply 1 Vulnerable.",
       "numbers": {
         "Vulnerable": 1,
-        "Damage": 9
+        "Damage": 8
       },
       "upgrade": "Damage +2, Vulnerable +1",
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
@@ -644,7 +643,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -758,7 +757,7 @@
         "Weak": 2,
         "Block": 20
       },
-      "upgrade": "Block +10",
+      "upgrade": "Block +5",
       "note": "Multiplayer-only. Co-op rot ritual (MP-only): you and every ally hunker down (Block) but soak up the rot (Weak), while all enemies choke on it too.",
       "tested": true,
       "artFinal": false,
@@ -955,7 +954,7 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Exhaust a card. Create a Potion.",
+      "text": "Exhaust a card. Create an Unstable Potion.",
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Grind Down: Exhaust a card from your hand and grind it into a potion.",
@@ -982,9 +981,9 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create an Energy Potion.",
+      "text": "Create an Unstable Energy Potion.",
       "numbers": {},
-      "upgrade": "Cost -1",
+      "upgrade": "custom (see code)",
       "note": "Hasty Brew: fast mana — brew an Energy Potion.",
       "tested": true,
       "artFinal": false,
@@ -1013,7 +1012,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1034,7 +1033,7 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, create a Puff of Smoke.",
+      "text": "At the start of your turn, create an Unstable Puff of Smoke.",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
@@ -1061,7 +1060,7 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create a Vial of Smoke. Upgrade 2 cards in your Hand.",
+      "text": "Create an Unstable Vial of Smoke. Upgrade 2 cards in your Hand.",
       "numbers": {
         "Cards": 2
       },
@@ -1144,10 +1143,10 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AllEnemies",
-      "text": "Gain 1 Hex. Deal 12 damage to ALL enemies.",
+      "text": "Gain 1 Hex. Deal 9 damage to ALL enemies.",
       "numbers": {
         "Hex": 1,
-        "Damage": 12
+        "Damage": 9
       },
       "upgrade": "Damage +4",
       "note": "Pact of Agony: hex yourself to lash the whole board.",
@@ -1298,12 +1297,12 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 12 Block. Add 2 Rats into your Draw Pile and Discard Pile.",
+      "text": "Gain 12 Block. Add 1 Rats into your Draw Pile and Discard Pile.",
       "numbers": {
         "Block": 12,
-        "Cards": 2
+        "Cards": 1
       },
-      "upgrade": "Block +4",
+      "upgrade": "Block +2",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
       "tested": true,
       "artFinal": false,
@@ -1537,9 +1536,9 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 24 damage. Costs 1 less [E] for each Attack played this turn.",
+      "text": "Deal 18 damage. Costs 1 less [E] for each Attack played this turn.",
       "numbers": {
-        "Damage": 24
+        "Damage": 18
       },
       "upgrade": "Damage +6",
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
@@ -1762,12 +1761,12 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain [E] [E] [E] [E]. Exhaust 2 cards from your Hand.",
+      "text": "Gain [E] [E] [E]. Exhaust 2 cards from your Hand.",
       "numbers": {
-        "Energy": 4,
+        "Energy": 3,
         "Cards": 2
       },
-      "upgrade": "Energy +2",
+      "upgrade": "Energy +1",
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
       "tested": true,
       "artFinal": true,
@@ -1791,7 +1790,7 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain 8 Block. Create a Fortifier Potion.",
+      "text": "Gain 8 Block. Create an Unstable Fortifier Potion.",
       "numbers": {
         "Block": 8
       },
@@ -1820,7 +1819,7 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Whenever you use a Potion, create a Noxious Brew.",
+      "text": "Whenever you use a Potion, create an Unstable Noxious Brew.",
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "",
@@ -1879,9 +1878,9 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Sacrifice a random Familiar. Gain 8 Strength.",
+      "text": "Sacrifice a random Familiar. Gain 5 Strength.",
       "numbers": {
-        "Strength": 8
+        "Strength": 5
       },
       "upgrade": "Strength +2",
       "note": "Broken Pact: end a familiar's service and take its strength for your own.",
@@ -2318,10 +2317,12 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Attacks you play are played an additional time.",
-      "numbers": {},
-      "upgrade": "custom (see code)",
-      "note": "Primal Form: shed the skin, keep the fury — Attacks you play are played an additional time.",
+      "text": "Each turn, the first 3 Attacks you play are played an additional time.",
+      "numbers": {
+        "PrimalForm": 3
+      },
+      "upgrade": "PrimalForm +1",
+      "note": "Primal Form: shed the skin, keep the fury — your first few Attacks each turn are played an additional time.",
       "tested": true,
       "artFinal": false,
       "mechanics": [
@@ -2373,7 +2374,7 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. Fill your empty potion slots with Rocks.",
+      "text": "Deal 10 damage. Fill your empty potion slots with Unstable Rocks.",
       "numbers": {
         "Damage": 10
       },
@@ -2488,13 +2489,13 @@
       "type": "Attack",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Deal 7 damage for each Attack played this turn.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "text": "Deal 6 damage for each Attack played this turn.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
       "numbers": {
-        "Damage": 7,
+        "Damage": 6,
         "CalculationBase": 0,
         "CalculationExtra": 1
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "Cat familiar token: one 7-damage hit per Attack you played this turn, INCLUDING itself (always ≥1).",
       "tested": true,
       "artFinal": false,
@@ -2521,10 +2522,10 @@
       "type": "Attack",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Deal {CalculatedDamage:diff()} damage. Increase the damage of ALL Gnash cards by 3 this combat.",
+      "text": "Deal {CalculatedDamage:diff()} damage. Increase the damage of ALL Gnash cards by 2 this combat.",
       "numbers": {
         "CalculationBase": 3,
-        "ExtraDamage": 3
+        "ExtraDamage": 2
       },
       "upgrade": "ExtraDamage +1",
       "note": "Wolf familiar token.",
@@ -2612,10 +2613,10 @@
       "type": "Attack",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Deal 16 damage. Apply 2 Vulnerable.",
+      "text": "Deal 12 damage. Apply 2 Vulnerable.",
       "numbers": {
         "Vulnerable": 2,
-        "Damage": 16
+        "Damage": 12
       },
       "upgrade": "Damage +6",
       "note": "Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).",
@@ -2643,12 +2644,12 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain [E]. Gain 5 Block.",
+      "text": "Gain [E]. Gain 3 Block.",
       "numbers": {
         "Energy": 1,
-        "Block": 5
+        "Block": 3
       },
-      "upgrade": "Block +3, Energy +1",
+      "upgrade": "Block +3",
       "note": "Cat familiar token: feline agility bottled as tempo — gain Energy and Block.",
       "tested": true,
       "artFinal": false,
@@ -2710,7 +2711,7 @@
       "numbers": {
         "Cards": 1
       },
-      "upgrade": "Cards +1",
+      "upgrade": "custom (see code)",
       "note": "Rat familiar token: dig a card back out of the discard pile (base-game Dredge pattern).",
       "tested": true,
       "artFinal": false,
@@ -2769,7 +2770,7 @@
       "numbers": {
         "Cards": 1
       },
-      "upgrade": "Cards +1",
+      "upgrade": "none",
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
       "tested": true,
       "artFinal": false,
@@ -2797,11 +2798,11 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Draw 2 cards. Discard a card.",
+      "text": "Draw 1 card. Discard a card.",
       "numbers": {
-        "Cards": 2
+        "Cards": 1
       },
-      "upgrade": "custom (see code)",
+      "upgrade": "Cards +1",
       "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
       "tested": true,
       "artFinal": false,
@@ -2856,13 +2857,13 @@
       "type": "Attack",
       "rarity": "Ancient",
       "target": "AnyEnemy",
-      "text": "Deal 15 damage. Apply 3 Hex. Create a Rare Potion.",
+      "text": "Deal 15 damage. Apply 3 Hex. Create a random Potion.",
       "numbers": {
         "Hex": 3,
         "Damage": 15
       },
       "upgrade": "Damage +5",
-      "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and ONE potent potion from a hard-coded loot table (Extract Essence pattern).",
+      "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and one random potion (any non-healing potion the Witch can roll, any rarity).",
       "tested": true,
       "artFinal": false,
       "mechanics": [

@@ -15,24 +15,18 @@ public sealed class Wisdom : WitchFamiliarCard
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(2)
+        new CardsVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
-        if (!IsUpgraded)
-        {
-            await CardCmd.Discard(choiceContext,
-                await CardSelectCmd.FromHandForDiscard(
-                    choiceContext,
-                    Owner,
-                    new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this));
-        }
+        await CardCmd.Discard(choiceContext,
+            await CardSelectCmd.FromHandForDiscard(
+                choiceContext,
+                Owner,
+                new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this));
     }
 
-    protected override void OnUpgrade()
-    {
-        // Upgrade changes behavior only (no discard); no numbers to bump.
-    }
+    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1);
 }

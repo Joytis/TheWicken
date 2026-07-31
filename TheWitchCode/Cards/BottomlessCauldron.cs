@@ -10,6 +10,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class BottomlessCauldron : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<NoxiousBrew>(),
     ];
 

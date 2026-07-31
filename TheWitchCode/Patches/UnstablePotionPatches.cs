@@ -68,7 +68,11 @@ public static class UnstablePotionPatches
         bool unstable = UnstablePotions.IsUnstable(potion);
         if (unstable && existing == null)
         {
-            node.AddChild(NUnstablePotionVfx.Create(node));
+            NUnstablePotionVfx? vfx = NUnstablePotionVfx.Create(node);
+            if (vfx != null)
+            {
+                node.AddChild(vfx);
+            }
         }
         else if (!unstable && existing != null)
         {
@@ -86,13 +90,28 @@ public static class UnstablePotionPatches
         }
     }
 
-    /// <summary>Combat-end explosion: burst + sting on the potion's belt holder (local player only).</summary>
+    /// <summary>Rattles the bottle in the run-up to its explosion (local player only).</summary>
+    public static void ShakeBeltNode(PotionModel potion)
+    {
+        FindBeltNode(potion)?
+            .GetNodeOrNull<NUnstablePotionVfx>(NUnstablePotionVfx.NodeName)?
+            .Shake();
+    }
+
+    /// <summary>
+    /// Combat-end explosion: burst + sting on the potion's belt holder (local player only), then
+    /// the bottle vanishes. Hiding it matters — the Discard() that follows tweens the bottle up
+    /// and off the belt (NPotionHolder.DiscardPotion), which reads as the potion escaping rather
+    /// than being destroyed. The burst lives on the holder, so it outlives the potion node.
+    /// Must run BEFORE Discard(): that clears NPotionHolder.Potion, and the lookup goes with it.
+    /// </summary>
     public static void PlayExplosion(PotionModel potion)
     {
         NPotion? node = FindBeltNode(potion);
         if (node?.GetParent() is NPotionHolder holder)
         {
             NUnstablePotionVfx.PlayExplosion(holder);
+            node.Visible = false;
         }
     }
 }

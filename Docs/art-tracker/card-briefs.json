@@ -2,7 +2,7 @@
   "comment": "Per-card art metadata, keyed by card name. Hand-maintained; merged into art-tracker.html at generation. Fields per entry: 'artist' (who is working on it), 'brief' (art direction notes). Status is DERIVED: artFinal=true in cards.json → Done; artist set here → In Progress; else Placeholder. Example: \"Broom Strike\": { \"artist\": \"Sam\", \"brief\": \"low angle, hat silhouette\" }",
   "briefs": {
     "Defend": {
-      "artist": "",
+      "artist": "Jake Ruesch",
       "brief": "This is our base defend card. There will be 5 in every starting deck. - it should depict the witch in a relatively neutral state without upgrades, simply blocking. See other blocks for inspiration - they typically depict the character in portrait holding some sort of equipment while rebuffing streaks of light."
     },
     "Extract Essence": {

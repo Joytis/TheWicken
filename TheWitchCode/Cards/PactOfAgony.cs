@@ -17,7 +17,7 @@ public sealed class PactOfAgony : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(1m),
-        new DamageVar(12m, ValueProp.Move)
+        new DamageVar(9m, ValueProp.Move)
     ];
 
     public PactOfAgony()

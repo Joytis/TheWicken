@@ -1,6 +1,5 @@
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
-using TheWitch.TheWitchCode.Potions;
 using TheWitch.TheWitchCode.Potions.Brewing;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -14,7 +13,6 @@ public sealed class StonyBrew : OrientationBrewCard
     protected override IEnumerable<PotionModel> LootTable => [
         ModelDb.Potion<SkillPotion>(),
         ModelDb.Potion<BlockPotion>(),
-        ModelDb.Potion<Fertilizer>(),
     ];
 
 

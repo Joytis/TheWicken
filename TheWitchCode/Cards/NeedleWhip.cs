@@ -18,7 +18,7 @@ public sealed class NeedleWhip : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9m, ValueProp.Move),
+        new DamageVar(8m, ValueProp.Move),
         new PowerVar<BramblesPower>(3m)
     ];
 

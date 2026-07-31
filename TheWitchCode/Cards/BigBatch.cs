@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWitch.TheWitchCode.Potions;
+using TheWitch.TheWitchCode.Character;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -11,6 +12,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class BigBatch : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<NoxiousBrew>(),
     ];
 
@@ -28,7 +30,7 @@ public sealed class BigBatch : WitchCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         for (int i = 0; i < DynamicVars["Brews"].IntValue; i++)
         {
-            await PotionCmd.TryToProcure<NoxiousBrew>(Owner);
+            await Witch.ProducePotion<NoxiousBrew>(Owner, Witch.PotionMode.Unstable);
         }
     }
 

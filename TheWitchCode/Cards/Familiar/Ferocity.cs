@@ -20,11 +20,11 @@ public sealed class Ferocity : WitchFamiliarCard
     private const string _calculatedHitsKey = "CalculatedHits";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7m, ValueProp.Move),
+        new DamageVar(6m, ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHitsKey)
-            .WithMultiplier((card, _) => AttacksPlayedThisTurnBefore(card) + 1)
+            .WithMultiplier((card, _) => AttacksPlayedThisTurnBefore(card))
     ];
 
     public Ferocity()
@@ -53,6 +53,6 @@ public sealed class Ferocity : WitchFamiliarCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

@@ -1,0 +1,126 @@
+[gd_scene load_steps=15 format=3 uid="uid://dtf0l514055gc"]
+
+[ext_resource type="Texture2D" uid="uid://cukm7q6npx0ev" path="res://TheWitch/textures/energy_orb_shine.png" id="1_ho6es"]
+[ext_resource type="Texture2D" uid="uid://c1ty52r857515" path="res://TheWitch/textures/broken_glass.png" id="1_igcxo"]
+
+[sub_resource type="Gradient" id="Gradient_dot"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dot"]
+gradient = SubResource("Gradient_dot")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_burst"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 140.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 160, 0)
+damping_min = 100.00001
+damping_max = 100.00001
+scale_min = 0.29999998
+color = Color(0.5137255, 0.9215686, 0.5215687, 0.9)
+
+[sub_resource type="Curve" id="Curve_u0tii"]
+_data = [Vector2(0, 1), 0.0, 0.15900362, 0, 0, Vector2(0.87162167, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.8373923, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n3xl3"]
+curve = SubResource("Curve_u0tii")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_igcxo"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 700.0
+initial_velocity_max = 900.0
+gravity = Vector3(0, 98, 0)
+damping_min = 700.00006
+damping_max = 700.00006
+scale_min = 0.19999999
+scale_max = 0.26
+scale_curve = SubResource("CurveTexture_n3xl3")
+turbulence_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igcxo"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_igcxo"]
+_data = [Vector2(0, 1), 0.0, 0.24645597, 0, 0, Vector2(0.9752252, 0.011955619), -2.7726316, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u0tii"]
+curve = SubResource("Curve_igcxo")
+
+[sub_resource type="Curve" id="Curve_ho6es"]
+_data = [Vector2(0.072072074, 1), 0.0, -6.9455795, 0, 0, Vector2(0.28153154, 0.22843724), -1.0198182, -1.0198182, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_igcxo"]
+curve = SubResource("Curve_ho6es")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ho6es"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_igcxo")
+color = Color(0, 1, 0.083333254, 0.34117648)
+alpha_curve = SubResource("CurveTexture_u0tii")
+
+[node name="UnstablePotionBurst" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BurstSmall" type="GPUParticles2D" parent="Center"]
+emitting = false
+amount = 24
+texture = SubResource("GradientTexture2D_dot")
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_burst")
+
+[node name="BurstGlass" type="GPUParticles2D" parent="Center"]
+emitting = false
+amount = 5
+texture = ExtResource("1_igcxo")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_igcxo")
+
+[node name="Burst2" type="GPUParticles2D" parent="Center"]
+material = SubResource("CanvasItemMaterial_igcxo")
+emitting = false
+amount = 1
+texture = ExtResource("1_ho6es")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ho6es")

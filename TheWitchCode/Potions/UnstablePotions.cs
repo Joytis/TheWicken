@@ -59,10 +59,20 @@ public sealed class UnstablePotionSweeperModel : AbstractModel
         UnstablePotionSweeperModel? instance = null;
         ModHelper.SubscribeForRunStateHooks($"{MainFile.ModId}-UnstablePotions", _ =>
         {
-            instance ??= ModelDb.GetByIdOrNull<UnstablePotionSweeperModel>(
-                ModelDb.GetId<UnstablePotionSweeperModel>());
+            instance ??= ModelDb.GetByIdOrNull<UnstablePotionSweeperModel>(ModelDb.GetId<UnstablePotionSweeperModel>());
             return instance == null ? [] : new AbstractModel[] { instance };
         });
+    }
+
+    public async Task ExplodePotion(PotionModel potion)
+    {
+        // Rattle first as a tell, then blow it up and hide the bottle, remove it from the
+        // belt, and beat before the next one so a full belt reads as a chain of
+        // explosions rather than one pop.
+        Patches.UnstablePotionPatches.ShakeBeltNode(potion);
+        await Cmd.Wait(NUnstablePotionVfx.ShakeDuration);
+        Patches.UnstablePotionPatches.PlayExplosion(potion);
+        potion.Discard();
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)
@@ -74,12 +84,16 @@ public sealed class UnstablePotionSweeperModel : AbstractModel
                 .Where(p => p != null && UnstablePotions.IsUnstable(p))
                 .Select(p => p!)
                 .ToList();
+
+                
+            List<Task> tasks = new();
             foreach (PotionModel potion in exploding)
             {
-                Patches.UnstablePotionPatches.PlayExplosion(potion);
-                potion.Discard();
-                await Cmd.Wait(0.1f);
+                
+                tasks.Add(ExplodePotion(potion));
+                await Cmd.Wait(0.15f);
             }
+            await Task.WhenAll(tasks);
         }
     }
 }

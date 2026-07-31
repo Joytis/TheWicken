@@ -7,8 +7,10 @@ using MegaCrit.Sts2.Core.Models;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Relics;
 using TheWitch.TheWitchCode.Config;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Entities.Potions;
+using MegaCrit.Sts2.Core.Entities.Players;
+using TheWitch.TheWitchCode.Potions;
+using MegaCrit.Sts2.Core.Commands;
 
 namespace TheWitch.TheWitchCode.Character;
 
@@ -20,7 +22,7 @@ public class Witch : PlaceholderCharacterModel
     public static readonly Color Color = new("5E2626");
     public static readonly Color DarkColor = new("3D1714FF");
     public override Color NameColor => Color;
-    public override Color MapDrawingColor => new("846464"); // Color darkened 30% for map-pen legibility
+    public override Color MapDrawingColor => new("632626"); // Color darkened 30% for map-pen legibility
     public override Color RemoteTargetingLineColor => Color;
     public override Color RemoteTargetingLineOutline => DarkColor;
     public override Color EnergyLabelOutlineColor => DarkColor;
@@ -35,7 +37,7 @@ public class Witch : PlaceholderCharacterModel
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
-        ModelDb.Card<DefendWitch>(),
+        ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
@@ -73,6 +75,33 @@ public class Witch : PlaceholderCharacterModel
             return icon;
         }
     }
+
+    public static async Task<PotionProcureResult> ProducePotion<T>(Player player, PotionMode mode = PotionMode.Stable)
+        where T : PotionModel
+    {
+        return await ProducePotion(ModelDb.Potion<T>(), player, mode);
+    }
+
+    public enum PotionMode
+    {
+        Stable,
+        Unstable
+    }
+
+    /// <summary>
+    /// Grants a potion, optionally marked Unstable. Takes the CANONICAL model — the mutable clone
+    /// is made here, and passing an already-mutable one throws in AssertCanonical.
+    /// </summary>
+    public static async Task<PotionProcureResult> ProducePotion(PotionModel potion, Player player, PotionMode mode = PotionMode.Stable, int slotIndex = -1)
+    {
+        PotionProcureResult result = await PotionCmd.TryToProcure(potion.ToMutable(), player);
+        if (result.success && mode == PotionMode.Unstable)
+        {
+            UnstablePotions.Mark(result.potion);
+        }
+        return result;
+    }
+
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectIconPath => "char_select_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();
@@ -90,6 +119,7 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomArmRockTexturePath => "multiplayer_hand_witch_rock.png".CharacterUiPath();
     public override string CustomArmPaperTexturePath => "multiplayer_hand_witch_paper.png".CharacterUiPath();
     public override string CustomArmScissorsTexturePath => "multiplayer_hand_witch_scissors.png".CharacterUiPath();
+
 
 
     /*  CustomCharacterModel virtuals not yet overridden — fill these in when replacing

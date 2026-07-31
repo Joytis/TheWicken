@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using TheWitch.TheWitchCode.Potions;
+using TheWitch.TheWitchCode.Character;
 
 namespace TheWitch.TheWitchCode.Powers;
 
@@ -25,7 +26,7 @@ public sealed class BottomlessCauldronPower : WitchPower
             Flash();
             for (int i = 0; i < Amount; i++)
             {
-                await PotionCmd.TryToProcure<NoxiousBrew>(Owner.Player);
+                await Witch.ProducePotion<NoxiousBrew>(Owner.Player, Witch.PotionMode.Unstable);
             }
         }
     }

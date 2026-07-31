@@ -15,6 +15,8 @@ public sealed class CursedSpellbook : WitchCard
         HoverTipFactory.FromPower<HexPower>(),
     ];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(3),
         new CardsVar(3),

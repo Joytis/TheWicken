@@ -20,7 +20,7 @@ public sealed class RattlingBottles : WitchCard
 
     private PotionModel CanonicalPotion => Witch.Turbo ? ModelDb.Potion<PotionShapedRock>() : ModelDb.Potion<PotionShapedPebble>();
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromPotion(CanonicalPotion) ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [ UnstablePotions.UnstableHoverTip, HoverTipFactory.FromPotion(CanonicalPotion) ];
     protected override IEnumerable<DynamicVar> CanonicalVars => [ new DamageVar(10m, ValueProp.Move) ];
 
     public RattlingBottles()
@@ -42,7 +42,7 @@ public sealed class RattlingBottles : WitchCard
         int empty = Owner.PotionSlots.Count(p => p == null);
         for (int i = 0; i < empty; i++)
         {
-            await PotionCmd.TryToProcure(CanonicalPotion.ToMutable(), Owner);
+            await Witch.ProducePotion(CanonicalPotion, Owner, Witch.PotionMode.Unstable);
             await Cmd.Wait(0.1f);
         }
     }

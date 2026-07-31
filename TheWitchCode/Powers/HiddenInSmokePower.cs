@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using TheWitch.TheWitchCode.Potions;
+using TheWitch.TheWitchCode.Character;
 
 namespace TheWitch.TheWitchCode.Powers;
 
@@ -26,7 +27,7 @@ public sealed class HiddenInSmokePower : WitchPower
         Flash();
         for(int i = 0; i < Amount; i++)
         {
-            await PotionCmd.TryToProcure<PuffOfSmoke>(player);
+            await Witch.ProducePotion<PuffOfSmoke>(player, Witch.PotionMode.Unstable);
             await Cmd.Wait(0.1f);            
         }
     }

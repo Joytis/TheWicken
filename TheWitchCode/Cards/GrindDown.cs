@@ -6,6 +6,9 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 using TheWitch.TheWitchCode.Potions.Brewing;
+using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Potions;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -15,6 +18,10 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class GrindDown : WitchCard
 {
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
+    ];
+
     public GrindDown()
         : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
@@ -43,7 +50,7 @@ public sealed class GrindDown : WitchCard
             ?? PotionCatalog.Random(PotionCatalog.Query(orientation: orientation), rng);
         if (potion != null)
         {
-            await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
+            await Witch.ProducePotion(potion, Owner, Witch.PotionMode.Unstable);
         }
     }
 

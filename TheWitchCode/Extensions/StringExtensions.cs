@@ -84,5 +84,6 @@ public static class StringExtensions
 
     public static string CharacterUiPath(this string path) => Path.Join(MainFile.ResPath, "images", "charui", path);
     public static string CharacterScenePath(this string path) => Path.Join(MainFile.ResPath, "scenes", path);
+    public static string VfxScenePath(this string path) => Path.Join(MainFile.ResPath, "scenes", "vfx", path);
     public static string PetConfigPath(this string path) => Path.Join(MainFile.ResPath, "data", "pets", path);
 }
