@@ -24,7 +24,7 @@ public sealed class RipSoul : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(15m, ValueProp.Move),
-        new PowerVar<HexPower>(3m),
+        new PowerVar<HexPower>(2m),
     ];
 
     public RipSoul()

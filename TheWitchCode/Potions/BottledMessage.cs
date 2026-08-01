@@ -1,3 +1,4 @@
+using System.Linq;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -30,6 +31,9 @@ public sealed class BottledMessage : WitchPotion
     private int _bottledUpgrades;
     private EnchantmentModel? _bottledEnchantCanonical;
     private int _bottledEnchantAmount;
+    private int _bottledCost = -1;
+
+    private const string BottledCostProp = "BottledCost";
 
     /// <summary>Whether a card is currently bottled.</summary>
     public bool HoldsCard => _bottledCanonical != null;
@@ -42,6 +46,12 @@ public sealed class BottledMessage : WitchPotion
         _bottledUpgrades = card.CurrentUpgradeLevel;
         _bottledEnchantCanonical = card.Enchantment?.CanonicalInstance;
         _bottledEnchantAmount = card.Enchantment?.Amount ?? 0;
+        // Keep the card's current cost reduction (Snecko roll, "costs 0 until played", etc.): capture the
+        // cost with LOCAL modifiers only (global hook effects re-evaluate naturally in the next combat).
+        // Applied reduce-only on unbottle, so a cost INCREASE is never carried over.
+        _bottledCost = !card.EnergyCost.CostsX && card.EnergyCost.HasLocalModifiers
+            ? card.EnergyCost.GetWithModifiers(CostModifiers.Local)
+            : -1;
     }
 
     /// <summary>Extended-save snapshot (registered in MainFile via ExtendedSaveTypes). Null if empty.</summary>
@@ -53,6 +63,9 @@ public sealed class BottledMessage : WitchPotion
                 CurrentUpgradeLevel = _bottledUpgrades,
                 Enchantment = _bottledEnchantCanonical is { } enchant
                     ? new SerializableEnchantment { Id = enchant.Id, Amount = _bottledEnchantAmount }
+                    : null,
+                Props = _bottledCost >= 0
+                    ? new SavedProperties { ints = [new SavedProperties.SavedProperty<int>(BottledCostProp, _bottledCost)] }
                     : null,
             }
             : null;
@@ -67,9 +80,12 @@ public sealed class BottledMessage : WitchPotion
             _bottledUpgrades = 0;
             _bottledEnchantCanonical = null;
             _bottledEnchantAmount = 0;
+            _bottledCost = -1;
             return;
         }
         _bottledUpgrades = state!.CurrentUpgradeLevel;
+        _bottledCost = state.Props?.ints?.Where(p => p.name == BottledCostProp)
+            .Select(p => (int?)p.value).FirstOrDefault() ?? -1;
         _bottledEnchantCanonical = state.Enchantment?.Id is { } enchantId
             ? ModelDb.GetByIdOrNull<EnchantmentModel>(enchantId)
             : null;
@@ -94,6 +110,10 @@ public sealed class BottledMessage : WitchPotion
         if (_bottledEnchantCanonical is { } enchantCanonical)
         {
             CardCmd.Enchant(enchantCanonical.ToMutable(), card, _bottledEnchantAmount);
+        }
+        if (_bottledCost >= 0 && !card.EnergyCost.CostsX)
+        {
+            card.EnergyCost.SetUntilPlayed(_bottledCost, reduceOnly: true);
         }
 
         // Deliberately NOT clearing the bottled state here: a used potion is consumed anyway, and the

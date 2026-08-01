@@ -8,8 +8,8 @@ using TheWitch.TheWitchCode.Powers;
 namespace TheWitch.TheWitchCode.Relics;
 
 /// <summary>
-/// Cozy Nest (shop): at the start of combat, summon an Owl Familiar — one stack of
-/// <see cref="OwlFamiliarPower" />, same as playing an unupgraded Owl Familiar (the power
+/// Cozy Nest (shop): at the start of combat, summon a Crow Familiar — one stack of
+/// <see cref="CrowFamiliarPower" />, same as playing an unupgraded Crow Familiar (the power
 /// spawns the pet and produces the turn-start token cards).
 /// </summary>
 public sealed class CozyNest : WitchRelic
@@ -17,14 +17,14 @@ public sealed class CozyNest : WitchRelic
     public override RelicRarity Rarity => RelicRarity.Shop;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<OwlFamiliarPower>(),
-        HoverTipFactory.FromCard<Wisdom>(),
-        HoverTipFactory.FromCard<Knowledge>(),
+        HoverTipFactory.FromPower<CrowFamiliarPower>(),
+        HoverTipFactory.FromCard<DarkOmen>(),
+        HoverTipFactory.FromCard<Shiny>(),
     ];
 
     public override async Task BeforeCombatStart()
     {
         Flash();
-        await PowerCmd.Apply<OwlFamiliarPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1m, Owner.Creature, null);
+        await PowerCmd.Apply<CrowFamiliarPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1m, Owner.Creature, null);
     }
 }

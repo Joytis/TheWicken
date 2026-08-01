@@ -167,6 +167,26 @@
           "path": "TheWitch/images/potions/potion_shaped_pebble.png"
         },
         {
+          "name": "Puff of Smoke",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Defensive",
+          "effect": "Gain Block. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/puff_of_smoke.png"
+        },
+        {
+          "name": "Ember Jar",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Deal 4 damage. (Card-only payload: Harvest)",
+          "path": "TheWitch/images/potions/ember_jar.png"
+        },
+        {
           "name": "Bear Fur",
           "artist": "",
           "done": false,
@@ -207,7 +227,7 @@
           "done": false,
           "brief": "",
           "rarity": "Shop",
-          "effect": "At the start of combat, summon an Owl Familiar.",
+          "effect": "At the start of combat, summon a Crow Familiar.",
           "path": "TheWitch/images/relics/big/cozy_nest.png"
         },
         {

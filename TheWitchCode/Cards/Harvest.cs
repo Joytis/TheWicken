@@ -25,7 +25,8 @@ public sealed class Harvest : WitchCard
         ModelDb.Potion<PuffOfSmoke>(),
         ModelDb.Potion<PricklyVial>(),
         ModelDb.Potion<OminousFlask>(),
-        
+        ModelDb.Potion<EmberJar>(),
+
     ];
 
     private static List<PotionModel> SecondaryLootTable => [
