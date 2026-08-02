@@ -172,8 +172,8 @@
         "Potions:Brew"
       ],
       "threads": [],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Bind in Blood",
@@ -190,7 +190,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -205,8 +205,8 @@
         "OtherDebuff",
         "HPLoss"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Broom Strike",
@@ -235,8 +235,8 @@
         "CostReduction",
         "SkillsMatter"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Call the Pack",
@@ -302,7 +302,7 @@
         "Energy",
         "Draw"
       ],
-      "vfxPass": false,
+      "vfxPass": true,
       "sfxPass": false
     },
     {
@@ -333,8 +333,8 @@
         "Energy",
         "DelayedEffect"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Hide in a Bush",
@@ -363,8 +363,8 @@
         "Brambles:Rider"
       ],
       "threads": [],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Lavender and Sage",
@@ -395,8 +395,8 @@
       "threads": [
         "Draw"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Needle Whip",
@@ -425,8 +425,8 @@
         "Brambles:Rider"
       ],
       "threads": [],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Pocket Rats",
@@ -514,8 +514,8 @@
       "threads": [
         "Vulnerable"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Tinder",
@@ -546,8 +546,8 @@
       "threads": [
         "Energy"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Trash Diving",
@@ -578,8 +578,8 @@
         "SelfExhaust",
         "Recursion"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Vexing Strike",
@@ -610,8 +610,8 @@
       "threads": [
         "OtherDebuff"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Wax and Wane",
@@ -672,8 +672,8 @@
       "threads": [
         "SkillsMatter"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Wicked Brew",
@@ -729,8 +729,8 @@
         "CardGen",
         "TurnEngine"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Bottle Barrage",
@@ -763,8 +763,8 @@
         "MultiHit",
         "Snowball"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Cat Familiar",
@@ -793,8 +793,8 @@
         "CardGen",
         "TurnEngine"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Circle of Rot",
@@ -825,8 +825,8 @@
         "Drawback",
         "SelfDebuff"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Cloak of Moonlight",
@@ -857,8 +857,8 @@
       "threads": [
         "BlockEngine"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Command",
@@ -888,8 +888,8 @@
       "threads": [
         "CardGen"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Creeping Vines",
@@ -919,8 +919,8 @@
       "threads": [
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Crow Familiar",
@@ -980,8 +980,8 @@
       "threads": [
         "TurnEngine"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Eye of Newt",
@@ -1009,8 +1009,8 @@
         "Potions:UsePayoff"
       ],
       "threads": [],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Grind Down",
@@ -1109,7 +1109,7 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1140,7 +1140,7 @@
       },
       "upgrade": "Cards +2",
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Potions"
@@ -1903,8 +1903,8 @@
         "Energy",
         "ExhaustOutlet"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Bottle Wall",

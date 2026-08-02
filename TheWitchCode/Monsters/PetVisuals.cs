@@ -26,11 +26,11 @@ public partial class PetVisuals : Node2D
     public override void _EnterTree() => FamiliarPower.AnimationRequested += OnAnimationRequested;
     public override void _ExitTree() => FamiliarPower.AnimationRequested -= OnAnimationRequested;
 
-    private void OnAnimationRequested(FamiliarPower power, int stackIndex, CardType cardType)
+    private void OnAnimationRequested(FamiliarPower power, int stackIndex, FamiliarPetAnim anim)
     {
         if (_pet != null && ReferenceEquals(_pet.SourcePower, power) && _pet.StackIndex == stackIndex)
         {
-            PlayAnimation(cardType);
+            PlayAnimation(anim);
         }
     }
 
@@ -65,18 +65,22 @@ public partial class PetVisuals : Node2D
         }
     }
 
-    /// <summary>Play the reaction for a played card: Attacks use the attack animation + vfx, everything else skill.</summary>
-    public void PlayAnimation(CardType cardType)
+    /// <summary>Play a pet reaction: attack/skill restart their vfx; create is the card-production flourish.</summary>
+    public void PlayAnimation(FamiliarPetAnim anim)
     {
-        if (cardType == CardType.Attack)
+        switch (anim)
         {
-            PlayAnimation("attack");
-            RestartParticles(_attackVfx);
-        }
-        else
-        {
-            PlayAnimation("skill");
-            RestartParticles(_skillVfx);
+            case FamiliarPetAnim.Attack:
+                PlayAnimation("attack");
+                RestartParticles(_attackVfx);
+                break;
+            case FamiliarPetAnim.Create:
+                PlayAnimation("create");
+                break;
+            default:
+                PlayAnimation("skill");
+                RestartParticles(_skillVfx);
+                break;
         }
     }
 

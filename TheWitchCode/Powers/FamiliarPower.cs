@@ -19,6 +19,14 @@ using TheWitch.TheWitchCode.Relics;
 
 namespace TheWitch.TheWitchCode.Powers;
 
+/// <summary>Cosmetic pet reactions PetVisuals can play (mapped to AnimationPlayer clips in the pet scene).</summary>
+public enum FamiliarPetAnim
+{
+    Attack,
+    Skill,
+    Create,
+}
+
 /// <summary>
 /// Marker base for "familiar" counter powers. Each familiar type (Owl, Cat, …) has its own
 /// <see cref="FamiliarPower" /> subclass; playing that familiar applies one stack
@@ -74,13 +82,15 @@ public abstract class FamiliarPower : WitchPower
         await GenerateCards(player, combatState);
     }
 
-    /// <summary>A single roll of this familiar's card production, ignoring stack count (Command's mid-turn order).</summary>
-    public async Task GenerateOneCard(Player player, ICombatState combatState)
+    /// <summary>A single roll of this familiar's card production, ignoring stack count (Command's mid-turn order).
+    /// <paramref name="stackIndex" /> picks which pet performs the create animation.</summary>
+    public async Task GenerateOneCard(Player player, ICombatState combatState, int stackIndex = 0)
     {
         Flash();
+        RequestPetAnimation(stackIndex, FamiliarPetAnim.Create);
         Rng rng = player.RunState.Rng.CombatCardGeneration;
         CardModel card = CreateTurnStartCard(player, combatState, rng);
-        TagSource(card, 0);
+        TagSource(card, stackIndex);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player, CardPilePosition.Top);
     }
 
@@ -98,6 +108,8 @@ public abstract class FamiliarPower : WitchPower
 
         for (int i = 0; i < Amount; i++)
         {
+            RequestPetAnimation(i, FamiliarPetAnim.Create);
+
             IEnumerable<CardModel> cards = sack != null
                 ? CreateAllTurnStartCards(player, combatState, rng)
                 : [CreateTurnStartCard(player, combatState, rng)];
@@ -200,7 +212,7 @@ public abstract class FamiliarPower : WitchPower
     /// Each PetVisuals node listens and reacts only to its own (power, index) pair —
     /// purely cosmetic, never touches game state, so firing on every MP client is fine.
     /// </summary>
-    public static event Action<FamiliarPower, int, CardType>? AnimationRequested;
+    public static event Action<FamiliarPower, int, FamiliarPetAnim>? AnimationRequested;
 
     /// <summary>
     /// Announce the played card type for tokens THIS power generated; PetVisuals maps it to an animation.
@@ -210,15 +222,16 @@ public abstract class FamiliarPower : WitchPower
     {
         if (cardPlay.Card is WitchFamiliarCard familiarCard && ReferenceEquals(familiarCard.SourceFamiliar, this))
         {
-            RequestPetAnimation(familiarCard.SourceStackIndex, cardPlay.Card.Type);
+            RequestPetAnimation(familiarCard.SourceStackIndex,
+                cardPlay.Card.Type == CardType.Attack ? FamiliarPetAnim.Attack : FamiliarPetAnim.Skill);
         }
 
         return Task.CompletedTask;
     }
 
-    /// <summary>Ask this power's pet at <paramref name="stackIndex" /> to play the animation PetVisuals maps to <paramref name="cardType" />. Cosmetic only.</summary>
-    protected void RequestPetAnimation(int stackIndex, CardType cardType) =>
-        AnimationRequested?.Invoke(this, stackIndex, cardType);
+    /// <summary>Ask this power's pet at <paramref name="stackIndex" /> to play <paramref name="anim" />. Cosmetic only.</summary>
+    protected void RequestPetAnimation(int stackIndex, FamiliarPetAnim anim) =>
+        AnimationRequested?.Invoke(this, stackIndex, anim);
 
     /// <summary>
     /// Cosmetic only: when a token THIS familiar produced deals attack damage, the pet that produced it
@@ -232,7 +245,7 @@ public abstract class FamiliarPower : WitchPower
             && cardSource is WitchFamiliarCard familiarCard
             && ReferenceEquals(familiarCard.SourceFamiliar, this))
         {
-            RequestPetAnimation(familiarCard.SourceStackIndex, CardType.Attack);
+            RequestPetAnimation(familiarCard.SourceStackIndex, FamiliarPetAnim.Attack);
         }
 
         return Task.CompletedTask;

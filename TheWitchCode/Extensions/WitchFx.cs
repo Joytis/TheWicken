@@ -4,8 +4,10 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+using TheWitch.TheWitchCode.Cards;
 
 namespace TheWitch.TheWitchCode.Extensions;
 
@@ -20,7 +22,10 @@ public static class WitchFx
 
     /// <summary>Poison-green tint shared by brew/bramble effects (base-game Noxious Fumes green).</summary>
     public static readonly Color WitchGreen = new("83eb85");
+
     public static readonly Color Purple = new("ac54b3");
+    public static readonly Color FireOrange = new("ff8b57");
+    public static readonly Color RummageBrown = new ("743323");
 
     /// <summary>Duplicate of the Attack state in witch_visuals.tscn — same swing animation, but the
     /// trigger name dodges CreatureCmd.TriggerAnim's "Attack" case, so CustomAttackSfx never plays.</summary>
@@ -66,6 +71,7 @@ public static class WitchFx
 
     /// <summary>Hex explosion signature: purple ground fire on the target (globally preloaded via Witch.ExtraAssetPaths).</summary>
     public static void PurpleFlame(Creature target) => Attach(NGroundFireVfx.Create(target, VfxColor.Purple));
+    public static void RedFlame(Creature target) => Attach(NGroundFireVfx.Create(target));
 
     /// <summary>Green gas burst (globally preloaded) — plague/rot effects.</summary>
     public static void GreenGas(Creature target) => Attach(NGaseousImpactVfx.Create(target, WitchGreen));
@@ -75,4 +81,47 @@ public static class WitchFx
 
     /// <summary>Potion-splash visual with custom tint.</summary>
     public static void Splash(Creature target, Color tint) => NCombatRoom.Instance?.PlaySplashVfx(target, tint);
+
+    /// <summary>
+    /// Spawn a single bare flipbook/particle sub-scene (e.g. "vfx/fire_impact/vfx_fire_burst_center_flipbook").
+    /// These building-block scenes ship dormant (emitting=false, one_shot, no script) — normally a parent
+    /// scene drives them — so this restarts the emitter and frees the node when the one-shot finishes.
+    /// Sub-scenes are not globally preloaded: cards using one should list
+    /// SceneHelper.GetScenePath(innerPath) in ExtraRunAssetPaths.
+    /// </summary>
+    public static void PlayFlipbook(string innerPath, Vector2 globalPosition, Color? tint = null, float scale = 1f)
+    {
+        GpuParticles2D particles = MegaCrit.Sts2.Core.Assets.PreloadManager.Cache
+            .GetScene(SceneHelper.GetScenePath(innerPath))
+            .Instantiate<GpuParticles2D>(PackedScene.GenEditState.Disabled);
+        particles.GlobalPosition = globalPosition;
+        particles.Scale *= scale;
+        if (tint.HasValue)
+        {
+            particles.Modulate = tint.Value;
+        }
+        particles.Finished += particles.QueueFree; // one-shot GPUParticles2D emits Finished when done
+        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(particles);
+        particles.Restart();
+    }
+
+    /// <summary>Flipbook sub-scene centered on a creature (see <see cref="PlayFlipbook(string, Vector2, Color?, float)" />).</summary>
+    public static void PlayFlipbook(string innerPath, Creature target, Color? tint = null, float scale = 1f)
+    {
+        NCreature? node = NCombatRoom.Instance?.GetCreatureNode(target);
+        if (node != null)
+        {
+            PlayFlipbook(innerPath, node.VfxSpawnPosition, tint, scale);
+        }
+    }
+
+    public static void FlameBurst(Creature target, float scale, Color tint)
+    {
+        // Fire Vfx
+        NCreature? nCreature = NCombatRoom.Instance?.GetCreatureNode(target);
+        if (nCreature != null)
+        {
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireBurstVfx.Create(nCreature.GetBottomOfHitbox(), scale, FireOrange));
+        }
+    }
 }

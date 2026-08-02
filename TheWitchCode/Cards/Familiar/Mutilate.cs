@@ -27,6 +27,7 @@ public sealed class Mutilate : WitchFamiliarCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.heavyBluntPath, null, "heavy_attack.mp3")
+            .WithHitVfxSpawnedAtBase()
             .Execute(choiceContext);
 
         if (cardPlay.Target.IsAlive)

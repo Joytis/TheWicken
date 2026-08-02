@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -27,7 +28,8 @@ public sealed class BroomStrike : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx(VfxCmd.heavyBluntPath, null, "blunt_attack.mp3")
+            .WithSilentAttack()
+            .WithHitFx(VfxCmd.bluntPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);
 
         await PowerCmd.Apply<NextSkillDiscountPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);

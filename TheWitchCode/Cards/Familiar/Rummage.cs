@@ -28,6 +28,7 @@ public sealed class Rummage : WitchFamiliarCard
             IEnumerable<CardModel> retrieved = await CardSelectCmd.FromCombatPile(
                 choiceContext, PileType.Discard.GetPile(Owner), Owner, new CardSelectorPrefs(SelectionScreenPrompt, count));
             List<CardModel> cards = retrieved.ToList();
+            
             await CardPileCmd.Add(cards, PileType.Hand);
 
             if (IsUpgraded)
