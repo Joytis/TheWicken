@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31",
+  "generated": "2026-08-01",
   "cards": [
     {
       "name": "Defend",
@@ -171,14 +171,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Lose 2 HP. Apply 3 Hex.",
+      "text": "Lose 1 HP. Apply 2 Hex.",
       "numbers": {
-        "Hex": 3,
-        "HpLoss": 2
+        "Hex": 2,
+        "HpLoss": 1
       },
-      "upgrade": "Hex +2",
+      "upgrade": "Hex +1",
       "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex"
@@ -1297,14 +1297,14 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 12 Block. Add 1 Rats into your Draw Pile and Discard Pile.",
+      "text": "Gain 12 Block. Add a Rats into your Draw Pile and Discard Pile.",
       "numbers": {
         "Block": 12,
         "Cards": 1
       },
       "upgrade": "Block +2",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -1475,14 +1475,14 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 3 Block. Gain 3 Brambles. Add a Sprouts into your Discard Pile.",
+      "text": "Gain 3 Block. Gain 3 Brambles. Add a copy of this card into your Discard Pile.",
       "numbers": {
         "Brambles": 3,
         "Block": 3
       },
       "upgrade": "Block +2",
       "note": "Sprouts: a small guard that reseeds itself — block + Brambles, and a copy of this card sprouts in your Discard pile (Anger pattern).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Brambles"
@@ -2197,11 +2197,11 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Exhaust X cards. Add X random cards to your Hand. They are free to play this combat.",
+      "text": "Exhaust X cards. Add X random cards into your Hand. They are free to play this combat.",
       "numbers": {},
       "upgrade": "none",
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "None"
@@ -2489,15 +2489,15 @@
       "type": "Attack",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Deal 6 damage for each Attack played this turn.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "text": "Deal 5 damage for each Attack played this turn.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
       "numbers": {
-        "Damage": 6,
+        "Damage": 5,
         "CalculationBase": 0,
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
       "note": "Cat familiar token: one 7-damage hit per Attack you played this turn, INCLUDING itself (always ≥1).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2766,7 +2766,7 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Add a Rats to your Hand, Draw Pile, and Discard Pile.",
+      "text": "Add a Rats into your Hand, Draw Pile, and Discard Pile.",
       "numbers": {
         "Cards": 1
       },
@@ -2857,14 +2857,14 @@
       "type": "Attack",
       "rarity": "Ancient",
       "target": "AnyEnemy",
-      "text": "Deal 15 damage. Apply 3 Hex. Create a random Potion.",
+      "text": "Deal 15 damage. Apply 2 Hex. Create a random Potion.",
       "numbers": {
-        "Hex": 3,
+        "Hex": 2,
         "Damage": 15
       },
       "upgrade": "Damage +5",
       "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and one random potion (any non-healing potion the Witch can roll, any rarity).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "mechanics": [
         "Hex",

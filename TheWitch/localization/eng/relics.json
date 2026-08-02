@@ -9,7 +9,7 @@
   "THEWITCH-LARGE_POCKETS.description": "Upon pickup, gain [blue]{PotionSlots}[/blue] potion {PotionSlots:plural:slot|slots}.",
   "THEWITCH-LARGE_POCKETS.flavor": "[red]Details for this relic will be revealed in the future...[/red]",
   "THEWITCH-COZY_NEST.title": "Cozy Nest",
-  "THEWITCH-COZY_NEST.description": "At the start of combat, summon an [gold]Owl Familiar[/gold].",
+  "THEWITCH-COZY_NEST.description": "At the start of combat, summon a [gold]Crow Familiar[/gold].",
   "THEWITCH-COZY_NEST.flavor": "[red]Details for this relic will be revealed in the future...[/red]",
   "THEWITCH-SACK_OF_TREATS.title": "Sack of Treats",
   "THEWITCH-SACK_OF_TREATS.description": "Your [gold]Familiars[/gold] create ALL of their cards at the start of your turn.",

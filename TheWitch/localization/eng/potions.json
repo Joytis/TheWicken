@@ -34,5 +34,7 @@
   "THEWITCH-BEAR_FUR.title": "Bear Fur",
   "THEWITCH-BEAR_FUR.description": "Create a [gold]Mutilate[/gold].",
   "THEWITCH-POTION_SHAPED_PEBBLE.description": "Deal [blue]{Damage}[/blue] damage.",
-  "THEWITCH-POTION_SHAPED_PEBBLE.title": "Potion-Shaped Pebble"
+  "THEWITCH-POTION_SHAPED_PEBBLE.title": "Potion-Shaped Pebble",
+  "THEWITCH-EMBER_JAR.title": "Ember Jar",
+  "THEWITCH-EMBER_JAR.description": "Deal [blue]{Damage}[/blue] damage."
 }

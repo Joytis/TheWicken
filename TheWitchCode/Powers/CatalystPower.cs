@@ -15,7 +15,7 @@ public sealed class CatalystPower : WitchPower
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.None;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override async Task AfterPotionUsed(PotionModel potion, Creature? target)
     {
@@ -24,14 +24,17 @@ public sealed class CatalystPower : WitchPower
             return;
         }
 
-        List<CardModel> hand = PileType.Hand.GetPile(Owner.Player).Cards.ToList();
-        CardModel? pick = Owner.Player.RunState.Rng.CombatCardSelection.NextItem(hand);
-        if (pick == null)
-        {
-            return;
-        }
-
         Flash();
-        await CardPileCmd.AddGeneratedCardToCombat(pick.CreateClone(), PileType.Hand, Owner.Player);
+        for (int i = 0; i < (int)Amount; i++)
+        {
+            List<CardModel> hand = PileType.Hand.GetPile(Owner.Player).Cards.ToList();
+            CardModel? pick = Owner.Player.RunState.Rng.CombatCardSelection.NextItem(hand);
+            if (pick == null)
+            {
+                return;
+            }
+
+            await CardPileCmd.AddGeneratedCardToCombat(pick.CreateClone(), PileType.Hand, Owner.Player);
+        }
     }
 }

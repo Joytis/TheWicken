@@ -3,8 +3,8 @@
   "name": "The Witch - Beta",
   "author": "Joytis",
   "description": "Slay the Spire 2 character mod created from a template for use with BaseLib",
-  "version": "v0.4.0",
-  "min_game_version": "0.107.0",
+  "version": "v0.5.1",
+  "min_game_version": "0.110.0",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
