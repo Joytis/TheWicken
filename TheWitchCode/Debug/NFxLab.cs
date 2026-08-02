@@ -483,6 +483,87 @@ public partial class NFxLab : Control
     // Rough purple-vs-green split for NSmokePuffVfx's two-value enum.
     private static bool IsPurplish(Color c) => c.R + c.B > c.G * 1.5f;
 
+    // ------------------------------------------------- copy-to-code snippets --
+
+    // Float-component Color ctor — hex strings clamp to LDR and can't express overblown/HDR values.
+    private static string Rgba(Color c) => c.A < 0.999f
+        ? FormattableString.Invariant($"new Color({c.R:0.###}f, {c.G:0.###}f, {c.B:0.###}f, {c.A:0.###}f)")
+        : FormattableString.Invariant($"new Color({c.R:0.###}f, {c.G:0.###}f, {c.B:0.###}f)");
+
+    private static string Rgba(Color? tint, string fallback) => Rgba(tint ?? new Color(fallback));
+
+    private static string AddLine(string expr) =>
+        $"NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely({expr});";
+
+    private static string AddModulated(string expr, Color? tint) => tint.HasValue
+        ? $"var vfx = {expr};\nif (vfx != null)\n{{\n    vfx.Modulate = {Rgba(tint.Value)};\n    {AddLine("vfx")}\n}}"
+        : AddLine(expr);
+
+    private static string SnappedVfxColor(Color? tint, Color fallback, params (VfxColor Value, Color Approx)[] options) =>
+        $"VfxColor.{NearestVfxColor(tint ?? fallback, options)}";
+
+    /// <summary>
+    /// Card-ready spawn code per node entry, with the picked tint baked in (null = canonical color).
+    /// Placeholders: `target` = Creature, `targetCenter`/`targetGround` = Vector2 (see
+    /// NCreature.VfxSpawnPosition / GetBottomOfHitbox). KEYS MUST MATCH the entry names in
+    /// CollectNodeVfxEntries, and the VfxColor option sets mirror the spawn lambdas — keep in sync.
+    /// </summary>
+    private static readonly Dictionary<string, Func<Color?, string>> CopySnippets = new(StringComparer.Ordinal)
+    {
+        ["NSmallMagicMissileVfx — hex bolt"] = tint =>
+            $"var missile = NSmallMagicMissileVfx.Create(targetCenter, {Rgba(tint, "50b598")});\n{AddLine("missile")}\nawait Cmd.Wait(missile?.WaitTime ?? 0f);",
+        ["NLargeMagicMissileVfx — big ritual bolt"] = tint =>
+            $"var missile = NLargeMagicMissileVfx.Create(targetGround, {Rgba(tint, "8c2447")});\n{AddLine("missile")}\nawait Cmd.Wait(missile?.WaitTime ?? 0f);",
+        ["NSpookyScreamVfx — ghost wail"] = tint => AddModulated("NSpookyScreamVfx.Create(targetCenter)", tint),
+        ["NScreamVfx — wail + shake"] = tint => AddModulated("NScreamVfx.Create(targetCenter)", tint),
+        ["NPoisonImpactVfx — toxic burst"] = tint => AddModulated("NPoisonImpactVfx.Create(target)", tint),
+        ["NGoopyImpactVfx — cauldron splat"] = tint => AddLine($"NGoopyImpactVfx.Create(targetCenter, {Rgba(tint, "00ff00")})"),
+        ["NSplashVfx — potion splash"] = tint => AddLine($"NSplashVfx.Create(targetCenter, {Rgba(tint, "00ff00")})"),
+        ["NWormyImpactVfx — ground tendrils"] = tint => AddModulated("NWormyImpactVfx.Create(target)", tint),
+        ["NBg/FgGroundSpikeVfx — thorn field"] = tint =>
+        {
+            string vc = SnappedVfxColor(tint, WitchPurple,
+                (VfxColor.Red, new Color("ff4020")), (VfxColor.Purple, WitchPurple),
+                (VfxColor.White, Colors.White), (VfxColor.Cyan, Colors.Cyan), (VfxColor.Gold, new Color("ffd700")));
+            return $"for (int i = 0; i < 6; i++)\n{{\n    Vector2 pos = targetGround + new Vector2((GD.Randf() - 0.5f) * 240f, 0f);\n    Node2D? spike = i % 2 == 0\n        ? NBgGroundSpikeVfx.Create(pos, movingRight: true, {vc})\n        : NFgGroundSpikeVfx.Create(pos, movingRight: true, {vc});\n    {AddLine("spike")}\n}}\n// not preloaded — ExtraRunAssetPaths: \"res://scenes/vfx/bg_ground_spike_vfx.tscn\", \"res://scenes/vfx/fg_ground_spike_vfx.tscn\"";
+        },
+        ["NStarryImpactVfx — star burst"] = tint => AddModulated("NStarryImpactVfx.Create(targetCenter)", tint),
+        ["NBigSlashVfx — crescent arc"] = tint => AddLine($"NBigSlashVfx.Create(targetCenter, facingRight: true, {Rgba(tint, "a380ff")})"),
+        ["NBigSlashImpactVfx — crescent impact"] = tint => AddLine($"NBigSlashImpactVfx.Create(targetCenter, 60f, {Rgba(tint, "80dbff")})"),
+        ["NFireBurstVfx — flame pop"] = tint => AddLine($"NFireBurstVfx.Create(targetGround, 1f, {Rgba(tint, "ff8b57")})"),
+        ["NFireBurningVfx — lingering flame"] = tint => AddLine($"NFireBurningVfx.Create(targetGround, 1f, true, {Rgba(tint, "ff8b57")})"),
+        ["NRestSmokeVfx — ambient smoke (viewport center)"] = tint =>
+            AddModulated("NRestSmokeVfx.Create()", tint) + "\n// not preloaded — ExtraRunAssetPaths: NRestSmokeVfx.AssetPaths",
+        ["NRainVfx — rain (3s kill)"] = tint =>
+            AddModulated("NRainVfx.Create()", tint) + "\n// NRainVfx never frees itself — QueueFree it when the effect should end.\n// not preloaded — ExtraRunAssetPaths: \"res://scenes/vfx/whole_screen/vfx_rain.tscn\"",
+        ["NSmokyVignetteVfx — screen-edge fog"] = tint =>
+        {
+            Color c = tint ?? new Color(0.8f, 0.3f, 0.8f);
+            return FormattableString.Invariant(
+                $"NGame.Instance.CurrentRunNode.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(\n    new Color({c.R:0.##}f, {c.G:0.##}f, {c.B:0.##}f, 0.66f),\n    new Color({c.R * 4f:0.##}f, {c.G * 4f:0.##}f, {c.B * 4f:0.##}f, 0.33f)));");
+        },
+        ["NAdditiveOverlayVfx — screen flash"] = tint =>
+            AddLine($"NAdditiveOverlayVfx.Create({SnappedVfxColor(tint, WitchPurple, (VfxColor.Green, new Color("00ff15")), (VfxColor.Purple, new Color("b300ff")), (VfxColor.Blue, Colors.Blue), (VfxColor.White, Colors.White), (VfxColor.Cyan, Colors.Cyan), (VfxColor.Gold, new Color("ffd700")))})")
+            + "\n// not preloaded — ExtraRunAssetPaths: \"res://scenes/vfx/additive_overlay_vfx.tscn\"",
+        ["NDoomOverlayVfx — hell flash (singleton)"] = tint =>
+            "NDoomOverlayVfx? overlay = NDoomOverlayVfx.GetOrCreate();\nif (overlay != null && overlay.GetParent() == null)\n{\n    NGame.Instance.CurrentRunNode.GlobalUi.AddChildSafely(overlay);\n}\n// not preloaded — ExtraRunAssetPaths: \"res://scenes/vfx/doom_overlay_vfx.tscn\"",
+        ["NSporeImpactVfx — spore poof"] = tint => AddLine($"NSporeImpactVfx.Create(target, {Rgba(tint, "83eb85")})"),
+        ["NGaseousImpactVfx — gas burst"] = tint => AddLine($"NGaseousImpactVfx.Create(target, {Rgba(tint, "83eb85")})"),
+        ["NGroundFireVfx — ground fire"] = tint =>
+            AddLine($"NGroundFireVfx.Create(target, {SnappedVfxColor(tint, WitchPurple, (VfxColor.Red, new Color("ff4020")), (VfxColor.Green, new Color("2fa800")), (VfxColor.Blue, new Color("0099cd")), (VfxColor.Purple, new Color("7821ff")), (VfxColor.White, Colors.White), (VfxColor.Black, Colors.Black))})")
+            + "\n// not preloaded — ExtraRunAssetPaths: NGroundFireVfx.AssetPaths (Witch.ExtraAssetPaths already includes it)",
+        ["NSmokePuffVfx — smoke puff"] = tint =>
+            AddLine($"NSmokePuffVfx.Create(target, NSmokePuffVfx.SmokePuffColor.{(IsPurplish(tint ?? WitchPurple) ? "Purple" : "Green")})")
+            + "\n// not preloaded — ExtraRunAssetPaths: NSmokePuffVfx.AssetPaths",
+        ["NStabVfx — cursed needle"] = tint =>
+            $".WithHitVfxNode(t => NStabVfx.Create(t, facingEnemies: true, {SnappedVfxColor(tint, WitchPurple, (VfxColor.Red, new Color("ff4020")), (VfxColor.Green, new Color("00a52f")), (VfxColor.Blue, new Color("007bdd")), (VfxColor.Purple, WitchPurple), (VfxColor.White, Colors.White), (VfxColor.Cyan, Colors.Cyan), (VfxColor.Gold, new Color("ffd700")))}))\n// not preloaded — ExtraRunAssetPaths: \"res://scenes/vfx/stab_vfx.tscn\"",
+        ["NThinSliceVfx — thin slice"] = tint =>
+            AddLine($"NThinSliceVfx.Create(target, {SnappedVfxColor(tint, Colors.Cyan, (VfxColor.Red, new Color("ff9900")), (VfxColor.Green, new Color("00a52f")), (VfxColor.Blue, new Color("007bdd")), (VfxColor.Purple, WitchPurple), (VfxColor.White, Colors.White), (VfxColor.Cyan, Colors.Cyan))})"),
+        ["NFireSmokePuffVfx — fiery pop"] = tint => AddModulated("NFireSmokePuffVfx.Create(target)", tint),
+        ["NPowerUpVfx — power-up aura"] = tint => "NPowerUpVfx.CreateNormal(target); // self-attaches to the combat vfx container",
+        ["NPowerUpVfx — ghostly aura (familiar summon)"] = tint => "NPowerUpVfx.CreateGhostly(target); // self-attaches to the combat vfx container",
+    };
+
     private static Node? Modulated(CanvasItem? node, Color? tint)
     {
         if (node != null && tint.HasValue)
@@ -580,6 +661,24 @@ public partial class NFxLab : Control
             Button spawnBtn = new() { Text = "Spawn", CustomMinimumSize = new Vector2(60, 0) };
             spawnBtn.Pressed += () => SpawnNodeVfx(entry);
             row.AddChild(spawnBtn);
+
+            Button copyBtn = new()
+            {
+                Text = "Copy",
+                CustomMinimumSize = new Vector2(52, 0),
+                TooltipText = "Copy card-ready spawn code using the current tint",
+                Disabled = !CopySnippets.ContainsKey(entry.Name),
+            };
+            copyBtn.Pressed += () =>
+            {
+                if (CopySnippets.TryGetValue(entry.Name, out Func<Color?, string>? snippet))
+                {
+                    Color? tint = _nodeTintEnabled.ButtonPressed ? _nodeTint.Color : null;
+                    DisplayServer.ClipboardSet(snippet(tint));
+                    MainFile.Logger.Info($"FX Lab: copied spawn code for '{entry.Name}'");
+                }
+            };
+            row.AddChild(copyBtn);
 
             Label nameLabel = new()
             {

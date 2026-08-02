@@ -2650,8 +2650,8 @@
         "OtherDebuff",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Ferocity",
@@ -2718,8 +2718,8 @@
         "Snowball",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Hibernate",
@@ -2751,8 +2751,8 @@
         "SelfExhaust",
         "DelayedEffect"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Knowledge",
@@ -2782,8 +2782,8 @@
         "CardGen",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Mutilate",
@@ -2815,8 +2815,8 @@
         "SelfExhaust",
         "Vulnerable"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Nimble",
@@ -2849,8 +2849,8 @@
         "Energy",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Rats",
@@ -2867,7 +2867,7 @@
       },
       "upgrade": "Damage +2",
       "note": "Rat familiar token (was Scavengers): tiny attack that cycles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2882,8 +2882,8 @@
         "Draw",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Rummage",
@@ -2915,8 +2915,8 @@
         "SelfExhaust",
         "Recursion"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Shiny!",
@@ -2945,8 +2945,8 @@
         "Energy",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Swarm",
@@ -2962,7 +2962,7 @@
       },
       "upgrade": "none",
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2979,8 +2979,8 @@
         "CardGen",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Wisdom",
@@ -3013,8 +3013,8 @@
         "Discard",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Catalyst",
@@ -3076,8 +3076,8 @@
       "threads": [
         "OtherDebuff"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Wormy",
@@ -3107,8 +3107,8 @@
         "Retain",
         "SelfExhaust"
       ],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     }
   ]
 }

@@ -11,85 +11,91 @@ using TheWitch.TheWitchCode.Cards;
 
 namespace TheWitch.TheWitchCode.Extensions;
 
-/// <summary>
-/// Shared Witch sfx/vfx mechanic signatures. See Docs/sfx-vfx-catalog.md for the
-/// base-game asset catalog and Docs/sfx-vfx-proposal.md for the house palette.
-/// </summary>
 public static class WitchFx
 {
     public const string SummonSfx = "event:/sfx/characters/necrobinder/necrobinder_summon";
     public const string HexSfx = "doom_apply.mp3";
 
-    /// <summary>Poison-green tint shared by brew/bramble effects (base-game Noxious Fumes green).</summary>
     public static readonly Color WitchGreen = new("83eb85");
 
     public static readonly Color Purple = new("ac54b3");
     public static readonly Color FireOrange = new("ff8b57");
     public static readonly Color RummageBrown = new ("743323");
 
-    /// <summary>Duplicate of the Attack state in witch_visuals.tscn — same swing animation, but the
-    /// trigger name dodges CreatureCmd.TriggerAnim's "Attack" case, so CustomAttackSfx never plays.</summary>
     public const string SilentAttackTrigger = "AttackSilent";
 
-    /// <summary>Play the attack swing without the character's default attack SFX, so a card can
-    /// supply its own via WithAttackerFx/WithHitFx. Call after FromCard.</summary>
+    public static void EnchantShimmer() => SfxCmd.Play("event:/sfx/ui/enchant_shimmer");
+
+
     public static AttackCommand WithSilentAttack(this AttackCommand cmd) =>
         cmd.WithAttackerAnim(SilentAttackTrigger, cmd.Attacker!.Player.Character.AttackAnimDelay);
 
     private static readonly System.Reflection.FieldInfo AttackerAnimNameField =
         HarmonyLib.AccessTools.Field(typeof(AttackCommand), "_attackerAnimName");
 
-    /// <summary>Set just the attacker anim delay — the per-hit pacing knob (each hit awaits this
-    /// before damage) — keeping whatever anim trigger is already set (Attack, AttackSilent, ...).
-    /// Call after FromCard; combine with OnlyPlayAnimOnce for the fastest multi-hit rattle.</summary>
     public static AttackCommand WithAttackDelay(this AttackCommand cmd, float time) =>
         cmd.WithAttackerAnim((string?)AttackerAnimNameField.GetValue(cmd), time);
 
     private static void Attach(Node2D? vfx) => NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(vfx);
 
-    /// <summary>Familiar summon signature: ghostly aura + summon sting. NPowerUpVfx self-attaches.
-    /// Cards using this must include NPowerUpVfx.AssetPaths in ExtraRunAssetPaths.</summary>
     public static void SummonFlourish(Creature owner)
     {
         NPowerUpVfx.CreateGhostly(owner);
         SfxCmd.Play(SummonSfx);
     }
 
-    /// <summary>Bramble-gain signature: green spore burst on the gainer (globally preloaded).</summary>
-    public static void SporePuff(Creature owner) => Attach(NSporeImpactVfx.Create(owner, WitchGreen));
 
-    /// <summary>Bramble retaliation/thorn hit: swamp-green thin slice on the target.
-    /// NThinSliceVfx is NOT globally preloaded — every Bramble-granting card registers it.</summary>
-    public static void BrambleSlice(Creature target) => Attach(NThinSliceVfx.Create(target, VfxColor.Swamp));
+    public static void SporePuff(Creature owner) => Attach(SporePuffNode(owner));
+    public static Node2D? SporePuffNode(Creature target) => NSporeImpactVfx.Create(target, WitchGreen);
 
-    /// <summary>Hex signature: occult gaze + doom sting on the target (globally preloaded).</summary>
+    public static void BrambleSlice(Creature target) => Attach(BrambleSliceNode(target));
+    public static Node2D? BrambleSliceNode(Creature target) => NThinSliceVfx.Create(target, VfxColor.Swamp);
+
     public static void HexGaze(Creature target)
     {
         VfxCmd.PlayOnCreatureCenter(target, VfxCmd.gazePath);
         NDebugAudioManager.Instance?.Play(HexSfx);
     }
 
-    /// <summary>Hex explosion signature: purple ground fire on the target (globally preloaded via Witch.ExtraAssetPaths).</summary>
-    public static void PurpleFlame(Creature target) => Attach(NGroundFireVfx.Create(target, VfxColor.Purple));
-    public static void RedFlame(Creature target) => Attach(NGroundFireVfx.Create(target));
 
-    /// <summary>Green gas burst (globally preloaded) — plague/rot effects.</summary>
-    public static void GreenGas(Creature target) => Attach(NGaseousImpactVfx.Create(target, WitchGreen));
+    public static void PurpleFlame(Creature target) => Attach(PurpleFlameNode(target));
+    public static Node2D? PurpleFlameNode(Creature target) => NGroundFireVfx.Create(target, VfxColor.Purple);
 
-    /// <summary>Sparkle sting for in-combat card/potion upgrades (base NCardUpgradeVfx is silent).</summary>
-    public static void EnchantShimmer() => SfxCmd.Play("event:/sfx/ui/enchant_shimmer");
+    public static void RedFlame(Creature target) => Attach(RedFlameNode(target));
+    public static Node2D? RedFlameNode(Creature target) => NGroundFireVfx.Create(target);
 
-    /// <summary>Potion-splash visual with custom tint.</summary>
+    public static void GreenGas(Creature target) => Attach(GreenGasNode(target));
+    public static Node2D? GreenGasNode(Creature target) => NGaseousImpactVfx.Create(target, WitchGreen);
+
+
     public static void Splash(Creature target, Color tint) => NCombatRoom.Instance?.PlaySplashVfx(target, tint);
+    public static Node2D? SplashNode(Creature target, Color tint)
+    {
+        NCreature? nCreature = NCombatRoom.Instance?.GetCreatureNode(target);
+        return nCreature == null ? null : NSplashVfx.Create(nCreature.GetBottomOfHitbox(), tint);
+    }
 
-    /// <summary>
-    /// Spawn a single bare flipbook/particle sub-scene (e.g. "vfx/fire_impact/vfx_fire_burst_center_flipbook").
-    /// These building-block scenes ship dormant (emitting=false, one_shot, no script) — normally a parent
-    /// scene drives them — so this restarts the emitter and frees the node when the one-shot finishes.
-    /// Sub-scenes are not globally preloaded: cards using one should list
-    /// SceneHelper.GetScenePath(innerPath) in ExtraRunAssetPaths.
-    /// </summary>
-    public static void PlayFlipbook(string innerPath, Vector2 globalPosition, Color? tint = null, float scale = 1f)
+    public static void PlayFlipbook(string innerPath, Vector2 globalPosition, Color? tint = null, float scale = 1f) =>
+        Attach(FlipbookNode(innerPath, globalPosition, tint, scale));
+
+    public static void PlayFlipbook(string innerPath, Creature target, Color? tint = null, float scale = 1f) =>
+        Attach(FlipbookNode(innerPath, target, tint, scale));
+
+
+    public static void RipSoulImpact(Creature target) => Attach(RipSoulImpactNode(target));
+    public static Node2D? RipSoulImpactNode(Creature target)
+    {
+        NCreature? nCreature = NCombatRoom.Instance?.GetCreatureNode(target);
+        var vfx = NStarryImpactVfx.Create(nCreature!.VfxSpawnPosition);
+        if (vfx != null)
+        {
+            vfx.Modulate = new Color(0.284f, 1.353f, 1.253f);
+        }
+        return vfx;
+        
+    }
+
+    public static GpuParticles2D FlipbookNode(string innerPath, Vector2 globalPosition, Color? tint = null, float scale = 1f)
     {
         GpuParticles2D particles = MegaCrit.Sts2.Core.Assets.PreloadManager.Cache
             .GetScene(SceneHelper.GetScenePath(innerPath))
@@ -100,28 +106,24 @@ public static class WitchFx
         {
             particles.Modulate = tint.Value;
         }
-        particles.Finished += particles.QueueFree; // one-shot GPUParticles2D emits Finished when done
-        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(particles);
-        particles.Restart();
+        particles.Finished += particles.QueueFree;
+        particles.Ready += particles.Restart;
+        return particles;
     }
 
-    /// <summary>Flipbook sub-scene centered on a creature (see <see cref="PlayFlipbook(string, Vector2, Color?, float)" />).</summary>
-    public static void PlayFlipbook(string innerPath, Creature target, Color? tint = null, float scale = 1f)
+    public static GpuParticles2D? FlipbookNode(string innerPath, Creature target, Color? tint = null, float scale = 1f)
     {
         NCreature? node = NCombatRoom.Instance?.GetCreatureNode(target);
-        if (node != null)
-        {
-            PlayFlipbook(innerPath, node.VfxSpawnPosition, tint, scale);
-        }
+        return node == null ? null : FlipbookNode(innerPath, node.VfxSpawnPosition, tint, scale);
     }
 
-    public static void FlameBurst(Creature target, float scale, Color tint)
+    public static void FlameBurst(Creature target, float scale, Color? tint = null) => Attach(FlameBurstNode(target, scale, tint));
+    public static Node2D? FlameBurstNode(Creature target, float scale, Color? tint = null)
     {
-        // Fire Vfx
         NCreature? nCreature = NCombatRoom.Instance?.GetCreatureNode(target);
-        if (nCreature != null)
-        {
-            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireBurstVfx.Create(nCreature.GetBottomOfHitbox(), scale, FireOrange));
-        }
+        return nCreature == null
+            ? null
+            : NFireBurstVfx.Create(nCreature.GetBottomOfHitbox(), scale, tint ?? FireOrange);
     }
+
 }
