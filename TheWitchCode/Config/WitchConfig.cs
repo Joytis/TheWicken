@@ -9,6 +9,9 @@ internal class WitchConfig : SimpleModConfig
     [ConfigHoverTip]
     public static bool TurboWitchery { get; set; } = false;
 
+    [ConfigHoverTip]
+    public static bool BetaImages { get; set; } = false;
+
     /// <summary>Host's value, received via <see cref="TurboWitcheryMessage"/>. Null until synced.</summary>
     [ConfigIgnore]
     internal static bool? SyncedTurbo { get; set; }

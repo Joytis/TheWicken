@@ -2,5 +2,8 @@
 	"THEWITCH.mod_title": "The Witch",
 	"THEWITCH-TURBO_WITCHERY.title": "Turbo Witchery",
 	"THEWITCH-TURBO_WITCHERY.hover.title": "Turbo Witchery",
-	"THEWITCH-TURBO_WITCHERY.hover.desc": "In multiplayer, the host's setting applies to all players."
+	"THEWITCH-TURBO_WITCHERY.hover.desc": "In multiplayer, the host's setting applies to all players.",
+	"THEWITCH-BETA_IMAGES.title": "Beta Images",
+	"THEWITCH-BETA_IMAGES.hover.title": "Beta Images",
+	"THEWITCH-BETA_IMAGES.hover.desc": "Show the original beta card art instead of final art. May require a restart to fully apply."
 }
