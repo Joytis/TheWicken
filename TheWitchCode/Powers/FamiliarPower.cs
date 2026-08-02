@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Monsters;
@@ -209,13 +210,35 @@ public abstract class FamiliarPower : WitchPower
     {
         if (cardPlay.Card is WitchFamiliarCard familiarCard && ReferenceEquals(familiarCard.SourceFamiliar, this))
         {
-            AnimationRequested?.Invoke(this, familiarCard.SourceStackIndex, cardPlay.Card.Type);
+            RequestPetAnimation(familiarCard.SourceStackIndex, cardPlay.Card.Type);
         }
 
         return Task.CompletedTask;
     }
 
-    private List<Creature> FindPets(Player player) =>
+    /// <summary>Ask this power's pet at <paramref name="stackIndex" /> to play the animation PetVisuals maps to <paramref name="cardType" />. Cosmetic only.</summary>
+    protected void RequestPetAnimation(int stackIndex, CardType cardType) =>
+        AnimationRequested?.Invoke(this, stackIndex, cardType);
+
+    /// <summary>
+    /// Cosmetic only: when a token THIS familiar produced deals attack damage, the pet that produced it
+    /// plays its attack animation on each hit (fires once per hit of a multi-hit — the per-hit
+    /// counterpart of AfterAttack). Never touches game state, so firing on every MP client is fine.
+    /// </summary>
+    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+    {
+        if (dealer == Owner
+            && props.IsPoweredAttack()
+            && cardSource is WitchFamiliarCard familiarCard
+            && ReferenceEquals(familiarCard.SourceFamiliar, this))
+        {
+            RequestPetAnimation(familiarCard.SourceStackIndex, CardType.Attack);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected List<Creature> FindPets(Player player) =>
         player.PlayerCombatState!.Pets.Where(p => p.Monster?.GetType() == Pet.GetType()).ToList();
 }
 

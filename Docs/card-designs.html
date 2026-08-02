@@ -222,7 +222,7 @@ function buildHead(){
   const cols = [];
   if(dev) cols.push(`<th>Art</th>`);
   cols.push(`<th data-k="name">Card</th>`,`<th data-k="cost">Cost</th>`,`<th data-k="type">Type</th>`,`<th data-k="rarity">Rarity</th>`,`<th>Category</th>`,`<th>Text</th>`,`<th>Numbers</th>`,`<th>Upgrade</th>`);
-  if(dev) cols.push(`<th>Artist</th>`,`<th>Art Brief</th>`,`<th>Add</th>`,`<th data-k="art">Art State</th>`,`<th data-k="tested">Tested</th>`);
+  if(dev) cols.push(`<th>Artist</th>`,`<th>Art Brief</th>`,`<th>Add</th>`,`<th data-k="art">Art State</th>`,`<th data-k="tested">Tested</th>`,`<th>VFX</th>`,`<th>SFX</th>`);
   document.getElementById("head").innerHTML = cols.join("");
   document.querySelectorAll("th[data-k]").forEach(th=>{
     th.onclick=()=>{ const k=th.dataset.k; state.dir = (state.sort===k)? -state.dir : 1; state.sort=k; render(); };
@@ -406,6 +406,12 @@ function render(){
         </td>
         <td class="tcell">
           <button class="tog ${c.tested?"on":""}" data-entry="${esc(c.entry)}" title="${c.tested?"Tested — click to clear":"Not tested — click to mark tested"}">${c.tested?"✅":"❌"}</button>
+        </td>
+        <td class="tcell">
+          <button class="tog ${c.vfxPass?"on":""}" data-field="vfxPass" data-entry="${esc(c.entry)}" title="${c.vfxPass?"VFX pass done — click to clear":"VFX pass not done — click to mark done"}">${c.vfxPass?"✨":"❌"}</button>
+        </td>
+        <td class="tcell">
+          <button class="tog ${c.sfxPass?"on":""}" data-field="sfxPass" data-entry="${esc(c.entry)}" title="${c.sfxPass?"SFX pass done — click to clear":"SFX pass not done — click to mark done"}">${c.sfxPass?"🔊":"❌"}</button>
         </td>`;
     } else { var devTail = ""; }
     html += `
@@ -460,19 +466,21 @@ document.addEventListener("click", async (e)=>{
   if(MODE==="dev"){
     const tg = e.target.closest(".tog");
     if(tg){
+      const field = tg.dataset.field || "tested";
+      const api = {tested:"/api/tested", vfxPass:"/api/vfxpass", sfxPass:"/api/sfxpass"}[field];
       const entry = tg.dataset.entry;
       const card = CARDS.find(c=>c.entry===entry);
-      const next = !card.tested;
-      card.tested = next;
+      const next = !card[field];
+      card[field] = next;
       render();
       if(SERVER){
         try{
-          const r = await fetch("/api/tested",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({entry,tested:next})});
+          const r = await fetch(api,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({entry,[field]:next})});
           if(!r.ok) throw new Error(await r.text());
         }catch(err){
-          card.tested = !next; render();
+          card[field] = !next; render();
           document.body.classList.add("nosrv");
-          alert("Could not save TESTED change — is the server running?\n"+err);
+          alert(`Could not save ${field} change — is the server running?\n`+err);
         }
       } else { document.body.classList.add("nosrv"); }
       return;

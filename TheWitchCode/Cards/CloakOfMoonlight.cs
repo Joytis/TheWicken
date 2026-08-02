@@ -9,11 +9,11 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class CloakOfMoonlight : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<CloakOfMoonlightPower>(2m)
+        new PowerVar<CloakOfMoonlightPower>(1m)
     ];
 
     public CloakOfMoonlight()
-        : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

@@ -1,6 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -20,6 +21,24 @@ public static class WitchFx
     /// <summary>Poison-green tint shared by brew/bramble effects (base-game Noxious Fumes green).</summary>
     public static readonly Color WitchGreen = new("83eb85");
     public static readonly Color Purple = new("ac54b3");
+
+    /// <summary>Duplicate of the Attack state in witch_visuals.tscn — same swing animation, but the
+    /// trigger name dodges CreatureCmd.TriggerAnim's "Attack" case, so CustomAttackSfx never plays.</summary>
+    public const string SilentAttackTrigger = "AttackSilent";
+
+    /// <summary>Play the attack swing without the character's default attack SFX, so a card can
+    /// supply its own via WithAttackerFx/WithHitFx. Call after FromCard.</summary>
+    public static AttackCommand WithSilentAttack(this AttackCommand cmd) =>
+        cmd.WithAttackerAnim(SilentAttackTrigger, cmd.Attacker!.Player.Character.AttackAnimDelay);
+
+    private static readonly System.Reflection.FieldInfo AttackerAnimNameField =
+        HarmonyLib.AccessTools.Field(typeof(AttackCommand), "_attackerAnimName");
+
+    /// <summary>Set just the attacker anim delay — the per-hit pacing knob (each hit awaits this
+    /// before damage) — keeping whatever anim trigger is already set (Attack, AttackSilent, ...).
+    /// Call after FromCard; combine with OnlyPlayAnimOnce for the fastest multi-hit rattle.</summary>
+    public static AttackCommand WithAttackDelay(this AttackCommand cmd, float time) =>
+        cmd.WithAttackerAnim((string?)AttackerAnimNameField.GetValue(cmd), time);
 
     private static void Attach(Node2D? vfx) => NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(vfx);
 

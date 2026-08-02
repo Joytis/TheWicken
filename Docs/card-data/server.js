@@ -84,8 +84,9 @@ function computeArtStates(cards) {
 
 const server = http.createServer((req, res) => {
   // --- toggles ---------------------------------------------------------
-  if (req.method === "POST" && (req.url === "/api/tested" || req.url === "/api/artfinal")) {
-    const field = req.url === "/api/tested" ? "tested" : "artFinal";
+  const TOGGLE_FIELDS = { "/api/tested": "tested", "/api/artfinal": "artFinal", "/api/vfxpass": "vfxPass", "/api/sfxpass": "sfxPass" };
+  if (req.method === "POST" && TOGGLE_FIELDS[req.url]) {
+    const field = TOGGLE_FIELDS[req.url];
     const valKey = field;
     let raw = "";
     req.on("data", (c) => (raw += c));
@@ -153,6 +154,8 @@ const server = http.createServer((req, res) => {
     const states = computeArtStates(data.cards);
     data.cards.forEach((c) => {
       if (typeof c.artFinal === "undefined") c.artFinal = false;
+      if (typeof c.vfxPass === "undefined") c.vfxPass = false;
+      if (typeof c.sfxPass === "undefined") c.sfxPass = false;
       c.art = states[c.entry];
     });
     return send(res, 200, JSON.stringify(data), "application/json; charset=utf-8");
@@ -175,5 +178,5 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Witch card designs -> http://localhost:${PORT}`);
-  console.log("TESTED + Art-Final flags are saved to Docs/card-data/cards.json. Ctrl+C to stop.");
+  console.log("TESTED + Art-Final + VFX/SFX-Pass flags are saved to Docs/card-data/cards.json. Ctrl+C to stop.");
 });

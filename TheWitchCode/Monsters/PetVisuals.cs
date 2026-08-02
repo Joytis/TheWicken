@@ -84,7 +84,16 @@ public partial class PetVisuals : Node2D
     {
         if (_animationPlayer != null && _animationPlayer.HasAnimation(name))
         {
-            _animationPlayer.Play(name);
+            // Play() is a no-op when the same animation is already running (per-hit re-requests
+            // during a multi-hit) — rewind instead so every request restarts the reaction.
+            if (_animationPlayer.CurrentAnimation == name)
+            {
+                _animationPlayer.Seek(0.0, update: true);
+            }
+            else
+            {
+                _animationPlayer.Play(name);
+            }
         }
     }
 

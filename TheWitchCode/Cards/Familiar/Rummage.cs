@@ -15,7 +15,7 @@ public sealed class Rummage : WitchFamiliarCard
     ];
 
     public Rummage()
-        : base(0, CardType.Skill, CardRarity.Token, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Token, TargetType.Self)
     {
     }
 
@@ -39,9 +39,5 @@ public sealed class Rummage : WitchFamiliarCard
                 }
             }
         }
-    }
-
-    protected override void OnUpgrade()
-    {
     }
 }

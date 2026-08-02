@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Extensions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -25,7 +26,8 @@ public sealed class BagOfTeeth : WitchCard
             .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bite")
+            .WithSilentAttack()
+            .WithHitFx("vfx/vfx_attack_blunt", "event:/sfx/enemy/enemy_attacks/obscura/obscura_attack")
             .Execute(choiceContext);
     }
 

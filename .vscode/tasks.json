@@ -170,6 +170,30 @@
             "detail": "dotnet publish (assets + code deploy), then launch STS2 straight into a Witch combat with 100 energy, tailing the game log. Debugger-attachable via 'Combat + Attach'."
         },
         {
+            "label": "Debug: Launch into combat (no build)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Solo", "-WitchBootstrap", "-TailLog",
+                "-DelayMs", "4000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "No build — launch STS2 straight into a Witch combat with whatever is already deployed. Pair with 'Debug: Build + Launch FX Lab' for a second instance to iterate VFX."
+        },
+        {
             "label": "Debug: Build + Launch AutoSlay",
             "type": "process",
             "command": "powershell",
@@ -218,6 +242,54 @@
             },
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
             "detail": "dotnet build (deploys mod), then launch STS2 into the SFX/VFX browser scene, tailing the game log. Debugger-attachable via 'FX Lab + Attach'."
+        },
+        {
+            "label": "Debug: Launch FX Lab (no build)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-Solo", "-FxLab", "-TailLog",
+                "-DelayMs", "4000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "No build — launch STS2 into the SFX/VFX browser scene with whatever is already deployed. Pair with 'Debug: Launch into combat (no build)' for a second instance."
+        },
+        {
+            "label": "Debug: Publish + Launch FX Lab + Combat",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-mp.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-mp.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
+            ],
+            "dependsOn": "dotnet publish",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "dotnet publish, then launch TWO STS2 instances: FX Lab first, then Witch combat (tailing its log). For VFX iteration with a live combat reference."
         },
         {
             "label": "Workshop: Bundle",

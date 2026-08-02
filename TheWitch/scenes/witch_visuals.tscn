@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://btcqkv2sr5amu"]
+[gd_scene load_steps=22 format=3 uid="uid://btcqkv2sr5amu"]
 
 [ext_resource type="Texture2D" uid="uid://eliyyn5nk1c" path="res://TheWitch/textures/witch_idle.png" id="1_hni02"]
 [ext_resource type="Texture2D" uid="uid://ds3vpnagm15nb" path="res://TheWitch/textures/witch_attack.png" id="1_yxqrw"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yxqrw"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_silent"]
 animation = &"Attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3hfbp"]
@@ -29,6 +32,10 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_silent"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xkjgo"]
 switch_mode = 2
 advance_mode = 2
@@ -36,6 +43,8 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3hfbp"]
 states/Attack/node = SubResource("AnimationNodeAnimation_yxqrw")
 states/Attack/position = Vector2(20, 179)
+states/AttackSilent/node = SubResource("AnimationNodeAnimation_silent")
+states/AttackSilent/position = Vector2(20, 110)
 states/Dead/node = SubResource("AnimationNodeAnimation_3hfbp")
 states/Dead/position = Vector2(388, 320)
 states/Hit/node = SubResource("AnimationNodeAnimation_et516")
@@ -44,7 +53,7 @@ states/Idle/node = SubResource("AnimationNodeAnimation_8jdyg")
 states/Idle/position = Vector2(208, 200)
 states/PowerUp/node = SubResource("AnimationNodeAnimation_dno7a")
 states/PowerUp/position = Vector2(38, 261)
-transitions = ["Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_et516"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_3hfbp"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_dno7a"), "PowerUp", "Idle", SubResource("AnimationNodeStateMachineTransition_xkjgo")]
+transitions = ["Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_et516"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_3hfbp"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_dno7a"), "PowerUp", "Idle", SubResource("AnimationNodeStateMachineTransition_xkjgo"), "AttackSilent", "Idle", SubResource("AnimationNodeStateMachineTransition_silent")]
 graph_offset = Vector2(-175, 55)
 
 [sub_resource type="Animation" id="Animation_et516"]

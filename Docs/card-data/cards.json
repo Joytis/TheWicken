@@ -24,7 +24,9 @@
         "Standalone"
       ],
       "sub": [],
-      "threads": []
+      "threads": [],
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Harvest",
@@ -51,7 +53,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Strike",
@@ -76,7 +80,9 @@
         "Standalone"
       ],
       "sub": [],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bag of Teeth",
@@ -107,7 +113,9 @@
       "threads": [
         "MultiHit",
         "DebuffPayoff"
-      ]
+      ],
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Bewitching Grin",
@@ -136,7 +144,9 @@
       "threads": [
         "Weak",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Big Batch",
@@ -161,7 +171,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bind in Blood",
@@ -192,7 +204,9 @@
       "threads": [
         "OtherDebuff",
         "HPLoss"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Broom Strike",
@@ -220,7 +234,9 @@
       "threads": [
         "CostReduction",
         "SkillsMatter"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Call the Pack",
@@ -250,7 +266,9 @@
       ],
       "threads": [
         "CardGen"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Forbidden Magic",
@@ -283,7 +301,9 @@
         "DebuffPayoff",
         "Energy",
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Frenzy",
@@ -312,7 +332,9 @@
         "MultiHit",
         "Energy",
         "DelayedEffect"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Hide in a Bush",
@@ -340,7 +362,9 @@
       "sub": [
         "Brambles:Rider"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Lavender and Sage",
@@ -370,7 +394,9 @@
       ],
       "threads": [
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Needle Whip",
@@ -398,7 +424,9 @@
       "sub": [
         "Brambles:Rider"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Pocket Rats",
@@ -428,7 +456,9 @@
       "threads": [
         "CardGen",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Stony Brew",
@@ -453,7 +483,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Strike Fear",
@@ -481,7 +513,9 @@
       "sub": [],
       "threads": [
         "Vulnerable"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Tinder",
@@ -511,7 +545,9 @@
       ],
       "threads": [
         "Energy"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Trash Diving",
@@ -541,7 +577,9 @@
         "CardGen",
         "SelfExhaust",
         "Recursion"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Vexing Strike",
@@ -571,7 +609,9 @@
       ],
       "threads": [
         "OtherDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wax and Wane",
@@ -602,7 +642,9 @@
       "threads": [
         "OtherDebuff",
         "DelayedEffect"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Weathered Witch Hat",
@@ -629,7 +671,9 @@
       "sub": [],
       "threads": [
         "SkillsMatter"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wicked Brew",
@@ -654,7 +698,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bear Familiar",
@@ -682,7 +728,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bottle Barrage",
@@ -714,7 +762,9 @@
       "threads": [
         "MultiHit",
         "Snowball"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Cat Familiar",
@@ -742,7 +792,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Circle of Rot",
@@ -772,7 +824,9 @@
         "Weak",
         "Drawback",
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Cloak of Moonlight",
@@ -802,7 +856,9 @@
       ],
       "threads": [
         "BlockEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Command",
@@ -831,7 +887,9 @@
       ],
       "threads": [
         "CardGen"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Creeping Vines",
@@ -860,7 +918,9 @@
       ],
       "threads": [
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Crow Familiar",
@@ -888,7 +948,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Deep Roots",
@@ -917,7 +979,9 @@
       ],
       "threads": [
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Eye of Newt",
@@ -944,7 +1008,9 @@
       "sub": [
         "Potions:UsePayoff"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Grind Down",
@@ -971,7 +1037,9 @@
       ],
       "threads": [
         "ExhaustOutlet"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Hasty Brew",
@@ -998,7 +1066,9 @@
       ],
       "threads": [
         "Energy"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Herbal Brew",
@@ -1023,7 +1093,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Hidden in Smoke",
@@ -1050,7 +1122,9 @@
       ],
       "threads": [
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Light the Candle",
@@ -1078,7 +1152,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Moonbeam",
@@ -1105,7 +1181,9 @@
       "sub": [],
       "threads": [
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Overrun",
@@ -1133,7 +1211,9 @@
       "sub": [],
       "threads": [
         "PlayVolume"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Pact of Agony",
@@ -1165,7 +1245,9 @@
       "threads": [
         "AoE",
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Pact of Fury",
@@ -1196,7 +1278,9 @@
         "Drawback",
         "SelfExhaust",
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Pick Clean",
@@ -1225,7 +1309,9 @@
       ],
       "threads": [
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Prices Paid",
@@ -1255,7 +1341,9 @@
       ],
       "threads": [
         "HPLoss"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Read the Bones",
@@ -1287,7 +1375,9 @@
         "DelayedEffect",
         "Energy",
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Refuse Pile",
@@ -1317,7 +1407,9 @@
       ],
       "threads": [
         "CardGen"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Ritual Sacrifice",
@@ -1351,7 +1443,9 @@
       "threads": [
         "Draw",
         "OtherDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rot Bloom",
@@ -1382,7 +1476,9 @@
       ],
       "threads": [
         "Weak"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rotting Roots",
@@ -1413,7 +1509,9 @@
         "TurnEngine",
         "OtherDebuff",
         "AoE"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Salt and Ash",
@@ -1440,7 +1538,9 @@
       "sub": [],
       "threads": [
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Share the Brew",
@@ -1465,7 +1565,9 @@
       "sub": [
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Sprouts",
@@ -1495,7 +1597,9 @@
       ],
       "threads": [
         "CardGen"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Stuck in a Bush",
@@ -1526,7 +1630,9 @@
       "threads": [
         "Drawback",
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Taste of Blood",
@@ -1555,7 +1661,9 @@
         "AttacksMatter",
         "CostReduction",
         "BurstFinisher"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Toil and Trouble",
@@ -1582,7 +1690,9 @@
       "sub": [],
       "threads": [
         "MultiHit"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Torment",
@@ -1610,7 +1720,9 @@
       "sub": [],
       "threads": [
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Volatile Vapors",
@@ -1638,7 +1750,9 @@
         "Potions:UsePayoff",
         "Potions:CreatePayoff"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wild Growth",
@@ -1665,7 +1779,9 @@
       ],
       "threads": [
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wolf Familiar",
@@ -1693,7 +1809,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "A Little Sip",
@@ -1723,7 +1841,9 @@
       "threads": [
         "StatRamp",
         "Draw"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Ambush!",
@@ -1751,7 +1871,9 @@
       "threads": [
         "AoE",
         "AutoPlay"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bonfire",
@@ -1780,7 +1902,9 @@
       "threads": [
         "Energy",
         "ExhaustOutlet"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bottle Wall",
@@ -1809,7 +1933,9 @@
       ],
       "threads": [
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Bottomless Cauldron",
@@ -1836,7 +1962,9 @@
         "Potions:UsePayoff",
         "Potions:Brew"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Brambleburst",
@@ -1868,7 +1996,9 @@
         "AoE",
         "MultiHit",
         "BurstFinisher"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Broken Pact",
@@ -1898,7 +2028,9 @@
       "threads": [
         "StatRamp",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Capture Soul",
@@ -1929,7 +2061,9 @@
       "threads": [
         "OtherDebuff",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Cauldron Dance",
@@ -1956,7 +2090,9 @@
         "Draw",
         "SelfExhaust",
         "SkillsMatter"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Crystal Bottle",
@@ -1985,7 +2121,9 @@
       ],
       "threads": [
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Cursed Spellbook",
@@ -2019,7 +2157,9 @@
         "Draw",
         "Drawback",
         "SelfDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Distill",
@@ -2044,7 +2184,9 @@
       "sub": [
         "Potions:Economy"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Embrace the Wilds",
@@ -2073,7 +2215,9 @@
         "CardGen",
         "TurnEngine",
         "Drawback"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Extract Life",
@@ -2100,7 +2244,9 @@
       "sub": [],
       "threads": [
         "ExhaustOutlet"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Gather Herbs",
@@ -2127,7 +2273,9 @@
       "sub": [
         "Potions:Economy"
       ],
-      "threads": []
+      "threads": [],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Hexblast",
@@ -2159,7 +2307,9 @@
         "AoE",
         "OtherDebuff",
         "MultiHit"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Message in a Bottle",
@@ -2187,7 +2337,9 @@
       "threads": [
         "SelfExhaust",
         "DelayedEffect"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Mulch",
@@ -2215,7 +2367,9 @@
         "CardGen",
         "CostReduction",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Owl Familiar",
@@ -2243,7 +2397,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Plaguestorm",
@@ -2278,7 +2434,9 @@
       "threads": [
         "AoE",
         "MultiHit"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Polymorph",
@@ -2307,7 +2465,9 @@
       ],
       "threads": [
         "Transform"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Primal Form",
@@ -2336,7 +2496,9 @@
         "TurnEngine",
         "AttacksMatter",
         "Drawback"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rat Familiar",
@@ -2364,7 +2526,9 @@
       "threads": [
         "CardGen",
         "TurnEngine"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rattling Bottles",
@@ -2394,7 +2558,9 @@
       ],
       "threads": [
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Ritual Casting",
@@ -2420,7 +2586,9 @@
       "threads": [
         "TurnEngine",
         "CostReduction"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Witchcraft",
@@ -2447,7 +2615,9 @@
       ],
       "threads": [
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Dark Omen",
@@ -2479,7 +2649,9 @@
       "threads": [
         "OtherDebuff",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Ferocity",
@@ -2497,7 +2669,7 @@
       },
       "upgrade": "Damage +2",
       "note": "Cat familiar token: one 7-damage hit per Attack you played this turn, INCLUDING itself (always ≥1).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "mechanics": [
         "Familiars"
@@ -2512,7 +2684,9 @@
         "MultiHit",
         "Snowball",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Gnash",
@@ -2543,7 +2717,9 @@
       "threads": [
         "Snowball",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Hibernate",
@@ -2574,7 +2750,9 @@
       "threads": [
         "SelfExhaust",
         "DelayedEffect"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Knowledge",
@@ -2603,7 +2781,9 @@
       "threads": [
         "CardGen",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Mutilate",
@@ -2634,7 +2814,9 @@
       "threads": [
         "SelfExhaust",
         "Vulnerable"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Nimble",
@@ -2666,7 +2848,9 @@
       "threads": [
         "Energy",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rats",
@@ -2697,7 +2881,9 @@
       "threads": [
         "Draw",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rummage",
@@ -2728,7 +2914,9 @@
       "threads": [
         "SelfExhaust",
         "Recursion"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Shiny!",
@@ -2756,7 +2944,9 @@
       "threads": [
         "Energy",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Swarm",
@@ -2788,7 +2978,9 @@
       "threads": [
         "CardGen",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wisdom",
@@ -2820,7 +3012,9 @@
         "Draw",
         "Discard",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Catalyst",
@@ -2847,7 +3041,9 @@
       ],
       "threads": [
         "CardGen"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Rip Soul",
@@ -2879,7 +3075,9 @@
       ],
       "threads": [
         "OtherDebuff"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     },
     {
       "name": "Wormy",
@@ -2908,7 +3106,9 @@
         "HPLoss",
         "Retain",
         "SelfExhaust"
-      ]
+      ],
+      "vfxPass": false,
+      "sfxPass": false
     }
   ]
 }
