@@ -27,7 +27,7 @@ public sealed class BagOfTeeth : WitchCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithSilentAttack()
-            .WithHitFx("vfx/vfx_attack_blunt", "event:/sfx/enemy/enemy_attacks/obscura/obscura_attack")
+            .WithHitFx(VfxCmd.bluntPath, "event:/sfx/enemy/enemy_attacks/obscura/obscura_attack")
             .Execute(choiceContext);
     }
 

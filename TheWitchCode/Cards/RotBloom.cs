@@ -36,7 +36,7 @@ public sealed class RotBloom : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_thrash", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.thrashPath, null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
         if (!cardPlay.Target.IsAlive)

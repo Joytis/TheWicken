@@ -43,7 +43,7 @@ public sealed class BottleBarrage : WitchCard
             .WithHitCount(potions)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_rock_shatter", null, "blunt_attack.mp3")
+            .WithHitFx(VfxCmd.rockShatterPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

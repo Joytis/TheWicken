@@ -31,7 +31,7 @@ public sealed class Frenzy : WitchCard
             .WithHitCount(2)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_scratch")
+            .WithHitFx(VfxCmd.scratchPath)
             .Execute(choiceContext);
 
         await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["EnergyNextTurnPower"].BaseValue, Owner.Creature, this);

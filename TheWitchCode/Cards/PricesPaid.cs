@@ -33,7 +33,7 @@ public sealed class PricesPaid : WitchCard
         // Lose HP.
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
-        VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_bloody_impact");
+        VfxCmd.PlayOnCreatureCenter(Owner.Creature, VfxCmd.bloodyImpactPath);
         SfxCmd.Play("slash_attack.mp3");
 
         // Deal damage.
@@ -41,7 +41,7 @@ public sealed class PricesPaid : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bloody_impact")
+            .WithHitFx(VfxCmd.bloodyImpactPath)
             .Execute(choiceContext);
 
         // Make brews.

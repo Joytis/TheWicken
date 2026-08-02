@@ -54,8 +54,8 @@
         "Potions:Brew"
       ],
       "threads": [],
-      "vfxPass": false,
-      "sfxPass": false
+      "vfxPass": true,
+      "sfxPass": true
     },
     {
       "name": "Strike",
@@ -81,7 +81,7 @@
       ],
       "sub": [],
       "threads": [],
-      "vfxPass": false,
+      "vfxPass": true,
       "sfxPass": false
     },
     {

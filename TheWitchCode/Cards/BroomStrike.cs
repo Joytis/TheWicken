@@ -27,7 +27,7 @@ public sealed class BroomStrike : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
+            .WithHitFx(VfxCmd.heavyBluntPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);
 
         await PowerCmd.Apply<NextSkillDiscountPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);

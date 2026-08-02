@@ -25,7 +25,7 @@ public sealed class Rats : WitchFamiliarCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bite")
+            .WithHitFx(VfxCmd.bitePath)
             .Execute(choiceContext);
 
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);

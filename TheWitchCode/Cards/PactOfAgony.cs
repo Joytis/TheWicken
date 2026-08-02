@@ -32,7 +32,7 @@ public sealed class PactOfAgony : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponents(CombatState!)
-            .WithHitFx("vfx/vfx_attack_slash", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.slashPath, null, "heavy_attack.mp3")
             .Execute(choiceContext);
     }
 

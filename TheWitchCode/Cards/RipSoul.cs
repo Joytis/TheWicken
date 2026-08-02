@@ -38,7 +38,7 @@ public sealed class RipSoul : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_scream", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.screamVfx, null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
         await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);

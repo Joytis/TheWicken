@@ -35,7 +35,7 @@ public sealed class Gnash : WitchFamiliarCard
         await DamageCmd.Attack(DynamicVars.CalculatedDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bite")
+            .WithHitFx(VfxCmd.bitePath)
             .Execute(choiceContext);
     }
 

@@ -51,7 +51,7 @@ public sealed class Plaguestorm : WitchCard
             .WithHitCount(hits)
             .FromCard(this)
             .TargetingRandomOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
     }
 

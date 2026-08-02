@@ -55,7 +55,7 @@ public sealed class Harvest : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
         var rng = Owner.RunState.Rng.CombatPotionGeneration;

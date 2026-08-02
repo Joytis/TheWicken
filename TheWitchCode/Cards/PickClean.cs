@@ -24,7 +24,7 @@ public sealed class PickClean : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_scratch")
+            .WithHitFx(VfxCmd.scratchPath)
             .Execute(choiceContext);
 
         int familiars = Familiars.Count(Owner.Creature);

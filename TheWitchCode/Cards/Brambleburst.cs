@@ -31,7 +31,7 @@ public sealed class Brambleburst : WitchCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_thrash", null, "blunt_attack.mp3")
+            .WithHitFx(VfxCmd.thrashPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

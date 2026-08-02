@@ -26,7 +26,7 @@ public sealed class BrokenPact : WitchCard
         bool sacrificed = await Familiars.RemoveRandom(Owner.Creature, Owner.RunState.Rng.CombatTargets);
         if (sacrificed)
         {
-            VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_spooky_scream");
+            VfxCmd.PlayOnCreatureCenter(Owner.Creature, VfxCmd.spookyScreamVfx);
             await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
         }
     }

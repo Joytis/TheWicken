@@ -33,7 +33,7 @@ public sealed class Command : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
         // One pool entry per stack, so Crow ×2 counts as two familiars (and can produce twice).

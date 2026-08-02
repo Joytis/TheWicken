@@ -34,7 +34,7 @@ public sealed class ForbiddenMagic : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_starry_impact", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.starryImpactVfx, null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
         if(wasHexed)
