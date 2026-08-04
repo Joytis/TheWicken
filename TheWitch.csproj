@@ -45,6 +45,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Remove=".godot/**" />
         <Compile Remove="gamedata/**" />
         <Compile Remove="TheWitch/**" />
         <Compile Remove="materials/**" />

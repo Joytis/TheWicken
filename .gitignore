@@ -1,6 +1,13 @@
 .godot/
 bin/
 /gamedata/
+
+# Junctions into gamedata/ so the Godot editor resolves base-game res:// paths
+# (recreate with: New-Item -ItemType Junction <name> -Target gamedata\<name>)
+/scenes/
+/materials/
+/shaders/
+/images/
 /android/
 .git/
 .idea/

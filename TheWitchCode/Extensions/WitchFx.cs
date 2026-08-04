@@ -18,6 +18,7 @@ public static class WitchFx
 
     public static readonly Color WitchGreen = new("83eb85");
 
+    public static readonly Color White = new("ffffff");
     public static readonly Color Purple = new("ac54b3");
     public static readonly Color FireOrange = new("ff8b57");
     public static readonly Color RummageBrown = new ("743323");
