@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01",
+  "generated": "2026-08-05",
   "cards": [
     {
       "name": "Defend",
@@ -17,6 +17,8 @@
       "note": "",
       "tested": true,
       "artFinal": true,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -42,6 +44,8 @@
       "note": "Harvest: deal damage; on unblocked damage, create a random potion from a HARD-CODED loot table (Herbal Brew pattern — not a live catalog query), so the pool is tuned per card.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Potions"
       ],
@@ -69,6 +73,8 @@
       "note": "The only difference between the starting Strike cards are portrait, attack vfx, and color.",
       "tested": true,
       "artFinal": true,
+      "vfxPass": true,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -95,6 +101,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Hex"
       ],
@@ -126,6 +134,8 @@
       "note": "Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -152,6 +162,8 @@
       "note": "Big Batch: one cauldron, many bottles — create a batch of Noxious Brews.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Potions"
       ],
@@ -178,8 +190,10 @@
       },
       "upgrade": "Hex +1",
       "note": "Bind in Blood: pay your own blood to seed the target with Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Hex"
       ],
@@ -210,6 +224,8 @@
       "note": "Broom Strike: swat with the broom; the follow-through sweeps your next Skill in cheaper.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -239,6 +255,8 @@
       "note": "Call the Pack: hunker down behind the wolves — gain Block, shuffle Gnash tokens into the Draw Pile.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -270,6 +288,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -301,6 +321,8 @@
       "note": "Frenzy: two quick swipes now, and the rush banks 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -331,6 +353,8 @@
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -359,6 +383,8 @@
       "note": "Lavender and Sage: draw a card and grow a thicket of Brambles.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -389,6 +415,8 @@
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -416,6 +444,8 @@
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -444,6 +474,8 @@
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -472,6 +504,8 @@
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -499,6 +533,8 @@
       "note": "Tinder: burn a bramble as kindling for Energy.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -527,6 +563,8 @@
       "note": "Trash Diving: dig one card back out of the discard pile (Rummage/base-game Dredge pattern) and a Rats scurries out with it — one Rats is generated straight into your hand.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -560,6 +598,8 @@
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Hex"
       ],
@@ -590,6 +630,8 @@
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -620,6 +662,8 @@
       "note": "Weathered Witch Hat: Block, then play a random Skill from your draw pile (free auto-play; nothing happens if the pile holds none).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -645,6 +689,8 @@
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -670,6 +716,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -702,6 +750,8 @@
       "note": "Hurl the whole belt: one 10-damage hit per potion you've brewed this combat.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Potions"
       ],
@@ -730,6 +780,8 @@
       "note": "Summons a cosmetic cat pet alongside the familiar power.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -761,6 +813,8 @@
       "note": "Multiplayer-only. Co-op rot ritual (MP-only): you and every ally hunker down (Block) but soak up the rot (Weak), while all enemies choke on it too.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -790,6 +844,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars",
         "Potions"
@@ -820,6 +876,8 @@
       "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random familiars each do their card production once.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -849,6 +907,8 @@
       "note": "Spend X energy to pile Brambles on yourself, 7 at a time, X times — a fast way to stack a big Bramble count.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -876,6 +936,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -906,6 +968,8 @@
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Brambles"
       ],
@@ -935,6 +999,8 @@
       "note": "Eye of Newt (was Experiment): a Power that makes your potions hit harder.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Potions"
       ],
@@ -960,6 +1026,8 @@
       "note": "Grind Down: Exhaust a card from your hand and grind it into a potion.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -987,6 +1055,8 @@
       "note": "Hasty Brew: fast mana — brew an Energy Potion.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1014,6 +1084,8 @@
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1037,8 +1109,10 @@
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1060,7 +1134,7 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create a Vial of Smoke. Upgrade 2 cards in your Hand.",
+      "text": "Create a Vial of Smoke. Upgrade 2 random cards in your Hand.",
       "numbers": {
         "Cards": 2
       },
@@ -1068,6 +1142,8 @@
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
       "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1096,6 +1172,8 @@
       "note": "Moonbeam: strike, then leave the beam on the target — it takes the same damage again at the start of each of your turns (<see cref=\"MoonbeamPower\" />, stacks on repeat plays).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1124,6 +1202,8 @@
       "note": "Overrun: mark one enemy for the pack — every Familiar card played this turn tramples it again.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -1152,6 +1232,8 @@
       "note": "Pact of Agony: hex yourself to lash the whole board.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1184,6 +1266,8 @@
       "note": "Multiplayer-only. Co-op (MP-only): take 5 Weak onto yourself so every other ally gains Strength.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1214,6 +1298,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -1244,6 +1330,8 @@
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1274,6 +1362,8 @@
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1306,6 +1396,8 @@
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
       "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -1336,6 +1428,8 @@
       "note": "Only gains Block if a Familiar was actually sacrificed.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars",
         "Hex"
@@ -1371,6 +1465,8 @@
       "note": "Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1400,6 +1496,8 @@
       "note": "Rotting Roots: a slow rot — every turn all enemies wither and grow hexed.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1423,14 +1521,16 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 8 Block. Gain {BonusBlock:diff()} extra Block if you have a debuff.",
+      "text": "Gain 9 Block. Remove Unstable from a random Potion.",
       "numbers": {
-        "Block": 8
+        "Block": 9
       },
-      "upgrade": "Block +3, BonusBlock +2",
-      "note": "Salt and Ash: Block, plus bonus Block if you're carrying a debuff.",
-      "tested": true,
+      "upgrade": "Block +3",
+      "note": "Salt and Ash: Block, and stabilize a random Unstable potion.",
+      "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1456,6 +1556,8 @@
       "note": "Multiplayer-only. Co-op (MP-only): pass a round of brews — you and every ally each gain a random potion.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1484,6 +1586,8 @@
       "note": "Sprouts: a small guard that reseeds itself — block + Brambles, and a copy of this card sprouts in your Discard pile (Anger pattern).",
       "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Brambles"
       ],
@@ -1514,6 +1618,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Brambles"
       ],
@@ -1544,6 +1650,8 @@
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1565,14 +1673,16 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage twice. Give a random card in your Draw Pile Replay {Replay}.",
+      "text": "Deal 5 damage twice. A random card in your Draw Pile gains Replay {Replay:diff()}.",
       "numbers": {
         "Damage": 5
       },
       "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1601,6 +1711,8 @@
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
       "tested": true,
       "artFinal": true,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1628,6 +1740,8 @@
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1654,6 +1768,8 @@
       "note": "Exhausts (until upgraded).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Brambles"
       ],
@@ -1681,6 +1797,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -1711,6 +1829,8 @@
       "note": "A Little Sip: a Power that heals 1 HP whenever you use a potion.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1741,6 +1861,8 @@
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1770,6 +1892,8 @@
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
       "tested": true,
       "artFinal": true,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],
@@ -1798,6 +1922,8 @@
       "note": "Bottle Wall: gain Block and brew up a Fortifier potion.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1825,6 +1951,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -1855,6 +1983,8 @@
       "note": "Hits once per Bramble; does nothing if you have no Brambles.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Brambles"
       ],
@@ -1886,6 +2016,8 @@
       "note": "Broken Pact: end a familiar's service and take its strength for your own.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -1908,15 +2040,17 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. Apply 1 Hex. If Fatal, Permanently increase this card's hex by 1.",
+      "text": "Deal 10 damage. Apply 1 Hex. If Fatal, Permanently increase this card's Hex by 1.",
       "numbers": {
         "Hex": 1,
         "Damage": 10
       },
       "upgrade": "Damage +4",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -1945,6 +2079,8 @@
       "note": "",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -1974,6 +2110,8 @@
       "note": "Crystal Bottle: a Power — the next potion you use becomes a Buff that repeats its effect each turn.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2005,6 +2143,8 @@
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -2035,6 +2175,8 @@
       "note": "Distill (renamed from Brew): replace a random belt potion (non-Rares prioritized) with a random RARE non-healing potion of the same orientation (see <see cref=\"PotionUpgrade\" />).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2056,10 +2198,12 @@
       "target": "Self",
       "text": "Summon {Familiars:diff()} random Familiars. Draw {DrawReduction} fewer cards at the start of each turn.",
       "numbers": {},
-      "upgrade": "Familiars +1",
+      "upgrade": "Familiars +1, DrawReduction +1",
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -2091,6 +2235,8 @@
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -2118,6 +2264,8 @@
       "note": "Copy the next potion you create this combat.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2146,6 +2294,8 @@
       "note": "Hexblast: blast every enemy, then lay Hex on all of them.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex"
       ],
@@ -2175,6 +2325,8 @@
       "note": "Message in a Bottle: bottle a chosen card from your hand into a Bottled Message potion; using the potion returns the card to your hand.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2203,6 +2355,8 @@
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
       "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -2231,6 +2385,8 @@
       "note": "Summons a cosmetic owl pet alongside the familiar power.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -2264,6 +2420,8 @@
       "note": "Plaguestorm (was Plague): hex the whole board, then the storm strikes — one hit against a random enemy for each Rats card played this combat.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Hex",
         "Familiars"
@@ -2296,6 +2454,8 @@
       "note": "Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -2325,6 +2485,8 @@
       "note": "Primal Form: shed the skin, keep the fury — your first few Attacks each turn are played an additional time.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -2352,6 +2514,8 @@
       "note": "Exhausts.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Familiars"
       ],
@@ -2382,6 +2546,8 @@
       "note": "Rattling Bottles: an attack that also crams every empty potion slot full of rocks.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2404,12 +2570,14 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Whenever you play a card that costs 2 or more, a random card in your Hand is free to play this turn.",
+      "text": "Whenever you play a card that costs [E] [E] or more, a random card in your Hand is free to play this turn.",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Ritual Casting: a Power — big Skills each unlock a random free card this turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "None"
       ],
@@ -2436,6 +2604,8 @@
       "note": "Witchcraft: spend X Energy, create X random potions.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2465,6 +2635,8 @@
       "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex a single target.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars",
         "Hex"
@@ -2497,8 +2669,10 @@
       },
       "upgrade": "Damage +2",
       "note": "Cat familiar token: one 7-damage hit per Attack you played this turn, INCLUDING itself (always ≥1).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2531,6 +2705,8 @@
       "note": "Wolf familiar token.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2553,15 +2729,17 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain 15 Block. Next turn, gain 10 Vigor.",
+      "text": "Gain 15 Block. Next turn, gain 3 Strength.",
       "numbers": {
-        "VigorNextTurn": 10,
+        "StrengthNextTurn": 3,
         "Block": 15
       },
-      "upgrade": "Block +3, VigorNextTurn +3",
-      "note": "Bear familiar token: den up — block now, wake up swinging with Vigor next turn.",
-      "tested": true,
+      "upgrade": "Block +3, StrengthNextTurn +1",
+      "note": "Bear familiar token: den up — block now, wake up stronger next turn.",
+      "tested": false,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2590,6 +2768,8 @@
       "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2622,6 +2802,8 @@
       "note": "Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2653,6 +2835,8 @@
       "note": "Cat familiar token: feline agility bottled as tempo — gain Energy and Block.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2683,8 +2867,10 @@
       },
       "upgrade": "Damage +2",
       "note": "Rat familiar token (was Scavengers): tiny attack that cycles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2703,7 +2889,7 @@
       "name": "Rummage",
       "entry": "RUMMAGE",
       "file": "TheWitchCode/Cards/Familiar/Rummage.cs",
-      "cost": 0,
+      "cost": 1,
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
@@ -2711,10 +2897,12 @@
       "numbers": {
         "Cards": 1
       },
-      "upgrade": "custom (see code)",
+      "upgrade": "none",
       "note": "Rat familiar token: dig a card back out of the discard pile (base-game Dredge pattern).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2734,16 +2922,18 @@
       "name": "Shiny!",
       "entry": "SHINY",
       "file": "TheWitchCode/Cards/Familiar/Shiny.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Put a card from your Draw Pile into your Hand.",
+      "text": "Create a random Treasure.",
       "numbers": {},
-      "upgrade": "Cost -1",
-      "note": "Crow familiar token: pluck a shiny — fetch a chosen card from the Draw Pile.",
-      "tested": true,
+      "upgrade": "custom (see code)",
+      "note": "Crow familiar token: the Crow drags home a shiny — create a random Treasure potion.",
+      "tested": false,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2772,8 +2962,10 @@
       },
       "upgrade": "none",
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2806,6 +2998,8 @@
       "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Familiars"
       ],
@@ -2836,6 +3030,8 @@
       "note": "Catalyst: the Witch's unique Ancient card (granted by Dusty Tome — any <c>CardRarity.Ancient</c> card in the pool outside the transcendence map qualifies).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
       "mechanics": [
         "Potions"
       ],
@@ -2866,6 +3062,8 @@
       "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and one random potion (any non-healing potion the Witch can roll, any rarity).",
       "tested": false,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "Hex",
         "Potions"
@@ -2897,6 +3095,8 @@
       "note": "Wormy: a playable nuisance status (from Wormy Apple).",
       "tested": true,
       "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
       "mechanics": [
         "None"
       ],

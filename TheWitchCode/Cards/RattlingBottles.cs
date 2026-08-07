@@ -34,7 +34,7 @@ public sealed class RattlingBottles : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_rock_shatter", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.rockShatterPath, null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
         await Cmd.Wait(0.2f);

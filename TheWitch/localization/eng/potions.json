@@ -1,4 +1,4 @@
-{
+﻿{
   "THEWITCH-CURSED_BOTTLE.title": "Cursed Bottle",
   "THEWITCH-CURSED_BOTTLE.description": "Apply [blue]{HexPower}[/blue] [gold]Hex[/gold].",
   "THEWITCH-OMINOUS_FLASK.title": "Ominous Flask",
@@ -36,5 +36,13 @@
   "THEWITCH-POTION_SHAPED_PEBBLE.description": "Deal [blue]{Damage}[/blue] damage.",
   "THEWITCH-POTION_SHAPED_PEBBLE.title": "Potion-Shaped Pebble",
   "THEWITCH-EMBER_JAR.title": "Ember Jar",
-  "THEWITCH-EMBER_JAR.description": "Deal [blue]{Damage}[/blue] damage."
+  "THEWITCH-EMBER_JAR.description": "Deal [blue]{Damage}[/blue] damage.",
+  "THEWITCH-POLISHED_BOTTLECAP.title": "Polished Bottlecap",
+  "THEWITCH-POLISHED_BOTTLECAP.description": "Deal [blue]{Damage}[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]{Gold}[/blue] [gold]Gold[/gold] instead.",
+  "THEWITCH-SHINY_HAIRPIN.title": "Shiny Hairpin",
+  "THEWITCH-SHINY_HAIRPIN.description": "Deal [blue]{Damage}[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]{Gold}[/blue] [gold]Gold[/gold] instead.",
+  "THEWITCH-FOREIGN_COIN.title": "Foreign Coin",
+  "THEWITCH-FOREIGN_COIN.description": "Deal [blue]{Damage}[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]{Gold}[/blue] [gold]Gold[/gold] instead.",
+  "THEWITCH-IMPECCABLE_SILVERWARE.title": "Impeccable Silverware",
+  "THEWITCH-IMPECCABLE_SILVERWARE.description": "Deal [blue]{Damage}[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]{Gold}[/blue] [gold]Gold[/gold] instead."
 }

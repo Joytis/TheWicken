@@ -187,6 +187,46 @@
           "path": "TheWitch/images/potions/ember_jar.png"
         },
         {
+          "name": "Polished Bottlecap",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Treasure: deal 5 damage, or sell to the shopkeeper for 15 Gold. (Card-only payload: Shiny!)",
+          "path": "TheWitch/images/potions/polished_bottlecap.png"
+        },
+        {
+          "name": "Shiny Hairpin",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Treasure: deal 5 damage, or sell to the shopkeeper for 15 Gold. (Card-only payload: Shiny!)",
+          "path": "TheWitch/images/potions/shiny_hairpin.png"
+        },
+        {
+          "name": "Foreign Coin",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Big Treasure: deal 7 damage, or sell to the shopkeeper for 30 Gold. (Card-only payload: Shiny!+)",
+          "path": "TheWitch/images/potions/foreign_coin.png"
+        },
+        {
+          "name": "Impeccable Silverware",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Token",
+          "orientation": "Offensive",
+          "effect": "Big Treasure: deal 7 damage, or sell to the shopkeeper for 30 Gold. (Card-only payload: Shiny!+)",
+          "path": "TheWitch/images/potions/impeccable_silverware.png"
+        },
+        {
           "name": "Bear Fur",
           "artist": "",
           "done": false,

@@ -1,4 +1,8 @@
 {
   "THEWITCH-UNSTABLE.title": "Unstable",
-  "THEWITCH-UNSTABLE.description": "At the end of combat, this potion explodes."
+  "THEWITCH-UNSTABLE.description": "At the end of combat, this potion explodes.",
+  "THEWITCH-TREASURE.title": "Treasure",
+  "THEWITCH-TREASURE.description": "Deal [blue]5[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]15[/blue] [gold]Gold[/gold] instead.",
+  "THEWITCH-BIG_TREASURE.title": "Big Treasure",
+  "THEWITCH-BIG_TREASURE.description": "Deal [blue]7[/blue] damage.\nCan be sold to the [gold]Merchant[/gold] for [blue]30[/blue] [gold]Gold[/gold] instead."
 }

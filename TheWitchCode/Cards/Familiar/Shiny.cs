@@ -1,32 +1,47 @@
-using System.Linq;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Potions;
+using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Potions.Treasures;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Crow familiar token: pluck a shiny — fetch a chosen card from the Draw Pile. Exhausts.</summary>
+/// <summary>Crow familiar token: the Crow drags home a shiny — create a random Treasure potion.</summary>
 public sealed class Shiny : WitchFamiliarCard
 {
+    // Resolved lazily: ModelDb isn't populated when static initializers can run.
+    private static List<PotionModel> Treasures => [
+        ModelDb.Potion<PolishedBottlecap>(),
+        ModelDb.Potion<ShinyHairpin>(),
+    ];
+
+    private static List<PotionModel> BigTreasures => [
+        ModelDb.Potion<ForeignCoin>(),
+        ModelDb.Potion<ImpeccableSilverware>(),
+    ];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        new HoverTip(
+            new LocString("static_hover_tips", IsUpgraded ? "THEWITCH-BIG_TREASURE.title" : "THEWITCH-TREASURE.title"),
+            new LocString("static_hover_tips", IsUpgraded ? "THEWITCH-BIG_TREASURE.description" : "THEWITCH-TREASURE.description")),
+    ];
+
     public Shiny()
-        : base(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+        : base(0, CardType.Skill, CardRarity.Token, TargetType.Self)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CardModel? chosen = (await CardSelectCmd.FromCombatPile(
-            choiceContext,
-            PileType.Draw.GetPile(Owner),
-            Owner,
-            new CardSelectorPrefs(SelectionScreenPrompt, 1))).FirstOrDefault();
-        if (chosen != null)
-        {
-            await CardPileCmd.Add(chosen, PileType.Hand);
-        }
+        List<PotionModel> pool = IsUpgraded ? BigTreasures : Treasures;
+        PotionModel pick = Owner.RunState.Rng.CombatPotionGeneration.NextItem(pool)!;
+        await Witch.ProducePotion(pick, Owner);
     }
 
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade()
+    {
+    }
 }

@@ -48,5 +48,8 @@ public sealed class EmbraceTheWilds : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars["Familiars"].UpgradeValueBy(1m);
+    protected override void OnUpgrade() {
+        DynamicVars["Familiars"].UpgradeValueBy(1m);
+        DynamicVars["DrawReduction"].UpgradeValueBy(1m);
+    }
 }

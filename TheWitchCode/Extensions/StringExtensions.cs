@@ -1,10 +1,29 @@
-﻿using Godot;
+using Godot;
+using TheWitch.TheWitchCode.Config;
 
 namespace TheWitch.TheWitchCode.Extensions;
 
 //Mostly utilities to get asset paths.
 public static class StringExtensions
 {
+    /// <summary>Join under images/<paramref name="relDir"/>; fall back to the category placeholder (with a log) when missing.</summary>
+    private static string Resolve(string relDir, string path, string placeholder)
+    {
+        string full = Path.Join(MainFile.ResPath, "images", relDir, path);
+        if (ResourceLoader.Exists(full)) return full;
+
+        MainFile.Logger.Info($"Could not find image path: {full}");
+        return Path.Join(MainFile.ResPath, "images", relDir, placeholder);
+    }
+
+    /// <summary>The card_portraits/beta/ variant of a card image when the Beta Images config is on and the file exists, else null. <paramref name="subDir"/> is the folder inside beta/ ("" for small, "big" for big art).</summary>
+    private static string? BetaCardImage(string subDir, string path)
+    {
+        if (!WitchConfig.BetaImages) return null;
+        string beta = Path.Join(MainFile.ResPath, "images", "card_portraits", "beta", subDir, path);
+        return ResourceLoader.Exists(beta) ? beta : null;
+    }
+
     public static string ImagePath(this string path)
     {
         return Path.Join(MainFile.ResPath, "images", path);
@@ -12,66 +31,19 @@ public static class StringExtensions
 
     public static string CardImagePath(this string path)
     {
-        path = Path.Join(MainFile.ResPath, "images", "card_portraits", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find card image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "card_portraits", "card.png");
+        return BetaCardImage("", path) ?? Resolve("card_portraits", path, "card.png");
     }
 
     public static string BigCardImagePath(this string path)
     {
-        path = Path.Join(MainFile.ResPath, "images", "card_portraits", "big", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find big card image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "card_portraits", "big", "card.png");
+        return BetaCardImage("big", path) ?? Resolve(Path.Join("card_portraits", "big"), path, "card.png");
     }
 
-    public static string PotionImagePath(this string path)
-    {
-        path = Path.Join(MainFile.ResPath, "images", "potions", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find potion image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "potions", "potion.png");
-    }
-
-    public static string PowerImagePath(this string path)
-    {
-        path = Path.Join(MainFile.ResPath, "images", "powers", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find power image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "powers", "power.png");
-    }
-
-    public static string BigPowerImagePath(this string path)
-    {
-        path = Path.Join(MainFile.ResPath, "images", "powers", "big", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find big power image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "powers", "big", "power.png");
-    }
-
-    public static string RelicImagePath(this string path)
-    {
-        path = Path.Join(MainFile.ResPath, "images", "relics", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find relic image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "relics", "relic.png");
-    }
-
-    public static string BigRelicImagePath(this string path)
-    {
-        path = Path.Join(MainFile.ResPath, "images", "relics", "big", path);
-        if (ResourceLoader.Exists(path)) return path;
-        
-        MainFile.Logger.Info("Could not find big relic image path: " + path);
-        return Path.Join(MainFile.ResPath, "images", "relics", "big", "relic.png");
-    }
+    public static string PotionImagePath(this string path) => Resolve("potions", path, "potion.png");
+    public static string PowerImagePath(this string path) => Resolve("powers", path, "power.png");
+    public static string BigPowerImagePath(this string path) => Resolve(Path.Join("powers", "big"), path, "power.png");
+    public static string RelicImagePath(this string path) => Resolve("relics", path, "relic.png");
+    public static string BigRelicImagePath(this string path) => Resolve(Path.Join("relics", "big"), path, "relic.png");
 
     public static string PetImagePath(this string path)
     {

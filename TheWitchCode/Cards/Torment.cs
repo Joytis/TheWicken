@@ -39,7 +39,7 @@ public sealed class Torment : WitchCard, IHexPreserving
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);

@@ -39,7 +39,7 @@ public sealed class ExtractLife : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bloody_impact")
+            .WithHitFx(VfxCmd.bloodyImpactPath)
             .Execute(choiceContext);
 
         CardModel? chosen = (await CardSelectCmd.FromHand(

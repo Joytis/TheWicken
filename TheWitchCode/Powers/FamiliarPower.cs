@@ -11,12 +11,21 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Monsters;
 using TheWitch.TheWitchCode.Relics;
 
 namespace TheWitch.TheWitchCode.Powers;
+
+/// <summary>Cosmetic pet reactions PetVisuals can play (mapped to AnimationPlayer clips in the pet scene).</summary>
+public enum FamiliarPetAnim
+{
+    Attack,
+    Skill,
+    Create,
+}
 
 /// <summary>
 /// Marker base for "familiar" counter powers. Each familiar type (Owl, Cat, …) has its own
@@ -38,20 +47,25 @@ public abstract class FamiliarPower : WitchPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
     /// <summary>
-    /// When true, the token cards this familiar produces come out Upgraded. Set by <c>WitchCard.GainFamiliar</c>
-    /// when an upgraded familiar summon card is played — sticky once any upgraded summon has applied this power.
+    /// How many of this power's stacks came from an UPGRADED summon card — those stacks produce Upgraded
+    /// token cards. Tracked PER STACK (not one sticky flag) so 3 normal + 3 upgraded Crows produce
+    /// 3 normal + 3 upgraded tokens. Incremented by <c>WitchCard.GainFamiliar</c>; clamped to
+    /// <see cref="Amount" /> when stacks are sacrificed. Upgraded stacks occupy the low indices.
     /// </summary>
-    public bool GrantsUpgradedCards { get; set; }
+    public int UpgradedStacks { get; set; }
 
-    /// <summary>Create one real combat card this familiar can produce (Upgraded per <see cref="GrantsUpgradedCards" />), chosen at random if it has several.</summary>
-    protected abstract CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng);
+    /// <summary>Does the stack at <paramref name="stackIndex" /> produce Upgraded tokens?</summary>
+    protected bool IsStackUpgraded(int stackIndex) => stackIndex < UpgradedStacks;
+
+    /// <summary>Create one real combat card this familiar can produce (Upgraded per <paramref name="upgraded" />), chosen at random if it has several.</summary>
+    protected abstract CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded);
 
     /// <summary>
     /// Every card this familiar can produce, one of each (Sack of Treats path). Single-card familiars
     /// produce their one card; loot-table familiars override to yield one of EACH table entry.
     /// </summary>
-    protected virtual IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng) =>
-        [CreateTurnStartCard(owner, combat, rng)];
+    protected virtual IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+        [CreateTurnStartCard(owner, combat, rng, upgraded)];
 
     /// <summary>
     /// Canonical cosmetic pet shown at the player's feet — ONE PET PER STACK, so the board shows how many of
@@ -73,13 +87,15 @@ public abstract class FamiliarPower : WitchPower
         await GenerateCards(player, combatState);
     }
 
-    /// <summary>A single roll of this familiar's card production, ignoring stack count (Command's mid-turn order).</summary>
-    public async Task GenerateOneCard(Player player, ICombatState combatState)
+    /// <summary>A single roll of this familiar's card production, ignoring stack count (Command's mid-turn order).
+    /// <paramref name="stackIndex" /> picks which pet performs the create animation.</summary>
+    public async Task GenerateOneCard(Player player, ICombatState combatState, int stackIndex = 0)
     {
         Flash();
+        RequestPetAnimation(stackIndex, FamiliarPetAnim.Create);
         Rng rng = player.RunState.Rng.CombatCardGeneration;
-        CardModel card = CreateTurnStartCard(player, combatState, rng);
-        TagSource(card, 0);
+        CardModel card = CreateTurnStartCard(player, combatState, rng, IsStackUpgraded(stackIndex));
+        TagSource(card, stackIndex);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player, CardPilePosition.Top);
     }
 
@@ -97,9 +113,12 @@ public abstract class FamiliarPower : WitchPower
 
         for (int i = 0; i < Amount; i++)
         {
+            RequestPetAnimation(i, FamiliarPetAnim.Create);
+
+            bool upgraded = IsStackUpgraded(i);
             IEnumerable<CardModel> cards = sack != null
-                ? CreateAllTurnStartCards(player, combatState, rng)
-                : [CreateTurnStartCard(player, combatState, rng)];
+                ? CreateAllTurnStartCards(player, combatState, rng, upgraded)
+                : [CreateTurnStartCard(player, combatState, rng, upgraded)];
 
             foreach (CardModel card in cards)
             {
@@ -124,6 +143,8 @@ public abstract class FamiliarPower : WitchPower
     {
         if (power == this)
         {
+            // Sacrificing stacks can't leave more upgraded stacks than stacks (normal ones are spent first).
+            UpgradedStacks = Math.Clamp(UpgradedStacks, 0, Math.Max(0, Amount));
             await SyncPets();
         }
     }
@@ -199,7 +220,7 @@ public abstract class FamiliarPower : WitchPower
     /// Each PetVisuals node listens and reacts only to its own (power, index) pair —
     /// purely cosmetic, never touches game state, so firing on every MP client is fine.
     /// </summary>
-    public static event Action<FamiliarPower, int, CardType>? AnimationRequested;
+    public static event Action<FamiliarPower, int, FamiliarPetAnim>? AnimationRequested;
 
     /// <summary>
     /// Announce the played card type for tokens THIS power generated; PetVisuals maps it to an animation.
@@ -209,13 +230,36 @@ public abstract class FamiliarPower : WitchPower
     {
         if (cardPlay.Card is WitchFamiliarCard familiarCard && ReferenceEquals(familiarCard.SourceFamiliar, this))
         {
-            AnimationRequested?.Invoke(this, familiarCard.SourceStackIndex, cardPlay.Card.Type);
+            RequestPetAnimation(familiarCard.SourceStackIndex,
+                cardPlay.Card.Type == CardType.Attack ? FamiliarPetAnim.Attack : FamiliarPetAnim.Skill);
         }
 
         return Task.CompletedTask;
     }
 
-    private List<Creature> FindPets(Player player) =>
+    /// <summary>Ask this power's pet at <paramref name="stackIndex" /> to play <paramref name="anim" />. Cosmetic only.</summary>
+    protected void RequestPetAnimation(int stackIndex, FamiliarPetAnim anim) =>
+        AnimationRequested?.Invoke(this, stackIndex, anim);
+
+    /// <summary>
+    /// Cosmetic only: when a token THIS familiar produced deals attack damage, the pet that produced it
+    /// plays its attack animation on each hit (fires once per hit of a multi-hit — the per-hit
+    /// counterpart of AfterAttack). Never touches game state, so firing on every MP client is fine.
+    /// </summary>
+    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+    {
+        if (dealer == Owner
+            && props.IsPoweredAttack()
+            && cardSource is WitchFamiliarCard familiarCard
+            && ReferenceEquals(familiarCard.SourceFamiliar, this))
+        {
+            RequestPetAnimation(familiarCard.SourceStackIndex, FamiliarPetAnim.Attack);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected List<Creature> FindPets(Player player) =>
         player.PlayerCombatState!.Pets.Where(p => p.Monster?.GetType() == Pet.GetType()).ToList();
 }
 
@@ -227,8 +271,8 @@ public abstract class FamiliarPower : WitchPower
 /// </summary>
 public abstract class FamiliarPower<TCard> : FamiliarPower where TCard : WitchFamiliarCard
 {
-    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng) =>
-        FamiliarCardRegistry.CreateFamiliarCards<TCard>(owner, 1, combat, GrantsUpgradedCards).First();
+    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+        FamiliarCardRegistry.CreateFamiliarCards<TCard>(owner, 1, combat, upgraded).First();
 }
 
 /// <summary>
@@ -293,9 +337,9 @@ public abstract class LootTableFamiliarPower : FamiliarPower
     /// <summary>Declare the cards this familiar can produce. Called once, lazily.</summary>
     protected abstract FamiliarLootTable BuildLootTable();
 
-    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng) =>
-        (_lootTable ??= BuildLootTable()).Roll(owner, combat, rng, GrantsUpgradedCards);
+    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+        (_lootTable ??= BuildLootTable()).Roll(owner, combat, rng, upgraded);
 
-    protected override IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng) =>
-        (_lootTable ??= BuildLootTable()).CreateAll(owner, combat, GrantsUpgradedCards);
+    protected override IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+        (_lootTable ??= BuildLootTable()).CreateAll(owner, combat, upgraded);
 }

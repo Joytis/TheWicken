@@ -35,7 +35,7 @@ public sealed class ToilAndTrouble : WitchCard
             .WithHitCount(Hits)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
         List<CardModel> candidates = PileType.Draw.GetPile(Owner).Cards

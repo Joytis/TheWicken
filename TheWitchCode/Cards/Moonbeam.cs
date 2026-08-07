@@ -35,7 +35,7 @@ public sealed class Moonbeam : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_starry_impact", null, "heavy_attack.mp3")
+            .WithHitFx(VfxCmd.starryImpactVfx, null, "heavy_attack.mp3")
             .Execute(choiceContext);
 
         if (cardPlay.Target.IsAlive)

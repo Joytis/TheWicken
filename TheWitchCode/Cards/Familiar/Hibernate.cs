@@ -9,18 +9,18 @@ using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Bear familiar token: den up — block now, wake up swinging with Vigor next turn.</summary>
+/// <summary>Bear familiar token: den up — block now, wake up stronger next turn.</summary>
 public sealed class Hibernate : WitchFamiliarCard
 {
     public override bool GainsBlock => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPower<VigorPower>(),
+        HoverTipFactory.FromPower<StrengthPower>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(15m, ValueProp.Move),
-        new PowerVar<VigorNextTurnPower>(10m)
+        new PowerVar<StrengthNextTurnPower>(3m)
     ];
 
     public Hibernate()
@@ -31,12 +31,12 @@ public sealed class Hibernate : WitchFamiliarCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<VigorNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["VigorNextTurnPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<StrengthNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["StrengthNextTurnPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3m);
-        DynamicVars["VigorNextTurnPower"].UpgradeValueBy(3m);
+        DynamicVars["StrengthNextTurnPower"].UpgradeValueBy(1m);
     }
 }

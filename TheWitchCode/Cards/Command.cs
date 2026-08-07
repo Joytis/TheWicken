@@ -33,17 +33,18 @@ public sealed class Command : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
         // One pool entry per stack, so Crow ×2 counts as two familiars (and can produce twice).
-        List<FamiliarPower> familiars = Owner.Creature.Powers.OfType<FamiliarPower>()
-            .SelectMany(power => Enumerable.Repeat(power, Math.Max((int)power.Amount, 1)))
+        // The stack index rides along so the exact pet that was ordered plays its create animation.
+        List<(FamiliarPower Power, int StackIndex)> familiars = Owner.Creature.Powers.OfType<FamiliarPower>()
+            .SelectMany(power => Enumerable.Range(0, Math.Max((int)power.Amount, 1)).Select(i => (power, i)))
             .ToList();
         familiars.UnstableShuffle(Owner.RunState.Rng.CombatCardGeneration);
-        foreach (FamiliarPower chosen in familiars.Take(2))
+        foreach ((FamiliarPower chosen, int stackIndex) in familiars.Take(2))
         {
-            await chosen.GenerateOneCard(Owner, CombatState!);
+            await chosen.GenerateOneCard(Owner, CombatState!, stackIndex);
         }
     }
 

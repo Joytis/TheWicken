@@ -1,4 +1,4 @@
-The Beta version of: https://steamcommunity.com/sharedfiles/filedetails/?id=3768831080
+The Main Version version of: https://steamcommunity.com/sharedfiles/filedetails/?id=3768831080
 
 [h1]The Witch[/h1] 
 A primal force of nature, enters the spire!
@@ -21,3 +21,6 @@ Art Direction and Placeholder: Kitsu
 [h2]Artists[/h2]
 Phenelia: https://x.com/Phenelia
 - Strike
+
+Jake Ruesch: https://jsruesch.com/
+- Defend

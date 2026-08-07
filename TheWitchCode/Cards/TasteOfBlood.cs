@@ -33,7 +33,7 @@ public sealed class TasteOfBlood : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_bite")
+            .WithHitFx(VfxCmd.bitePath)
             .Execute(choiceContext);
     }
 

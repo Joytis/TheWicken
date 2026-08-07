@@ -24,7 +24,7 @@ public sealed class Ambush : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState!)
-            .WithHitFx("vfx/vfx_scratch")
+            .WithHitFx(VfxCmd.scratchPath)
             .Execute(choiceContext);
     }
 

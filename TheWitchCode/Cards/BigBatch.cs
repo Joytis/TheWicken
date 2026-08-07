@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWitch.TheWitchCode.Potions;
 using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Extensions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -28,9 +29,12 @@ public sealed class BigBatch : WitchCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        WitchFx.Splash(Owner.Creature, WitchFx.WitchGreen);
+
         for (int i = 0; i < DynamicVars["Brews"].IntValue; i++)
         {
             await Witch.ProducePotion<NoxiousBrew>(Owner, Witch.PotionMode.Unstable);
+            await Cmd.Wait(0.1f);
         }
     }
 

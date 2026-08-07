@@ -15,7 +15,7 @@ public sealed class Rummage : WitchFamiliarCard
     ];
 
     public Rummage()
-        : base(0, CardType.Skill, CardRarity.Token, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Token, TargetType.Self)
     {
     }
 
@@ -28,6 +28,7 @@ public sealed class Rummage : WitchFamiliarCard
             IEnumerable<CardModel> retrieved = await CardSelectCmd.FromCombatPile(
                 choiceContext, PileType.Discard.GetPile(Owner), Owner, new CardSelectorPrefs(SelectionScreenPrompt, count));
             List<CardModel> cards = retrieved.ToList();
+            
             await CardPileCmd.Add(cards, PileType.Hand);
 
             if (IsUpgraded)
@@ -39,9 +40,5 @@ public sealed class Rummage : WitchFamiliarCard
                 }
             }
         }
-    }
-
-    protected override void OnUpgrade()
-    {
     }
 }

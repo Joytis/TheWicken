@@ -251,7 +251,8 @@ def resolve_big(arg: str) -> Path:
         if cand.is_file():
             return cand.resolve()
     base = Path(arg).name
-    matches = sorted({p.resolve() for p in IMAGES_ROOT.glob(f"**/big/**/{base}")})
+    matches = sorted({p.resolve() for p in IMAGES_ROOT.glob(f"**/big/**/{base}")
+                      if "beta" not in p.parts})
     if len(matches) == 1:
         return matches[0]
     if len(matches) > 1:

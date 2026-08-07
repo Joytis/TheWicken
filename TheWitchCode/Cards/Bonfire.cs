@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using TheWitch.TheWitchCode.Extensions;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -27,15 +28,18 @@ public sealed class Bonfire : WitchCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-
         IEnumerable<CardModel> toExhaust = await CardSelectCmd.FromHand(
             choiceContext, Owner, new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, DynamicVars.Cards.IntValue), null, this);
+
+
         foreach (CardModel card in toExhaust)
         {
             await CardCmd.Exhaust(choiceContext, card);
         }
+
+        WitchFx.RedFlame(Owner.Creature);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
     }
 
     protected override void OnUpgrade() => DynamicVars.Energy.UpgradeValueBy(1m);

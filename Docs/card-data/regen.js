@@ -8,7 +8,8 @@
  * It parses every card class in TheWitchCode/Cards (+ Familiar/) for the mechanical fields
  * (cost / type / rarity / target / numbers / upgrade) and the localization JSON for name + text.
  *
- * PRESERVED across runs (keyed by entry): `tested` flag and any curated `note`.
+ * PRESERVED across runs (keyed by entry): `tested`/`artFinal`/`vfxPass`/`sfxPass` flags and any
+ * curated `note`. `artFinal`/`vfxPass`/`sfxPass` are manual-only and never auto-cleared.
  * If a card's mechanical fingerprint CHANGES, its `tested` flag is auto-reset to false and the
  * change is reported — that is the "clear TESTED when the design changes" rule, automated.
  */
@@ -221,6 +222,8 @@ function build() {
       note,
       tested: false,
       artFinal: false,
+      vfxPass: false,
+      sfxPass: false,
       mechanics: [],
       role: [],
       sub: [],
@@ -251,6 +254,8 @@ function main() {
     const prev = oldByEntry[c.entry];
     if (!c._hasLoc) missingLoc.push(c.entry);
     c.artFinal = !!prev && prev.artFinal; // art-final flag is independent of mechanics; always preserved
+    c.vfxPass = !!prev && !!prev.vfxPass; // manual VFX/SFX pass flags — user-toggled only, always preserved
+    c.sfxPass = !!prev && !!prev.sfxPass;
     // curated categorization tags — independent of mechanical fingerprint; always preserved
     if (prev && prev.mechanics) c.mechanics = prev.mechanics;
     if (prev && prev.role) c.role = prev.role;

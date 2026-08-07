@@ -30,7 +30,7 @@ public sealed class Overrun : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_thrash")
+            .WithHitFx(VfxCmd.thrashPath)
             .Execute(choiceContext);
 
         if (Owner.Creature.GetPower<OverrunPower>() is null)

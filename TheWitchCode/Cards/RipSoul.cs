@@ -38,8 +38,11 @@ public sealed class RipSoul : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_scream", null, "heavy_attack.mp3")
+            .WithHitFx(null, null, "heavy_attack.mp3")
+            .WithHitVfxNode(WitchFx.RipSoulImpactNode)
             .Execute(choiceContext);
+
+        // Color(0.505, 1.196, 1.353)
 
         await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);
 

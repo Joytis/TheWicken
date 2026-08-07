@@ -114,6 +114,11 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomRestSiteAnimPath => "witch_rest_site.tscn".CharacterScenePath();
     public override string CustomMerchantAnimPath => "witch_merchant.tscn".CharacterScenePath();
 
+    // Audio — Ironclad stand-ins until the Witch gets her own FMOD events.
+    public override string CustomAttackSfx => "event:/sfx/characters/ironclad/ironclad_attack";
+    public override string CustomCastSfx => "event:/sfx/characters/ironclad/ironclad_cast";
+    public override string CustomDeathSfx => "event:/sfx/characters/ironclad/ironclad_die";
+
     // Arms (events / rock-paper-scissors)
     public override string CustomArmPointingTexturePath => "multiplayer_hand_witch_point.png".CharacterUiPath();
     public override string CustomArmRockTexturePath => "multiplayer_hand_witch_rock.png".CharacterUiPath();
@@ -146,11 +151,6 @@ public class Witch : PlaceholderCharacterModel
 
     // Character select
     // public override string CustomCharacterSelectTransitionPath => ...;
-
-    // Audio
-    // public override string CustomAttackSfx => ...;
-    // public override string CustomCastSfx => ...;
-    // public override string CustomDeathSfx => ...;
 
     // Currently provided by PlaceholderCharacterModel — must supply once off the placeholder base:
     // public override string CharacterSelectSfx => ...;
