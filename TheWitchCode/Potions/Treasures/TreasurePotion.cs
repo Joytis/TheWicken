@@ -61,7 +61,8 @@ public abstract class TreasurePotion : WitchPotion
         if (CombatManager.Instance.IsInProgress)
         {
             AssertValidForTargetedPotion(target);
-            await CreatureCmd.Damage(choiceContext, target, DynamicVars.Damage, Owner.Creature, null);
+            DamageVar damage = DynamicVars.Damage;
+            await CreatureCmd.Damage(choiceContext, target, DynamicVars.Damage, Owner.Creature);
         }
         else if (Owner.RunState.CurrentRoom is MerchantRoom)
         {
