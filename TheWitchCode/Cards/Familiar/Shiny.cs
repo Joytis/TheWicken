@@ -16,13 +16,11 @@ public sealed class Shiny : WitchFamiliarCard
     private static List<PotionModel> Treasures => [
         ModelDb.Potion<PolishedBottlecap>(),
         ModelDb.Potion<ShinyHairpin>(),
-        ModelDb.Potion<ForeignCoin>()
     ];
 
     private static List<PotionModel> BigTreasures => [
-        ModelDb.Potion<CrackedGemstone>(),
-        ModelDb.Potion<FancyComb>(),
-        ModelDb.Potion<ImpeccableSilverware>()
+        ModelDb.Potion<ForeignCoin>(),
+        ModelDb.Potion<ImpeccableSilverware>(),
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

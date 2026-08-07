@@ -43,10 +43,11 @@ public abstract class WitchCard(int cost, CardType type, CardRarity rarity, Targ
     {
         await PowerCmd.Apply<TPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
 
-        // An upgraded summon card makes its familiar produce Upgraded token cards (sticky on the power).
+        // An upgraded summon card makes ITS stack produce Upgraded token cards — per stack, so mixing
+        // normal and upgraded summons of the same familiar yields a matching mix of tokens.
         if (IsUpgraded && Owner.Creature.GetPower<TPower>() is { } power)
         {
-            power.GrantsUpgradedCards = true;
+            power.UpgradedStacks++;
         }
     }
 }

@@ -102,8 +102,6 @@ public abstract class BigTreasurePotion : TreasurePotion
 
 public sealed class PolishedBottlecap : SmallTreasurePotion;
 public sealed class ShinyHairpin : SmallTreasurePotion;
-public sealed class ForeignCoin : SmallTreasurePotion;
 
-public sealed class CrackedGemstone : BigTreasurePotion;
-public sealed class FancyComb : BigTreasurePotion;
+public sealed class ForeignCoin : BigTreasurePotion;
 public sealed class ImpeccableSilverware : BigTreasurePotion;
