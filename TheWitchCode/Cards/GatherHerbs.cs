@@ -14,7 +14,7 @@ public sealed class GatherHerbs : WitchCard
     ];
 
     public GatherHerbs()
-        : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
+        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

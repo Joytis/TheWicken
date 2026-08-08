@@ -21,7 +21,7 @@ public sealed class RotBloom : WitchCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(10m, ValueProp.Move),
         new PowerVar<WeakPower>(2m),
-        new PowerVar<HexPower>(2m)
+        new PowerVar<HexPower>(3m)
     ];
 
     public RotBloom()

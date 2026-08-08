@@ -17,10 +17,10 @@ public sealed class Moonbeam : WitchCard
     private const string _beamDamageKey = "BeamDamage";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(8m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         // Unscaled twin of Damage: the power's flat per-turn tick (ValueProp.Unpowered at deal time),
         // so the card face doesn't show it inflated by Strength/Vigor.
-        new DynamicVar(_beamDamageKey, 8m)
+        new DynamicVar(_beamDamageKey, 10m)
     ];
 
     public Moonbeam()

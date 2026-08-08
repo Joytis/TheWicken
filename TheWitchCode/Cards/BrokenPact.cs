@@ -15,7 +15,7 @@ public sealed class BrokenPact : WitchCard
     ];
 
     public BrokenPact()
-        : base(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
     }
 

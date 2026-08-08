@@ -28,7 +28,7 @@ public class Witch : PlaceholderCharacterModel
     public override Color EnergyLabelOutlineColor => DarkColor;
 
     public override CharacterGender Gender => CharacterGender.Neutral;
-    public override int StartingHp => 68;
+    public override int StartingHp => 70;
 
     public static bool Turbo => WitchConfig.EffectiveTurboWitchery;
     

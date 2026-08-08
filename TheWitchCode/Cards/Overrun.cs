@@ -14,8 +14,8 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class Overrun : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
-        new ExtraDamageVar(5m)
+        new DamageVar(8m, ValueProp.Move),
+        new ExtraDamageVar(6m)
     ];
 
     public Overrun()

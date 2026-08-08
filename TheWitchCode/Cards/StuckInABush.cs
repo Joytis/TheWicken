@@ -17,7 +17,7 @@ public sealed class StuckInABush : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<BramblesPower>(6m),
+        new PowerVar<BramblesPower>(7m),
         new PowerVar<VulnerablePower>(1m)
     ];
 
@@ -32,5 +32,5 @@ public sealed class StuckInABush : WitchCard
         await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature, DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Brambles().UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars.Brambles().UpgradeValueBy(3m);
 }

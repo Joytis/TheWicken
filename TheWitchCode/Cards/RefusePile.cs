@@ -18,7 +18,7 @@ public sealed class RefusePile : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(12m, ValueProp.Move),
+        new BlockVar(13m, ValueProp.Move),
         new CardsVar(1)
     ];
 
@@ -44,5 +44,5 @@ public sealed class RefusePile : WitchCard
         CardCmd.PreviewCardPileAdd(generated);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3m);
 }

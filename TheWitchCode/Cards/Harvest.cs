@@ -26,17 +26,16 @@ public sealed class Harvest : WitchCard
         ModelDb.Potion<PricklyVial>(),
         ModelDb.Potion<OminousFlask>(),
         ModelDb.Potion<EmberJar>(),
-
     ];
 
-    private static List<PotionModel> SecondaryLootTable => [
-        ModelDb.Potion<CatWhisker>(),
-        ModelDb.Potion<CrowTalon>(),
-        ModelDb.Potion<OwlFeather>(),
-        ModelDb.Potion<WolfFang>(),
-        ModelDb.Potion<RatTail>(),
-        ModelDb.Potion<BearFur>(),
-    ];
+    // private static List<PotionModel> SecondaryLootTable => [
+    //     ModelDb.Potion<CatWhisker>(),
+    //     ModelDb.Potion<CrowTalon>(),
+    //     ModelDb.Potion<OwlFeather>(),
+    //     ModelDb.Potion<WolfFang>(),
+    //     ModelDb.Potion<RatTail>(),
+    //     ModelDb.Potion<BearFur>(),
+    // ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(12m, ValueProp.Move)
@@ -58,17 +57,15 @@ public sealed class Harvest : WitchCard
             .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
 
+        // var rng = Owner.RunState.Rng.CombatPotionGeneration;
+        // var roll = rng.NextInt(LootTable.Count + 1);
+        // PotionModel potion = roll == LootTable.Count ? 
+        //     SecondaryLootTable[rng.NextInt(SecondaryLootTable.Count)] :
+        //     LootTable[roll];
+
         var rng = Owner.RunState.Rng.CombatPotionGeneration;
         var roll = rng.NextInt(LootTable.Count + 1);
-
-        PotionModel potion = roll == LootTable.Count ? 
-            SecondaryLootTable[rng.NextInt(SecondaryLootTable.Count)] :
-            LootTable[roll];
-
-        if (potion != null)
-        {
-            await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
-        }
+        await PotionCmd.TryToProcure(LootTable[roll].ToMutable(), Owner);
     }
 
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);

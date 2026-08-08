@@ -14,7 +14,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class Frenzy : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4m, ValueProp.Move),
+        new DamageVar(5m, ValueProp.Move),
         new EnergyVar("EnergyNextTurnPower", 1)
     ];
 

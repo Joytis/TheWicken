@@ -18,7 +18,7 @@ public sealed class BindInBlood : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new HpLossVar(1m),
-        new PowerVar<HexPower>(2m)
+        new PowerVar<HexPower>(3m)
     ];
 
     public BindInBlood()
