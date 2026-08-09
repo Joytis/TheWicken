@@ -42,8 +42,12 @@ public sealed class Witchcraft : WitchCard
             PotionRarity rarity = roll <= 0.1f ? PotionRarity.Rare
                 : roll <= 0.35f ? PotionRarity.Uncommon
                 : PotionRarity.Common;
-            PotionModel? potion = PotionCatalog.Random(PotionCatalog.Query(rarity: rarity), rng)
-                ?? PotionCatalog.Random(PotionCatalog.Query(), rng);
+            List<PotionModel> pool = PotionCatalog.Query(rarity: rarity).ToList();
+            if (pool.Count == 0)
+            {
+                pool = PotionCatalog.Query().ToList();
+            }
+            PotionModel? potion = await PotionCatalog.Pick(pool, choiceContext, Owner, rng);
             if (potion != null)
             {
                 WitchFx.Splash(Owner.Creature, new Godot.Color("ac54b3")); // conjured brew: purple splash

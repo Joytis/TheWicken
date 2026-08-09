@@ -51,11 +51,17 @@
         <Compile Remove="materials/**" />
         <Compile Remove="shaders/**" />
         <Compile Remove="images/**" />
+        <Compile Remove="src/**" />
+        <Compile Remove="addons/**" />
+        <Compile Remove="themes/**" />
         <EmbeddedResource Remove="gamedata/**" />
         <EmbeddedResource Remove="TheWitch/**" />
         <EmbeddedResource Remove="materials/**" />
         <EmbeddedResource Remove="shaders/**" />
         <EmbeddedResource Remove="images/**" />
+        <EmbeddedResource Remove="src/**" />
+        <EmbeddedResource Remove="addons/**" />
+        <EmbeddedResource Remove="themes/**" />
     </ItemGroup>
 
     <ItemGroup>

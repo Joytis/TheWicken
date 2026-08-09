@@ -284,18 +284,9 @@
           "artist": "",
           "done": false,
           "brief": "",
-          "rarity": "Uncommon",
+          "rarity": "Rare",
           "effect": "Every 10th card you play returns to your hand.",
           "path": "TheWitch/images/relics/big/morganne.png"
-        },
-        {
-          "name": "Wormy's Apple",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Uncommon",
-          "effect": "Upon pickup gain Max HP. Each combat, add a Wormy into your Hand.",
-          "path": "TheWitch/images/relics/big/wormys_apple.png"
         },
         {
           "name": "Sack of Treats",
@@ -307,13 +298,31 @@
           "path": "TheWitch/images/relics/big/sack_of_treats.png"
         },
         {
+          "name": "Separatory Funnel",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Rare",
+          "effect": "Whenever an effect would create a random Potion, choose it instead.",
+          "path": "TheWitch/images/relics/big/separatory_funnel.png"
+        },
+        {
           "name": "Tasty Herbs",
           "artist": "",
           "done": false,
           "brief": "",
-          "rarity": "Common",
+          "rarity": "Uncommon",
           "effect": "At the end of combat, heal 3 HP if you used a potion.",
           "path": "TheWitch/images/relics/big/tasty_herbs.png"
+        },
+        {
+          "name": "Wormy's Apple",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "rarity": "Uncommon",
+          "effect": "Upon pickup gain Max HP. Each combat, add a Wormy into your Hand.",
+          "path": "TheWitch/images/relics/big/wormys_apple.png"
         }
       ]
     },

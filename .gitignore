@@ -8,6 +8,9 @@ bin/
 /materials/
 /shaders/
 /images/
+/src/
+/themes/
+/addons/
 /android/
 .git/
 .idea/

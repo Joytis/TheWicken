@@ -45,7 +45,6 @@ public static class PotionTraits
         [typeof(PotionShapedRock)] = PotionOrientation.Offensive,       // deal damage (card-only rock)
         [typeof(ExplosiveAmpoule)] = PotionOrientation.Offensive,       // deal damage to ALL enemies
         [typeof(FoulPotion)] = PotionOrientation.Offensive,             // deal damage to all players & enemies
-        [typeof(WeakPotion)] = PotionOrientation.Offensive,             // apply Weak
         [typeof(VulnerablePotion)] = PotionOrientation.Offensive,       // apply Vulnerable
         [typeof(BeetleJuice)] = PotionOrientation.Offensive,            // enemy's attacks deal less damage
         [typeof(PowderedDemise)] = PotionOrientation.Offensive,         // enemy loses HP at end of each turn
@@ -60,6 +59,7 @@ public static class PotionTraits
         [typeof(SoldiersStew)] = PotionOrientation.Offensive,           // Strike cards gain Replay this combat
 
         // ---------------- Defensive (block / heal / max HP) ----------------
+        [typeof(WeakPotion)] = PotionOrientation.Defensive,             // apply Weak
         [typeof(ShacklingPotion)] = PotionOrientation.Defensive,        // ALL enemies lose Strength this turn
         [typeof(BlockPotion)] = PotionOrientation.Defensive,            // gain Block
         [typeof(ShipInABottle)] = PotionOrientation.Defensive,          // gain Block now and again next turn
@@ -111,7 +111,7 @@ public static class PotionTraits
         // ---------------- Modded (TheWitch) ----------------
         [typeof(NoxiousBrew)] = PotionOrientation.Offensive,            // card-only offensive brew (deal damage)
         [typeof(CursedBottle)] = PotionOrientation.Offensive,           // apply Hex to an enemy
-        [typeof(Fertilizer)] = PotionOrientation.Offensive,             // gains Brambles, tagged offensive by design
+        [typeof(Fertilizer)] = PotionOrientation.Defensive,             // gains Brambles, tagged offensive by design
         [typeof(BuddyInABottle)] = PotionOrientation.Utility,           // adds a random Familiar summon card
         [typeof(VialOfSmoke)] = PotionOrientation.Defensive,            // card-only Block potion (Light the Candle)
         [typeof(MushroomExtract)] = PotionOrientation.Utility,          // discard hand, draw 6 free gibberish cards

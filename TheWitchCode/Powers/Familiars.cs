@@ -38,4 +38,19 @@ public static class Familiars
         await PowerCmd.Decrement(chosen);
         return true;
     }
+
+    /// <summary>
+    /// Sacrifice every familiar at once (Broken Pact): removes each familiar power outright and returns
+    /// the total number of stacks that were lost, for callers that pay out per familiar.
+    /// </summary>
+    public static async Task<int> RemoveAll(Creature creature)
+    {
+        List<FamiliarPower> familiars = creature.Powers.OfType<FamiliarPower>().ToList();
+        int sacrificed = familiars.Sum(p => p.Amount);
+        foreach (FamiliarPower familiar in familiars)
+        {
+            await PowerCmd.Remove(familiar);
+        }
+        return sacrificed;
+    }
 }

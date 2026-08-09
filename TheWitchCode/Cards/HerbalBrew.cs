@@ -11,22 +11,17 @@ public sealed class HerbalBrew : OrientationBrewCard
 
     public HerbalBrew() : base(1, CardRarity.Uncommon)
     {
-        
     }
 
-    // First pass: every utility potion the Witch could previously roll (shared pool + Witch pool,
-    // all rarities, no healers). Trim freely — this list IS the card's roll pool.
+    // Seeded from the old live query: every Common utility potion the Witch could roll
+    // (shared pool, no healers). Trim/add freely — this list IS the card's roll pool and the
+    // upgraded card's selection grid.
     protected override IEnumerable<PotionModel> LootTable => [
-        ModelDb.Potion<CureAll>(),
         ModelDb.Potion<SwiftPotion>(),
-    ];
-
-
-    // Potions only the upgraded card can brew — none yet; new potions land here.
-    protected override IEnumerable<PotionModel> UpgradedExtras => [        
+        ModelDb.Potion<ColorlessPotion>(),
         ModelDb.Potion<PowerPotion>(),
+        ModelDb.Potion<CureAll>(),
+        ModelDb.Potion<Clarity>(),
+        ModelDb.Potion<StableSerum>(),
     ];
-
-    // Potions the upgraded card can NO LONGER brew — dropped from the base table on upgrade.
-    protected override IEnumerable<PotionModel> UpgradedRemovals => [];
 }

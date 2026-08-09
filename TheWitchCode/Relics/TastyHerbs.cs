@@ -14,7 +14,7 @@ namespace TheWitch.TheWitchCode.Relics;
 /// </summary>
 public sealed class TastyHerbs : WitchRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Uncommon;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new HealVar(3m)

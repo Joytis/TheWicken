@@ -23,7 +23,7 @@ public sealed class OminousFlask : WitchPotion
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<HexPower>(1m)
+        new PowerVar<HexPower>(2m)
     ];
 
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<HexPower>()];

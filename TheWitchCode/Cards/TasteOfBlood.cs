@@ -18,11 +18,11 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class TasteOfBlood : WitchCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(18m, ValueProp.Move)
+        new DamageVar(32m, ValueProp.Move)
     ];
 
     public TasteOfBlood()
-        : base(3, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(4, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -37,7 +37,7 @@ public sealed class TasteOfBlood : WitchCard
             .Execute(choiceContext);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(6m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(8m);
 
     // Stomp pattern: back-count this turn's attacks when the card enters combat mid-turn...
     public override Task AfterCardEnteredCombat(CardModel card)

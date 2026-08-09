@@ -37,12 +37,12 @@ public class Witch : PlaceholderCharacterModel
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
-        ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<Harvest>(),
+        ModelDb.Card<Incant>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

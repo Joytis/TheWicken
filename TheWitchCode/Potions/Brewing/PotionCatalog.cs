@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Potions;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.PotionPools;
 using MegaCrit.Sts2.Core.Random;
 using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Relics;
+using TheWitch.TheWitchCode.Ui;
 
 namespace TheWitch.TheWitchCode.Potions.Brewing;
 
@@ -65,4 +71,31 @@ public static class PotionCatalog
         List<PotionModel> list = pool.ToList();
         return list.Count == 0 ? null : rng.NextItem(list);
     }
+
+    /// <summary>
+    /// The chokepoint every in-combat "create a random potion" effect goes through: normally a
+    /// <see cref="Random" /> roll, but the Rare relic <see cref="SeparatoryFunnel" /> turns it into a player
+    /// choice over the same pool. <paramref name="pool" /> must enumerate in the same order on every
+    /// client (ModelDb order — never shuffle it), because the choice syncs as a list index.
+    /// </summary>
+    public static async Task<PotionModel?> Pick(
+        IEnumerable<PotionModel> pool, PlayerChoiceContext context, Player player, Rng rng)
+    {
+        List<PotionModel> list = pool.ToList();
+        if (list.Count == 0)
+        {
+            return null;
+        }
+
+        SeparatoryFunnel? funnel = player.GetRelic<SeparatoryFunnel>();
+        if (funnel == null)
+        {
+            return rng.NextItem(list);
+        }
+
+        funnel.Flash();
+        return await PotionSelectCmd.FromChoosePotionScreen(context, list, player, FunnelPrompt);
+    }
+
+    private static LocString FunnelPrompt => new("static_hover_tips", "THEWITCH-BREW_PROMPT.title");
 }
