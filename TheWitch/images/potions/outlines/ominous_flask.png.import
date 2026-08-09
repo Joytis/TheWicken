@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7is5msmfqb6j"
-path="res://.godot/imported/large_pockets_outline.png-fb633cb0bc5725c216bb43e19d4924a7.ctex"
+uid="uid://b3ocf4o75y61v"
+path="res://.godot/imported/ominous_flask.png-685f21df57f9de3c64348fa25a5632a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/relics/large_pockets_outline.png"
-dest_files=["res://.godot/imported/large_pockets_outline.png-fb633cb0bc5725c216bb43e19d4924a7.ctex"]
+source_file="res://TheWitch/images/potions/outlines/ominous_flask.png"
+dest_files=["res://.godot/imported/ominous_flask.png-685f21df57f9de3c64348fa25a5632a7.ctex"]
 
 [params]
 

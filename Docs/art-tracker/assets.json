@@ -441,6 +441,15 @@
           "path": "TheWitch/images/charui/text_energy.png"
         },
         {
+          "name": "Yummy Cookie (Witch variant)",
+          "artist": "",
+          "done": false,
+          "brief": "",
+          "dims": "94x94 + 256x256 (relic icon + outline)",
+          "effect": "Base-game Ancient relic Yummy Cookie shows a character-flavored cookie; needs a Witch-themed variant (wired via CustomYummyCookie / RelicIconData).",
+          "path": "TheWitch/images/relics/big/yummy_cookie.png"
+        },
+        {
           "name": "Card Frame Fallbacks",
           "artist": "",
           "done": false,

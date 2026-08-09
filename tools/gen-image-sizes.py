@@ -16,7 +16,8 @@ Card portraits and powers each ship in two sizes: a small portrait and a
     TheWitch/images/charui/big/foo.png                  (big, e.g. map marker)
 
 Relics use exact per-category sizes (256x256 <-> 94x94, not a clean multiple);
-``*_outline.png`` relic images are small-only and never get a big/ variant.
+Relic/potion outlines live in their own ``outlines/`` subfolder (see
+gen-outlines.py) so they are never picked up as source art here.
 charui (map marker, char select, energy icons) downscales big/ art to the
 existing small's exact dimensions.
 
@@ -44,6 +45,11 @@ Variants are scaled by a fixed factor (default 4x), which matches the project's
 existing assets (250x190 <-> 1000x760, 64x64 <-> 256x256). Aspect ratio is
 preserved, so odd prototype sizes round-trip cleanly.
 
+After the size passes, tools/gen-outlines.py is invoked for every relic/potion
+small this run wrote, so their white silhouette outlines never go stale
+(``--no-outlines`` skips it). The call and the impacted-asset count are printed
+as ``[outlines]`` lines.
+
 New PNGs are imported automatically; `dotnet publish` invokes Godot, which
 writes the .import sidecars before packing the .pck.
 
@@ -64,6 +70,7 @@ the quick "I just authored big/foo.png, make its small" task.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import shutil
 import sys
@@ -77,6 +84,41 @@ except ImportError:
 # Repo root is the parent of this tools/ folder.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 IMAGES_ROOT = REPO_ROOT / "TheWitch" / "images"
+
+# Every small image this run writes, so the outline pass at the end can refresh
+# exactly the impacted relic/potion silhouettes (see run_outline_pass).
+TOUCHED: list[Path] = []
+
+
+def load_gen_outlines():
+    """Import tools/gen-outlines.py (hyphenated, so not a normal import)."""
+    path = Path(__file__).with_name("gen-outlines.py")
+    if not path.exists():
+        return None
+    spec = importlib.util.spec_from_file_location("gen_outlines", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def run_outline_pass(dry_run: bool) -> int:
+    """Rebuild the white silhouette outlines for any relic/potion art this run
+    touched. Relics and potions draw an outline layer behind the small icon
+    (undiscovered-relic / unbrewed-potion silhouettes), so a regenerated small
+    leaves a stale outline behind unless we refresh it here."""
+    candidates = sorted({p.resolve() for p in TOUCHED})
+    module = load_gen_outlines()
+    if module is None:
+        print("[outlines] tools/gen-outlines.py not found (skipped)")
+        return 0
+    impacted = [p for p in candidates if module.category_for(p) is not None
+                and not module.is_outline(p)]
+    print(f"[outlines] {len(impacted)} impacted relic/potion asset(s) "
+          f"of {len(candidates)} written - calling gen-outlines")
+    if not impacted:
+        print("  nothing to do")
+        return 0
+    return module.generate_for_paths(impacted, dry_run=dry_run)
 
 # Category -> (small_dir, big_dir). Big art lives under a single "big/" mirror
 # at each portrait root, with category subfolders nested inside it (matching
@@ -102,8 +144,7 @@ CATEGORIES = {
                "big": IMAGES_ROOT / "powers" / "big"},
     "relics": {"small": IMAGES_ROOT / "relics",
                "big": IMAGES_ROOT / "relics" / "big",
-               "small_size": (94, 94), "big_size": (256, 256),
-               "exclude": ["*_outline.png"]},
+               "small_size": (94, 94), "big_size": (256, 256)},
     "charui": {"small": IMAGES_ROOT / "charui",
                "big": IMAGES_ROOT / "charui" / "big",
                "no_upscale": True,
@@ -128,7 +169,7 @@ def loc_entries(loc_name: str) -> list[str]:
     if not loc_file.exists():
         print(f"[seed] loc file not found: {loc_file} (skipped)")
         return []
-    keys = json.loads(loc_file.read_text(encoding="utf-8"))
+    keys = json.loads(loc_file.read_text(encoding="utf-8-sig"))
     return [k[len("THEWITCH-"):-len(".title")].lower()
             for k in keys if k.endswith(".title")]
 
@@ -148,6 +189,7 @@ def seed_loc_placeholders(loc_name: str, target_dir: Path, placeholder: Path,
         if dst.exists() or big.exists():
             continue
         print(f"  seed      placeholder -> {dst.relative_to(REPO_ROOT)}")
+        TOUCHED.append(dst)
         if not dry_run:
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(placeholder, dst)
@@ -186,6 +228,7 @@ def seed_card_placeholders(dry_run: bool) -> int:
 
         rel_dst = small_path.relative_to(REPO_ROOT)
         print(f"  seed      placeholder -> {rel_dst}")
+        TOUCHED.append(small_path)
         if not dry_run:
             small_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(PLACEHOLDER, small_path)
@@ -208,6 +251,7 @@ def resize(src: Path, dst: Path, factor: float, resample, dry_run: bool) -> None
         rel_dst = dst.relative_to(REPO_ROOT)
         print(f"  {verb:9} {img.size[0]}x{img.size[1]} -> {target[0]}x{target[1]}"
               f"  {rel_src}  ->  {rel_dst}")
+        TOUCHED.append(dst)
         if dry_run:
             return
         out = img.resize(target, resample)
@@ -224,6 +268,7 @@ def resize_exact(src: Path, dst: Path, target: tuple[int, int], resample,
         rel_dst = dst.relative_to(REPO_ROOT)
         print(f"  {verb:9} {img.size[0]}x{img.size[1]} -> {target[0]}x{target[1]}"
               f"  {rel_src}  ->  {rel_dst}")
+        TOUCHED.append(dst)
         if dry_run:
             return
         out = img.resize(target, resample)
@@ -388,6 +433,9 @@ def main() -> int:
     parser.add_argument("--no-seed", action="store_true",
                         help="Skip seeding placeholders for cards in cards.json "
                              "that have no art yet.")
+    parser.add_argument("--no-outlines", action="store_true",
+                        help="Skip the gen-outlines pass that refreshes the "
+                             "white silhouettes of impacted relic/potion art.")
     parser.add_argument("--dry-run", action="store_true",
                         help="Print actions without writing files.")
     args = parser.parse_args()
@@ -401,7 +449,10 @@ def main() -> int:
     if args.big_image:
         total = scale_one_big(args.big_image, args.scale, resample, args.dry_run)
         print()
+        outlines = 0 if args.no_outlines else run_outline_pass(args.dry_run)
+        print()
         print(f"{'Dry run: ' if args.dry_run else ''}{total} variant(s)"
+              f" + {outlines} outline(s)"
               f"{' would be' if args.dry_run else ''} generated.")
         return 0
 
@@ -429,10 +480,14 @@ def main() -> int:
                                   args.force, args.dry_run)
 
     print()
+    outlines = 0 if args.no_outlines else run_outline_pass(args.dry_run)
+
+    print()
     if args.dry_run:
-        print(f"Dry run: {total} variant(s) would be generated.")
+        print(f"Dry run: {total} variant(s) + {outlines} outline(s) "
+              f"would be generated.")
     else:
-        print(f"Generated {total} variant(s).")
+        print(f"Generated {total} variant(s) + {outlines} outline(s).")
     return 0
 
 

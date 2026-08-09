@@ -11,9 +11,14 @@ if (-not (Test-Path (Join-Path $repoRoot 'gamedata'))) {
     Write-Error "gamedata/ not found at $repoRoot. Decompile the game there first (see CLAUDE.md)."
 }
 
-foreach ($name in 'scenes', 'materials', 'shaders', 'images') {
+foreach ($name in 'scenes', 'materials', 'shaders', 'images', 'src', 'themes', 'fonts') {
     $link = Join-Path $repoRoot $name
     $target = Join-Path $repoRoot "gamedata\$name"
+
+    if (-not (Test-Path $target)) {
+        Write-Warning "skipped: gamedata\$name does not exist."
+        continue
+    }
 
     if (Test-Path $link) {
         $item = Get-Item $link -Force

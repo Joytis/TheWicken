@@ -43,6 +43,12 @@ public static class StringExtensions
     public static string PowerImagePath(this string path) => Resolve("powers", path, "power.png");
     public static string BigPowerImagePath(this string path) => Resolve(Path.Join("powers", "big"), path, "power.png");
     public static string RelicImagePath(this string path) => Resolve("relics", path, "relic.png");
+
+    /// <summary>Relic outline (white silhouette drawn behind the small icon); falls back to the outline placeholder, not the colored relic art.</summary>
+    public static string RelicOutlineImagePath(this string path) => Resolve(Path.Join("relics", "outlines"), path, "relic.png");
+
+    /// <summary>Potion outline; no placeholder — the game treats a missing outline as "no outline" rather than drawing a wrong one.</summary>
+    public static string PotionOutlineImagePath(this string path) => Path.Join(MainFile.ResPath, "images", "potions", "outlines", path);
     public static string BigRelicImagePath(this string path) => Resolve(Path.Join("relics", "big"), path, "relic.png");
 
     public static string PetImagePath(this string path)

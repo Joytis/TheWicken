@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbggkg37bciv1"
-path="res://.godot/imported/relic_outline.png-0d484b2ec51913e7dcbd7fb58bf18b1f.ctex"
+uid="uid://c8plxrmy744ck"
+path="res://.godot/imported/wormy_apple.png-6bf468bb3f6aae36ec73c14b9104687d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/relics/relic_outline.png"
-dest_files=["res://.godot/imported/relic_outline.png-0d484b2ec51913e7dcbd7fb58bf18b1f.ctex"]
+source_file="res://TheWitch/images/potions/outlines/wormy_apple.png"
+dest_files=["res://.godot/imported/wormy_apple.png-6bf468bb3f6aae36ec73c14b9104687d.ctex"]
 
 [params]
 
