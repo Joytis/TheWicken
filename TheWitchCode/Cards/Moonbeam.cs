@@ -1,9 +1,11 @@
 using System;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -35,7 +37,9 @@ public sealed class Moonbeam : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx(VfxCmd.starryImpactVfx, null, "heavy_attack.mp3")
+            .WithHitVfxNode((Creature c) => WitchFx.MoonbeamNode(Owner.Creature, c))
+            // Cast sound on the attacker, impact thud on the hit — the Sovereign Blade split.
+            .WithHitFx(null, WitchFx.CelestialSfx, null)
             .Execute(choiceContext);
 
         if (cardPlay.Target.IsAlive)

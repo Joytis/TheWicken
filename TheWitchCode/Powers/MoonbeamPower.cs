@@ -27,7 +27,9 @@ public sealed class MoonbeamPower : WitchPower
         }
 
         Flash();
-        WitchFx.PurpleFlame(Owner);
+        WitchFx.Moonbeam(Applier, Owner);
+        // No attacker animation on a turn-start tick, so play the cast sound directly (GuidingStar's pattern).
+        SfxCmd.Play(WitchFx.CelestialSfx);
         await CreatureCmd.Damage(choiceContext, [Owner], Amount, ValueProp.Unpowered, Applier, null);
     }
 }
