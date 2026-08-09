@@ -31,6 +31,10 @@ namespace TheWitch.TheWitchCode.Debug;
 ///   --witch-fxlab                     skips the main menu and opens the FX Lab (NFxLab):
 ///                                     searchable SFX/VFX browser with play + copy-path buttons.
 ///                                     Pair with --witch-debug. Wins over --witch-bootstrap.
+///   --witch-iconlab                   skips the main menu and opens the Icon Lab (NIconLab):
+///                                     every relic + potion, Witch above base game, drawn in
+///                                     each composited state (owned / not seen / undiscovered /
+///                                     locked / raw outline) for art-parity checks.
 ///
 /// Patch-point note: NGame.GameStartup's state machine is already JIT-compiled (and possibly
 /// tier-1 promoted with call sites inlined) by the time mods initialize inside it, so methods it
@@ -44,6 +48,7 @@ public static class WitchDebug
 
     private static bool _bootstrapStarted;
     private static bool _fxLabStarted;
+    private static bool _iconLabStarted;
 
     public static void ApplyPatches(Harmony harmony)
     {
@@ -74,6 +79,13 @@ public static class WitchDebug
             harmony.Patch(
                 AccessTools.Method(typeof(NMainMenu), "_Ready"),
                 postfix: new HarmonyMethod(typeof(WitchDebug), nameof(FxLabMenuReadyPostfix)));
+        }
+        else if (CommandLineHelper.HasArg("witch-iconlab"))
+        {
+            MainFile.Logger.Info("--witch-iconlab: will skip menu and open the Icon Lab");
+            harmony.Patch(
+                AccessTools.Method(typeof(NMainMenu), "_Ready"),
+                postfix: new HarmonyMethod(typeof(WitchDebug), nameof(IconLabMenuReadyPostfix)));
         }
         else if (CommandLineHelper.HasArg("witch-bootstrap"))
         {
@@ -152,6 +164,40 @@ public static class WitchDebug
         catch (Exception e)
         {
             MainFile.Logger.Error($"--witch-fxlab failed: {e}");
+        }
+    }
+
+    private static void IconLabMenuReadyPostfix(NMainMenu __instance)
+    {
+        if (_iconLabStarted)
+        {
+            return;
+        }
+        _iconLabStarted = true;
+        MainFile.Logger.Info("--witch-iconlab: main menu ready, opening the Icon Lab");
+        TaskHelper.RunSafely(OpenIconLab(__instance));
+    }
+
+    private static async Task OpenIconLab(NMainMenu menu)
+    {
+        SceneTree tree = menu.GetTree();
+        for (int i = 0; i < 5; i++)
+        {
+            await menu.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+        }
+        try
+        {
+            NGame? game = NGame.Instance;
+            if (game == null)
+            {
+                MainFile.Logger.Error("--witch-iconlab failed: NGame.Instance is null");
+                return;
+            }
+            game.RootSceneContainer.SetCurrentScene(NIconLab.Create());
+        }
+        catch (Exception e)
+        {
+            MainFile.Logger.Error($"--witch-iconlab failed: {e}");
         }
     }
 

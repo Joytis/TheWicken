@@ -30,6 +30,7 @@ param(
     [switch]$WitchBootstrap,   # -witch-debug -witch-bootstrap: skip menu, enter combat with 100 energy
     [switch]$AutoSlay,         # -witch-debug -autoslay: run the smoke-test bot
     [switch]$FxLab,            # -witch-debug -witch-fxlab: open the SFX/VFX browser scene
+    [switch]$IconLab,          # -witch-debug -witch-iconlab: open the relic/potion icon browser scene
     [string]$Encounter = "",   # optional encounter id for -WitchBootstrap (e.g. SLIMES_WEAK)
     [switch]$TailLog           # solo only: stream %appdata%\SlayTheSpire2\logs\godot.log to this console
 )
@@ -71,7 +72,7 @@ Write-Host "Game dir : $gameDir"
 # --- Solo (no multiplayer) --------------------------------------------------
 if ($Solo) {
     $gameArgs = @()
-    if ($WitchBootstrap -or $AutoSlay -or $FxLab) {
+    if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab) {
         # Game-native dev switch: skips the intro logo (checked once at startup).
         # Child processes inherit the environment, so set it just for this launch.
         $env:STS2_DEV_SKIP = '1'
@@ -87,6 +88,10 @@ if ($Solo) {
     if ($FxLab) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
         $gameArgs += '-witch-fxlab'
+    }
+    if ($IconLab) {
+        if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
+        $gameArgs += '-witch-iconlab'
     }
     $launchTime = Get-Date
     if ($gameArgs.Count -gt 0) {
