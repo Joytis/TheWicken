@@ -114,6 +114,8 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomCharacterSelectBg => "char_select_bg_witch.tscn".CharacterScenePath();
     public override string CustomTrailPath => "card_trail_witch.tscn".CharacterScenePath();
     public override string CustomRestSiteAnimPath => "witch_rest_site.tscn".CharacterScenePath();
+    // SDF wipe played by NTransition.FadeOut when embarking from character select.
+    public override string CustomCharacterSelectTransitionPath => "witch_transition_mat.tres".ShaderPath();
     public override string CustomMerchantAnimPath => "witch_merchant.tscn".CharacterScenePath();
 
     // Audio — Ironclad stand-ins until the Witch gets her own FMOD events.
@@ -150,9 +152,6 @@ public class Witch : PlaceholderCharacterModel
     // public override void RegisterSceneConversions() => ...;
 
     // public override RelicIconData CustomYummyCookie => ...;
-
-    // Character select
-    // public override string CustomCharacterSelectTransitionPath => ...;
 
     // Currently provided by PlaceholderCharacterModel — must supply once off the placeholder base:
     // public override string CharacterSelectSfx => ...;
