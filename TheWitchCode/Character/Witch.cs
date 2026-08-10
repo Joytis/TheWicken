@@ -129,22 +129,7 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomArmPaperTexturePath => "multiplayer_hand_witch_paper.png".CharacterUiPath();
     public override string CustomArmScissorsTexturePath => "multiplayer_hand_witch_scissors.png".CharacterUiPath();
 
-
-
-    /*  CustomCharacterModel virtuals not yet overridden — fill these in when replacing
-        PlaceholderCharacterModel with CustomCharacterModel.
-        (Skipped: CustomEnergyCounter — legacy API, we use CustomEnergyCounterPath.)
-
-    // Behavior / flags
-    // public override List<(string, string)> Localization => ...;
-    // public override bool HideFromVanillaCharacterSelect => ...;
-    // public override bool AllowInVanillaRandomCharacterSelect => ...;   // defaults to !HideFromVanillaCharacterSelect
-    // public override bool HideInCompendium => ...;
-
-    // Icons
-    // public override string CustomIconOutlineTexturePath => ...;
-    // public override string CustomIconPath => ...;
-
+    /*
     // Anims / visuals
     // public override float DeathAnimTime => ...;
     // public override NCreatureVisuals CreateCustomVisuals() => ...;
