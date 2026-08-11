@@ -128,6 +128,7 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomArmRockTexturePath => "multiplayer_hand_witch_rock.png".CharacterUiPath();
     public override string CustomArmPaperTexturePath => "multiplayer_hand_witch_paper.png".CharacterUiPath();
     public override string CustomArmScissorsTexturePath => "multiplayer_hand_witch_scissors.png".CharacterUiPath();
+    public override string CharacterSelectSfx => "witch_screen_selection.wav".CharacterSfxPath();
 
     /*
     // Anims / visuals
@@ -139,7 +140,6 @@ public class Witch : PlaceholderCharacterModel
     // public override RelicIconData CustomYummyCookie => ...;
 
     // Currently provided by PlaceholderCharacterModel — must supply once off the placeholder base:
-    // public override string CharacterSelectSfx => ...;
     // public override string CharacterTransitionSfx => ...;
     // public override List<string> GetArchitectAttackVfx() => ...;
     */
