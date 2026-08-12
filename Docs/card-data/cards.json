@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-09",
+  "generated": "2026-08-12",
   "cards": [
     {
       "name": "Defend",
@@ -2485,13 +2485,13 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Transform two cards in your Draw Pile into 2 Rats each.",
+      "text": "Choose 2 cards in your Draw Pile to Transform into 2 Rats each.",
       "numbers": {
         "Cards": 2
       },
       "upgrade": "Cost -1",
       "note": "Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2516,13 +2516,13 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Each turn, the first 3 Attacks you play are played an additional time.",
+      "text": "The first 2 Attacks you play each turn are played an additional time.",
       "numbers": {
-        "PrimalForm": 3
+        "PrimalForm": 2
       },
       "upgrade": "PrimalForm +1",
       "note": "Primal Form: shed the skin, keep the fury — your first few Attacks each turn are played an additional time.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -3029,13 +3029,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Draw 1 card. Discard a card.",
+      "text": "Draw 1 card. Discard 1 card.",
       "numbers": {
         "Cards": 1
       },
       "upgrade": "Cards +1",
       "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,

@@ -60,16 +60,9 @@ public abstract class WitchFamiliarCard(int cost, CardType type, CardRarity rari
 		return familiars;
 	}
 
-    //Image size:
-    //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
-    //Full art: 606x852
-    public override string CustomPortraitPath => $"familiar/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
-    
-    //Smaller variants of card images for efficiency:
-    //Smaller variant of fullart: 250x350
-    //Smaller variant of normalart: 250x190
-    
-    //Uses card_portraits/card_name.png as image path. These should be smaller images.
-    public override string PortraitPath => $"familiar/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-    public override string BetaPortraitPath => $"familiar/beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+    //Source art lives in card_portraits/familiar/ and is packed into atlas slices by
+    //tools/pack-card-atlas.py — cards render the .tres slice.
+    public override string CustomPortraitPath => $"familiar/{Id.Entry.RemovePrefix().ToLowerInvariant()}.tres".CardAtlasPath();
+    public override string PortraitPath => CustomPortraitPath;
+    public override string BetaPortraitPath => CustomPortraitPath;
 }

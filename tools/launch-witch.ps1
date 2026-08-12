@@ -1,25 +1,31 @@
 <#
 .SYNOPSIS
-    Launch N local Slay the Spire 2 instances for multiplayer testing:
-    1 host (-fastmp host_standard) + (N-1) clients (-fastmp join).
+    Witch dev launcher for Slay the Spire 2. Default: one solo instance (with
+    optional mod debug flags). Pass -Players N for multiplayer testing
+    (1 host [-fastmp host_standard] + N-1 clients [-fastmp join]).
 
 .DESCRIPTION
-    The first instance hosts. Each additional client gets a unique -clientId
-    starting at 1000 (1000, 1001, 1002, ...), as required for 3+ players.
+    In multiplayer mode the first instance hosts. Each additional client gets a
+    unique -clientId starting at 1000 (1000, 1001, 1002, ...), as required for
+    3+ players.
 
     The game is launched directly (no Steam) via the steam_appid.txt next to
     the executable. Start-Process sets the working directory to the game folder
     so the game finds steam_appid.txt and its data dir.
 
 .PARAMETER Players
-    Total number of instances to launch (host + clients). Default 2.
+    Total number of instances to launch (host + clients). Omitted = one solo
+    instance; providing it switches to multiplayer mode. (-Solo still forces
+    solo and is what the VS Code tasks pass explicitly.)
 
 .PARAMETER Sts2Path
     Path to the Slay the Spire 2 install folder (containing SlayTheSpire2.exe).
     Auto-discovered from the Steam library registry if not given.
 
 .EXAMPLE
-    ./launch-mp.ps1 -Players 4
+    ./launch-witch.ps1                # one solo instance
+    ./launch-witch.ps1 -TestUpdatePopup
+    ./launch-witch.ps1 -Players 4    # 1 host + 3 clients
 #>
 param(
     [int]$Players = 2,
@@ -32,6 +38,9 @@ param(
     [switch]$FxLab,            # -witch-debug -witch-fxlab: open the SFX/VFX browser scene
     [switch]$IconLab,          # -witch-debug -witch-iconlab: open the relic/potion icon browser scene
     [string]$Encounter = "",   # optional encounter id for -WitchBootstrap (e.g. SLIMES_WEAK)
+    [switch]$TestUpdatePopup,          # -witch-test-update-popup: show the Workshop-update restart popup (no Steam calls)
+    [switch]$ForceWorkshopDownload,    # -witch-force-workshop-download=<id>: force the Workshop download path;
+                                       # item id read from workshop/mod_id.txt (local builds need it)
     [switch]$TailLog           # solo only: stream %appdata%\SlayTheSpire2\logs\godot.log to this console
 )
 
@@ -70,7 +79,8 @@ if (-not (Test-Path $appId)) {
 Write-Host "Game dir : $gameDir"
 
 # --- Solo (no multiplayer) --------------------------------------------------
-if ($Solo) {
+# Solo is the default; multiplayer only when -Players is given explicitly.
+if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
     $gameArgs = @()
     if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab) {
         # Game-native dev switch: skips the intro logo (checked once at startup).
@@ -92,6 +102,21 @@ if ($Solo) {
     if ($IconLab) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
         $gameArgs += '-witch-iconlab'
+    }
+    # Workshop self-update debug flags (not gated on -witch-debug; handled in
+    # WorkshopSelfUpdate.Initialize).
+    if ($TestUpdatePopup) {
+        $gameArgs += '-witch-test-update-popup'
+    }
+    if ($ForceWorkshopDownload) {
+        $modIdFile = Join-Path $PSScriptRoot '..\workshop\mod_id.txt'
+        if (Test-Path $modIdFile) {
+            $itemId = (Get-Content $modIdFile -Raw).Trim()
+            $gameArgs += "-witch-force-workshop-download=$itemId"
+        } else {
+            Write-Warning "workshop/mod_id.txt not found; passing the flag without an item id (only works for a Workshop-loaded install)."
+            $gameArgs += '-witch-force-workshop-download'
+        }
     }
     $launchTime = Get-Date
     if ($gameArgs.Count -gt 0) {

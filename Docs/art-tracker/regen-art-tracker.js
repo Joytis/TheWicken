@@ -36,10 +36,10 @@ function clean(s) {
 const root = path.join(__dirname, '..', '..');
 function cardArtPath(entry) {
   const base = entry.toLowerCase() + '.png';
-  for (const dir of ['TheWitch/images/card_portraits/big/', 'TheWitch/images/card_portraits/big/familiar/']) {
+  for (const dir of ['TheWitch/images/card_portraits/', 'TheWitch/images/card_portraits/familiar/']) {
     if (fs.existsSync(path.join(root, dir + base))) return dir + base;
   }
-  return 'TheWitch/images/card_portraits/big/' + base; // convention target even if missing
+  return 'TheWitch/images/card_portraits/' + base; // convention target even if missing
 }
 // status is derived: done → Done; artist assigned → In Progress; else Placeholder
 function derive(done, artist) { return done ? 'Done' : (artist ? 'In Progress' : 'Placeholder'); }

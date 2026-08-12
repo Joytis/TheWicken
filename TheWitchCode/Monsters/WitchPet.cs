@@ -36,7 +36,7 @@ public abstract class WitchPet : MonsterModel
 
     /// <summary>res:// path to the sprite texture swapped onto the host body at spawn.</summary>
     public abstract string PetFileName { get; }
-    public string TexturePath => (PetFileName + ".png").PetImagePath();
+    public string TexturePath => (PetFileName + ".tres").PetAtlasPath();
     public string ConfigPath => (PetFileName + ".tres").PetConfigPath();
 
     /// <summary>

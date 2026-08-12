@@ -50,7 +50,7 @@ public static class MushroomedCards
 
     /// <summary>The shared "mystery" portrait used for every mushroomed card (falls back to card.png if missing).</summary>
     public static Texture2D? MysteryPortrait =>
-        _mystery ??= ResourceLoader.Load<Texture2D>("mystery.png".CardImagePath(), null, ResourceLoader.CacheMode.Reuse);
+        _mystery ??= ResourceLoader.Load<Texture2D>("mystery.tres".CardAtlasPath(), null, ResourceLoader.CacheMode.Reuse);
 
     private static Gibberish Generate(Rng rng)
     {

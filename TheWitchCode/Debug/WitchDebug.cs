@@ -35,6 +35,14 @@ namespace TheWitch.TheWitchCode.Debug;
 ///                                     every relic + potion, Witch above base game, drawn in
 ///                                     each composited state (owned / not seen / undiscovered /
 ///                                     locked / raw outline) for art-parity checks.
+///   --witch-test-update-popup         shows the Workshop self-update "restart required" popup
+///                                     directly at the main menu (no Steam calls) — popup UI/loc
+///                                     iteration. Handled in WorkshopSelfUpdate.Initialize.
+///   --witch-force-workshop-download[=ITEMID]
+///                                     skips the staleness gate and forces the high-priority
+///                                     Workshop download + monitor + popup path. The optional
+///                                     ITEMID lets a local mods/-folder build target the live
+///                                     Workshop item. Handled in WorkshopSelfUpdate.Initialize.
 ///
 /// Patch-point note: NGame.GameStartup's state machine is already JIT-compiled (and possibly
 /// tier-1 promoted with call sites inlined) by the time mods initialize inside it, so methods it

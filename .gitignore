@@ -41,3 +41,6 @@ tools/ModUploader-win-x64/mod-uploader.log
 # Generated outline contact sheet (tools/gen-outlines.py --sheet)
 Docs/art-tracker/outline-sheet.png
 tools/__pycache__/
+
+# Generated card atlas pages + .tres slices (tools/pack-card-atlas.py; source art = card_portraits/)
+/TheWitch/images/atlases/

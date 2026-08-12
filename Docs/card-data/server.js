@@ -13,7 +13,7 @@ const ROOT = path.resolve(HERE, "..", ".."); // repo root
 const DOCS_DIR = path.join(HERE, ".."); // Docs/
 const JSON_PATH = path.join(HERE, "cards.json");
 const HTML_PATH = path.join(DOCS_DIR, "card-designs.html");
-const BIG_DIR = path.join(ROOT, "TheWitch", "images", "card_portraits", "big");
+const BIG_DIR = path.join(ROOT, "TheWitch", "images", "card_portraits"); // single-size source art (packed to atlases at publish)
 const PLACEHOLDER = path.join(BIG_DIR, "card.png"); // the "no art" duplicate source
 
 function send(res, code, body, type) {
@@ -42,8 +42,8 @@ function regenTracker() {
 }
 
 const md5 = (buf) => crypto.createHash("md5").update(buf).digest("hex");
-// Big portrait lives at big/<entry>.png, but familiar token cards author their art under
-// big/familiar/<entry>.png (mirrors WitchFamiliarCard's `familiar/` PortraitPath prefix).
+// Source art lives at card_portraits/<entry>.png, but familiar token cards author theirs under
+// familiar/<entry>.png (mirrors WitchFamiliarCard's `familiar/` atlas-key prefix).
 // Check the root first, then the familiar/ subdir; fall back to the root path when neither exists.
 const bigPathFor = (entry) => {
   const root = path.join(BIG_DIR, entry.toLowerCase() + ".png");
@@ -55,8 +55,7 @@ const hashFile = (file) => { try { return md5(fs.readFileSync(file)); } catch { 
 
 // Known placeholder images (the generic card backs). Any big art matching one of these is "No Art".
 const PLACEHOLDER_FILES = [
-  PLACEHOLDER,                                                            // big/card.png
-  path.join(ROOT, "TheWitch", "images", "card_portraits", "card.png"),  // small card.png
+  PLACEHOLDER, // card_portraits/card.png
 ];
 
 // Live art state for every card's BIG portrait, recomputed from disk on each call:

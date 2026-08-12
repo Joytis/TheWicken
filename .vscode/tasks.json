@@ -8,7 +8,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "${input:playerCount}"
             ],
             "problemMatcher": [],
@@ -26,7 +26,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "2"
             ],
             "problemMatcher": [],
@@ -40,7 +40,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "4"
             ],
             "problemMatcher": [],
@@ -54,7 +54,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "${input:playerCount}"
             ],
             "dependsOn": "dotnet build",
@@ -120,13 +120,37 @@
             "presentation": { "reveal": "always", "panel": "shared" }
         },
         {
+            "label": "Run",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
+                "-Solo", "-TailLog",
+                "-DelayMs", "4000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "No build — launch one STS2 instance with whatever is already deployed, tailing the game log."
+        },
+        {
             "label": "Publish and Run",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -151,7 +175,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-WitchBootstrap", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -176,7 +200,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-WitchBootstrap", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -200,7 +224,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-AutoSlay", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -225,7 +249,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-FxLab", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -250,7 +274,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-FxLab", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -275,7 +299,7 @@
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
                 "-Command",
-                "& '${workspaceFolder}/tools/launch-mp.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-mp.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-witch.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
             ],
             "dependsOn": "dotnet publish",
             "isBackground": true,
