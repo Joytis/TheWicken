@@ -14,6 +14,7 @@ Comfy nest is really good. It should probably do something else
 
 Add an 'Art By' system - https://github.com/lamali292/Downfall/blob/main/DownfallCode/Artists/Artist.cs
 
+Brambles now UNDER Represented - Hex dominates. 
 
 # BENCHED - NEEDS FURTHER EVALUATION
 - Maybe another repeatable block source? 

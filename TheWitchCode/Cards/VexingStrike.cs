@@ -20,7 +20,7 @@ public sealed class VexingStrike : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9m, ValueProp.Move),
-        new PowerVar<HexPower>(2m)
+        new PowerVar<HexPower>(1m)
     ];
 
     public VexingStrike()
@@ -39,5 +39,8 @@ public sealed class VexingStrike : WitchCard
         await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);
+    protected override void OnUpgrade() {
+        DynamicVars.Damage.UpgradeValueBy(1m);
+        DynamicVars.Hex().UpgradeValueBy(1m);
+    }
 }
