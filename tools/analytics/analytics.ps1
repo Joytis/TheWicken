@@ -31,6 +31,11 @@ param(
     # (String so a blanked-out VS Code task prompt doesn't fail int binding.)
     [string]$DaysBack,
 
+    # Which cards to chart: 'all' (players mix other mods' cards into Witch runs) or 'witch'
+    # (only THEWITCH- entries). Applies to the card-level chart modes.
+    [ValidateSet('all', 'witch')]
+    [string]$Cards = 'all',
+
     # card-ascension mode: card entry id as uploaded, e.g. RITUAL_SACRIFICE.
     [string]$CardName,
 
@@ -44,6 +49,7 @@ function Add-CommonFilters([System.Collections.Generic.List[string]]$argList) {
     if ($ModVersion)  { $argList.Add('--mod-version');  $argList.Add($ModVersion) }
     if ($GameVersion) { $argList.Add('--game-version'); $argList.Add($GameVersion) }
     if ($DaysBack -and [int]$DaysBack -gt 0) { $argList.Add('--days-back'); $argList.Add($DaysBack) }
+    if ($Cards -eq 'witch') { $argList.Add('--witch-only') }
 }
 
 # Run a plot script, echoing its output, then open the chart it reports having written.

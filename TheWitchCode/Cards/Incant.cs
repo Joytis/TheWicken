@@ -27,7 +27,7 @@ public sealed class Incant : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8m, ValueProp.Move),
-        new PowerVar<HexPower>(2m)
+        new PowerVar<HexPower>(1m)
     ];
 
     private bool UsedPotionThisTurn => CombatManager.Instance.History.Entries
@@ -51,5 +51,8 @@ public sealed class Incant : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3m);
+    protected override void OnUpgrade() 
+    {
+        DynamicVars.Hex().UpgradeValueBy(1m);
+    }
 }

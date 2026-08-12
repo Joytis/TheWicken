@@ -21,7 +21,7 @@ public sealed class ReadTheBones : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<HexPower>(3m),
+        new PowerVar<HexPower>(2m),
         new EnergyVar("EnergyNextTurnPower", 1),
         new PowerVar<DrawCardsNextTurnPower>(1m)
     ];
@@ -42,6 +42,6 @@ public sealed class ReadTheBones : WitchCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars["EnergyNextTurnPower"].UpgradeValueBy(1m);
+        DynamicVars["DrawCardsNextTurnPower"].UpgradeValueBy(1m);
     }
 }

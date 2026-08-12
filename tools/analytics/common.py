@@ -1,6 +1,7 @@
 """Shared plumbing for the analytics scripts: Supabase fetch, read-key discovery, and the
 witch-house chart theme. Dispatched via tools/analytics/analytics.ps1."""
 
+import json
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -44,12 +45,15 @@ def add_common_args(parser) -> None:
     parser.add_argument("--mod-version", default=None, help="filter to one mod release (default: all)")
     parser.add_argument("--game-version", default=None, help="filter to one StS2 build (default: all)")
     parser.add_argument("--days-back", type=int, default=None, help="only runs from the last N days")
+    parser.add_argument("--witch-only", action="store_true",
+                        help="only chart THEWITCH- cards (players mix in other mods' cards)")
 
 
 def describe_filters(args) -> str:
     return ", ".join(f"{name}={val}" for name, val in [
         ("mod_version", args.mod_version), ("game_version", args.game_version),
-        ("last_days", args.days_back)] if val) or "all runs"
+        ("last_days", args.days_back),
+        ("cards", "witch-only" if getattr(args, "witch_only", False) else None)] if val) or "all runs"
 
 
 def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
@@ -72,7 +76,7 @@ def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
     return pd.DataFrame(resp.json())
 
 
-def card_stats(runs: pd.DataFrame) -> pd.DataFrame:
+def card_stats(runs: pd.DataFrame, witch_only: bool = False) -> pd.DataFrame:
     # One row per (run, unique card in deck): a card's win rate = win rate of runs playing it,
     # its pick rate = share of observed runs whose deck contains it.
     rows = [
@@ -87,7 +91,30 @@ def card_stats(runs: pd.DataFrame) -> pd.DataFrame:
         .reset_index()
     )
     per_card["pick_rate"] = per_card["runs"] / len(runs)
+    if witch_only:
+        # Every remaining label carries the mod prefix — strip it for readability.
+        per_card = per_card[per_card["card"].str.startswith("THEWITCH-")]
+        per_card = per_card.assign(card=per_card["card"].str.removeprefix("THEWITCH-"))
     return per_card
+
+
+def card_rarities() -> dict[str, str]:
+    """Entry -> rarity, from the Witch card db plus the base-game class dumps. Witch entries
+    are mapped both bare and with the THEWITCH- prefix (uploads carry the prefix; witch-only
+    charts strip it)."""
+    repo = Path(__file__).resolve().parents[2]
+    rarities: dict[str, str] = {}
+    for name in ("silent", "necrobinder", "ironclad", "cards"):
+        data = json.loads((repo / f"Docs/card-data/{name}.json").read_text(encoding="utf-8"))
+        for card in data["cards"] if isinstance(data, dict) else data:
+            entry, rarity = card.get("entry"), card.get("rarity")
+            if not entry or not rarity:
+                continue
+            if name == "cards":
+                rarities[entry] = rarities[f"THEWITCH-{entry}"] = rarity
+            else:
+                rarities.setdefault(entry, rarity)
+    return rarities
 
 
 def apply_theme() -> None:

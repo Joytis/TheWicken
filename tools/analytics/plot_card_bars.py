@@ -41,7 +41,7 @@ def main() -> None:
     runs = common.fetch_runs(args.key, args.mod_version, args.game_version, args.days_back)
     if runs.empty:
         sys.exit(f"No runs found ({filters}).")
-    stats = common.card_stats(runs).sort_values(column, ascending=False)
+    stats = common.card_stats(runs, args.witch_only).sort_values(column, ascending=False)
     print(f"{len(runs)} runs, {len(stats)} cards ({filters})")
     print(stats.head(10).to_string(index=False))
 
@@ -61,7 +61,9 @@ def main() -> None:
     ax.set_ylabel(ylabel)
     ax.set_ylim(0, 1.05)
     ax.margins(x=0.01)
-    ax.tick_params(axis="x", labelrotation=90, labelsize=7)
+    ax.tick_params(axis="x", labelsize=7)
+    # Slanted, right-anchored labels read much better than fully vertical ones.
+    plt.setp(ax.get_xticklabels(), rotation=60, ha="right", rotation_mode="anchor")
     ax.yaxis.set_major_formatter(lambda y, _: f"{y:.0%}")
     ax.set_title(f"{title} ({filters}, {len(runs)} runs)")
     fig.tight_layout()

@@ -408,7 +408,8 @@
                 "-Mode", "win-rate",
                 "-ModVersion", "${input:analyticsModVersion}",
                 "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}"
+                "-DaysBack", "${input:analyticsDaysBack}",
+                "-Cards", "${input:analyticsCards}"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": [],
@@ -444,7 +445,8 @@
                 "-Mode", "card-pick-rate",
                 "-ModVersion", "${input:analyticsModVersion}",
                 "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}"
+                "-DaysBack", "${input:analyticsDaysBack}",
+                "-Cards", "${input:analyticsCards}"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": [],
@@ -462,7 +464,8 @@
                 "-Mode", "card-win-rate",
                 "-ModVersion", "${input:analyticsModVersion}",
                 "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}"
+                "-DaysBack", "${input:analyticsDaysBack}",
+                "-Cards", "${input:analyticsCards}"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": [],
@@ -488,6 +491,13 @@
             "type": "promptString",
             "description": "Slay the Spire 2 build to analyze, as uploaded (blank = all game versions)",
             "default": ""
+        },
+        {
+            "id": "analyticsCards",
+            "type": "pickString",
+            "description": "Which cards to chart",
+            "options": ["all", "witch"],
+            "default": "all"
         },
         {
             "id": "analyticsCardName",
