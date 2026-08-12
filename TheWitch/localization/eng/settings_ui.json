@@ -5,5 +5,8 @@
 	"THEWITCH-TURBO_WITCHERY.hover.desc": "In multiplayer, the host's setting applies to all players.",
 	"THEWITCH-BETA_IMAGES.title": "Beta Images",
 	"THEWITCH-BETA_IMAGES.hover.title": "Beta Images",
-	"THEWITCH-BETA_IMAGES.hover.desc": "Show the original beta card art instead of final art. May require a restart to fully apply."
+	"THEWITCH-BETA_IMAGES.hover.desc": "Show the original beta card art instead of final art. May require a restart to fully apply.",
+	"THEWITCH-ANALYTICS_ENABLED.title": "Analytics Enabled",
+	"THEWITCH-ANALYTICS_ENABLED.hover.title": "Analytics Enabled",
+	"THEWITCH-ANALYTICS_ENABLED.hover.desc": "Send anonymous Witch run results (win/loss, deck, card picks) to the mod team for balance tuning. Only active if the game's own Upload Data setting is on."
 }

@@ -2,13 +2,11 @@
 
 Bug: Bloodwall freeze
 Rework: Tasty Herbs
-Bug: Wisdom Text should be like prepared.
-Bug: Wording for Bottomless Pockets.
-Bug: Polymorph phrasing: ⁠Slay the Spire⁠[STS2] The Witch - Playtest and…
 Bug: "Produce a random potion"
-Bug: primal form phrasing ⁠Slay the Spire⁠[STS2] The Witch - Playtest and…
 Bug: Just an FYI because it might not be intentional:
 Gather Herbs copies the next potion you create, but the potion copied doesn''t inherit Unstable if you happen to make an Unstable potion. Didn't seem intentional, but it was a pleasant discovery in this particular run xD
+
+Make the Ancient Relic more busted. 
 
 Hex: totally busted right now. Needs a slight nerf to make it not the best thing she could be doing at all times
 Read the bones: -1 hex
