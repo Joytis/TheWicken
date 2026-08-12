@@ -46,8 +46,12 @@ public sealed class GrindDown : WitchCard
         await CardCmd.Exhaust(choiceContext, chosen);
 
         Rng rng = Owner.RunState.Rng.CombatPotionGeneration;
-        PotionModel? potion = PotionCatalog.Random(PotionCatalog.Query(orientation: orientation, rarity: rarity), rng)
-            ?? PotionCatalog.Random(PotionCatalog.Query(orientation: orientation), rng);
+        List<PotionModel> pool = PotionCatalog.Query(orientation: orientation, rarity: rarity).ToList();
+        if (pool.Count == 0)
+        {
+            pool = PotionCatalog.Query(orientation: orientation).ToList();
+        }
+        PotionModel? potion = await PotionCatalog.Pick(pool, choiceContext, Owner, rng);
         if (potion != null)
         {
             await Witch.ProducePotion(potion, Owner, Witch.PotionMode.Unstable);

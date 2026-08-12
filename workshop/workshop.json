@@ -2,7 +2,7 @@
     "title":  "The Witch - Beta Branch",
     "description":  "The Beta Version version of: https://steamcommunity.com/sharedfiles/filedetails/?id=3752517967\n\n[h1]The Witch[/h1] \nA primal force of nature, enters the spire!\nThe woods are furious... \n\nThe Witch brews a flurry of potions to hex enemies, grow thickets of brambles, and gather her familiars. \n\n[h1]Core Mechanics[/h1] \nPotions: Create unique and classic potions to create powerful turns. \nFamiliars: Summon friendly creatures that support you with unique cards each turn\nBrambles: Grow spiky thickets and hunker down, let the enemies break themselves against your wall of thorns. \nHex: Curse your enemies, causing your attacks to deal progressively more damage. \n\nAI is not used for any Art in The Witch \n\n[h1]Credits[/h1] \nDesign and Engineering: Joytis\nArt Direction and Placeholder: Kitsu\n\n[h2]Artists[/h2]\nPhenelia: https://x.com/Phenelia\n[list]\n[*]Strike\n[/list]\n\nJake Ruesch: https://jsruesch.com/\n[list]\n[*]Defend\n[/list]",
     "visibility":  "public",
-    "changeNote":  "Added some new art, new vfx, a couple balance changes, and a bug fix!! \u003c3 v 0.5.2",
+    "changeNote":  "v0.6.1 - Added analytics and some sfx :)!",
     "tags":  [
                  "Characters",
                  "Cards",

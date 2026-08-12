@@ -10,4 +10,5 @@ namespace TheWitch.TheWitchCode.Potions;
 public abstract class WitchPotion : CustomPotionModel
 {
     public override string? CustomPackedImagePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PotionImagePath();
+    public override string? CustomPackedOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PotionOutlineImagePath();
 }

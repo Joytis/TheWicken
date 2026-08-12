@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using TheWitch.TheWitchCode.Cards;
+using TheWitch.TheWitchCode.Vfx;
 
 namespace TheWitch.TheWitchCode.Extensions;
 
@@ -16,12 +17,16 @@ public static class WitchFx
     public const string SummonSfx = "event:/sfx/characters/necrobinder/necrobinder_summon";
     public const string HexSfx = "doom_apply.mp3";
 
+    /// <summary>The Regent's Guiding Star chime — the game's one star-themed event. Moonbeam's signature.</summary>
+    public const string CelestialSfx = "event:/sfx/enemy/enemy_attacks/living_fog/living_fog_explode";
+
     public static readonly Color WitchGreen = new("83eb85");
 
     public static readonly Color White = new("ffffff");
     public static readonly Color Purple = new("ac54b3");
     public static readonly Color FireOrange = new("ff8b57");
     public static readonly Color RummageBrown = new ("743323");
+    public static readonly Color MoonbeamFire = new(0.331f, 0.968f, 1f);
 
     public const string SilentAttackTrigger = "AttackSilent";
 
@@ -116,6 +121,45 @@ public static class WitchFx
     {
         NCreature? node = NCombatRoom.Instance?.GetCreatureNode(target);
         return node == null ? null : FlipbookNode(innerPath, node.VfxSpawnPosition, tint, scale);
+    }
+
+    /// <summary>Moonbeam's cast-and-impact beam (<see cref="NMoonbeamVfx" />). Not globally preloaded —
+    /// a card spawning it must list <see cref="NMoonbeamVfx.scenePath" /> in ExtraRunAssetPaths.</summary>
+    public static void Moonbeam(Creature owner, Creature target, Color? tint = null) => Attach(MoonbeamNode(owner, target, tint));
+
+    public static Node2D? MoonbeamNode(Creature owner, Creature? target, Color? tint = null)
+    {
+        // Fire burst sits at the CASTER's feet (swap to target's node for an impact-side burst).
+        Node2D? flameBurst = FlameBurstNode(target!, 1.0f, MoonbeamFire);
+        Node2D? moonbeam = NMoonbeamVfx.Create(owner, target, White);
+        return Compose(flameBurst, moonbeam);
+    }
+
+    /// <summary>Groups vfx nodes under one root so a single node can be returned to WithHitVfxNode.
+    /// Each child positions itself in global space before being parented, and the root stays at the
+    /// origin untransformed, so nesting doesn't move anything. Children free themselves on their own
+    /// schedule; the root goes when the last one leaves.</summary>
+    private static Node2D? Compose(params Node2D?[] children)
+    {
+        Node2D[] live = children.Where(c => c != null).ToArray()!;
+        if (live.Length == 0)
+        {
+            return null;
+        }
+
+        Node2D root = new() { Name = "ComposedVfx" };
+        foreach (Node2D child in live)
+        {
+            root.AddChildSafely(child);
+        }
+        root.ChildExitingTree += _ =>
+        {
+            if (root.GetChildCount() <= 1)
+            {
+                root.QueueFreeSafely();
+            }
+        };
+        return root;
     }
 
     public static void FlameBurst(Creature target, float scale, Color? tint = null) => Attach(FlameBurstNode(target, scale, tint));

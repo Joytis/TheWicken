@@ -9,19 +9,16 @@ public sealed class WickedBrew : OrientationBrewCard
 {
     protected override PotionOrientation Orientation => PotionOrientation.Offensive;
 
-    // First pass: every offensive potion the Witch could previously roll (shared pool + Witch pool,
-    // all rarities, no healers). Trim freely — this list IS the card's roll pool.
+    // Seeded from the old live query: every Common offensive potion the Witch could roll
+    // (shared pool + Witch pool, no healers). Trim/add freely — this list IS the card's roll
+    // pool and the upgraded card's selection grid.
     protected override IEnumerable<PotionModel> LootTable => [
-        ModelDb.Potion<ExplosiveAmpoule>(),
         ModelDb.Potion<FirePotion>(),
+        ModelDb.Potion<ExplosiveAmpoule>(),
+        ModelDb.Potion<VulnerablePotion>(),
+        ModelDb.Potion<StrengthPotion>(),
+        ModelDb.Potion<FlexPotion>(),
+        ModelDb.Potion<AttackPotion>(),
+        ModelDb.Potion<CursedBottle>(),
     ];
-
-
-    // Potions only the upgraded card can brew — none yet; new potions land here.
-    protected override IEnumerable<PotionModel> UpgradedExtras => [
-        ModelDb.Potion<PowderedDemise>(),
-    ];
-
-    // Potions the upgraded card can NO LONGER brew — dropped from the base table on upgrade.
-    protected override IEnumerable<PotionModel> UpgradedRemovals => [ ];
 }

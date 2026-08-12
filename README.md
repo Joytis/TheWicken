@@ -12,7 +12,9 @@ A **Slay the Spire 2** character mod ("The Witch") — Godot 4.5 / C# (net9.0), 
    powershell -ExecutionPolicy Bypass -File tools\setup-gamedata-links.ps1
    ```
 
-   This creates repo-root junctions `scenes/`, `materials/`, `shaders/`, `images/` → `gamedata/<same>` so the Godot editor resolves base-game `res://` paths referenced by mod scenes (at runtime they resolve from the game's pck regardless). The junctions are gitignored and excluded from export in `export_presets.cfg` — don't remove those excludes, or game assets get packed into the mod `.pck`.
+   This creates repo-root junctions `scenes/`, `materials/`, `shaders/`, `images/`, `src/`, `themes/`, `fonts/` → `gamedata/<same>` so the Godot editor resolves base-game `res://` paths referenced by mod scenes (at runtime they resolve from the game's pck regardless). The script is idempotent — re-run it any time the editor reports broken dependencies (e.g. `Scene 'res://themes/…' has broken dependencies: res://fonts/…`), which means a junction is missing.
+
+   The junctions are gitignored and excluded from export in `export_presets.cfg` — don't remove those excludes, or game assets get packed into the mod `.pck`.
 
 ## Build
 

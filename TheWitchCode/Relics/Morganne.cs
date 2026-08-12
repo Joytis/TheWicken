@@ -15,7 +15,7 @@ public sealed class Morganne : WitchRelic
 	private bool _isActivating;
 	private int _cardsPlayed;
 
-	public override RelicRarity Rarity => RelicRarity.Uncommon;
+	public override RelicRarity Rarity => RelicRarity.Rare;
 	public override string FlashSfx => "event:/sfx/ui/relic_activate_draw";
 	public override bool ShowCounter => true;
 

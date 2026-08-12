@@ -29,7 +29,7 @@ public sealed class HexPower : WitchPower
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    private const decimal DamagePerStack = 3m;
+    private const decimal DamagePerStack = 2m;
 
     // Loc token {TotalDamage}: the live total bonus damage (per-stack × stacks), kept in sync
     // with the stack count below so the tooltip shows what the enemy will actually take.

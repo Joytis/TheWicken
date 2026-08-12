@@ -14,7 +14,6 @@ namespace TheWitch.TheWitchCode.Patches;
 /// enters combat late (generated, drafted, tutored from outside the deck) can never see earlier procures.
 /// Recording centrally instead lets any instance read the true combat total.
 /// Cleared alongside the real combat history, so lifetime matches one combat.
-/// Caveat: like all mid-combat state this is not restored on multiplayer rejoin (see CLAUDE.md).
 /// </summary>
 public static class PotionProcureHistory
 {

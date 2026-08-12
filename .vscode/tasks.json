@@ -372,6 +372,24 @@
             "problemMatcher": [],
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
             "detail": "Stop the card design server (kills the node process on port 7820)."
+        },
+        {
+            "label": "Analytics: Win rate per card (prompt for mod version)",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
+                "-Mode", "win-rate",
+                "-ModVersion", "${input:analyticsModVersion}",
+                "-GameVersion", "${input:analyticsGameVersion}",
+                "-DaysBack", "${input:analyticsDaysBack}"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "Pull runs from Supabase and write the win-rate-per-card scatter to build/analytics/."
         }
     ],
     "inputs": [
@@ -380,6 +398,24 @@
             "type": "promptString",
             "description": "Total players to launch (1 host + rest clients)",
             "default": "2"
+        },
+        {
+            "id": "analyticsModVersion",
+            "type": "promptString",
+            "description": "Mod version to analyze, as uploaded from TheWitch.json (blank = all versions; seed-test = fabricated rows)",
+            "default": "v0.6.0"
+        },
+        {
+            "id": "analyticsGameVersion",
+            "type": "promptString",
+            "description": "Slay the Spire 2 build to analyze, as uploaded (blank = all game versions)",
+            "default": ""
+        },
+        {
+            "id": "analyticsDaysBack",
+            "type": "promptString",
+            "description": "Only analyze runs from the last N days (0 = all time)",
+            "default": "0"
         },
         {
             "id": "changeNote",

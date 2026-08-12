@@ -28,12 +28,11 @@ public class Witch : PlaceholderCharacterModel
     public override Color EnergyLabelOutlineColor => DarkColor;
 
     public override CharacterGender Gender => CharacterGender.Neutral;
-    public override int StartingHp => 68;
+    public override int StartingHp => 70;
 
     public static bool Turbo => WitchConfig.EffectiveTurboWitchery;
     
     public override IEnumerable<CardModel> StartingDeck => [
-        ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
         ModelDb.Card<StrikeWitch>(),
@@ -43,6 +42,7 @@ public class Witch : PlaceholderCharacterModel
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<DefendWitch>(),
         ModelDb.Card<Harvest>(),
+        ModelDb.Card<Incant>(),
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
@@ -56,6 +56,8 @@ public class Witch : PlaceholderCharacterModel
         .. MegaCrit.Sts2.Core.Nodes.Vfx.NPowerUpVfx.AssetPaths,
         .. MegaCrit.Sts2.Core.Nodes.Vfx.NThinSliceVfx.AssetPaths,
         .. MegaCrit.Sts2.Core.Nodes.Vfx.NGroundFireVfx.AssetPaths,
+        // MoonbeamPower re-fires the beam every turn, so it can't rely on the card's own assets.
+        Vfx.NMoonbeamVfx.scenePath,
     ];
 
     public override CardPoolModel CardPool => ModelDb.CardPool<WitchCardPool>();
@@ -112,6 +114,8 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomCharacterSelectBg => "char_select_bg_witch.tscn".CharacterScenePath();
     public override string CustomTrailPath => "card_trail_witch.tscn".CharacterScenePath();
     public override string CustomRestSiteAnimPath => "witch_rest_site.tscn".CharacterScenePath();
+    // SDF wipe played by NTransition.FadeOut when embarking from character select.
+    public override string CustomCharacterSelectTransitionPath => "witch_transition_mat.tres".ShaderPath();
     public override string CustomMerchantAnimPath => "witch_merchant.tscn".CharacterScenePath();
 
     // Audio — Ironclad stand-ins until the Witch gets her own FMOD events.
@@ -124,23 +128,9 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomArmRockTexturePath => "multiplayer_hand_witch_rock.png".CharacterUiPath();
     public override string CustomArmPaperTexturePath => "multiplayer_hand_witch_paper.png".CharacterUiPath();
     public override string CustomArmScissorsTexturePath => "multiplayer_hand_witch_scissors.png".CharacterUiPath();
+    public override string CharacterSelectSfx => "witch_screen_selection.wav".CharacterSfxPath();
 
-
-
-    /*  CustomCharacterModel virtuals not yet overridden — fill these in when replacing
-        PlaceholderCharacterModel with CustomCharacterModel.
-        (Skipped: CustomEnergyCounter — legacy API, we use CustomEnergyCounterPath.)
-
-    // Behavior / flags
-    // public override List<(string, string)> Localization => ...;
-    // public override bool HideFromVanillaCharacterSelect => ...;
-    // public override bool AllowInVanillaRandomCharacterSelect => ...;   // defaults to !HideFromVanillaCharacterSelect
-    // public override bool HideInCompendium => ...;
-
-    // Icons
-    // public override string CustomIconOutlineTexturePath => ...;
-    // public override string CustomIconPath => ...;
-
+    /*
     // Anims / visuals
     // public override float DeathAnimTime => ...;
     // public override NCreatureVisuals CreateCustomVisuals() => ...;
@@ -149,11 +139,7 @@ public class Witch : PlaceholderCharacterModel
 
     // public override RelicIconData CustomYummyCookie => ...;
 
-    // Character select
-    // public override string CustomCharacterSelectTransitionPath => ...;
-
     // Currently provided by PlaceholderCharacterModel — must supply once off the placeholder base:
-    // public override string CharacterSelectSfx => ...;
     // public override string CharacterTransitionSfx => ...;
     // public override List<string> GetArchitectAttackVfx() => ...;
     */

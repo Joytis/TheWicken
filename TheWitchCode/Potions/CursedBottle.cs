@@ -23,7 +23,7 @@ public sealed class CursedBottle : WitchPotion
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<HexPower>(3m)
+        new PowerVar<HexPower>(4m)
     ];
 
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<HexPower>()];

@@ -3,11 +3,15 @@ bin/
 /gamedata/
 
 # Junctions into gamedata/ so the Godot editor resolves base-game res:// paths
-# (recreate with: New-Item -ItemType Junction <name> -Target gamedata\<name>)
+# (recreate with: pwsh tools/setup-gamedata-links.ps1)
 /scenes/
+/fonts/
 /materials/
 /shaders/
 /images/
+/src/
+/themes/
+/addons/
 /android/
 .git/
 .idea/
@@ -28,3 +32,12 @@ tools/ModUploader-win-x64/mod-uploader.log
 
 # Discord webhook URL for workshop-upload notifications (secret, machine-local)
 /tools/discord-webhook.local.txt
+
+# Supabase service_role key for analytics read scripts (secret, machine-local)
+/tools/analytics/supabase-service-key.local.txt
+
+# Generated analytics charts (tools/analytics/*.py)
+/build/
+# Generated outline contact sheet (tools/gen-outlines.py --sheet)
+Docs/art-tracker/outline-sheet.png
+tools/__pycache__/

@@ -23,12 +23,12 @@ public sealed class RipSoul : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(15m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         new PowerVar<HexPower>(2m),
     ];
 
     public RipSoul()
-        : base(2, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
+        : base(0, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
     {
     }
 
@@ -47,7 +47,8 @@ public sealed class RipSoul : WitchCard
         await PowerCmd.Apply<HexPower>(choiceContext, cardPlay.Target, DynamicVars.Hex().BaseValue, Owner.Creature, this);
 
         // Any non-healing potion the Witch can roll (Query defaults: randomizable pool, healing excluded).
-        PotionModel? created = PotionCatalog.Random(PotionCatalog.Query(), Owner.RunState.Rng.CombatPotionGeneration);
+        PotionModel? created = await PotionCatalog.Pick(
+            PotionCatalog.Query(), choiceContext, Owner, Owner.RunState.Rng.CombatPotionGeneration);
         if (created != null)
         {
             await PotionCmd.TryToProcure(created.ToMutable(), Owner);

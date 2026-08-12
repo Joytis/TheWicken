@@ -7,11 +7,13 @@ using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Broken Pact: end a familiar's service and take its strength for your own.</summary>
+/// <summary>Broken Pact: end every familiar's service at once and take their strength for your own.</summary>
 public sealed class BrokenPact : WitchCard
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<StrengthPower>(5m)
+        new PowerVar<StrengthPower>(4m)
     ];
 
     public BrokenPact()
@@ -23,11 +25,12 @@ public sealed class BrokenPact : WitchCard
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        bool sacrificed = await Familiars.RemoveRandom(Owner.Creature, Owner.RunState.Rng.CombatTargets);
-        if (sacrificed)
+        int sacrificed = await Familiars.RemoveAll(Owner.Creature);
+        if (sacrificed > 0)
         {
             VfxCmd.PlayOnCreatureCenter(Owner.Creature, VfxCmd.spookyScreamVfx);
-            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(
+                choiceContext, Owner.Creature, DynamicVars.Strength.BaseValue * sacrificed, Owner.Creature, this);
         }
     }
 

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3nfrju8bbes2"]
+
+[ext_resource type="Script" uid="uid://c2hvtf36u4afv" path="res://TheWitchCode/Vfx/NMoonbeamVfx.cs" id="1_script"]
+[ext_resource type="Material" uid="uid://c04ue1ye1syha" path="res://materials/vfx/hyperbeam/vfx_hyperbeam_laser_line.tres" id="2_vdaye"]
+
+[sub_resource type="Curve" id="Curve_togei"]
+_data = [Vector2(0, 0), 0.0, 13.993162, 0, 0, Vector2(0.09885058, 0.6968086), 0.0, 0.22560202, 0, 0, Vector2(1, 1), 0.21340723, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_m07qf"]
+offsets = PackedFloat32Array(0.0025974025, 1)
+colors = PackedColorArray(2.454227, 2.454227, 2.454227, 1, 1, 1, 1, 1)
+
+[node name="MoonbeamVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="impact_container" type="Node2D" parent="."]
+
+[node name="vfx_hyperbeam_laser_line" type="Line2D" parent="impact_container"]
+z_index = 2
+material = ExtResource("2_vdaye")
+position = Vector2(0, -1999)
+rotation = 1.5707964
+points = PackedVector2Array(0, 0, 50, 0, 150, 0, 400, 0, 750, 0, 1400, 0, 2000, 0)
+width = 500.0
+width_curve = SubResource("Curve_togei")
+gradient = SubResource("Gradient_m07qf")
+texture_mode = 1

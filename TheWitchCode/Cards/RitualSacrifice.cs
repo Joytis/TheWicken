@@ -16,7 +16,7 @@ public sealed class RitualSacrifice : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(3),
-        new PowerVar<HexPower>(5m)
+        new PowerVar<HexPower>(7m)
     ];
 
     public RitualSacrifice()

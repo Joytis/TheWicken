@@ -29,7 +29,7 @@ public abstract class WitchFamiliarCard(int cost, CardType type, CardRarity rari
     /// The familiar power instance that generated this card, and which of its stacks (0-based) rolled it —
     /// used to play the matching cosmetic pet's animation when the card is played. Null/0 for cards that
     /// reached the deck some other way (tutors, test hands). Plain C# state: consistent in SP and lockstep
-    /// MP, lost only on mid-combat MP rejoin (cosmetic, acceptable).
+    /// MP, and mid-combat state is never restored, so it needs no serialization.
     /// </summary>
     public FamiliarPower? SourceFamiliar { get; set; }
     public int SourceStackIndex { get; set; }

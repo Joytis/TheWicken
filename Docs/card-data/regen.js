@@ -16,6 +16,9 @@
 const fs = require("fs");
 const path = require("path");
 
+// Editors re-save the localization JSON with a UTF-8 BOM on and off; JSON.parse chokes on one.
+const readJson = (p) => JSON.parse(fs.readFileSync(p, "utf8").replace(/^﻿/, ""));
+
 const ROOT = path.resolve(__dirname, "..", "..");                 // repo root
 const CARDS_DIR = path.join(ROOT, "TheWitchCode", "Cards");
 const LOC_PATH = path.join(ROOT, "TheWitch", "localization", "eng", "cards.json");
@@ -166,7 +169,7 @@ function parseCard(file, srcByClass) {
 
 // ---------- localization ----------
 function loadLoc() {
-  const raw = JSON.parse(fs.readFileSync(LOC_PATH, "utf8"));
+  const raw = readJson(LOC_PATH);
   return raw; // flat map of "THEWITCH-ENTRY.field" -> string
 }
 
@@ -246,7 +249,7 @@ function main() {
   const fresh = build();
 
   let old = { cards: [] };
-  if (fs.existsSync(OUT_PATH)) { try { old = JSON.parse(fs.readFileSync(OUT_PATH, "utf8")); } catch {} }
+  if (fs.existsSync(OUT_PATH)) { try { old = readJson(OUT_PATH); } catch {} }
   const oldByEntry = Object.fromEntries((old.cards || []).map((c) => [c.entry, c]));
 
   const added = [], changed = [], missingLoc = [];

@@ -44,6 +44,10 @@ public partial class MainFile : Node
         // can never contain a marked potion.
         Potions.UnstablePotionSweeperModel.Register();
 
+        // Witch run analytics: rides the game's official OnMetricsUpload hook (release builds,
+        // user's Upload Data setting on) + our own AnalyticsEnabled config toggle.
+        CommonCode.Data.WitchMetrics.Initialize();
+
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();

@@ -66,7 +66,8 @@ const cardRows = cardsData.cards.map(c => {
 // Powers tab: auto-enumerated from the localization file (every power must have loc, so it is the
 // authoritative list — new powers appear on the next regen). Optional per-power curation (artist/done/brief)
 // lives in assets.json under "powerOverrides", keyed by the loc entry (e.g. "HEX_POWER").
-const powerLoc = JSON.parse(fs.readFileSync(path.join(root, 'TheWitch', 'localization', 'eng', 'powers.json'), 'utf8'));
+// .replace strips a UTF-8 BOM — editors re-save the localization JSON with one on and off.
+const powerLoc = JSON.parse(fs.readFileSync(path.join(root, 'TheWitch', 'localization', 'eng', 'powers.json'), 'utf8').replace(/^﻿/, ''));
 const powerOverrides = require(path.join(__dirname, 'assets.json')).powerOverrides || {};
 const powerEntries = Object.keys(powerLoc)
   .filter(k => k.endsWith('.title'))

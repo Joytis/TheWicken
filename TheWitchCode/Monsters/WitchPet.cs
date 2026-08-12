@@ -42,7 +42,7 @@ public abstract class WitchPet : MonsterModel
     /// <summary>
     /// Which familiar power stack this pet represents, stamped on the mutable clone by
     /// FamiliarPower.SyncPets. PetVisuals matches animation events against this pair.
-    /// Plain C# state — cosmetic only, not serialized (lost on mid-combat MP rejoin).
+    /// Plain C# state — cosmetic only, and mid-combat state is never restored, so it needs no serialization.
     /// </summary>
     public Powers.FamiliarPower? SourcePower { get; set; }
     public int StackIndex { get; set; }

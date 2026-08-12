@@ -21,7 +21,7 @@ public sealed class NoxiousBrew : WitchPotion
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8m, ValueProp.Unpowered)
+        new DamageVar(10m, ValueProp.Unpowered)
     ];
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
