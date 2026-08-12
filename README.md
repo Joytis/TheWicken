@@ -1,4 +1,4 @@
-# TheWicken
+# The Witch
 
 A **Slay the Spire 2** character mod ("The Witch") — Godot 4.5 / C# (net9.0), loaded by the game at runtime. See [CLAUDE.md](CLAUDE.md) for architecture and conventions.
 
