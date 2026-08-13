@@ -11,6 +11,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Catalyst : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public Catalyst()
         : base(1, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {

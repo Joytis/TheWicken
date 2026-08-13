@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PetConfig" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://TheWitchCode/Monsters/PetConfig.cs" id="1_cfg"]
-[ext_resource type="Texture2D" path="res://TheWitch/images/pets/rat_familiar.png" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://vr4ug05b04n5c" path="res://TheWitch/images/atlases/pets_atlas.sprites/rat_familiar.tres" id="2_tex"]
 
 [resource]
 script = ExtResource("1_cfg")

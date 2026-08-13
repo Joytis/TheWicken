@@ -27,8 +27,8 @@
 
 | | witch | silent | necrobinder | ironclad | defect | regent |
 |---|---|---|---|---|---|---|
-| 0 | 11 | 16 | 9 | 11 | 15 | 20 |
-| 1 | 50 | 43 | 54 | 48 | 49 | 49 |
+| 0 | 10 | 16 | 9 | 11 | 15 | 20 |
+| 1 | 51 | 43 | 54 | 48 | 49 | 49 |
 | 2 | 19 | 17 | 14 | 19 | 15 | 14 |
 | 3 | 4 | 10 | 7 | 7 | 6 | 3 |
 | 4+ | 1 | 0 | 2 | 0 | 1 | 1 |
@@ -40,11 +40,11 @@ Effective damage = per-hit × hits. Cells: energy cost × single-target/AoE. Bas
 
 | cost | shape | base n | base med | base med+ | witch n | witch med | witch med+ |
 |---|---|---|---|---|---|---|---|
-| 0 | single | 15 | 6 | 8 | 5 | 5 | 8 |
+| 0 | single | 15 | 6 | 8 | 4 | 4 | 6.5 |
 | 0 | AoE | 1 | 60 | 75 | 0 | — | — |
-| 1 | single | 48 | 8 | 10 | 11 | 8 | 10 |
+| 1 | single | 48 | 8 | 10 | 12 | 8 | 10 |
 | 1 | AoE | 11 | 8 | 11 | 2 | 8 | 11 |
-| 2 | single | 20 | 13 | 17 | 4 | 11 | 13 |
+| 2 | single | 20 | 13 | 17 | 4 | 10 | 12 |
 | 2 | AoE | 1 | 28 | 36 | 1 | 12 | 14 |
 | 3 | single | 9 | 19 | 24 | 1 | 10 | 15 |
 | 3 | AoE | 2 | 14 | 18 | 1 | 16 | 20 |
@@ -81,7 +81,6 @@ Non-flat block cards per class:
 |---|---|---|---|---|---|---|
 | Harvest | dmg | 0 | 3 | 6 | 0.50 |  |
 | Torment | dmg | 0 | 3 | 6 | 0.50 |  |
-| Capture Soul | dmg | 0 | 10 | 6 | 1.67 | SelfExhaust |
 | Rattling Bottles | dmg | 3 | 10 | 19 | 0.53 | SelfExhaust |
 | Rip Soul | dmg | 0 | 10 | 6 | 1.67 |  |
 | Incant | block | 1 | 8 | 6 | 1.33 |  |

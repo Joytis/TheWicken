@@ -13,6 +13,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// your next couple of turns (see <see cref="SmolderPower" />).</summary>
 public sealed class Smolder : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public override bool GainsBlock => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

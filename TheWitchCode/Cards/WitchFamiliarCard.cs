@@ -25,6 +25,10 @@ public abstract class WitchFamiliarCard(int cost, CardType type, CardRarity rari
     // A subclass that needs extra keywords must re-include Exhaust in its own CanonicalKeywords override.
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    /// <summary>Artist credit for this card's art (data-only for now — no in-game display).
+    /// Defaults to Kitsu; override per card, or return null for uncredited.</summary>
+    public virtual Artists.Artist? ArtBy => Artists.Artist.Kitsu;
+
     /// <summary>
     /// The familiar power instance that generated this card, and which of its stacks (0-based) rolled it —
     /// used to play the matching cosmetic pet's animation when the card is played. Null/0 for cards that

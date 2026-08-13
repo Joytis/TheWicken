@@ -42,11 +42,11 @@ public sealed class CaptureSoul : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(10m, ValueProp.Move),
-        new PowerVar<HexPower>(2 + BonusHex)
+        new PowerVar<HexPower>(1 + BonusHex)
     ];
 
     public CaptureSoul()
-        : base(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }
 

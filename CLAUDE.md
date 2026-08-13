@@ -23,6 +23,7 @@ dotnet publish        # build + invokes headless Godot to export the .pck (full 
 - `dotnet publish` requires a real Godot mono executable; path is set in [Directory.Build.props](Directory.Build.props) (`GodotPath`). **Must be Godot 4.5.x** — the game refuses `.pck` files exported by a newer Godot.
 - Build references `sts2.dll` and `0Harmony.dll` from the installed game; building fails with a clear error if the game isn't found.
 - No test suite. Validation is manual in-game.
+- **Releases**: version lives ONLY in `TheWitch.json`; the `version-bump` skill (`/version-bump`) bumps it, writes player-facing notes to `Docs/patch-notes/vX.Y.Z.md`, and walks the tag + `tools/bundle-workshop.ps1 -Upload` flow. Release commits are tagged `vX.Y.Z`.
 
 ## Architecture
 

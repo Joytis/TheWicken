@@ -8,6 +8,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Ritual Casting: a Power — big Skills each unlock a random free card this turn.</summary>
 public sealed class RitualCasting : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public RitualCasting()
         : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {

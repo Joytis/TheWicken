@@ -12,6 +12,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.</summary>
 public sealed class VexingStrike : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -19,8 +21,8 @@ public sealed class VexingStrike : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(9m, ValueProp.Move),
-        new PowerVar<HexPower>(1m)
+        new DamageVar(7m, ValueProp.Move),
+        new PowerVar<HexPower>(2m)
     ];
 
     public VexingStrike()
@@ -40,7 +42,6 @@ public sealed class VexingStrike : WitchCard
     }
 
     protected override void OnUpgrade() {
-        DynamicVars.Damage.UpgradeValueBy(1m);
-        DynamicVars.Hex().UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

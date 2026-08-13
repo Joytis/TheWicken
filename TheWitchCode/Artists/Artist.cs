@@ -12,4 +12,6 @@ public sealed record Artist(string Name)
     public static readonly Artist JakeRuesch = new("Jake Ruesch");
     public static readonly Artist Phenelia = new("Phenelia");
     public static readonly Artist Joytis = new("Joytis");
+    public static readonly Artist BobbyHessler = new("Bobby Hessler");
+    public static readonly Artist KaiThePhaux = new("KaiThePhaux");
 }

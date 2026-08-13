@@ -20,7 +20,7 @@ public sealed class Hexblast : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<HexPower>(3m),
+        new PowerVar<HexPower>(2m),
         new DamageVar(8m, ValueProp.Move)
     ];
 

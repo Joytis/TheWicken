@@ -19,6 +19,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Incant : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public override bool GainsBlock => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

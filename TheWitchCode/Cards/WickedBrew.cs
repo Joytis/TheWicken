@@ -7,6 +7,8 @@ namespace TheWitch.TheWitchCode.Cards;
 
 public sealed class WickedBrew : OrientationBrewCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.KaiThePhaux;
+
     protected override PotionOrientation Orientation => PotionOrientation.Offensive;
 
     // Seeded from the old live query: every Common offensive potion the Witch could roll

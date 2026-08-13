@@ -18,6 +18,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class RipSoul : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];

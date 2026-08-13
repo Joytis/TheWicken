@@ -34,5 +34,5 @@ public sealed class BrokenPact : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Strength.UpgradeValueBy(2m);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

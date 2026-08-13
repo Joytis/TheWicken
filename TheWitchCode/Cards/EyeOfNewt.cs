@@ -10,11 +10,13 @@ using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Eye of Newt: a Power that makes your potions hit every enemy, plus a Noxious Brew to throw.</summary>
+/// <summary>Eye of Newt: a Power that fans your potions out to one extra random target (upgraded: ALL
+/// valid targets), plus an unstable Ember Jar to throw. Upgrade is behavior-only — it flips the applied
+/// power's HitsAll mode, no stat change.</summary>
 public sealed class EyeOfNewt : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPotion(ModelDb.Potion<NoxiousBrew>()),
+        HoverTipFactory.FromPotion(ModelDb.Potion<EmberJar>()),
         UnstablePotions.UnstableHoverTip,
     ];
 
@@ -31,8 +33,10 @@ public sealed class EyeOfNewt : WitchCard
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
         await PowerCmd.Apply<EyeOfNewtPower>(choiceContext, Owner.Creature, DynamicVars["EyeOfNewtPower"].BaseValue, Owner.Creature, this);
-        await Witch.ProducePotion<NoxiousBrew>(Owner, Witch.PotionMode.Unstable);
+        if (IsUpgraded)
+        {
+            Owner.Creature.GetPower<EyeOfNewtPower>()?.EnableHitsAll();
+        }
+        await Witch.ProducePotion<EmberJar>(Owner, Witch.PotionMode.Unstable);
     }
-
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

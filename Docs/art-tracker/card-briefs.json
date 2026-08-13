@@ -74,7 +74,7 @@
       "brief": "Carved bones lay on the tray, inlays glowing a soft purple as they speak sinister intent. Potential: eyes glow faintly in the background, or a claw sneaks towards the bones to inspect them."
     },
     "Stony Brew": {
-      "artist": "",
+      "artist": "Joytis",
       "brief": "One of the Common Brew trio. This will create a common defensive potion for the player. These potions create block, give dexterity, and general create 'safety. The bottle should feel sturdy, steadfest, and the liquid could even feel a bit thick. if you drink this potion, you'll definitely be healthy."
     },
     "Tinder": {
@@ -82,7 +82,7 @@
       "brief": "A Small bundle of sticks and twigs ignite - the witch has spent a bit of their own growth to feed the flames."
     },
     "Vexing Strike": {
-      "artist": "",
+      "artist": "Joytis",
       "brief": "A slashing claw, fingertips trailing purple. Hexes are sinister, so feel free to play with carved spells or blood."
     },
     "Weathered Witch Hat": {
@@ -110,7 +110,7 @@
       "brief": "A knot of brambles explodes into a torrent of thorns, berries, and vines. It's vicious, self-destructive, and will ultimately destroy the knot of thorns."
     },
     "Cat Familiar": {
-      "artist": "",
+      "artist": "Kitsu",
       "brief": "Familiar. Associated Cards: Nimble, Ferocity\nA lithe, nimble cat. Lanky, quick. It attacks fast, dodges around, and is generally just a naughty little fellow."
     },
     "Circle of Rot": {
@@ -134,7 +134,7 @@
       "brief": "General themes of growth, thickets, brambles, or roots piercing into the earth. This is a generator card which consistently enables the brambles synergy."
     },
     "Distill": {
-      "artist": "",
+      "artist": "Joytis",
       "brief": "Depictions of a brewing apparatus hooked into potions, seeking to distill powerful potions into *even more powerful versions*. Should feel experimental, controlled, and intentional, like a fantasy chemical distillation."
     },
     "Toil and Trouble": {
@@ -166,7 +166,7 @@
       "brief": "A horde of familiars charge at the enemy! Witch familiars include Bear, Crow, Rat, Wolf, Owl and Cat."
     },
     "Owl Familiar": {
-      "artist": "",
+      "artist": "Joytis",
       "brief": "Familiar. Associated Cards: Knowledge, Wisdom\nA prideful, knowledgeable owl. He can be old and wizened, or young and and prideful. Either way, the owl is learned, creates cards that spread knowledge, and is a generally helpful companion in accelerating card draw."
     },
     "Pact of Fury": {
@@ -202,6 +202,62 @@
       "brief": ""
     },
     "Bonfire": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Harvest": {
+      "artist": "Kitsu",
+      "brief": ""
+    },
+    "Frenzy": {
+      "artist": "Kitsu",
+      "brief": ""
+    },
+    "Rip Soul": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Smolder": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Incant": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Volatile Vapors": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Wild Growth": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Embrace the Wilds": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Plaguestorm": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Ritual Casting": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Extract Life": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Witchcraft": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Catalyst": {
+      "artist": "Joytis",
+      "brief": ""
+    },
+    "Wisdom": {
       "artist": "Joytis",
       "brief": ""
     }

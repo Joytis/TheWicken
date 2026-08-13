@@ -18,7 +18,7 @@ public sealed class CursedSpellbook : WitchCard
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(3),
+        new EnergyVar(2),
         new CardsVar(3),
         new PowerVar<HexPower>(3m)
     ];
@@ -39,6 +39,7 @@ public sealed class CursedSpellbook : WitchCard
     // Upgrade softens the curse: gain 2 Hex instead of 3.
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(2);
+        DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

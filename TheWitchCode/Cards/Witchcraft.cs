@@ -16,6 +16,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Witchcraft : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override bool HasEnergyCostX => true;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
