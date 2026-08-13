@@ -61,5 +61,5 @@ public sealed class Harvest : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars["Potions"].UpgradeValueBy(1m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
 }

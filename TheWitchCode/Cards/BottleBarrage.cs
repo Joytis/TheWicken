@@ -19,7 +19,7 @@ public sealed class BottleBarrage : WitchCard
     private const string _calculatedHitsKey = "CalculatedHits";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
+        new DamageVar(6m, ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHitsKey)
@@ -47,5 +47,5 @@ public sealed class BottleBarrage : WitchCard
             .Execute(choiceContext);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
 }
