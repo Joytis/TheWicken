@@ -66,15 +66,6 @@ public static class StringExtensions
     public static string BigPowerImagePath(this string path) => Resolve("powers", path, "power.png");
     public static string BigRelicImagePath(this string path) => Resolve("relics", path, "relic.png");
 
-    public static string PetAtlasPath(this string path)
-    {
-        string petPath = Path.Join(MainFile.ResPath, "images", "atlases", "pets_atlas.sprites", path);
-        if (ResourceLoader.Exists(petPath)) return petPath;
-
-        MainFile.Logger.Info("Could not find pet atlas slice: " + petPath + " — falling back to card art");
-        return path.CardAtlasPath();
-    }
-
     public static string CharacterUiPath(this string path) => Path.Join(MainFile.ResPath, "images", "charui", path);
     public static string CharacterSfxPath(this string path) => Path.Join(MainFile.ResPath, "sfx", path);
     public static string CharacterScenePath(this string path) => Path.Join(MainFile.ResPath, "scenes", path);

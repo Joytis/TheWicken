@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
+using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Powers;
 
@@ -37,7 +38,13 @@ public sealed class NextPotionCopiedPower : WitchPower
         _copying = true;
         try
         {
-            await PotionCmd.TryToProcure(canonical.ToMutable(), Owner.Player);
+            var result = await PotionCmd.TryToProcure(canonical.ToMutable(), Owner.Player);
+            if (result.success && result.potion != null)
+            {
+                // The copy exists before the creator marks the original Unstable —
+                // register it so a later Mark(original) propagates (Gather Herbs + Unstable brews).
+                UnstablePotions.RegisterCopy(potion, result.potion);
+            }
         }
         finally
         {

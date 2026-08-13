@@ -11,11 +11,11 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big
+/// Transfer Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big
 /// extra payoff this combat, then gone. Replay enchant mirrors the base-game <c>HiddenGem</c> pattern
 /// (<c>BaseReplayCount += Replay</c>, then <c>CardCmd.Preview</c>); Exhaust is added via <c>AddKeyword</c>.
 /// </summary>
-public sealed class ExtractLife : WitchCard
+public sealed class TransferLife : WitchCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -28,7 +28,7 @@ public sealed class ExtractLife : WitchCard
         new IntVar("Replay", 2m)
     ];
 
-    public ExtractLife()
+    public TransferLife()
         : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }

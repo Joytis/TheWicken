@@ -398,79 +398,33 @@
             "detail": "Stop the card design server (kills the node process on port 7820)."
         },
         {
-            "label": "Analytics: Win rate per card (prompt for mod version)",
+            "label": "Analytics: Export web stats",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
                 "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "win-rate",
-                "-ModVersion", "${input:analyticsModVersion}",
-                "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}",
-                "-Cards", "${input:analyticsCards}"
+                "-Mode", "export"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": [],
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Pull runs from Supabase and write the win-rate-per-card scatter to build/analytics/."
+            "detail": "Pull runs from Supabase and regenerate pages/analytics-data/*.json for the dashboard (same script CI runs nightly)."
         },
         {
-            "label": "Analytics: Card win rate by ascension (prompt for card)",
+            "label": "Analytics: Serve dashboard",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "card-ascension",
-                "-ModVersion", "${input:analyticsModVersion}",
-                "-GameVersion", "${input:analyticsGameVersion}",
-                "-CardName", "${input:analyticsCardName}"
+                "-Command",
+                "Start-Process 'http://localhost:7821/pages/analytics.html'; py -m http.server 7821 --directory '${workspaceFolder}'"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "isBackground": true,
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Bar graph of one card's win rate per ascension vs the overall rate, written to build/analytics/."
-        },
-        {
-            "label": "Analytics: Card by pick rate",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "card-pick-rate",
-                "-ModVersion", "${input:analyticsModVersion}",
-                "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}",
-                "-Cards", "${input:analyticsCards}"
-            ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Bar graph of every observed card's pick rate, sorted descending, written to build/analytics/."
-        },
-        {
-            "label": "Analytics: Card by win rate",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "card-win-rate",
-                "-ModVersion", "${input:analyticsModVersion}",
-                "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}",
-                "-Cards", "${input:analyticsCards}"
-            ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Bar graph of every observed card's win rate vs the overall rate, sorted descending, written to build/analytics/."
+            "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+            "detail": "Serve the repo on http://localhost:7821 and open the analytics dashboard (fetch needs http, not file://). Terminate the task to stop. Live copy: https://joytis.github.io/TheWicken/pages/analytics.html"
         }
     ],
     "inputs": [
@@ -479,37 +433,6 @@
             "type": "promptString",
             "description": "Total players to launch (1 host + rest clients)",
             "default": "2"
-        },
-        {
-            "id": "analyticsModVersion",
-            "type": "promptString",
-            "description": "Mod version to analyze, as uploaded from TheWitch.json (blank = all versions; seed-test = fabricated rows)",
-            "default": "v0.6.0"
-        },
-        {
-            "id": "analyticsGameVersion",
-            "type": "promptString",
-            "description": "Slay the Spire 2 build to analyze, as uploaded (blank = all game versions)",
-            "default": ""
-        },
-        {
-            "id": "analyticsCards",
-            "type": "pickString",
-            "description": "Which cards to chart",
-            "options": ["all", "witch"],
-            "default": "all"
-        },
-        {
-            "id": "analyticsCardName",
-            "type": "promptString",
-            "description": "Card entry id as uploaded, e.g. RITUAL_SACRIFICE",
-            "default": ""
-        },
-        {
-            "id": "analyticsDaysBack",
-            "type": "promptString",
-            "description": "Only analyze runs from the last N days (0 = all time)",
-            "default": "0"
         },
         {
             "id": "changeNote",

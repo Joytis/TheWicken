@@ -18,6 +18,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class CaptureSoul : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     private int _bonusHex;
 
     [SavedProperty]

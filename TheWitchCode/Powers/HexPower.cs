@@ -79,6 +79,13 @@ public sealed class HexPower : WitchPower
         Flash();
         WitchFx.PurpleFlame(Owner);
 
+        // Hex-trigger payoffs live on the attacker (Cloak of Moonlight). Runs before the
+        // IHexPreserving early-out — a preserved trigger is still a trigger.
+        if (command.Attacker?.GetPower<CloakOfMoonlightPower>() is { } cloak)
+        {
+            await cloak.OnHexTriggered();
+        }
+
         // Torment-style attacks milk the Hex without burning it.
         if (command.ModelSource is IHexPreserving)
         {

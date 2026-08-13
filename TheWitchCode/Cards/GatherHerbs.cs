@@ -29,5 +29,9 @@ public sealed class GatherHerbs : WitchCard
         await PowerCmd.Apply<NextPotionCopiedPower>(choiceContext, Owner.Creature, DynamicVars["NextPotionCopiedPower"].BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars["NextPotionCopiedPower"].UpgradeValueBy(1m);
+    protected override void OnUpgrade() 
+    {
+        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars["NextPotionCopiedPower"].UpgradeValueBy(1m);
+    }
 }

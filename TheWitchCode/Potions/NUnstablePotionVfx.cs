@@ -44,17 +44,13 @@ public partial class NUnstablePotionVfx : Control
     [Export]
     public float ShakeAngle { get; set; } = 14f;
 
-    /// <summary>Instantiates the ambient scene for a belt potion, or null if the scene didn't bind.</summary>
-    public static NUnstablePotionVfx? Create(NPotion potion)
+    /// <summary>Instantiates the ambient scene for a belt potion.</summary>
+    public static NUnstablePotionVfx Create(NPotion potion)
     {
-        // Pattern cast, not Instantiate<T>: a .tscn whose script didn't bind instantiates as a
-        // plain Control and the generic form would throw (same as the pet scenes).
-        if (PreloadManager.Cache.GetScene(AmbientScenePath)
-                .Instantiate(PackedScene.GenEditState.Disabled) is not NUnstablePotionVfx vfx)
-        {
-            MainFile.Logger.Warn("unstable_potion_vfx.tscn didn't bind its mod script; skipping ambient vfx.");
-            return null;
-        }
+        // Instantiate<T> throws when the .tscn script didn't bind — a no-bind scene is a
+        // malformed asset; fail loud.
+        NUnstablePotionVfx vfx = PreloadManager.Cache.GetScene(AmbientScenePath)
+            .Instantiate<NUnstablePotionVfx>(PackedScene.GenEditState.Disabled);
 
         vfx.Name = NodeName;
         vfx._potion = potion;

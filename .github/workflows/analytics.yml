@@ -1,0 +1,47 @@
+name: analytics
+
+# Nightly refresh of the aggregate stats behind pages/analytics.html.
+# Requires the SUPABASE_READ_KEY repository secret (Settings -> Secrets and
+# variables -> Actions); value = contents of tools/analytics/supabase-service-key.local.txt.
+
+on:
+  schedule:
+    - cron: "17 9 * * *" # daily, UTC, best-effort timing
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analytics
+  cancel-in-progress: false
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests pandas
+
+      - name: Export aggregate stats
+        env:
+          SUPABASE_READ_KEY: ${{ secrets.SUPABASE_READ_KEY }}
+        run: python tools/analytics/export_stats.py
+
+      - name: Commit if changed
+        run: |
+          git add pages/analytics-data
+          if git diff --staged --quiet; then
+            echo "Stats unchanged - nothing to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Analytics: refresh aggregate stats"
+            git push
+          fi

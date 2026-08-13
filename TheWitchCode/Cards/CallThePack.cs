@@ -13,11 +13,11 @@ public sealed class CallThePack : WitchCard
     public override bool GainsBlock => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<Gnash>(),
+        HoverTipFactory.FromCard<Gnash>(IsUpgraded),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(6m, ValueProp.Move),
+        new BlockVar(7m, ValueProp.Move),
         new CardsVar(2)
     ];
 
@@ -30,14 +30,13 @@ public sealed class CallThePack : WitchCard
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
-        var gnashes = FamiliarCardRegistry.CreateFamiliarCards<Gnash>(Owner, DynamicVars.Cards.IntValue, CombatState, false);
+        var gnashes = FamiliarCardRegistry.CreateFamiliarCards<Gnash>(Owner, DynamicVars.Cards.IntValue, CombatState, IsUpgraded);
         var generated = await CardPileCmd.AddGeneratedCardsToCombat(gnashes, PileType.Draw, Owner, CardPilePosition.Random);
         CardCmd.PreviewCardPileAdd(generated);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3m);
-        DynamicVars.Cards.UpgradeValueBy(1m);
+        DynamicVars.Block.UpgradeValueBy(2m);
     }
 }

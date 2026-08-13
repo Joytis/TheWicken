@@ -68,11 +68,7 @@ public static class UnstablePotionPatches
         bool unstable = UnstablePotions.IsUnstable(potion);
         if (unstable && existing == null)
         {
-            NUnstablePotionVfx? vfx = NUnstablePotionVfx.Create(node);
-            if (vfx != null)
-            {
-                node.AddChild(vfx);
-            }
+            node.AddChild(NUnstablePotionVfx.Create(node));
         }
         else if (!unstable && existing != null)
         {

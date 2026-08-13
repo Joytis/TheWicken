@@ -11,6 +11,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class StrikeWitch : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Phenelia;
+
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [

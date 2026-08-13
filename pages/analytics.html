@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Wicken — Balance Analytics</title>
+<style>
+  /* Witch-house chrome + rarity colors, both ported from the retired matplotlib
+     scripts. Rarity hues are close under color-blindness — tooltips, the table
+     rarity column, and search-dimming carry identity alongside color. */
+  :root{
+    --ground:#2e2226; --panel:#382a2c; --frame:#8a6f66;
+    --ink:#e8dcc8; --ink-2:#cbb8a4; --muted:#9b8577;
+    --grid:#4d3b3a; --baseline:#5c4844;
+    --sage:#b8d48f; --rose:#c99a90;
+    --rare:#e6c15c; --uncommon:#b8d48f; --common:#cf9a8f; --other:#8a7f74;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);
+       font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+  main{max-width:1150px;margin:0 auto;padding:28px 24px 80px}
+  h1{font-size:24px;margin:0 0 2px}
+  .sub{color:var(--ink-2);font-size:13px;margin-bottom:6px}
+  .fresh{color:var(--muted);font-size:12px;margin-bottom:18px}
+  a{color:var(--sage)}
+
+  .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+           background:var(--panel);border:1px solid var(--grid);border-radius:10px;
+           padding:10px 14px;margin-bottom:14px}
+  .filters label{font-size:12px;color:var(--ink-2);display:flex;gap:6px;align-items:center}
+  select,input[type=number],input[type=search]{
+    background:var(--ground);color:var(--ink);border:1px solid var(--frame);
+    border-radius:6px;padding:4px 8px;font:inherit;font-size:13px}
+  .chips{display:flex;gap:4px;flex-wrap:wrap}
+  .chip{background:transparent;border:1px solid var(--grid);color:var(--ink-2);
+        border-radius:14px;padding:3px 11px;font:inherit;font-size:12px;cursor:pointer}
+  .chip:hover{border-color:var(--frame)}
+  .chip.on{background:var(--sage);border-color:var(--sage);color:#26301a;font-weight:600}
+  .toggle{cursor:pointer;user-select:none}
+
+  .tabs{display:flex;gap:4px;margin-bottom:14px}
+  .tab{background:transparent;border:1px solid var(--grid);border-bottom:none;color:var(--ink-2);
+       border-radius:8px 8px 0 0;padding:7px 18px;font:inherit;font-size:14px;cursor:pointer}
+  .tab.on{background:var(--panel);color:var(--ink);font-weight:600}
+  .view{display:none}
+  .view.on{display:block}
+
+  .cards-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .tile{background:var(--panel);border:1px solid var(--grid);border-radius:10px;
+        padding:12px 18px;min-width:130px}
+  .tile .lab{font-size:12px;color:var(--ink-2)}
+  .tile .val{font-size:26px;font-weight:600;margin-top:2px}
+
+  .panel{background:var(--panel);border:1px solid var(--grid);border-radius:10px;
+         padding:14px 16px;margin-bottom:14px}
+  .panel h2{font-size:14px;margin:0 0 2px;color:var(--ink)}
+  .panel .note{font-size:12px;color:var(--muted);margin-bottom:8px}
+  svg{display:block;width:100%;height:auto}
+  svg text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--ink-2);margin:6px 2px 0}
+  .legend .sw{display:inline-block;width:10px;height:10px;border-radius:50%;
+              margin-right:5px;vertical-align:-1px}
+  .legend .ln{display:inline-block;width:16px;height:0;border-top:2px dashed var(--rose);
+              margin-right:5px;vertical-align:3px}
+
+  .modal-back{position:fixed;inset:0;background:rgba(20,13,15,.72);z-index:20;
+              display:flex;align-items:center;justify-content:center;padding:24px}
+  .modal-back[hidden]{display:none}
+  .modal{background:var(--panel);border:1px solid var(--frame);border-radius:12px;
+         padding:18px 22px;max-width:940px;width:100%;max-height:90vh;overflow:auto;
+         position:relative}
+  .modal h2{font-size:17px;margin:0 26px 2px 0}
+  .modal .note{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .modal-close{position:absolute;top:10px;right:12px;background:none;border:none;
+               color:var(--ink-2);font-size:22px;cursor:pointer;line-height:1}
+  .modal-close:hover{color:var(--ink)}
+
+  .tooltip{position:fixed;pointer-events:none;background:#241a1d;border:1px solid var(--frame);
+           border-radius:6px;padding:6px 10px;font-size:12.5px;color:var(--ink-2);
+           display:none;z-index:10;max-width:280px}
+  .tooltip .v{color:var(--ink);font-weight:600}
+
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{text-align:left;padding:5px 10px;border-bottom:1px solid var(--grid)}
+  th{color:var(--ink-2);font-weight:600;cursor:pointer;user-select:none;white-space:nowrap}
+  th.sorted::after{content:" ▾";color:var(--sage)}
+  th.sorted.asc::after{content:" ▴"}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.rowlink{cursor:pointer}
+  tr.rowlink:hover td{background:#41302f}
+  .rar{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+  .minibar{display:inline-block;height:8px;border-radius:0 4px 4px 0;background:var(--sage);
+           vertical-align:1px}
+  .empty{color:var(--muted);font-size:14px;padding:26px;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <h1>The Witch — Balance Analytics</h1>
+  <div class="sub">Aggregate run telemetry · rates recomputed live from daily count tables ·
+    <a href="../index.html">back to docs</a></div>
+  <div class="fresh" id="fresh">Loading…</div>
+
+  <div class="filters" id="filters" hidden>
+    <div class="chips" id="dateChips"></div>
+    <label>Mod <select id="modSel"></select></label>
+    <label>Game <select id="gameSel"></select></label>
+    <label class="toggle"><input type="checkbox" id="witchOnly" /> Witch cards only</label>
+    <div class="chips" id="mechChips"></div>
+    <label>Min runs <input type="number" id="minRuns" value="3" min="1" style="width:58px" /></label>
+  </div>
+
+  <div class="tabs" id="tabs" hidden>
+    <button class="tab on" data-view="overview">Overview</button>
+    <button class="tab" data-view="cards">Cards</button>
+  </div>
+
+  <div class="view on" id="view-overview">
+    <div class="cards-row" id="tiles"></div>
+    <div class="panel">
+      <h2>Win rate by day</h2>
+      <div class="note">Share of runs won, per upload day. Hover for run counts.</div>
+      <div id="chartDay"></div>
+    </div>
+    <div class="panel">
+      <h2>Win rate by ascension</h2>
+      <div class="note">Dashed line = overall win rate across the current filters.</div>
+      <div id="chartAsc"></div>
+      <div class="legend"><span><span class="ln"></span>overall win rate</span></div>
+    </div>
+  </div>
+
+  <div class="view" id="view-cards">
+    <div class="panel">
+      <h2>Card win rate vs pick rate</h2>
+      <div class="note">Pick rate = share of runs whose deck contains the card. Hover a point;
+        click it for the ascension breakdown.</div>
+      <div style="margin-bottom:8px">
+        <input type="search" id="cardSearch" placeholder="Search cards…" style="width:240px" />
+      </div>
+      <div id="chartScatter"></div>
+      <div class="legend" id="scatterLegend"></div>
+    </div>
+    <div class="panel">
+      <h2>All cards</h2>
+      <div class="note">Click a header to sort; click a row for the ascension breakdown.</div>
+      <div id="cardTable"></div>
+    </div>
+  </div>
+
+  <div class="empty" id="loadError" hidden></div>
+</main>
+
+<div class="modal-back" id="modalBack" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h2 id="modalTitle"></h2>
+    <div class="note" id="modalSub"></div>
+    <div id="chartCardAsc"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--sage)"></span>card win rate</span>
+      <span><span class="ln"></span>all-runs baseline</span></div>
+  </div>
+</div>
+<div class="tooltip" id="tip"></div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const CSS = getComputedStyle(document.documentElement);
+const C = name => CSS.getPropertyValue(name).trim();
+const RARITY_COLOR = {Rare: C("--rare"), Uncommon: C("--uncommon"), Common: C("--common")};
+const MECHANICS = ["All", "Hex", "Potions", "Familiars", "Brambles", "None"];
+const DATE_PRESETS = [["7d", 7], ["30d", 30], ["90d", 90], ["All time", 0]];
+
+let META, RUNS, CARDS, CMETA;          // fetched data
+const state = {days: 0, mod: "", game: "", witchOnly: false, mech: "All",
+               minRuns: 3, search: "", sortKey: "runs", sortAsc: false};
+const matchesSearch = name => !state.search ||
+  name.toLowerCase().includes(state.search.toLowerCase());
+
+// ---------- data recomposition (counts are additive; rates never stored) ----------
+
+function sliceFilter(row) {
+  if (state.mod && row.mod !== state.mod) return false;
+  if (state.game && row.game !== state.game) return false;
+  if (state.days) {
+    const cutoff = new Date(META.last_day + "T00:00:00Z");
+    cutoff.setUTCDate(cutoff.getUTCDate() - (state.days - 1));
+    if (row.day < cutoff.toISOString().slice(0, 10)) return false;
+  }
+  return true;
+}
+
+function groupSum(rows, keyFn) {
+  const m = new Map();
+  for (const r of rows) {
+    const k = keyFn(r);
+    const g = m.get(k) || {runs: 0, wins: 0};
+    g.runs += r.runs; g.wins += r.wins;
+    m.set(k, g);
+  }
+  return m;
+}
+
+function cardVisible(card) {
+  const meta = CMETA[card];
+  if (state.witchOnly && !(meta && meta.witch)) return false;
+  if (state.mech !== "All") {
+    if (!(meta && meta.witch)) return false;
+    const mechs = meta.mechanics || [];
+    if (state.mech === "None" ? mechs.length > 0 : !mechs.includes(state.mech)) return false;
+  }
+  return true;
+}
+
+function computeCards() {
+  const runSlice = RUNS.filter(sliceFilter);
+  const total = runSlice.reduce((n, r) => n + r.runs, 0);
+  const perCard = groupSum(CARDS.filter(sliceFilter), r => r.card);
+  const rows = [];
+  for (const [card, g] of perCard) {
+    if (g.runs < state.minRuns || !cardVisible(card)) continue;
+    const meta = CMETA[card];
+    rows.push({card, name: prettyName(card), runs: g.runs, wins: g.wins,
+               winrate: g.wins / g.runs, pick: total ? g.runs / total : 0,
+               rarity: meta ? meta.rarity : "Other",
+               color: RARITY_COLOR[meta && meta.rarity] || C("--other")});
+  }
+  return {rows, total};
+}
+
+function prettyName(card) {
+  return card.replace(/^THEWITCH-/, "").toLowerCase()
+             .replace(/_/g, " ").replace(/\b\w/g, ch => ch.toUpperCase());
+}
+
+const pct = v => (v * 100).toFixed(v * 100 >= 10 ? 0 : 1) + "%";
+
+// ---------- svg helpers ----------
+
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, text) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+// Frame: y is always win-rate 0..1. Returns svg + plot mappers.
+function makeFrame(width, height, pad) {
+  const svg = el("svg", {viewBox: `0 0 ${width} ${height}`, role: "img"});
+  const px = v => pad.l + v * (width - pad.l - pad.r);   // v in 0..1
+  const py = v => height - pad.b - v * (height - pad.t - pad.b);
+  for (const f of [0, .25, .5, .75, 1]) {                // horizontal grid + % ticks
+    svg.append(el("line", {x1: pad.l, x2: width - pad.r, y1: py(f), y2: py(f),
+                           stroke: C("--grid"), "stroke-width": 1}));
+    svg.append(el("text", {x: pad.l - 8, y: py(f) + 4, "text-anchor": "end",
+                           "font-size": 11, fill: C("--ink-2")}, (f * 100) + "%"));
+  }
+  svg.append(el("line", {x1: pad.l, x2: width - pad.r, y1: py(0), y2: py(0),
+                         stroke: C("--baseline"), "stroke-width": 1}));
+  return {svg, px, py, width, height, pad};
+}
+
+function baselineDash(f, y, x1, x2) {
+  f.svg.append(el("line", {x1, x2, y1: y, y2: y, stroke: C("--rose"),
+                           "stroke-width": 2, "stroke-dasharray": "6 5"}));
+}
+
+const tip = $("tip");
+function showTip(evt, lines) {
+  tip.replaceChildren();
+  for (const [label, value, strong] of lines) {
+    const d = document.createElement("div");
+    if (strong) { const s = document.createElement("span"); s.className = "v";
+                  s.textContent = value; d.append(s, " " + label); }
+    else d.textContent = `${label} ${value}`;
+    tip.append(d);
+  }
+  tip.style.display = "block";
+  const w = tip.offsetWidth, x = Math.min(evt.clientX + 14, innerWidth - w - 8);
+  tip.style.left = x + "px";
+  tip.style.top = (evt.clientY + 14) + "px";
+}
+const hideTip = () => tip.style.display = "none";
+
+// Single-series line with markers, surface rings, crosshair + snap tooltip.
+function lineChart(host, points, tipLines) {  // points: [{label, v(0..1), runs}]
+  host.replaceChildren();
+  if (!points.length) return host.append(emptyNote());
+  const f = makeFrame(900, 300, {l: 52, t: 14, r: 16, b: 34});
+  const xs = i => points.length === 1 ? f.px(.5)
+                                      : f.px(i / (points.length - 1));
+  const step = Math.ceil(points.length / 12);            // x labels, thinned
+  points.forEach((p, i) => { if (i % step === 0 || i === points.length - 1)
+    f.svg.append(el("text", {x: xs(i), y: f.height - 12, "text-anchor": "middle",
+                             "font-size": 11, fill: C("--ink-2")}, p.label)); });
+  const path = points.map((p, i) => `${i ? "L" : "M"}${xs(i)},${f.py(p.v)}`).join("");
+  f.svg.append(el("path", {d: path, fill: "none", stroke: C("--sage"),
+                           "stroke-width": 2, "stroke-linejoin": "round",
+                           "stroke-linecap": "round"}));
+  const cross = el("line", {y1: f.pad.t, y2: f.height - f.pad.b, stroke: C("--frame"),
+                            "stroke-width": 1, visibility: "hidden"});
+  f.svg.append(cross);
+  points.forEach((p, i) => {
+    f.svg.append(el("circle", {cx: xs(i), cy: f.py(p.v), r: 6, fill: C("--sage"),
+                               stroke: C("--panel"), "stroke-width": 2}));
+  });
+  f.svg.addEventListener("pointermove", evt => {
+    const box = f.svg.getBoundingClientRect();
+    const mx = (evt.clientX - box.left) / box.width * f.width;
+    let best = 0, dist = Infinity;
+    points.forEach((p, i) => { const d = Math.abs(xs(i) - mx);
+                               if (d < dist) { dist = d; best = i; } });
+    cross.setAttribute("x1", xs(best)); cross.setAttribute("x2", xs(best));
+    cross.setAttribute("visibility", "visible");
+    showTip(evt, tipLines(points[best]));
+  });
+  f.svg.addEventListener("pointerleave", () => { hideTip();
+    cross.setAttribute("visibility", "hidden"); });
+  host.append(f.svg);
+}
+
+// Rarity-colored scatter: pick (x, scaled to max) vs win rate (y), nearest-point hover.
+function scatterChart(host, rows) {
+  host.replaceChildren();
+  if (!rows.length) return host.append(emptyNote());
+  const f = makeFrame(900, 430, {l: 52, t: 14, r: 20, b: 40});
+  const maxPick = Math.max(.1, ...rows.map(r => r.pick)) * 1.06;
+  for (const t of [0, .25, .5, .75, 1]) {
+    f.svg.append(el("text", {x: f.px(t), y: f.height - 10, "text-anchor": "middle",
+                             "font-size": 11, fill: C("--ink-2")}, pct(t * maxPick)));
+  }
+  f.svg.append(el("text", {x: f.px(.125), y: f.height - 10, "text-anchor": "middle",
+                           "font-size": 11, fill: C("--muted")}, "pick rate →"));
+  const overall = overallWinrate();
+  if (overall !== null) baselineDash(f, f.py(overall), f.pad.l, f.width - f.pad.r);
+  const pts = rows.map(r => ({r, x: f.px(r.pick / maxPick), y: f.py(r.winrate),
+                              hit: matchesSearch(r.name)}));
+  for (const p of pts.filter(p => !p.hit)) {             // dimmed first, hits on top
+    p.node = el("circle", {cx: p.x, cy: p.y, r: 5.5, fill: p.r.color, opacity: .16});
+    f.svg.append(p.node);
+  }
+  for (const p of pts.filter(p => p.hit)) {
+    p.node = el("circle", {cx: p.x, cy: p.y, r: 5.5, fill: p.r.color,
+                           stroke: C("--panel"), "stroke-width": 2, cursor: "pointer"});
+    f.svg.append(p.node);
+  }
+  let hot = null;
+  f.svg.addEventListener("pointermove", evt => {
+    const box = f.svg.getBoundingClientRect();
+    const mx = (evt.clientX - box.left) / box.width * f.width;
+    const my = (evt.clientY - box.top) / box.height * f.height;
+    let best = null, dist = 26 * 26;                     // 26px nearest-point radius
+    for (const p of pts) { if (!p.hit) continue;         // dimmed points aren't targets
+                           const d = (p.x - mx) ** 2 + (p.y - my) ** 2;
+                           if (d < dist) { dist = d; best = p; } }
+    if (hot && hot !== best) hot.node.setAttribute("r", 5.5);
+    hot = best;
+    if (!best) return hideTip();
+    best.node.setAttribute("r", 7.5);
+    showTip(evt, [[best.r.name, "", false],
+                  ["win rate", pct(best.r.winrate), true],
+                  ["pick rate", pct(best.r.pick), true],
+                  [`${best.r.runs} runs · ${best.r.rarity}`, "", false]]);
+  });
+  f.svg.addEventListener("pointerleave", () => { hideTip();
+    if (hot) hot.node.setAttribute("r", 5.5); hot = null; });
+  f.svg.addEventListener("click", () => { if (hot) openModal(hot.r); });
+  host.append(f.svg);
+}
+
+// Card-detail columns by ascension + per-ascension baseline dashes.
+function ascBarChart(host, rows) {  // rows: [{asc, v, runs, baseline}]
+  host.replaceChildren();
+  if (!rows.length) return host.append(emptyNote("No runs with this card match the filters."));
+  const f = makeFrame(900, 320, {l: 52, t: 20, r: 16, b: 36});
+  const slot = (f.width - f.pad.l - f.pad.r) / rows.length;
+  const bw = Math.min(24, slot * .5);
+  rows.forEach((r, i) => {
+    const cx = f.pad.l + slot * (i + .5);
+    const y = f.py(r.v), y0 = f.py(0);
+    const h = Math.max(0, y0 - y);
+    const rad = Math.min(4, h);                          // rounded data-end, square base
+    f.svg.append(el("path", {d: `M${cx - bw / 2},${y0} V${y + rad}
+        Q${cx - bw / 2},${y} ${cx - bw / 2 + rad},${y}
+        H${cx + bw / 2 - rad} Q${cx + bw / 2},${y} ${cx + bw / 2},${y + rad} V${y0} Z`,
+        fill: C("--sage")}));
+    if (r.baseline !== null)
+      baselineDash(f, f.py(r.baseline), cx - slot * .36, cx + slot * .36);
+    f.svg.append(el("text", {x: cx, y: y - 7, "text-anchor": "middle", "font-size": 11.5,
+                             fill: C("--ink"), "font-weight": 600}, pct(r.v)));
+    f.svg.append(el("text", {x: cx, y: f.height - 12, "text-anchor": "middle",
+                             "font-size": 11.5, fill: C("--ink-2")}, "A" + r.asc));
+    const hit = el("rect", {x: cx - slot / 2, y: f.pad.t, width: slot,
+                            height: f.height - f.pad.t - f.pad.b, fill: "transparent"});
+    hit.addEventListener("pointermove", evt => showTip(evt, [
+      ["Ascension " + r.asc, "", false],
+      ["card win rate", pct(r.v), true],
+      ["runs with card", String(r.runs), true],
+      ["baseline", r.baseline === null ? "—" : pct(r.baseline), true]]));
+    hit.addEventListener("pointerleave", hideTip);
+    f.svg.append(hit);
+  });
+  host.append(f.svg);
+}
+
+function emptyNote(msg) {
+  const d = document.createElement("div");
+  d.className = "empty";
+  d.textContent = msg || "No runs match the current filters.";
+  return d;
+}
+
+function overallWinrate() {
+  const s = RUNS.filter(sliceFilter).reduce((a, r) => ({runs: a.runs + r.runs,
+    wins: a.wins + r.wins}), {runs: 0, wins: 0});
+  return s.runs ? s.wins / s.runs : null;
+}
+
+// ---------- views ----------
+
+function renderOverview() {
+  const slice = RUNS.filter(sliceFilter);
+  const total = slice.reduce((n, r) => n + r.runs, 0);
+  const wins = slice.reduce((n, r) => n + r.wins, 0);
+  const tiles = [["Runs", String(total)],
+                 ["Win rate", total ? pct(wins / total) : "—"],
+                 ["Days observed", String(new Set(slice.map(r => r.day)).size)]];
+  $("tiles").replaceChildren(...tiles.map(([lab, val]) => {
+    const t = document.createElement("div"); t.className = "tile";
+    t.innerHTML = '<div class="lab"></div><div class="val"></div>';
+    t.firstChild.textContent = lab; t.lastChild.textContent = val;
+    return t;
+  }));
+
+  const byDay = [...groupSum(slice, r => r.day)].sort((a, b) => a[0] < b[0] ? -1 : 1);
+  lineChart($("chartDay"),
+    byDay.map(([day, g]) => ({label: day.slice(5), v: g.wins / g.runs,
+                              runs: g.runs, day})),
+    p => [[p.day, "", false], ["win rate", pct(p.v), true], ["runs", String(p.runs), true]]);
+
+  const byAsc = [...groupSum(slice, r => r.asc)].sort((a, b) => a[0] - b[0]);
+  const host = $("chartAsc");
+  lineChart(host,
+    byAsc.map(([asc, g]) => ({label: "A" + asc, v: g.wins / g.runs, runs: g.runs})),
+    p => [[p.label, "", false], ["win rate", pct(p.v), true], ["runs", String(p.runs), true]]);
+  const overall = overallWinrate();
+  if (overall !== null && host.firstChild instanceof SVGElement) {
+    const svg = host.firstChild;
+    const y = 300 - 34 - overall * (300 - 14 - 34);      // mirror makeFrame(900,300) pads
+    svg.append(el("line", {x1: 52, x2: 900 - 16, y1: y, y2: y, stroke: C("--rose"),
+                           "stroke-width": 2, "stroke-dasharray": "6 5"}));
+  }
+}
+
+function renderCards() {
+  const {rows} = computeCards();
+  scatterChart($("chartScatter"), rows);
+
+  const shown = new Set(rows.map(r => r.rarity));
+  $("scatterLegend").replaceChildren(...["Rare", "Uncommon", "Common", "Other"]
+    .filter(r => shown.has(r)).map(r => {
+      const s = document.createElement("span");
+      const sw = document.createElement("span"); sw.className = "sw";
+      sw.style.background = RARITY_COLOR[r] || C("--other");
+      s.append(sw, r); return s;
+    }));
+
+  const dir = state.sortAsc ? 1 : -1;
+  const tableRows = rows.filter(r => matchesSearch(r.name));
+  tableRows.sort((a, b) => (a[state.sortKey] > b[state.sortKey] ? 1 : -1) * dir);
+  const maxPick = Math.max(.001, ...tableRows.map(r => r.pick));
+  const tbl = document.createElement("table");
+  const head = tbl.createTHead().insertRow();
+  for (const [key, label, num] of [["name", "Card"], ["rarity", "Rarity"],
+       ["runs", "Runs", 1], ["winrate", "Win rate", 1], ["pick", "Pick rate", 1]]) {
+    const th = document.createElement("th");
+    th.textContent = label;
+    if (num) th.className = "num";
+    if (key === state.sortKey) { th.classList.add("sorted");
+                                 th.classList.toggle("asc", state.sortAsc); }
+    th.addEventListener("click", () => {
+      state.sortAsc = state.sortKey === key ? !state.sortAsc : key === "name";
+      state.sortKey = key; renderCards();
+    });
+    head.append(th);
+  }
+  const body = tbl.createTBody();
+  for (const r of tableRows) {
+    const tr = body.insertRow();
+    tr.className = "rowlink";
+    tr.addEventListener("click", () => openModal(r));
+    const name = tr.insertCell();
+    const dot = document.createElement("span");
+    dot.className = "rar"; dot.style.background = r.color;
+    name.append(dot, r.name);
+    tr.insertCell().textContent = r.rarity;
+    const runs = tr.insertCell(); runs.className = "num"; runs.textContent = r.runs;
+    const wr = tr.insertCell(); wr.className = "num"; wr.textContent = pct(r.winrate);
+    const pk = tr.insertCell(); pk.className = "num";
+    const bar = document.createElement("span");
+    bar.className = "minibar"; bar.style.width = (r.pick / maxPick * 90) + "px";
+    pk.append(pct(r.pick) + " ", bar);
+  }
+  $("cardTable").replaceChildren(tableRows.length ? tbl : emptyNote());
+}
+
+function openModal(row) {                                // row from computeCards()
+  $("modalTitle").textContent = row.name;
+  $("modalSub").textContent = `${row.rarity} · ${row.runs} runs · win rate ` +
+    `${pct(row.winrate)} · pick rate ${pct(row.pick)} — win rate by ascension below, ` +
+    `dashed = all-runs baseline`;
+  const baseline = groupSum(RUNS.filter(sliceFilter), r => r.asc);
+  const cardRows = CARDS.filter(r => r.card === row.card && sliceFilter(r));
+  const byAsc = [...groupSum(cardRows, r => r.asc)].sort((a, b) => a[0] - b[0]);
+  ascBarChart($("chartCardAsc"), byAsc.map(([asc, g]) => ({
+    asc, v: g.wins / g.runs, runs: g.runs,
+    baseline: baseline.has(asc) ? baseline.get(asc).wins / baseline.get(asc).runs : null})));
+  $("modalBack").hidden = false;
+}
+
+function closeModal() { $("modalBack").hidden = true; hideTip(); }
+
+function renderAll() {
+  renderOverview(); renderCards();
+}
+
+// ---------- controls ----------
+
+function chipRow(host, labels, get, set) {
+  host.replaceChildren(...labels.map(label => {
+    const b = document.createElement("button");
+    b.className = "chip" + (get() === label ? " on" : "");
+    b.textContent = label;
+    b.addEventListener("click", () => { set(label);
+      [...host.children].forEach(c => c.classList.toggle("on", c.textContent === label));
+      renderAll(); });
+    return b;
+  }));
+}
+
+function fillSelect(sel, values, allLabel) {
+  sel.replaceChildren(...[["", allLabel], ...values.map(v => [v, v])].map(([v, lab]) => {
+    const o = document.createElement("option"); o.value = v; o.textContent = lab; return o;
+  }));
+}
+
+async function init() {
+  let files;
+  try {
+    files = await Promise.all(["meta", "runs_daily", "cards_daily", "cards_meta"]
+      .map(n => fetch(`analytics-data/${n}.json`).then(r => {
+        if (!r.ok) throw new Error(`${n}.json: HTTP ${r.status}`);
+        return r.json();
+      })));
+  } catch (err) {
+    $("fresh").textContent = "";
+    $("loadError").hidden = false;
+    $("loadError").textContent = "Could not load analytics data — " + err.message +
+      ". (Serve over http, not file://.)";
+    return;
+  }
+  [META, RUNS, CARDS, CMETA] = files;
+
+  $("fresh").textContent = `Data refreshed ${META.generated_at.replace("T", " ").replace("Z", " UTC")}` +
+    ` · ${META.total_runs} runs · ${META.first_day} → ${META.last_day}`;
+  $("filters").hidden = false;
+  $("tabs").hidden = false;
+
+  chipRow($("dateChips"), DATE_PRESETS.map(p => p[0]),
+    () => DATE_PRESETS.find(p => p[1] === state.days)[0],
+    label => state.days = DATE_PRESETS.find(p => p[0] === label)[1]);
+  chipRow($("mechChips"), MECHANICS, () => state.mech, m => state.mech = m);
+  fillSelect($("modSel"), META.mod_versions, "all versions");
+  fillSelect($("gameSel"), META.game_versions, "all builds");
+  $("modSel").addEventListener("change", e => { state.mod = e.target.value; renderAll(); });
+  $("gameSel").addEventListener("change", e => { state.game = e.target.value; renderAll(); });
+  $("witchOnly").addEventListener("change", e => { state.witchOnly = e.target.checked; renderAll(); });
+  $("minRuns").addEventListener("change", e => {
+    state.minRuns = Math.max(1, +e.target.value || 1); renderAll(); });
+  $("cardSearch").addEventListener("input", e => {
+    state.search = e.target.value.trim(); renderCards();
+  });
+  $("modalClose").addEventListener("click", closeModal);
+  $("modalBack").addEventListener("click", e => { if (e.target === $("modalBack")) closeModal(); });
+  addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+  document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t === tab));
+    document.querySelectorAll(".view").forEach(v =>
+      v.classList.toggle("on", v.id === "view-" + tab.dataset.view));
+    history.replaceState(null, "", "#" + tab.dataset.view);
+  }));
+
+  renderAll();
+  const cardLink = location.hash.match(/^#card=(.+)/);
+  if (cardLink) {
+    const row = computeCards().rows.find(r => r.card === decodeURIComponent(cardLink[1]));
+    if (row) { document.querySelector('[data-view="cards"]').click(); openModal(row); }
+  } else {
+    const hashTab = document.querySelector(`[data-view="${location.hash.slice(1)}"]`);
+    if (hashTab) hashTab.click();
+  }
+}
+init();
+</script>
+</body>
+</html>

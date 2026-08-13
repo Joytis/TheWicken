@@ -26,6 +26,10 @@ public abstract class WitchCard(int cost, CardType type, CardRarity rarity, Targ
     public override string PortraitPath => CustomPortraitPath;
     public override string BetaPortraitPath => CustomPortraitPath;
 
+    /// <summary>Artist credit for this card's art (data-only for now — no in-game display).
+    /// Defaults to Kitsu; override per card, or return null for uncredited.</summary>
+    public virtual Artists.Artist? ArtBy => Artists.Artist.Kitsu;
+
     /// <summary>
     /// Register that this card summoned a familiar by applying one stack of its <typeparamref name="TPower" />
     /// counter to the player. The total of all <see cref="FamiliarPower" /> stacks is the player's familiar

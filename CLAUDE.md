@@ -1,71 +1,11 @@
 # CLAUDE.md
 
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
-
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
-
-## 1. Think Before Coding
-
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
-
 **When asked to review existing code, "is this correct?" is a question, not a request for changes.** Answer it. Don't edit.
 
 **Never call code broken without verifying it against `gamedata/`.** Trace the actual execution path and check the arithmetic. A defect claim needs a concrete failing case you have confirmed — not a plausible-sounding edge case. If you can't demonstrate the failure, you haven't found one.
 
 **Game design decisions are the user's, not yours.** Behavior that looks wrong (a relic bypassing Exhaust, a Power card returning to hand, an effect silently wasted at the hand cap) is usually intended. Ask what the intent is before labeling it a bug. Never mix design opinions into a correctness review.
-
-## 2. Simplicity First
-
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
 ## What this is
 
@@ -186,9 +126,4 @@ The signature mechanic. A **summon Power card** (`WolfFamiliar`, `BearFamiliar`,
 
 ## Task workflow (TODO loop)
 
-Backlog work for this mod runs through a saved loop — the **`todo-loop`** skill ([.claude/skills/todo-loop/SKILL.md](.claude/skills/todo-loop/SKILL.md)) plus three docs under [Docs/](Docs/):
-- **`TODO_STAGING.md`** — raw-notes inbox; the user drops half-formed ideas here.
-- **`TODO.md`** — formatted, prioritized queue; its header holds the loop protocol.
-- **`DONE.md`** — completed items (what changed, the design calls made, verification).
-
-Procedure: ingest each staging note into a self-contained `TODO.md` item (then delete that line from staging); claim the top item (`IN PROGRESS`), implement, `dotnet build` green is the gate, move it to `DONE.md`. Flag truncated/ambiguous notes as `BLOCKED` and ask rather than guess; serialize shared-JSON edits but parallelize file-isolated work. Run `/todo-loop` to drive it.
+Backlog work for this mod runs through a saved loop — the **`todo-loop`** skill ([.claude/skills/todo-loop/SKILL.md](.claude/skills/todo-loop/SKILL.md)), the single source of the protocol, over three docs under [Docs/](Docs/): `TODO_STAGING.md` (raw-notes inbox; a `BENCHED` section there is off-limits to ingestion), `TODO.md` (work queue), `DONE.md` (one line per completed item). Run `/todo-loop` to drive it.

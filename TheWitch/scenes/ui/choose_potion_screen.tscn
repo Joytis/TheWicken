@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://437lovwjymy7"]
+[gd_scene load_steps=4 format=3 uid="uid://437lovwjymy7"]
 
 [ext_resource type="Script" uid="uid://c8tkgi6cwdr6s" path="res://TheWitchCode/Ui/NChoosePotionScreen.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="2_banner"]
+[ext_resource type="PackedScene" uid="uid://rxgwkwxf1dsr" path="res://scenes/combat/peek_button.tscn" id="3_peek"]
 
 [node name="ChoosePotionScreen" type="Control"]
 layout_mode = 3
@@ -37,3 +38,15 @@ size_flags_horizontal = 4
 theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 28
 columns = 4
+
+[node name="PeekButton" parent="." instance=ExtResource("3_peek")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 100.0
+offset_top = -64.0
+offset_right = 228.0
+offset_bottom = 64.0
+grow_horizontal = 1

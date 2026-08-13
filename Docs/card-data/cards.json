@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-12",
+  "generated": "2026-08-13",
   "cards": [
     {
       "name": "Defend",
@@ -65,14 +65,14 @@
       "type": "Skill",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Gain 8 Block. Apply 2 Hex if you have used a Potion this turn.",
+      "text": "Gain 8 Block. Apply 1 Hex if you have used a Potion this turn.",
       "numbers": {
-        "Hex": 2,
+        "Hex": 1,
         "Block": 8
       },
-      "upgrade": "Block +3",
+      "upgrade": "Hex +1",
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -279,14 +279,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 6 Block. Shuffle 2 Gnash into your Draw Pile.",
+      "text": "Gain 7 Block. Shuffle 2 {IfUpgraded:Gnash+|Gnash} into your Draw Pile.",
       "numbers": {
-        "Block": 6,
+        "Block": 7,
         "Cards": 2
       },
-      "upgrade": "Block +3, Cards +1",
+      "upgrade": "Block +2",
       "note": "Call the Pack: hunker down behind the wolves — gain Block, shuffle Gnash tokens into the Draw Pile.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -619,14 +619,14 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. Apply 2 Hex.",
+      "text": "Deal 9 damage. Apply 1 Hex.",
       "numbers": {
-        "Hex": 2,
+        "Hex": 1,
         "Damage": 9
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +1, Hex +1",
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -651,14 +651,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 8 Block. Next turn, apply 2 Hex to ALL enemies.",
+      "text": "Gain 8 Block. Next turn, apply 1 Hex to ALL enemies.",
       "numbers": {
-        "WaxAndWane": 2,
+        "WaxAndWane": 1,
         "Block": 8
       },
       "upgrade": "Block +2",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -770,15 +770,15 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 7 damage for each Potion created this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "text": "Deal 5 damage for each Potion created this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
       "numbers": {
-        "Damage": 7,
+        "Damage": 5,
         "CalculationBase": 0,
         "CalculationExtra": 1
       },
       "upgrade": "Damage +3",
       "note": "Hurl the whole belt: one 10-damage hit per potion you've brewed this combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -862,31 +862,31 @@
       "name": "Cloak of Moonlight",
       "entry": "CLOAK_OF_MOONLIGHT",
       "file": "TheWitchCode/Cards/CloakOfMoonlight.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you create a card or Potion, gain 2 Block.",
+      "text": "Whenever you trigger Hex, gain 2 Block.",
       "numbers": {
         "CloakOfMoonlight": 2
       },
       "upgrade": "CloakOfMoonlight +1",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
-        "Familiars",
-        "Potions"
+        "Hex"
       ],
       "role": [
         "Payoff"
       ],
       "sub": [
-        "Potions:CreatePayoff"
+        "Hex:Exploit"
       ],
       "threads": [
+        "DebuffPayoff",
         "BlockEngine"
       ]
     },
@@ -1026,9 +1026,9 @@
         "NextPotionCopied": 1,
         "Block": 11
       },
-      "upgrade": "NextPotionCopied +1",
+      "upgrade": "Block +2, NextPotionCopied +1",
       "note": "Gain Block, and copy the next potion you create this combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1136,11 +1136,11 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, create a Puff of Smoke.",
+      "text": "At the start of your turn, create an Unstable Puff of Smoke.",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1386,14 +1386,14 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Apply 3 Hex. Next turn, gain [E] and draw 1 card.",
+      "text": "Apply 2 Hex. Next turn, gain [E] and draw 1 card.",
       "numbers": {
-        "Hex": 3,
+        "Hex": 2,
         "DrawCardsNextTurn": 1
       },
-      "upgrade": "EnergyNextTurn +1",
+      "upgrade": "DrawCardsNextTurn +1",
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1738,14 +1738,14 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage. Draw 1 card. Does not consume Hex.",
+      "text": "Deal 3 damage. Draw 1 card. Does not consume Hex.",
       "numbers": {
-        "Damage": 5,
+        "Damage": 3,
         "Cards": 1
       },
       "upgrade": "Damage +2",
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
@@ -2256,35 +2256,6 @@
       ]
     },
     {
-      "name": "Extract Life",
-      "entry": "EXTRACT_LIFE",
-      "file": "TheWitchCode/Cards/ExtractLife.cs",
-      "cost": 2,
-      "type": "Attack",
-      "rarity": "Rare",
-      "target": "AnyEnemy",
-      "text": "Deal 12 damage. Give a card in your hand Replay {Replay:diff()} and Exhaust.",
-      "numbers": {
-        "Damage": 12
-      },
-      "upgrade": "Damage +4",
-      "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "None"
-      ],
-      "role": [
-        "Standalone"
-      ],
-      "sub": [],
-      "threads": [
-        "ExhaustOutlet"
-      ]
-    },
-    {
       "name": "Eye of Newt",
       "entry": "EYE_OF_NEWT",
       "file": "TheWitchCode/Cards/EyeOfNewt.cs",
@@ -2630,6 +2601,29 @@
       ]
     },
     {
+      "name": "Transfer Life",
+      "entry": "TRANSFER_LIFE",
+      "file": "TheWitchCode/Cards/TransferLife.cs",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Rare",
+      "target": "AnyEnemy",
+      "text": "Deal 12 damage. Give a card in your hand Replay {Replay:diff()} and Exhaust.",
+      "numbers": {
+        "Damage": 12
+      },
+      "upgrade": "Damage +4",
+      "note": "Transfer Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
+    },
+    {
       "name": "Witchcraft",
       "entry": "WITCHCRAFT",
       "file": "TheWitchCode/Cards/Witchcraft.cs",
@@ -2865,14 +2859,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain [E]. Gain 3 Block.",
+      "text": "Gain [E].",
       "numbers": {
-        "Energy": 1,
-        "Block": 3
+        "Energy": 1
       },
-      "upgrade": "Block +3",
-      "note": "Cat familiar token: feline agility bottled as tempo — gain Energy and Block.",
-      "tested": true,
+      "upgrade": "none",
+      "note": "Cat familiar token: feline agility bottled as tempo — gain Energy.",
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,

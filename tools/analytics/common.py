@@ -1,30 +1,17 @@
 """Shared plumbing for the analytics scripts: Supabase fetch, read-key discovery, and the
-witch-house chart theme. Dispatched via tools/analytics/analytics.ps1."""
+card-metadata lookups. Dispatched via tools/analytics/analytics.ps1. The interactive
+charts live in pages/analytics.html, fed by export_stats.py."""
 
 import json
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 
 SUPABASE_URL = "https://bjwqinohtgsvnbscnvmb.supabase.co/rest/v1/runs"
 KEY_FILE = Path(__file__).with_name("supabase-service-key.local.txt")  # gitignored
-OUT_DIR = Path(__file__).resolve().parents[2] / "build" / "analytics"  # gitignored
-
-# Witch-house palette: rose-brown ground, sage-green marks, parchment text.
-GROUND = "#2e2226"
-PANEL = "#382a2c"
-FRAME = "#8a6f66"
-PARCHMENT = "#e8dcc8"
-PARCHMENT_DIM = "#cbb8a4"
-MUTED = "#6d5a55"
-GRID = "#4d3b3a"
-SAGE = "#b8d48f"
-SAGE_RIM = "#e6f2c8"
-ROSE = "#c99a90"
 
 
 def default_key() -> str | None:
@@ -45,20 +32,12 @@ def add_common_args(parser) -> None:
     parser.add_argument("--mod-version", default=None, help="filter to one mod release (default: all)")
     parser.add_argument("--game-version", default=None, help="filter to one StS2 build (default: all)")
     parser.add_argument("--days-back", type=int, default=None, help="only runs from the last N days")
-    parser.add_argument("--witch-only", action="store_true",
-                        help="only chart THEWITCH- cards (players mix in other mods' cards)")
-
-
-def describe_filters(args) -> str:
-    return ", ".join(f"{name}={val}" for name, val in [
-        ("mod_version", args.mod_version), ("game_version", args.game_version),
-        ("last_days", args.days_back),
-        ("cards", "witch-only" if getattr(args, "witch_only", False) else None)] if val) or "all runs"
 
 
 def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
                days_back: int | None) -> pd.DataFrame:
-    params = {"select": "victory,ascension,floor,data", "limit": "10000"}
+    params = {"select": "victory,ascension,floor,data,mod_version,game_version,created_at",
+              "limit": "10000"}
     if mod_version:
         params["mod_version"] = f"eq.{mod_version}"
     if game_version:
@@ -74,28 +53,6 @@ def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
     )
     resp.raise_for_status()
     return pd.DataFrame(resp.json())
-
-
-def card_stats(runs: pd.DataFrame, witch_only: bool = False) -> pd.DataFrame:
-    # One row per (run, unique card in deck): a card's win rate = win rate of runs playing it,
-    # its pick rate = share of observed runs whose deck contains it.
-    rows = [
-        {"card": card, "victory": run.victory}
-        for run in runs.itertuples()
-        for card in set(run.data.get("deck", []))
-    ]
-    per_card = (
-        pd.DataFrame(rows)
-        .groupby("card")
-        .agg(runs=("victory", "size"), winrate=("victory", "mean"))
-        .reset_index()
-    )
-    per_card["pick_rate"] = per_card["runs"] / len(runs)
-    if witch_only:
-        # Every remaining label carries the mod prefix — strip it for readability.
-        per_card = per_card[per_card["card"].str.startswith("THEWITCH-")]
-        per_card = per_card.assign(card=per_card["card"].str.removeprefix("THEWITCH-"))
-    return per_card
 
 
 def card_rarities() -> dict[str, str]:
@@ -117,22 +74,8 @@ def card_rarities() -> dict[str, str]:
     return rarities
 
 
-def apply_theme() -> None:
-    plt.rcParams.update({
-        "figure.facecolor": GROUND,
-        "axes.facecolor": PANEL,
-        "axes.edgecolor": FRAME,
-        "axes.labelcolor": PARCHMENT,
-        "text.color": PARCHMENT,
-        "xtick.color": PARCHMENT_DIM,
-        "ytick.color": PARCHMENT_DIM,
-        "grid.color": GRID,
-        "legend.facecolor": PANEL,
-        "legend.edgecolor": FRAME,
-    })
-
-
-def save(fig, out_path: Path) -> None:
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_path, dpi=150)
-    print(f"Wrote {out_path}")
+def card_mechanics() -> dict[str, set[str]]:
+    """Bare Witch card entry -> mechanics tags (Potions/Hex/Familiars/Brambles/None)."""
+    repo = Path(__file__).resolve().parents[2]
+    cards = json.loads((repo / "Docs/card-data/cards.json").read_text(encoding="utf-8"))["cards"]
+    return {c["entry"]: set(c.get("mechanics", [])) for c in cards}

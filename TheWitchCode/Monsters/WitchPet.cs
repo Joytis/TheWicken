@@ -34,9 +34,8 @@ public abstract class WitchPet : MonsterModel
     // Base-game host: Node2D + NCreatureVisuals script + empty Sprite2D "%Visuals" + markers.
     protected override string VisualsPath => SceneHelper.GetScenePath("creature_visuals/rocket");
 
-    /// <summary>res:// path to the sprite texture swapped onto the host body at spawn.</summary>
+    /// <summary>Base filename for the pet's config/atlas .tres assets.</summary>
     public abstract string PetFileName { get; }
-    public string TexturePath => (PetFileName + ".tres").PetAtlasPath();
     public string ConfigPath => (PetFileName + ".tres").PetConfigPath();
 
     /// <summary>
@@ -47,9 +46,8 @@ public abstract class WitchPet : MonsterModel
     public Powers.FamiliarPower? SourcePower { get; set; }
     public int StackIndex { get; set; }
 
-    /// <summary>Sprite scale + offset so the pet sits nicely at the player's feet. Tune per-pet.</summary>
+    /// <summary>Sprite scale so the pet sits nicely at the player's feet. Tune per-pet.</summary>
     public virtual float SpriteScale => 0.4f;
-    public virtual Vector2 SpriteOffset => new(0f, -40f);
 
     // Cosmetic only: a single self-looping no-op move, mirroring Byrdpip's monster model.
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
