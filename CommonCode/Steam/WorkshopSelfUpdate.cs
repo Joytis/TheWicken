@@ -116,7 +116,7 @@ internal static class WorkshopSelfUpdate
     {
         foreach (Mod mod in ModManager.Mods)
         {
-            if (mod.assembly == typeof(WorkshopSelfUpdate).Assembly)
+            if (mod.assemblies != null && mod.assemblies.Contains(typeof(WorkshopSelfUpdate).Assembly))
             {
                 return mod;
             }
