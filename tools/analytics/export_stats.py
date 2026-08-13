@@ -1,14 +1,15 @@
 """Export additive aggregate stats for the web analytics dashboard (pages/analytics.html).
 
-Publishes COUNT tables (runs, wins) keyed by every filter dimension so the page can
-recompose any rate client-side by summing. No raw rows, decks, or player hashes leave
-this script. Run by .github/workflows/analytics.yml (SUPABASE_READ_KEY secret) and
-locally via ./tools/analytics/analytics.ps1 -Mode export.
+Publishes COUNT tables (runs, wins, offered, picked, ...) keyed by every filter dimension
+so the page can recompose any rate client-side by summing. No raw rows, decks, or player
+hashes leave this script. Run by .github/workflows/analytics.yml (SUPABASE_READ_KEY secret)
+and locally via ./tools/analytics/analytics.ps1 -Mode export.
 """
 
 import argparse
 import json
 import sys
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -18,33 +19,89 @@ import common
 
 OUT_DIR = Path(__file__).resolve().parents[2] / "pages" / "analytics-data"
 
+# Dominant-archetype rules: a run commits to the mechanic with the most witch cards in
+# deck (duplicates count); fewer than COMMIT_THRESHOLD such cards = "Unfocused".
+# Ties break in this fixed order.
+MECHANIC_ORDER = ["Hex", "Potions", "Familiars", "Brambles"]
+COMMIT_THRESHOLD = 3
 
-def build_tables(runs: pd.DataFrame) -> tuple[list[dict], list[dict]]:
-    """runs_daily rows at grain (day, mod, game, asc) and cards_daily rows at
-    grain (day, mod, game, asc, card) — card runs deduped per run via set(deck)."""
-    base = pd.DataFrame({
-        "day": pd.to_datetime(runs["created_at"]).dt.strftime("%Y-%m-%d"),
-        "mod": runs["mod_version"],
-        "game": runs["game_version"],
-        "asc": runs["ascension"].astype(int),
-        "wins": runs["victory"].astype(int),
-    })
-    keys = ["day", "mod", "game", "asc"]
-    runs_daily = (base.groupby(keys).agg(runs=("wins", "size"), wins=("wins", "sum"))
-                  .reset_index())
 
+def base_keys(run, day: str, data: dict) -> dict:
+    return {"day": day, "mod": run.mod_version, "game": run.game_version,
+            "asc": int(run.ascension),
+            "mp": 1 if data.get("numPlayers", 1) > 1 else 0}
+
+
+def aggregate(rows: list[dict], keys: list[str], sums: list[str]) -> list[dict]:
+    if not rows:
+        return []
+    return (pd.DataFrame(rows).groupby(keys)[sums].sum().reset_index()
+            .to_dict("records"))
+
+
+def copies_bucket(n: int) -> int:
+    return min(n, 3)  # 1, 2, 3+ — enough signal, keeps cardinality flat
+
+
+def dominant_archetype(deck: list[str], mechanics: dict[str, set[str]]) -> str:
+    counts = Counter()
+    for card in deck:
+        for mech in mechanics.get(card.removeprefix("THEWITCH-"), []):
+            if card.startswith("THEWITCH-"):
+                counts[mech] += 1
+    best = max(MECHANIC_ORDER, key=lambda m: (counts.get(m, 0), -MECHANIC_ORDER.index(m)),
+               default="Unfocused")
+    return best if counts.get(best, 0) >= COMMIT_THRESHOLD else "Unfocused"
+
+
+def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
     rarities = common.card_rarities()
-    card_rows = [
-        row | {"card": card}
-        for row, deck in zip(base.to_dict("records"),
-                             (set(run.data.get("deck", [])) for run in runs.itertuples()))
-        for card in deck
-        if rarities.get(card) != "Starter"  # forced picks carry no signal
-    ]
-    cards_daily = (pd.DataFrame(card_rows)
-                   .groupby(keys + ["card"]).agg(runs=("wins", "size"), wins=("wins", "sum"))
-                   .reset_index())
-    return runs_daily.to_dict("records"), cards_daily.to_dict("records")
+    mechanics = common.card_mechanics()
+    run_rows, card_rows, choice_rows = [], [], []
+    death_rows, floor_rows, enc_rows, arch_rows = [], [], [], []
+
+    for run in runs.itertuples():
+        day = pd.to_datetime(run.created_at).strftime("%Y-%m-%d")
+        win = int(run.victory)
+        data = run.data or {}
+        keys = base_keys(run, day, data)
+        deck = data.get("deck", [])
+
+        run_rows.append(keys | {"runs": 1, "wins": win})
+        arch_rows.append(keys | {"arch": dominant_archetype(deck, mechanics),
+                                 "runs": 1, "wins": win})
+
+        for card, copies in Counter(deck).items():
+            if rarities.get(card) != "Starter":  # forced picks carry no signal
+                card_rows.append(keys | {"card": card, "copies": copies_bucket(copies),
+                                         "runs": 1, "wins": win})
+
+        for screen in data.get("cardChoices", []):
+            for card in screen.get("picked", []):
+                choice_rows.append(keys | {"card": card, "offered": 1, "picked": 1})
+            for card in screen.get("skipped", []):
+                choice_rows.append(keys | {"card": card, "offered": 1, "picked": 0})
+
+        killed_by = data.get("killedByEncounter")
+        if not win and killed_by and killed_by != "NONE":
+            death_rows.append(keys | {"enc": killed_by, "deaths": 1})
+            floor_rows.append(keys | {"floor": int(run.floor), "deaths": 1})
+
+        for enc in data.get("encounters", []):
+            enc_rows.append(keys | {"enc": enc["id"], "fights": 1,
+                                    "dmg": int(enc.get("damage", 0)),
+                                    "turns": int(enc.get("turns", 0))})
+
+    keys = ["day", "mod", "game", "asc", "mp"]
+    return {
+        "runs_daily": aggregate(run_rows, keys, ["runs", "wins"]),
+        "cards_daily": aggregate(card_rows, keys + ["card", "copies"], ["runs", "wins"]),
+        "choices_daily": aggregate(choice_rows, keys + ["card"], ["offered", "picked"]),
+        "deaths_daily": aggregate(death_rows, keys + ["enc"], ["deaths"]),
+        "death_floors_daily": aggregate(floor_rows, keys + ["floor"], ["deaths"]),
+        "encounters_daily": aggregate(enc_rows, keys + ["enc"], ["fights", "dmg", "turns"]),
+        "archetypes_daily": aggregate(arch_rows, keys + ["arch"], ["runs", "wins"]),
+    }
 
 
 def build_cards_meta() -> dict[str, dict]:
@@ -80,28 +137,29 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
-    runs_daily, cards_daily = build_tables(runs)
-    days = sorted({r["day"] for r in runs_daily})
-    outputs = {
-        "meta.json": {
-            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "total_runs": int(len(runs)),
-            "mod_versions": sorted(runs["mod_version"].unique()),
-            "game_versions": sorted(runs["game_version"].unique()),
-            "first_day": days[0],
-            "last_day": days[-1],
-        },
-        "runs_daily.json": runs_daily,
-        "cards_daily.json": cards_daily,
-        "cards_meta.json": build_cards_meta(),
+    tables = build_tables(runs)
+    days = sorted({r["day"] for r in tables["runs_daily"]})
+    outputs = {f"{name}.json": rows for name, rows in tables.items()}
+    outputs["meta.json"] = {
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "total_runs": int(len(runs)),
+        "mod_versions": sorted(runs["mod_version"].unique()),
+        "game_versions": sorted(runs["game_version"].unique()),
+        "first_day": days[0],
+        "last_day": days[-1],
     }
+    outputs["cards_meta.json"] = build_cards_meta()
+    # Base-game encounter whitelist (generated from gamedata/ — see base_encounters.json);
+    # the page hides other mods' encounters unless "include other mods" is on.
+    outputs["encounters_meta.json"] = json.loads(
+        (Path(__file__).with_name("base_encounters.json")).read_text(encoding="utf-8"))
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, payload in outputs.items():
         path = OUT_DIR / name
         path.write_text(json.dumps(payload, separators=(",", ":"), sort_keys=True) + "\n",
                         encoding="utf-8")
-        count = len(payload) if isinstance(payload, (list, dict)) else 1
-        print(f"Wrote {path} ({count} rows)")
+        print(f"Wrote {path} ({len(payload)} rows)")
     return 0
 
 
