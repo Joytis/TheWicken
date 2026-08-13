@@ -190,7 +190,7 @@
   "THEWITCH-A_LITTLE_SIP.title": "A Little Sip",
   "THEWITCH-A_LITTLE_SIP.description": "Whenever you use a [gold]Potion[/gold], gain {StrengthPower:diff()} [gold]Strength[/gold] and draw a card.",
   "THEWITCH-PACT_OF_AGONY.title": "Pact of Agony",
-  "THEWITCH-PACT_OF_AGONY.description": "Gain {HexPower:diff()} [gold]Hex[/gold].\nDeal {Damage:diff()} damage.\nYour [gold]Potions[/gold] deal {IfUpgraded:show:triple:double} damage this turn.",
+  "THEWITCH-PACT_OF_AGONY.description": "Gain {HexPower:diff()} [gold]Hex[/gold].\nDeal {Damage:diff()} damage.\nYour [gold]Potions[/gold] deal {IfUpgraded:show:triple|double} damage this turn.",
   "THEWITCH-PACT_OF_FURY.title": "Pact of Fury",
   "THEWITCH-PACT_OF_FURY.description": "Gain {WeakPower:diff()} [gold]Weak[/gold].\nOther allies gain {StrengthPower:diff()} [gold]Strength[/gold].",
   "THEWITCH-LIGHT_THE_CANDLE.title": "Light the Candle",

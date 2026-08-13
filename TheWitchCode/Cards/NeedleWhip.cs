@@ -34,7 +34,7 @@ public sealed class NeedleWhip : WitchCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             // Thorn hit: swamp-green slice (preloaded via Witch.ExtraAssetPaths).
-            .WithHitVfxNode(t => NThinSliceVfx.Create(t, VfxColor.Swamp))
+            .WithHitVfxNode(WitchFx.BrambleSliceNode)
             .Execute(choiceContext);
         await PowerCmd.Apply<BramblesPower>(choiceContext, Owner.Creature, DynamicVars.Brambles().BaseValue, Owner.Creature, this);
     }

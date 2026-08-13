@@ -11,8 +11,6 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Pact of Agony: hex yourself to charge your potions — they hit far harder for the rest of the turn.</summary>
 public sealed class PactOfAgony : WitchCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
-
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];
