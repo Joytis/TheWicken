@@ -19,7 +19,7 @@ public sealed class PactOfAgony : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(2m),
-        new DamageVar(13m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         // The MULTIPLIER applied to potion damage, not a stack count: 2x, upgrading to 3x.
         new PowerVar<PotionDamageMultiplierPower>(2m)
     ];
