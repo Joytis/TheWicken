@@ -17,6 +17,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class ExtractLife : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -25,7 +27,7 @@ public sealed class ExtractLife : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(12m, ValueProp.Move),
-        new IntVar("Replay", 2m)
+        new IntVar("Replay", 1m)
     ];
 
     public ExtractLife()
@@ -56,5 +58,5 @@ public sealed class ExtractLife : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);
+    protected override void OnUpgrade() => DynamicVars["Replay"].UpgradeValueBy(1m);
 }

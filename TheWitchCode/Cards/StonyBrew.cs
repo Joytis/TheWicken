@@ -7,6 +7,8 @@ namespace TheWitch.TheWitchCode.Cards;
 
 public sealed class StonyBrew : OrientationBrewCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override PotionOrientation Orientation => PotionOrientation.Defensive;
 
     // Seeded from the old live query: every Common defensive potion the Witch could roll

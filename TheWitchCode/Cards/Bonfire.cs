@@ -12,6 +12,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.</summary>
 public sealed class Bonfire : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         EnergyHoverTip,
     ];

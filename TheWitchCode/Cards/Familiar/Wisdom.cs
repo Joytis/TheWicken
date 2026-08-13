@@ -9,6 +9,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.</summary>
 public sealed class Wisdom : WitchFamiliarCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public Wisdom()
         : base(0, CardType.Skill, CardRarity.Token, TargetType.Self)
     {

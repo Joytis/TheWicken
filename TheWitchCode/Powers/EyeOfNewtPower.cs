@@ -11,40 +11,41 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.TestSupport;
 using Godot;
 
 namespace TheWitch.TheWitchCode.Powers;
 
 /// <summary>
-/// Eye of Newt: the owner's single-target potions hit every valid target — enemy potions hit ALL enemies,
-/// player/ally potions hit ALL players (multiplayer only; in singleplayer there is just the one).
+/// Eye of Newt: the owner's single-target potions hit one additional random target from the potion's
+/// target set — or, once upgraded (HitsAll), every valid target: enemy potions across ALL enemies,
+/// player/ally potions across ALL players (multiplayer only; in singleplayer there is just the one).
 /// Passive toggle (Single stack); the actual fan-out lives in <see cref="EyeOfNewtPotionFanoutPatch" />.
 /// </summary>
 public sealed class EyeOfNewtPower : WitchPower
 {
+    private const string HitsAllKey = "HitsAll";
+
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(HitsAllKey, 0m)
+    ];
+
+    /// <summary>True once applied by an upgraded Eye of Newt: fan out to ALL valid targets instead of one
+    /// random extra. A DynamicVar (not a field) so the power tooltip can switch text on it.</summary>
+    public bool HitsAll => DynamicVars[HitsAllKey].BaseValue > 0m;
+
+    /// <summary>One-way: an upgraded application never downgrades back to single-extra-target.</summary>
+    public void EnableHitsAll() => DynamicVars[HitsAllKey].BaseValue = 1m;
 
     /// <summary>Protected-to-public bridge so the fan-out patch can flash the icon.</summary>
     public void FlashIcon() => Flash();
 }
 
-/// <summary>
-/// No native hook can widen a potion's target set (`BeforePotionUsed` gets the target by value), so this
-/// postfix wraps <c>PotionModel.OnUseWrapper</c>: after the original use resolves against the chosen
-/// target, if the potion's owner has <see cref="EyeOfNewtPower" />, re-invoke the potion's protected
-/// <c>OnUse</c> (virtual dispatch via reflection — the NeverendingPotionPower replay shape) once per
-/// OTHER living creature in the potion's target set, each bracketed in Begin/EndCardOrPotionEffect.
-/// The target set is chosen by <c>TargetType</c>: AnyEnemy fans across enemies, AnyPlayer/AnyAlly across
-/// player creatures (a no-op in singleplayer, where there is only one player). Already-AoE types
-/// (AllEnemies/AllAllies/Self) need no help and are skipped. Deterministic for MP: UsePotionAction is a
-/// synced GameAction and the fan-out iterates the shared combat state's lists in order, no RNG. Each extra
-/// target gets its own bottle-throw arc (see ThrowBottleAt) so the fan-out reads as a volley rather than
-/// damage appearing from nowhere. Neverending Potion replays call OnUse directly (not OnUseWrapper), so
-/// replayed potions do NOT fan out — accepted for now.
-/// </summary>
 [HarmonyPatch(typeof(PotionModel), nameof(PotionModel.OnUseWrapper))]
 public static class EyeOfNewtPotionFanoutPatch
 {
@@ -73,25 +74,26 @@ public static class EyeOfNewtPotionFanoutPatch
             return;
         }
 
-        List<Creature> fanTargets = potion.TargetType switch
+        List<Creature> fanTargets = (potion.TargetType switch
         {
-            TargetType.AnyEnemy => combatState.HittableEnemies.ToList(),
-            TargetType.AnyPlayer or TargetType.AnyAlly => combatState.PlayerCreatures.ToList(),
+            TargetType.AnyEnemy => combatState.HittableEnemies,
+            TargetType.AnyPlayer or TargetType.AnyAlly => combatState.PlayerCreatures,
             _ => [], // already AoE (AllEnemies/AllAllies), self-only, or non-creature — nothing to widen
-        };
+        }).Where(other => other != target && other.IsAlive).ToList();
         if (fanTargets.Count == 0)
         {
             return;
         }
 
+        if (!power.HitsAll)
+        {
+            // Unupgraded: exactly one extra hit, on a synced-RNG random pick from the widened set.
+            fanTargets = [owner.RunState.Rng.CombatTargets.NextItem(fanTargets)!];
+        }
+
         power.FlashIcon();
         foreach (Creature other in fanTargets)
         {
-            if (other == target || !other.IsAlive)
-            {
-                continue;
-            }
-            
             await ThrowBottleAt(potion, ownerCreature, other);
             await Cmd.Wait(ThrowStagger);
 

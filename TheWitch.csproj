@@ -26,6 +26,10 @@
             <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="Steamworks.NET">
+            <HintPath>$(Sts2DataDir)/Steamworks.NET.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
     </ItemGroup>
 
     <!-- Krafs.Publicizer (and its disabled <Publicize Include="sts2"> block) removed: merely having the
@@ -72,11 +76,6 @@
         <None Include="TheWitch/**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="TheWitch\images\card_portraits\big\" />
-      <Folder Include="TheWitch\images\powers\big\" />
-      <Folder Include="TheWitch\images\relics\big\" />
-    </ItemGroup>
     
     <Target Name="CheckDependencyPaths" >
         <Error
@@ -126,6 +125,21 @@
                Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"/>
     </Target>
     
+    <!-- Regenerate atlas pages + .tres slices (cards, relics, powers, potions, pets) from the
+         source art before the pck export — see tools/pack-atlases.py. -->
+    <Target Name="PackAtlases" BeforeTargets="GodotImport" Condition="'$(IsInnerGodotExport)' != 'true'">
+        <Exec Command="py &quot;$(MSBuildProjectDirectory)\tools\pack-atlases.py&quot;"/>
+    </Target>
+
+    <!-- Headless import so freshly generated atlas pngs have .ctex before the export runs
+         (the editor normally does this, but publish must not depend on the editor having been opened). -->
+    <Target Name="GodotImport" BeforeTargets="GodotPublish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
+        <Exec Command="&quot;$(GodotPath)&quot; --headless --audio-driver Dummy --path &quot;$(MSBuildProjectDirectory)&quot; --import --quit"
+              EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
+              IgnoreExitCode="true"
+              IgnoreStandardErrorWarningFormat="true"/>
+    </Target>
+
     <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
         <Message Text="Exporting Godot .pck to mods folder" Importance="high"/>
         <Exec Command="&quot;$(GodotPath)&quot; --headless --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;"

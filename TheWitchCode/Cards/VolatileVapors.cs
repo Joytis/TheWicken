@@ -9,8 +9,10 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.</summary>
 public sealed class VolatileVapors : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VolatileVaporsPower>(6m)
+        new PowerVar<VolatileVaporsPower>(5m)
     ];
 
     public VolatileVapors()

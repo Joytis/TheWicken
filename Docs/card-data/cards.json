@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-09",
+  "generated": "2026-08-13",
   "cards": [
     {
       "name": "Defend",
@@ -40,10 +40,10 @@
       "numbers": {
         "Damage": 3
       },
-      "upgrade": "Potions +1",
+      "upgrade": "Damage +2",
       "note": "Harvest: deal damage and create small potions from a HARD-CODED loot table (hand-tuned — trim/add freely).",
-      "tested": true,
-      "artFinal": false,
+      "tested": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
@@ -65,12 +65,12 @@
       "type": "Skill",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Gain 8 Block. Apply 2 Hex if you have used a Potion this turn.",
+      "text": "Gain 8 Block. Apply 1 Hex if you have used a Potion this turn.",
       "numbers": {
-        "Hex": 2,
+        "Hex": 1,
         "Block": 8
       },
-      "upgrade": "Block +3",
+      "upgrade": "Hex +1",
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
       "tested": true,
       "artFinal": false,
@@ -279,12 +279,12 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 6 Block. Shuffle 2 Gnash into your Draw Pile.",
+      "text": "Gain 7 Block. Shuffle 2 {IfUpgraded:Gnash+|Gnash} into your Draw Pile.",
       "numbers": {
-        "Block": 6,
+        "Block": 7,
         "Cards": 2
       },
-      "upgrade": "Block +3, Cards +1",
+      "upgrade": "Block +2",
       "note": "Call the Pack: hunker down behind the wolves — gain Block, shuffle Gnash tokens into the Draw Pile.",
       "tested": true,
       "artFinal": false,
@@ -353,7 +353,7 @@
       "upgrade": "Damage +2",
       "note": "Frenzy: two quick swipes now, and the rush banks 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
@@ -508,7 +508,7 @@
       },
       "upgrade": "Block +3",
       "note": "Smolder: block now, and the embers keep producing — an Ember Jar at the start of each of your next couple of turns (see <see cref=\"SmolderPower\" />).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -619,15 +619,15 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 9 damage. Apply 2 Hex.",
+      "text": "Deal 7 damage. Apply 2 Hex.",
       "numbers": {
         "Hex": 2,
-        "Damage": 9
+        "Damage": 7
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
@@ -651,14 +651,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 8 Block. Next turn, apply 2 Hex to ALL enemies.",
+      "text": "Gain 8 Block. Next turn, apply 1 Hex to ALL enemies.",
       "numbers": {
-        "WaxAndWane": 2,
+        "WaxAndWane": 1,
         "Block": 8
       },
-      "upgrade": "Block +2",
+      "upgrade": "Block +1, WaxAndWane +1",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -770,15 +770,15 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 7 damage for each Potion created this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "text": "Deal 6 damage for each Potion created this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
       "numbers": {
-        "Damage": 7,
+        "Damage": 6,
         "CalculationBase": 0,
         "CalculationExtra": 1
       },
-      "upgrade": "Damage +3",
+      "upgrade": "Damage +2",
       "note": "Hurl the whole belt: one 10-damage hit per potion you've brewed this combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -809,7 +809,7 @@
       "upgrade": "none",
       "note": "Summons a cosmetic cat pet alongside the familiar power.",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
@@ -862,11 +862,11 @@
       "name": "Cloak of Moonlight",
       "entry": "CLOAK_OF_MOONLIGHT",
       "file": "TheWitchCode/Cards/CloakOfMoonlight.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you create a card or Potion, gain 2 Block.",
+      "text": "Whenever you trigger Hex, gain 2 Block.",
       "numbers": {
         "CloakOfMoonlight": 2
       },
@@ -877,16 +877,16 @@
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
-        "Familiars",
-        "Potions"
+        "Hex"
       ],
       "role": [
         "Payoff"
       ],
       "sub": [
-        "Potions:CreatePayoff"
+        "Hex:Exploit"
       ],
       "threads": [
+        "DebuffPayoff",
         "BlockEngine"
       ]
     },
@@ -929,9 +929,9 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 6 Brambles X times.",
+      "text": "Gain 7 Brambles X times.",
       "numbers": {
-        "Brambles": 6
+        "Brambles": 7
       },
       "upgrade": "Brambles +2",
       "note": "Spend X energy to pile Brambles on yourself, 7 at a time, X times — a fast way to stack a big Bramble count.",
@@ -1026,7 +1026,7 @@
         "NextPotionCopied": 1,
         "Block": 11
       },
-      "upgrade": "NextPotionCopied +1",
+      "upgrade": "Block +2, NextPotionCopied +1",
       "note": "Gain Block, and copy the next potion you create this combat.",
       "tested": true,
       "artFinal": false,
@@ -1136,7 +1136,7 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "At the start of your turn, create a Puff of Smoke.",
+      "text": "At the start of your turn, create an Unstable Puff of Smoke.",
       "numbers": {},
       "upgrade": "custom (see code)",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
@@ -1254,15 +1254,15 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Gain 2 Hex. Deal 13 damage. Your Potions deal {IfUpgraded:show:triple:double} damage this turn.",
+      "text": "Gain 2 Hex. Deal 10 damage. Your Potions deal double damage this turn.",
       "numbers": {
         "Hex": 2,
         "PotionDamageMultiplier": 2,
-        "Damage": 13
+        "Damage": 10
       },
       "upgrade": "PotionDamageMultiplier +1",
       "note": "Pact of Agony: hex yourself to charge your potions — they hit far harder for the rest of the turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1386,12 +1386,12 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Apply 3 Hex. Next turn, gain [E] and draw 1 card.",
+      "text": "Apply 2 Hex. Next turn, gain [E] and draw 1 card.",
       "numbers": {
-        "Hex": 3,
+        "Hex": 2,
         "DrawCardsNextTurn": 1
       },
-      "upgrade": "EnergyNextTurn +1",
+      "upgrade": "DrawCardsNextTurn +1",
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
       "tested": true,
       "artFinal": false,
@@ -1420,14 +1420,14 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 13 Block. Add a Rats into your Draw Pile and Discard Pile.",
+      "text": "Gain 11 Block. Add a Rats into your Draw Pile and Discard Pile.",
       "numbers": {
-        "Block": 13,
+        "Block": 11,
         "Cards": 1
       },
       "upgrade": "Block +3",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1496,7 +1496,7 @@
       },
       "upgrade": "Damage +3, Hex +1",
       "note": "Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1715,7 +1715,7 @@
       },
       "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1738,9 +1738,9 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage. Draw 1 card. Does not consume Hex.",
+      "text": "Deal 3 damage. Draw 1 card. Does not consume Hex.",
       "numbers": {
-        "Damage": 5,
+        "Damage": 3,
         "Cards": 1
       },
       "upgrade": "Damage +2",
@@ -1768,9 +1768,9 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 6 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 5 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 6
+        "VolatileVapors": 5
       },
       "upgrade": "VolatileVapors +3",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
@@ -1885,17 +1885,17 @@
       "name": "Ambush!",
       "entry": "AMBUSH",
       "file": "TheWitchCode/Cards/Ambush.cs",
-      "cost": 1,
+      "cost": 2,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
-      "text": "Deal 10 damage to ALL enemies. Whenever you draw this card, play it for free.",
+      "text": "Deal 9 damage to ALL enemies. Whenever you draw this card, play it for free.",
       "numbers": {
-        "Damage": 10
+        "Damage": 9
       },
       "upgrade": "Damage +3",
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1926,7 +1926,7 @@
       },
       "upgrade": "Energy +1",
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -1983,7 +1983,7 @@
       "target": "Self",
       "text": "Whenever you use a Potion, create an Unstable Noxious Brew.",
       "numbers": {},
-      "upgrade": "Cost -1",
+      "upgrade": "custom (see code)",
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -2044,11 +2044,11 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Sacrifice ALL Familiars. Gain 4 Strength for each.",
+      "text": "Sacrifice ALL Familiars. Gain 4 Strength for each Familiar sacrificed.",
       "numbers": {
         "Strength": 4
       },
-      "upgrade": "Strength +2",
+      "upgrade": "Cost -1",
       "note": "Broken Pact: end every familiar's service at once and take their strength for your own.",
       "tested": true,
       "artFinal": false,
@@ -2072,13 +2072,13 @@
       "name": "Capture Soul",
       "entry": "CAPTURE_SOUL",
       "file": "TheWitchCode/Cards/CaptureSoul.cs",
-      "cost": 0,
+      "cost": 1,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. Apply 2 Hex. If Fatal, Permanently increase this card's Hex by 1.",
+      "text": "Deal 10 damage. Apply 1 Hex. If Fatal, Permanently increase this card's Hex by 1.",
       "numbers": {
-        "Hex": 2,
+        "Hex": 1,
         "Damage": 10
       },
       "upgrade": "Damage +4",
@@ -2169,13 +2169,13 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain [E] [E] [E]. Draw 3 cards. Gain 3 Hex.",
+      "text": "Gain [E] [E]. Draw 3 cards. Gain 3 Hex.",
       "numbers": {
         "Hex": 3,
-        "Energy": 3,
+        "Energy": 2,
         "Cards": 3
       },
-      "upgrade": "Cards +2",
+      "upgrade": "Energy +1, Cards +1",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
       "tested": true,
       "artFinal": false,
@@ -2209,7 +2209,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "Distill: TRANSFORM a chosen belt potion into a random RARE non-healing potion, Unstable.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2234,7 +2234,7 @@
       "target": "Self",
       "text": "Summon {Familiars:diff()} random Familiars. Draw {DrawReduction} fewer cards at the start of each turn.",
       "numbers": {},
-      "upgrade": "Familiars +1",
+      "upgrade": "DrawReduction +1, Familiars +1",
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
       "tested": true,
       "artFinal": false,
@@ -2267,22 +2267,16 @@
       "numbers": {
         "Damage": 12
       },
-      "upgrade": "Damage +4",
+      "upgrade": "Replay +1",
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
       "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
-      "mechanics": [
-        "None"
-      ],
-      "role": [
-        "Standalone"
-      ],
+      "mechanics": [],
+      "role": [],
       "sub": [],
-      "threads": [
-        "ExhaustOutlet"
-      ]
+      "threads": []
     },
     {
       "name": "Eye of Newt",
@@ -2292,12 +2286,12 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Your Potions hit ALL valid targets. Create an Unstable Noxious Brew.",
+      "text": "Your Potions hit one additional random target. Create an Unstable Ember Jar.",
       "numbers": {
         "EyeOfNewt": 1
       },
-      "upgrade": "Cost -1",
-      "note": "Eye of Newt: a Power that makes your potions hit every enemy, plus a Noxious Brew to throw.",
+      "upgrade": "none",
+      "note": "Eye of Newt: a Power that fans your potions out to one extra random target (upgraded: ALL valid targets), plus an unstable Ember Jar to throw.",
       "tested": true,
       "artFinal": false,
       "vfxPass": true,
@@ -2325,9 +2319,9 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
-      "text": "Deal 8 damage twice to ALL enemies. Apply 3 Hex to ALL enemies.",
+      "text": "Deal 8 damage twice to ALL enemies. Apply 2 Hex to ALL enemies.",
       "numbers": {
-        "Hex": 3,
+        "Hex": 2,
         "Damage": 8
       },
       "upgrade": "Damage +2, Hex +1",
@@ -2485,13 +2479,13 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Transform two cards in your Draw Pile into 2 Rats each.",
+      "text": "Transform 2 cards in your Draw Pile into Rats.",
       "numbers": {
         "Cards": 2
       },
-      "upgrade": "Cost -1",
-      "note": "Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).",
-      "tested": true,
+      "upgrade": "Cards +1",
+      "note": "Polymorph (was Repurpose): choose {Cards} cards in your draw pile (1, upgraded 2) — each becomes a Rats token, 1:1 (combat-scoped <c>CardCmd.Transform</c>, native one-to-one overlay per choice).",
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2516,9 +2510,9 @@
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Each turn, the first 3 Attacks you play are played an additional time.",
+      "text": "The first 2 Attacks you play each turn are played an additional time.",
       "numbers": {
-        "PrimalForm": 3
+        "PrimalForm": 2
       },
       "upgrade": "PrimalForm +1",
       "note": "Primal Form: shed the skin, keep the fury — your first few Attacks each turn are played an additional time.",
@@ -2865,13 +2859,12 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain [E]. Gain 3 Block.",
+      "text": "Gain [E].",
       "numbers": {
-        "Energy": 1,
-        "Block": 3
+        "Energy": 1
       },
-      "upgrade": "Block +3",
-      "note": "Cat familiar token: feline agility bottled as tempo — gain Energy and Block.",
+      "upgrade": "none",
+      "note": "Cat familiar token: feline agility bottled as tempo — gain Energy.",
       "tested": true,
       "artFinal": false,
       "vfxPass": true,
@@ -3029,7 +3022,7 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Draw 1 card. Discard a card.",
+      "text": "Draw 1 card. Discard 1 card.",
       "numbers": {
         "Cards": 1
       },
@@ -3092,15 +3085,15 @@
       "type": "Attack",
       "rarity": "Ancient",
       "target": "AnyEnemy",
-      "text": "Deal 10 damage. Apply 2 Hex. Create a random Potion.",
+      "text": "Deal 10 damage. Apply 2 Hex. Create a random Unstable Potion.",
       "numbers": {
         "Hex": 2,
         "Damage": 10
       },
       "upgrade": "Damage +5",
-      "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, 3 Hex, and one random potion (any non-healing potion the Witch can roll, any rarity).",
-      "tested": true,
-      "artFinal": false,
+      "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, Hex, and one random Unstable potion (any non-healing potion the Witch can roll, any rarity).",
+      "tested": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [

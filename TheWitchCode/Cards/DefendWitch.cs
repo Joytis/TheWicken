@@ -8,6 +8,8 @@ namespace TheWitch.TheWitchCode.Cards;
 
 public sealed class DefendWitch : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.JakeRuesch;
+
 	public override bool GainsBlock => true;
 
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };

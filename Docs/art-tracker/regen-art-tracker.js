@@ -36,10 +36,10 @@ function clean(s) {
 const root = path.join(__dirname, '..', '..');
 function cardArtPath(entry) {
   const base = entry.toLowerCase() + '.png';
-  for (const dir of ['TheWitch/images/card_portraits/big/', 'TheWitch/images/card_portraits/big/familiar/']) {
+  for (const dir of ['TheWitch/images/card_portraits/', 'TheWitch/images/card_portraits/familiar/']) {
     if (fs.existsSync(path.join(root, dir + base))) return dir + base;
   }
-  return 'TheWitch/images/card_portraits/big/' + base; // convention target even if missing
+  return 'TheWitch/images/card_portraits/' + base; // convention target even if missing
 }
 // status is derived: done → Done; artist assigned → In Progress; else Placeholder
 function derive(done, artist) { return done ? 'Done' : (artist ? 'In Progress' : 'Placeholder'); }
@@ -117,10 +117,11 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Witch — Art Tracker</title>
 <style>
+  /* Witch-house palette — keep in sync with pages/analytics.html */
   :root{
-    --bg:#15131c; --panel:#1f1b2b; --panel2:#272234; --line:#3a3350;
-    --ink:#e9e4f5; --muted:#a99fc4; --gold:#e0b24a; --accent:#9d7bff;
-    --ok:#46c476; --warn:#e0b24a; --no:#5b5470;
+    --bg:#2e2226; --panel:#382a2c; --panel2:#41302f; --line:#4d3b3a;
+    --ink:#e8dcc8; --muted:#9b8577; --gold:#e6c15c; --accent:#b8d48f;
+    --ok:#b8d48f; --warn:#e6c15c; --no:#6d5a55;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",system-ui,sans-serif}
@@ -129,11 +130,11 @@ const html = `<!DOCTYPE html>
   .sub{color:var(--muted);font-size:12px}
   .tabs{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
   .tab{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:7px 16px;border-radius:8px 8px 0 0;cursor:pointer;font-size:13px;font-weight:600;user-select:none}
-  .tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:#26301a}
   .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
   input[type=search]{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:7px 10px;border-radius:6px;min-width:220px;font-size:13px}
   .chip{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 11px;border-radius:14px;cursor:pointer;font-size:12px;user-select:none}
-  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#26301a}
   .prog{margin-left:auto;color:var(--muted);font-size:12px;text-align:right}
   .bar{width:180px;height:7px;background:var(--panel2);border-radius:4px;overflow:hidden;margin-top:4px}
   .bar > i{display:block;height:100%;background:var(--ok);width:0}
@@ -145,16 +146,16 @@ const html = `<!DOCTYPE html>
   .name{font-weight:600}
   .meta{color:var(--muted);font-size:12px;white-space:nowrap}
   .text{max-width:340px}
-  .brief{max-width:420px;color:#b9a8e6;font-style:italic;font-size:12px}
+  .brief{max-width:420px;color:#c99a90;font-style:italic;font-size:12px}
   .dims{font:11px/1.4 ui-monospace,Consolas,monospace;color:var(--muted)}
   .pathcell{font:10px/1.4 ui-monospace,Consolas,monospace;color:var(--muted);max-width:220px;word-break:break-all}
   .badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
-  .s-done{background:#46c47633;color:#5fe09a}
-  .s-inprogress{background:#c9a82a33;color:#e6cf5a}
-  .s-placeholder{background:#5b547033;color:#9b93b3}
-  .artist{color:#8ec2ee;font-size:12px;white-space:nowrap}
+  .s-done{background:#b8d48f33;color:#cfe3a8}
+  .s-inprogress{background:#e6c15c33;color:#e6c15c}
+  .s-placeholder{background:#6d5a5533;color:#a08a7d}
+  .artist{color:var(--accent);font-size:12px;white-space:nowrap}
   .thumb{width:60px}
-  .thumb img{width:52px;height:auto;border-radius:4px;border:1px solid var(--line);background:#0d0b14;display:block;cursor:zoom-in}
+  .thumb img{width:52px;height:auto;border-radius:4px;border:1px solid var(--line);background:#241a1d;display:block;cursor:zoom-in}
   .thumb .none{width:52px;height:40px;border:1px dashed var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--no);font-size:10px}
   #lightbox{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
   #lightbox img{max-width:88vw;max-height:88vh;border-radius:8px;border:1px solid var(--line)}

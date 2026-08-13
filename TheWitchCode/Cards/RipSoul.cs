@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Potions;
 using TheWitch.TheWitchCode.Potions.Brewing;
 using TheWitch.TheWitchCode.Powers;
 using TheWitch.TheWitchCode.Extensions;
@@ -13,13 +15,16 @@ namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
 /// Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage,
-/// 3 Hex, and one random potion (any non-healing potion the Witch can roll, any rarity). Granted by the
+/// Hex, and one random Unstable potion (any non-healing potion the Witch can roll, any rarity). Granted by the
 /// Archaic Tooth transcendence map (see <see cref="Patches.AncientTranscendencePatch" />).
 /// </summary>
 public sealed class RipSoul : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
+        UnstablePotions.UnstableHoverTip,
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -51,7 +56,7 @@ public sealed class RipSoul : WitchCard
             PotionCatalog.Query(), choiceContext, Owner, Owner.RunState.Rng.CombatPotionGeneration);
         if (created != null)
         {
-            await PotionCmd.TryToProcure(created.ToMutable(), Owner);
+            await Witch.ProducePotion(created, Owner, Witch.PotionMode.Unstable);
         }
     }
 

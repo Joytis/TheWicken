@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Witch Card Designs</title>
 <style>
+  /* Witch-house palette — keep in sync with pages/analytics.html */
   :root{
-    --bg:#15131c; --panel:#1f1b2b; --panel2:#272234; --line:#3a3350;
-    --ink:#e9e4f5; --muted:#a99fc4; --gold:#e0b24a; --accent:#9d7bff;
-    --ok:#46c476; --no:#5b5470;
-    --starter:#7d8590; --common:#9fb1c9; --uncommon:#5f9bd6; --rare:#d6a23a; --special:#c46be0; --ancient:#e0734a; --token:#7c6f96;
+    --bg:#2e2226; --panel:#382a2c; --panel2:#41302f; --line:#4d3b3a;
+    --ink:#e8dcc8; --muted:#9b8577; --gold:#e6c15c; --accent:#b8d48f;
+    --ok:#b8d48f; --no:#6d5a55;
+    --starter:#a08a7d; --common:#cf9a8f; --uncommon:#b8d48f; --rare:#e6c15c; --special:#c99ad6; --ancient:#e0734a; --token:#8a7f74;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",system-ui,sans-serif}
@@ -44,13 +45,13 @@
   .copy.done{border-color:var(--ok);color:var(--ok)}
   .chip.btn{cursor:pointer}
   .thumb{width:54px}
-  .thumb img{width:48px;height:auto;border-radius:4px;border:1px solid var(--line);background:#0d0b14;display:block;cursor:zoom-in}
+  .thumb img{width:48px;height:auto;border-radius:4px;border:1px solid var(--line);background:#241a1d;display:block;cursor:zoom-in}
   .thumb img.noart{opacity:.35;filter:grayscale(.6)}
   .artcell{white-space:nowrap}
   .artbadge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600}
-  .art-none{background:#5b547033;color:#9b93b3}
-  .art-placeholder{background:#c98a2a33;color:#e0b24a}
-  .art-final{background:#46c47633;color:#5fe09a}
+  .art-none{background:#6d5a5533;color:#a08a7d}
+  .art-placeholder{background:#e6c15c33;color:#e6c15c}
+  .art-final{background:#b8d48f33;color:#cfe3a8}
   .afinal{margin-left:6px;cursor:pointer;background:none;border:1px solid var(--line);border-radius:5px;color:var(--muted);font-size:11px;padding:2px 6px}
   .afinal:hover:not(:disabled){border-color:var(--ok);color:var(--ok)}
   .afinal:disabled{opacity:.3;cursor:not-allowed}
@@ -78,7 +79,7 @@
   .m-Status{background:#4a4a2a33;color:#c6c67f}
   .m-Colorless{background:#55555533;color:#cfcfcf}
   .m-Shivs{background:#5a5f6b33;color:#b9c4d6}
-  .m-Discard{background:#7b5a2a33;color:#e0b24a}
+  .m-Discard{background:#7b5a2a33;color:#e6c15c}
   .m-Doom{background:#7b2a4a33;color:#e68fa8}
   .m-Strength{background:#7b3a2a33;color:#e69a74}
   .m-Exhaust{background:#5a3a6b33;color:#c08fe6}
@@ -90,12 +91,12 @@
   .m-Stars{background:#6b5a2a33;color:#e6cf74}
   .m-Forge{background:#7b3a2a33;color:#e69074}
   .m-Vigor{background:#2a6b4a33;color:#74e6a8}
-  .m-None{background:#5b547033;color:#9b93b3}
+  .m-None{background:#6d5a5533;color:#a08a7d}
   .r-Generator{background:#2f6b5a33;color:#5fe0b8}
-  .r-Payoff{background:#7b5a2a33;color:#e0b24a}
+  .r-Payoff{background:#7b5a2a33;color:#e6c15c}
   .r-Enabler{background:#5a4a8a33;color:#a99fff}
   .r-Token{background:#6b3a5a33;color:#e68fc0}
-  .r-Standalone{background:#5b547033;color:#9b93b3}
+  .r-Standalone{background:#6d5a5533;color:#a08a7d}
   .matrix{margin-top:12px;border-collapse:collapse;font-size:12px}
   .matrix th,.matrix td{border:1px solid var(--line);padding:4px 10px;text-align:center;position:static;background:none;text-transform:none;letter-spacing:0}
   .matrix th{color:var(--accent);font-weight:600}

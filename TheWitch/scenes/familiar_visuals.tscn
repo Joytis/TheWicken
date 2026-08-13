@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buavwg3onb8ib" path="res://TheWitchCode/Monsters/PetVisuals.cs" id="1_iv0ga"]
 [ext_resource type="Texture2D" uid="uid://cukm7q6npx0ev" path="res://TheWitch/textures/energy_orb_shine.png" id="2_djl4c"]
-[ext_resource type="Texture2D" uid="uid://d0bjsgslvtc00" path="res://TheWitch/images/pets/crow_familiar.png" id="2_oehyf"]
+[ext_resource type="Texture2D" uid="uid://rhho5h7dmjzrc" path="res://TheWitch/images/atlases/pets_atlas.sprites/crow_familiar.tres" id="2_oehyf"]
 [ext_resource type="Texture2D" uid="uid://8vlyxysla806" path="res://TheWitch/textures/cross_burst.png" id="3_t37xl"]
 [ext_resource type="Texture2D" uid="uid://c3wf1nxd2ayqq" path="res://TheWitch/textures/zoom_line.png" id="4_is4cd"]
 

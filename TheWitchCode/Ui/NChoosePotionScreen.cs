@@ -1,13 +1,17 @@
 using System.Linq;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
+using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
 using MegaCrit.Sts2.Core.TestSupport;
 using TheWitch.TheWitchCode.Extensions;
 
@@ -33,13 +37,16 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
     private IReadOnlyList<PotionModel> _potions = null!;
     private LocString _header = null!;
     private GridContainer _grid = null!;
+    private NPeekButton _peekButton = null!;
     private Tween? _fadeTween;
 
     public NetScreenType ScreenType => NetScreenType.CardSelection;
 
     public bool UseSharedBackstop => true;
 
-    public Control? DefaultFocusedControl => _grid.GetChildOrNull<Control>(0);
+    public Control? DefaultFocusedControl => _peekButton.IsPeeking
+        ? NCombatRoom.Instance?.DefaultFocusedControl
+        : _grid.GetChildOrNull<Control>(0);
 
     public static NChoosePotionScreen? ShowScreen(IReadOnlyList<PotionModel> potions, LocString header)
     {
@@ -47,14 +54,10 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
         {
             return null;
         }
-        // Pattern cast, not Instantiate<T>: a .tscn whose script didn't bind instantiates as a
-        // plain Control and the generic form would throw.
-        if (PreloadManager.Cache.GetScene(scenePath)
-                .Instantiate(PackedScene.GenEditState.Disabled) is not NChoosePotionScreen screen)
-        {
-            MainFile.Logger.Warn("choose_potion_screen.tscn didn't bind its mod script; skipping selection screen.");
-            return null;
-        }
+        // Instantiate<T> throws when the .tscn script didn't bind — a no-bind scene is a
+        // malformed asset; fail loud.
+        NChoosePotionScreen screen = PreloadManager.Cache.GetScene(scenePath)
+            .Instantiate<NChoosePotionScreen>(PackedScene.GenEditState.Disabled);
         screen.Name = "NChoosePotionScreen";
         screen._potions = potions;
         screen._header = header;
@@ -64,36 +67,11 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
 
     public override void _Ready()
     {
-        // Scene-instanced base-game banner (requires the src/ junction at export). DIAGNOSTIC in
-        // progress: the instanced node has arrived script-less at runtime even with the junction —
-        // log what actually got instantiated, and fall back to a direct runtime load so the screen
-        // stays functional.
-        Node? bannerNode = GetNodeOrNull("%Banner");
-        NCommonBanner? banner = bannerNode as NCommonBanner;
-        MainFile.Logger.Info(
-            $"[NChoosePotionScreen] instanced Banner: clrType={bannerNode?.GetType().FullName ?? "null"} " +
-            $"script={(bannerNode?.GetScript().Obj as Script)?.ResourcePath ?? "none"}");
-        if (banner == null)
-        {
-            Node direct = ResourceLoader.Load<PackedScene>("res://scenes/ui/common_banner.tscn")
-                .Instantiate(PackedScene.GenEditState.Disabled);
-            MainFile.Logger.Info($"[NChoosePotionScreen] direct-loaded banner: clrType={direct.GetType().FullName}");
-            bannerNode?.QueueFreeSafely();
-            banner = direct as NCommonBanner;
-            if (banner != null)
-            {
-                this.AddChildSafely(banner);
-            }
-            else
-            {
-                direct.QueueFreeSafely();
-            }
-        }
-        if (banner != null)
-        {
-            banner.label.SetTextAutoSize(_header.GetRawText());
-            banner.AnimateIn();
-        }
+        // Scene-instanced base-game nodes (banner, peek button) require the src/ junction at
+        // export — if a script fails to bind, GetNode<T> throws right here. Fail loud.
+        NCommonBanner banner = GetNode<NCommonBanner>("%Banner");
+        banner.label.SetTextAutoSize(_header.GetRawText());
+        banner.AnimateIn();
 
         _grid = GetNode<GridContainer>("%Grid");
         _grid.Columns = _columns;
@@ -110,6 +88,30 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
         }
 
         WireControllerFocus();
+        SetupPeekButton(banner);
+    }
+
+    /// <summary>
+    /// The base-game peek button (eye icon, hides the overlay to show combat state) that every
+    /// base-game selection screen carries — wiring mirrors NCardGridSelectionScreen.
+    /// </summary>
+    private void SetupPeekButton(NCommonBanner banner)
+    {
+        NPeekButton peek = GetNode<NPeekButton>("%PeekButton");
+        _peekButton = peek;
+        peek.AddTargets(_grid, banner);
+        peek.Connect(NPeekButton.SignalName.Toggled, Callable.From<NPeekButton>(_ =>
+        {
+            if (peek.IsPeeking)
+            {
+                MouseFilter = MouseFilterEnum.Ignore;
+            }
+            else
+            {
+                MouseFilter = MouseFilterEnum.Stop;
+                ActiveScreenContext.Instance.Update();
+            }
+        }));
     }
 
     /// <summary>Non-wrapping 4-column grid navigation; a partial last row is reachable from anywhere above it.</summary>
@@ -166,6 +168,7 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
 
     public void AfterOverlayClosed()
     {
+        _peekButton.SetPeeking(false);
         _fadeTween?.Kill();
         this.QueueFreeSafely();
     }
@@ -173,10 +176,15 @@ public partial class NChoosePotionScreen : Control, IOverlayScreen
     public void AfterOverlayShown()
     {
         Visible = true;
+        if (CombatManager.Instance.IsInProgress)
+        {
+            _peekButton.Enable();
+        }
     }
 
     public void AfterOverlayHidden()
     {
         Visible = false;
+        _peekButton.Disable();
     }
 }

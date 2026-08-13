@@ -1,5 +1,5 @@
-{
-  "comment": "Non-card art assets for the art tracker. Hand-maintained. Per asset: 'artist' (who is working on it — fill in manually) and 'done': true when final art is in. Status is DERIVED: done → Done; artist set → In Progress; else Placeholder. Cards are NOT listed here — they come from ../card-data/cards.json (artFinal) + ./card-briefs.json (artist/brief).",
+﻿{
+  "comment": "Non-card art assets for the art tracker. Hand-maintained. Per asset: 'artist' (who is working on it â€” fill in manually) and 'done': true when final art is in. Status is DERIVED: done â†’ Done; artist set â†’ In Progress; else Placeholder. Cards are NOT listed here â€” they come from ../card-data/cards.json (artFinal) + ./card-briefs.json (artist/brief).",
   "categories": [
     {
       "id": "potions",
@@ -250,7 +250,7 @@
           "brief": "",
           "rarity": "Uncommon",
           "effect": "Whenever you enter an unknown ? location, obtain a random potion.",
-          "path": "TheWitch/images/relics/big/bottled_curiosity.png"
+          "path": "TheWitch/images/relics/bottled_curiosity.png"
         },
         {
           "name": "Bottomless Pockets",
@@ -259,7 +259,7 @@
           "brief": "",
           "rarity": "Starter",
           "effect": "Orobas upgrade of Large Pockets: potion slot bonus becomes 3.",
-          "path": "TheWitch/images/relics/big/bottomless_pockets.png"
+          "path": "TheWitch/images/relics/bottomless_pockets.png"
         },
         {
           "name": "Cozy Nest",
@@ -268,7 +268,7 @@
           "brief": "",
           "rarity": "Shop",
           "effect": "At the start of combat, summon a Crow Familiar.",
-          "path": "TheWitch/images/relics/big/cozy_nest.png"
+          "path": "TheWitch/images/relics/cozy_nest.png"
         },
         {
           "name": "Large Pockets",
@@ -277,7 +277,7 @@
           "brief": "",
           "rarity": "Starter",
           "effect": "Upon pickup gain potion slots. Starting relic.",
-          "path": "TheWitch/images/relics/big/large_pockets.png"
+          "path": "TheWitch/images/relics/large_pockets.png"
         },
         {
           "name": "Morganne",
@@ -286,7 +286,7 @@
           "brief": "",
           "rarity": "Rare",
           "effect": "Every 10th card you play returns to your hand.",
-          "path": "TheWitch/images/relics/big/morganne.png"
+          "path": "TheWitch/images/relics/morganne.png"
         },
         {
           "name": "Sack of Treats",
@@ -295,7 +295,7 @@
           "brief": "A burlap dripping sack of bones and a limb sticking out.",
           "rarity": "Rare",
           "effect": "Your Familiars create ALL of their cards at the start of your turn.",
-          "path": "TheWitch/images/relics/big/sack_of_treats.png"
+          "path": "TheWitch/images/relics/sack_of_treats.png"
         },
         {
           "name": "Separatory Funnel",
@@ -304,7 +304,7 @@
           "brief": "",
           "rarity": "Rare",
           "effect": "Whenever an effect would create a random Potion, choose it instead.",
-          "path": "TheWitch/images/relics/big/separatory_funnel.png"
+          "path": "TheWitch/images/relics/separatory_funnel.png"
         },
         {
           "name": "Tasty Herbs",
@@ -313,7 +313,7 @@
           "brief": "",
           "rarity": "Uncommon",
           "effect": "At the end of combat, heal 3 HP if you used a potion.",
-          "path": "TheWitch/images/relics/big/tasty_herbs.png"
+          "path": "TheWitch/images/relics/tasty_herbs.png"
         },
         {
           "name": "Wormy's Apple",
@@ -322,14 +322,14 @@
           "brief": "",
           "rarity": "Uncommon",
           "effect": "Upon pickup gain Max HP. Each combat, add a Wormy into your Hand.",
-          "path": "TheWitch/images/relics/big/wormys_apple.png"
+          "path": "TheWitch/images/relics/wormys_apple.png"
         }
       ]
     },
     {
       "id": "pets",
       "title": "Familiar Pets",
-      "dims": "Flexible — sprite is scaled in code (~0.4x). Match card-art res, e.g. 1000x760.",
+      "dims": "Flexible â€” sprite is scaled in code (~0.4x). Match card-art res, e.g. 1000x760.",
       "assets": [
         {
           "name": "Wolf Pet",
@@ -447,7 +447,7 @@
           "brief": "",
           "dims": "94x94 + 256x256 (relic icon + outline)",
           "effect": "Base-game Ancient relic Yummy Cookie shows a character-flavored cookie; needs a Witch-themed variant (wired via CustomYummyCookie / RelicIconData).",
-          "path": "TheWitch/images/relics/big/yummy_cookie.png"
+          "path": "TheWitch/images/relics/yummy_cookie.png"
         },
         {
           "name": "Card Frame Fallbacks",

@@ -11,15 +11,13 @@ namespace TheWitch.TheWitchCode.Cards;
 /// <summary>Pact of Agony: hex yourself to charge your potions — they hit far harder for the rest of the turn.</summary>
 public sealed class PactOfAgony : WitchCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
-
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(2m),
-        new DamageVar(13m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         // The MULTIPLIER applied to potion damage, not a stack count: 2x, upgrading to 3x.
         new PowerVar<PotionDamageMultiplierPower>(2m)
     ];

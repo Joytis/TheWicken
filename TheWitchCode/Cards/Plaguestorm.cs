@@ -17,6 +17,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Plaguestorm : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     private const string _calculatedHitsKey = "CalculatedHits";
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

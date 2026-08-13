@@ -25,6 +25,15 @@ public static class UnstablePotions
     /// <summary>Marked mutable potion instances. Weak so discarded/used potions don't leak.</summary>
     private static readonly ConditionalWeakTable<PotionModel, object> _marks = [];
 
+    /// <summary>
+    /// original → duplicate made by NextPotionCopiedPower. The copy is procured inside the original's
+    /// procure (AfterPotionProcured), i.e. BEFORE the creator gets to Mark the original — so Mark
+    /// propagates to a registered copy after the fact.
+    /// </summary>
+    private static readonly ConditionalWeakTable<PotionModel, PotionModel> _copies = [];
+
+    public static void RegisterCopy(PotionModel original, PotionModel copy) => _copies.Add(original, copy);
+
     public static HoverTip UnstableHoverTip => new(
         new LocString("static_hover_tips", "THEWITCH-UNSTABLE.title"),
         new LocString("static_hover_tips", "THEWITCH-UNSTABLE.description"));
@@ -34,6 +43,10 @@ public static class UnstablePotions
         potion.AssertMutable();
         _marks.GetValue(potion, _ => new object());
         Patches.UnstablePotionPatches.RefreshBeltNode(potion);
+        if (_copies.TryGetValue(potion, out PotionModel? copy) && !IsUnstable(copy))
+        {
+            Mark(copy);
+        }
     }
 
     public static void Unmark(PotionModel potion)

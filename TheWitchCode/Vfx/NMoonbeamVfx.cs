@@ -78,14 +78,10 @@ public partial class NMoonbeamVfx : Node2D
         {
             return null;
         }
-        // Pattern cast, not Instantiate<T>: a .tscn whose script didn't bind instantiates as a
-        // plain Node2D and the generic form would throw (same as the pet scenes).
-        if (PreloadManager.Cache.GetScene(scenePath)
-                .Instantiate(PackedScene.GenEditState.Disabled) is not NMoonbeamVfx vfx)
-        {
-            MainFile.Logger.Warn("vfx_moonbeam.tscn didn't bind its mod script; skipping vfx.");
-            return null;
-        }
+        // Instantiate<T> throws when the .tscn script didn't bind — a no-bind scene is a
+        // malformed asset; fail loud.
+        NMoonbeamVfx vfx = PreloadManager.Cache.GetScene(scenePath)
+            .Instantiate<NMoonbeamVfx>(PackedScene.GenEditState.Disabled);
         vfx.GlobalPosition = targetCenterPosition;
         vfx.ApplyRotation(casterCenterPosition, targetCenterPosition);
         vfx.ApplyTint(tint);
@@ -116,11 +112,7 @@ public partial class NMoonbeamVfx : Node2D
 
     private void Collect(string containerName, List<GpuParticles2D> into)
     {
-        Node? container = GetNodeOrNull(containerName);
-        if (container == null)
-        {
-            return;
-        }
+        Node container = GetNode(containerName);
         foreach (Node child in container.GetChildren())
         {
             if (child is GpuParticles2D p)

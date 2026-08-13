@@ -32,7 +32,7 @@ public partial class NPotionChoiceCell : NButton
 
     private PotionModel _model = null!;
     private NPotion? _potionNode;
-    private NSelectionReticle? _reticle;
+    private NSelectionReticle _reticle = null!;
     private Tween? _hoverTween;
 
     public PotionModel Model => _model;
@@ -43,14 +43,10 @@ public partial class NPotionChoiceCell : NButton
         {
             return null;
         }
-        // Pattern cast, not Instantiate<T>: a .tscn whose script didn't bind instantiates as a
-        // plain Control and the generic form would throw.
-        if (PreloadManager.Cache.GetScene(scenePath)
-                .Instantiate(PackedScene.GenEditState.Disabled) is not NPotionChoiceCell cell)
-        {
-            MainFile.Logger.Warn("potion_choice_cell.tscn didn't bind its mod script; skipping cell.");
-            return null;
-        }
+        // Instantiate<T> throws when the .tscn script didn't bind — a no-bind scene is a
+        // malformed asset; fail loud.
+        NPotionChoiceCell cell = PreloadManager.Cache.GetScene(scenePath)
+            .Instantiate<NPotionChoiceCell>(PackedScene.GenEditState.Disabled);
         cell.Name = $"NPotionChoiceCell-{potion.Id}";
         cell._model = potion;
         return cell;
@@ -59,21 +55,8 @@ public partial class NPotionChoiceCell : NButton
     public override void _Ready()
     {
         ConnectSignals();
-        // Scene-instanced base-game reticle (needs the src/ junction so the editor resolves its script).
-        // Fallback: if the instanced node arrived script-less, spawn the game's scene directly.
-        _reticle = GetNodeOrNull<NSelectionReticle>("%SelectionReticle");
-        if (_reticle == null)
-        {
-            GetNodeOrNull("%SelectionReticle")?.QueueFreeSafely();
-            if (ResourceLoader.Load<PackedScene>("res://scenes/ui/selection_reticle.tscn")
-                    .Instantiate(PackedScene.GenEditState.Disabled) is NSelectionReticle direct)
-            {
-                _reticle = direct;
-                _reticle.Position = Vector2.Zero;
-                _reticle.Size = Vector2.One * _cellSize;
-                this.AddChildSafely(_reticle);
-            }
-        }
+        // Scene-instanced base-game reticle (needs the src/ junction so its script binds at export).
+        _reticle = GetNode<NSelectionReticle>("%SelectionReticle");
         _potionNode = NPotion.Create(_model);
         if (_potionNode != null)
         {
@@ -95,7 +78,7 @@ public partial class NPotionChoiceCell : NButton
     protected override void OnFocus()
     {
         base.OnFocus();
-        _reticle?.OnSelect();
+        _reticle.OnSelect();
         if (_potionNode != null)
         {
             _hoverTween?.Kill();
@@ -108,7 +91,7 @@ public partial class NPotionChoiceCell : NButton
 
     protected override void OnUnfocus()
     {
-        _reticle?.OnDeselect();
+        _reticle.OnDeselect();
         if (_potionNode != null)
         {
             _hoverTween?.Kill();

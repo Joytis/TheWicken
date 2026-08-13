@@ -55,7 +55,18 @@ public static class WitchFx
     public static Node2D? SporePuffNode(Creature target) => NSporeImpactVfx.Create(target, WitchGreen);
 
     public static void BrambleSlice(Creature target) => Attach(BrambleSliceNode(target));
-    public static Node2D? BrambleSliceNode(Creature target) => NThinSliceVfx.Create(target, VfxColor.Swamp);
+    public static Node2D? BrambleSliceNode(Creature target)
+    {
+        // NThinSliceVfx.SetColor throws for VfxColor.Swamp (only Red/White/Cyan are mapped;
+        // Green is a no-op), which also skips its SelfDestruct and leaks the node — so pass
+        // Green and tint the whole node via Modulate instead.
+        NThinSliceVfx? vfx = NThinSliceVfx.Create(target, VfxColor.Green);
+        if (vfx != null)
+        {
+            vfx.Modulate = WitchGreen;
+        }
+        return vfx;
+    }
 
     public static void HexGaze(Creature target)
     {

@@ -13,8 +13,8 @@ namespace TheWitch.TheWitchCode.Powers;
 /// </summary>
 public abstract class WitchPower : CustomPowerModel
 {
-    //Loads from TheWitch/images/powers/your_power.png
-    public override string CustomPackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();
+    //Renders the power_atlas slice packed from TheWitch/images/powers/your_power.png
+    public override string CustomPackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.tres".PowerAtlasPath();
     public override string CustomBigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigPowerImagePath();
 
     /// <summary>

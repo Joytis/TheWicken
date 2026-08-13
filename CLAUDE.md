@@ -1,71 +1,11 @@
 # CLAUDE.md
 
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
-
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
-
-## 1. Think Before Coding
-
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
-
 **When asked to review existing code, "is this correct?" is a question, not a request for changes.** Answer it. Don't edit.
 
 **Never call code broken without verifying it against `gamedata/`.** Trace the actual execution path and check the arithmetic. A defect claim needs a concrete failing case you have confirmed — not a plausible-sounding edge case. If you can't demonstrate the failure, you haven't found one.
 
 **Game design decisions are the user's, not yours.** Behavior that looks wrong (a relic bypassing Exhaust, a Power card returning to hand, an effect silently wasted at the hand cap) is usually intended. Ask what the intent is before labeling it a bug. Never mix design opinions into a correctness review.
-
-## 2. Simplicity First
-
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
 ## What this is
 
@@ -83,6 +23,7 @@ dotnet publish        # build + invokes headless Godot to export the .pck (full 
 - `dotnet publish` requires a real Godot mono executable; path is set in [Directory.Build.props](Directory.Build.props) (`GodotPath`). **Must be Godot 4.5.x** — the game refuses `.pck` files exported by a newer Godot.
 - Build references `sts2.dll` and `0Harmony.dll` from the installed game; building fails with a clear error if the game isn't found.
 - No test suite. Validation is manual in-game.
+- **Releases**: version lives ONLY in `TheWitch.json`; the `version-bump` skill (`/version-bump`) bumps it, writes player-facing notes to `Docs/patch-notes/vX.Y.Z.md`, and walks the tag + `tools/bundle-workshop.ps1 -Upload` flow. Release commits are tagged `vX.Y.Z`.
 
 ## Architecture
 
@@ -100,7 +41,7 @@ Create new content by subclassing the relevant base in its folder (the BaseLib `
 
 **Pools.** [Character/](TheWitchCode/Character/) defines the character and its `CardPool`/`RelicPool`/`PotionPool`. Content is bound to a pool with the `[Pool(typeof(...))]` attribute on the base class — so individual cards/relics inherit pool membership and don't declare it themselves. [Character/Witch.cs](TheWitchCode/Character/Witch.cs) (`PlaceholderCharacterModel`) defines starting HP/deck/relics and references the pools; it currently uses base-game Ironclad placeholders.
 
-**Asset path convention (important).** Content classes derive their image path from `Id.Entry` — the model id, lowercased with the mod prefix stripped (`RemovePrefix().ToLowerInvariant()`). So a card with id `THEWITCH-Foo` loads `TheWitch/images/card_portraits/foo.png` (and `big/foo.png` for full art). Path helpers live in [Extensions/StringExtensions.cs](TheWitchCode/Extensions/StringExtensions.cs); they fall back to a default placeholder image and log when a file is missing. Add art at the matching path rather than overriding the path methods.
+**Asset path convention (important).** Content classes derive their image key from `Id.Entry` — the model id, lowercased with the mod prefix stripped (`RemovePrefix().ToLowerInvariant()`). All content art (cards, relics, powers, potions, pets) renders **packed `.tres` atlas slices** generated at publish time by `tools/pack-atlases.py` from single-size source art — see the atlas bullet under Conventions & gotchas for source paths and slice sizes. `CardAtlasPath()` is beta-config-aware (`card_portraits/beta/` source wins when the Beta Images config is on). Path helpers live in [Extensions/StringExtensions.cs](TheWitchCode/Extensions/StringExtensions.cs); missing art falls back to a packed placeholder slice with a log. Add art at the matching source path rather than overriding the path methods.
 
 **Localization** is JSON under [TheWitch/localization/eng/](TheWitch/localization/) (`cards.json`, `powers.json`, `relics.json`, `characters.json`, keywords, hover tips). Keys follow `THEWITCH-<ENTRY>.<field>`. These files are fed to the BaseLib analyzer (`AdditionalFiles` in the csproj) so missing/extra localization is caught at build time.
 
@@ -165,8 +106,8 @@ The signature mechanic. A **summon Power card** (`WolfFamiliar`, `BearFamiliar`,
 - **A number that scales with combat state must display *live* via `CalculatedDamageVar`, not by mutating `BaseValue`.** Use the base-game Soul Storm shape: `CalculationBaseVar(base)` + `ExtraDamageVar(perUnit)` + `CalculatedDamageVar(prop).WithMultiplier((card, _) => <count>)`; `OnPlay` deals `DynamicVars.CalculatedDamage`, `OnUpgrade` bumps `DynamicVars.ExtraDamage`. Mutating `DynamicVars.Damage.BaseValue` at runtime (the "Maul" buff-every-copy pattern) does **not** reliably re-render and breaks outright for `Exhaust` cards that respawn each turn (e.g. Gnash). Reference: [Cards/Familiar/Gnash.cs](TheWitchCode/Cards/Familiar/Gnash.cs).
 - **Localization for a created/added card that can be upgraded** uses the base-game convention `[gold]{IfUpgraded:show:Name+|Name}[/gold]` — the card name gains a `+` and stays `[gold]`; the `+` *is* the upgrade marker (never `[green]`; that's only for flavor/prose). Base-game examples: `REAVE`, `DIRGE`, `HIDDEN_DAGGERS`. Pair it with `HoverTipFactory.FromCard<T>(IsUpgraded)` on the source card so the preview matches.
 - **Combat-scoped persistent effects revert in `AfterCombatEnd`.** To grant something for one fight only, apply a tracker power that undoes it at combat end rather than leaving run-level state mutated — e.g. the cut Roomy Satchel card granted potion slots + applied a tracker power whose `AfterCombatEnd` called `LoseMaxPotionCount(Amount)` (pattern lives in git history: `RoomySatchelPower`). The decrement-to-zero auto-remove path fires `AfterRemoved`, the combat-end teardown fires `AfterCombatEnd`.
-- **Art is authored "big" and scaled down.** Author `images/.../big/<name>.png`; generate the small variant with `py tools/gen-image-sizes.py big/<name>.png` (single-image mode reuses the existing small's dimensions, else falls back to ¼). No-arg runs the bulk both-sizes pass over all categories. It then calls `tools/gen-outlines.py` for every relic/potion small it wrote (logged as `[outlines] N impacted …`), so silhouettes never go stale — `--no-outlines` opts out.
-- **Relics and potions need a `<name>_outline.png`.** Not a stroke: an opaque WHITE silhouette of the icon, dilated a few px. The game draws it behind the *small* icon and tints it flat to render undiscovered relics (relic collection), unbrewed potions (potion lab), and the char-select starting relic; `IconSize.Large` hides it, so big art never needs one. Generate with `py tools/gen-outlines.py [source.png]` (no-arg = all missing/stale; plain dilation + `--blur` softening, enclosed holes deliberately kept — 47/341 base-game relic outlines have them); `--sheet` renders a contact sheet of every source + outline + game-tinted preview to review them in bulk. Paths: `images/relics/<entry>_outline.png` (94x94), `images/potions/<entry>_outline.png` (256x256). A missing potion outline is null-safe (no outline drawn); a missing relic outline falls back to `outlines/relic.png`. Check parity in-game with the **Icon Lab**: `./tools/launch-mp.ps1 -Solo -IconLab` (`--witch-debug --witch-iconlab`, [Debug/NIconLab.cs](TheWitchCode/Debug/NIconLab.cs)) — every relic + potion, Witch above base game, in each composited state (owned / not seen / undiscovered / locked / raw outline); assets with no outline sort to the front.
+- **All content art ships as packed atlas slices** (`tools/pack-atlases.py`, run by `dotnet publish` before the Godot import/export; run it manually to eyeball output). One source image per asset, no small variants: cards `card_portraits/<entry>.png` (any resolution; taller-than-wide = full art; `.gdignore`'d), relics `relics/<entry>.png` (256; these pngs also ship loose for the `BigIcon` views), powers `powers/<entry>_power.png` (256; ditto), potions `potions/<entry>.png` (256, `.gdignore`'d), pets `pets/<name>.png` (512, `.gdignore`'d). Slices: cards 250×190 / 250×351, relics 94, powers 64, potions 80 (base-game sizes), pets native. Output `TheWitch/images/atlases/` is generated + gitignored. The model bases resolve slices via the `*AtlasPath` helpers in [Extensions/StringExtensions.cs](TheWitchCode/Extensions/StringExtensions.cs) (missing art → packed placeholder slice + log). Only **charui** still ships paired small + `big/` pngs — `py tools/gen-image-sizes.py` fills those in (and seeds power/potion placeholder art from localization keys).
+- **Relic and potion outlines are generated by the packer** — an opaque WHITE silhouette slice (`<entry>_outline.tres`, dilate + soft blur, enclosed holes kept — matches base game) packed into `relic_outline_atlas` / `potion_outline_atlas`. The game draws it behind the *small* icon and tints it flat to render undiscovered relics (relic collection), unbrewed potions (potion lab), and the char-select starting relic; `IconSize.Large` hides it, so big art never needs one. Outlines can never go stale (regenerated from source art every pack). A missing potion outline is null-safe (no outline drawn); a missing relic outline falls back to the placeholder's outline slice. Check parity in-game with the **Icon Lab**: `./tools/launch-witch.ps1 -Solo -IconLab` (`--witch-debug --witch-iconlab`, [Debug/NIconLab.cs](TheWitchCode/Debug/NIconLab.cs)) — every relic + potion, Witch above base game, in each composited state (owned / not seen / undiscovered / locked / raw outline); assets with no outline sort to the front.
 - **Pool membership ≠ random availability for potions.** `[Pool]` on the base registers content; for potions, *random* drop/shop availability is gated separately by **rarity**. `PotionFactory.CreateRandomPotion` only ever rolls `Common`/`Uncommon`/`Rare` (combat drops *and* merchant stock both route through it), so a potion with rarity `PotionRarity.Token` or `Event` is never generated randomly while remaining registered — so `PotionCmd.TryToProcure<T>()` from a card/relic still grants it. This is how you make a **card-only payload potion** (base-game example: `PotionShapedRock` = `Token`; `FoulPotion`/`GlowwaterPotion` = `Event`). Don't try to exclude it by removing `[Pool]` — that unregisters it and breaks `TryToProcure`.
 - **Potions serialize as id + slot ONLY** (`SerializablePotion` in `gamedata/src/Core/Saves/Runs/`) — no per-potion state survives save/quit/resume or syncs in MP. Any stateful potion (state stored in the mutable instance's `DynamicVars`) silently resets to canonical on reload. Same caveat class as `FamiliarPower.GrantsUpgradedCards`. If persistence matters, use **BaseLib's `ExtendedSaveTypes.RegisterSavedValue<TModel, TVal>`** (namespace `BaseLib.Patches.Saves`; undocumented on the wiki) — it bakes a value into the run save attached to the model's serializable entry AND into its net serialization (so it rides MP full-state sync too). Register in the mod initializer with a getter/setter on the model + `PacketWriter`/`PacketReader` delegates; `TVal` must be JSON-known to `MegaCritSerializerContext` (game types like `SerializableCard` are; custom classes need `ExtendedSaveTypes.RegisterObjectSaveType`). Works for Card/Relic/Potion/Enchantment/Player/Reward/IRunState models. Reference: [Potions/BottledMessage.cs](TheWitchCode/Potions/BottledMessage.cs) (`SaveState`/`RestoreState`) + its registration in [MainFile.cs](TheWitchCode/MainFile.cs). (The older user-dir sidecar-JSON pattern from git history — `CauldronSavePatch.cs` — is superseded: it was a single floating file shared across all saves.)
 - **Plain C# fields on a power/card instance are safe — mid-combat state is never restored.** Run saves contain NO combat state at all (`SerializableRoom` = room type + encounter id + rewards; no creatures/powers/piles), so save/quit/resume restarts the encounter fresh. Live MP is deterministic lockstep (`ActionQueueSynchronizer`) — every client runs the same hooks, so instance fields (NeverendingPotionPower's bottled list, `FamiliarPower.GrantsUpgradedCards`) stay consistent across clients. Players never rejoin mid-combat, so there is no restore path to design around: use an ordinary field when a power needs state beyond its stack `Amount`, and don't split a power or reach for `RegisterSavedValue` on serialization grounds alone (that's for RUN-level state that must survive save/quit — see the potion bullet above).
@@ -186,9 +127,4 @@ The signature mechanic. A **summon Power card** (`WolfFamiliar`, `BearFamiliar`,
 
 ## Task workflow (TODO loop)
 
-Backlog work for this mod runs through a saved loop — the **`todo-loop`** skill ([.claude/skills/todo-loop/SKILL.md](.claude/skills/todo-loop/SKILL.md)) plus three docs under [Docs/](Docs/):
-- **`TODO_STAGING.md`** — raw-notes inbox; the user drops half-formed ideas here.
-- **`TODO.md`** — formatted, prioritized queue; its header holds the loop protocol.
-- **`DONE.md`** — completed items (what changed, the design calls made, verification).
-
-Procedure: ingest each staging note into a self-contained `TODO.md` item (then delete that line from staging); claim the top item (`IN PROGRESS`), implement, `dotnet build` green is the gate, move it to `DONE.md`. Flag truncated/ambiguous notes as `BLOCKED` and ask rather than guess; serialize shared-JSON edits but parallelize file-isolated work. Run `/todo-loop` to drive it.
+Backlog work for this mod runs through a saved loop — the **`todo-loop`** skill ([.claude/skills/todo-loop/SKILL.md](.claude/skills/todo-loop/SKILL.md)), the single source of the protocol, over three docs under [Docs/](Docs/): `TODO_STAGING.md` (raw-notes inbox; a `BENCHED` section there is off-limits to ingestion), `TODO.md` (work queue), `DONE.md` (one line per completed item). Run `/todo-loop` to drive it.

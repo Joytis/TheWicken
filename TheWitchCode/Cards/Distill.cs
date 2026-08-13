@@ -23,6 +23,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class Distill : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => Witch.Turbo ? [] : [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

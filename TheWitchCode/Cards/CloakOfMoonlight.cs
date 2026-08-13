@@ -13,7 +13,7 @@ public sealed class CloakOfMoonlight : WitchCard
     ];
 
     public CloakOfMoonlight()
-        : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

@@ -10,8 +10,8 @@ using MegaCrit.Sts2.Core.Models;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Polymorph (was Repurpose): choose TWO cards in your draw pile — each becomes two Rats tokens
-/// (combat-scoped <c>CardCmd.Transform</c> plus one generated extra per choice, 4 Rats total).
+/// Polymorph (was Repurpose): choose {Cards} cards in your draw pile (1, upgraded 2) — each becomes
+/// a Rats token, 1:1 (combat-scoped <c>CardCmd.Transform</c>, native one-to-one overlay per choice).
 /// </summary>
 public sealed class Polymorph : WitchCard
 {
@@ -36,21 +36,14 @@ public sealed class Polymorph : WitchCard
             choiceContext,
             PileType.Draw.GetPile(Owner),
             Owner,
-            new CardSelectorPrefs(SelectionScreenPrompt, 2))).ToList();
+            new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue))).ToList();
 
         foreach (CardModel card in chosen)
         {
             CardModel replacement = CombatState!.CreateCard<Rats>(Owner);
             await CardCmd.Transform(card, replacement);
-
-            // Each choice becomes TWO Rats — generate the extras alongside the transform.
-            for (int i = 1; i < DynamicVars.Cards.IntValue; i++)
-            {
-                CardModel extra = CombatState!.CreateCard<Rats>(Owner);
-                await CardPileCmd.AddGeneratedCardToCombat(extra, PileType.Draw, Owner, CardPilePosition.Random);
-            }
         }
     }
 
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1m);
 }

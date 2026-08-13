@@ -20,7 +20,7 @@ public sealed class WaxAndWane : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8m, ValueProp.Move),
-        new PowerVar<WaxAndWanePower>(2m)
+        new PowerVar<WaxAndWanePower>(1m)
     ];
 
     public WaxAndWane()
@@ -36,6 +36,7 @@ public sealed class WaxAndWane : WitchCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(1m);
+        DynamicVars["WaxAndWanePower"].UpgradeValueBy(1m);
     }
 }

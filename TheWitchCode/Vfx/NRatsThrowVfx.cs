@@ -62,14 +62,10 @@ public partial class NRatsThrowVfx : Node2D
         {
             return null;
         }
-        // Pattern cast, not Instantiate<T>: a .tscn whose script didn't bind instantiates as a
-        // plain Node2D and the generic form would throw (same as the pet scenes).
-        if (PreloadManager.Cache.GetScene(scenePath)
-                .Instantiate(PackedScene.GenEditState.Disabled) is not NRatsThrowVfx vfx)
-        {
-            MainFile.Logger.Warn("vfx_rats_throw.tscn didn't bind its mod script; skipping vfx.");
-            return null;
-        }
+        // Instantiate<T> throws when the .tscn script didn't bind — a no-bind scene is a
+        // malformed asset; fail loud.
+        NRatsThrowVfx vfx = PreloadManager.Cache.GetScene(scenePath)
+            .Instantiate<NRatsThrowVfx>(PackedScene.GenEditState.Disabled);
         vfx.GlobalPosition = targetCenterPosition;
         vfx.ApplyRotation(throwerCenterPosition, targetCenterPosition);
         vfx.ApplyTint(tint);

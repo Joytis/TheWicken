@@ -18,12 +18,14 @@ public interface IHexPreserving;
 /// <summary>Torment: a free sting that cycles — and leaves the target's Hex untouched.</summary>
 public sealed class Torment : WitchCard, IHexPreserving
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
+        new DamageVar(3m, ValueProp.Move),
         new CardsVar(1)
     ];
 

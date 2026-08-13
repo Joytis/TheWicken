@@ -9,6 +9,8 @@ namespace TheWitch.TheWitchCode.Cards;
 
 public sealed class WildGrowth : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

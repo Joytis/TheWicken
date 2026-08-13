@@ -8,7 +8,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "${input:playerCount}"
             ],
             "problemMatcher": [],
@@ -26,7 +26,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "2"
             ],
             "problemMatcher": [],
@@ -40,7 +40,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "4"
             ],
             "problemMatcher": [],
@@ -54,7 +54,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Players", "${input:playerCount}"
             ],
             "dependsOn": "dotnet build",
@@ -120,13 +120,37 @@
             "presentation": { "reveal": "always", "panel": "shared" }
         },
         {
+            "label": "Run",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
+                "-Solo", "-TailLog",
+                "-DelayMs", "4000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "No build — launch one STS2 instance with whatever is already deployed, tailing the game log."
+        },
+        {
             "label": "Publish and Run",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -151,7 +175,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-WitchBootstrap", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -176,7 +200,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-WitchBootstrap", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -200,9 +224,8 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
-                "-Solo", "-AutoSlay", "-TailLog",
-                "-DelayMs", "4000"
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -AutoSlay -TailLog -DelayMs 4000 ${input:autoSlayHeadless}"
             ],
             "dependsOn": "dotnet build",
             "isBackground": true,
@@ -216,7 +239,7 @@
                 }
             },
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet build (deploys mod), then launch STS2 with the AutoSlay smoke-test bot, tailing the game log. Debugger-attachable via 'AutoSlay + Attach'."
+            "detail": "dotnet build (deploys mod), then launch STS2 with the AutoSlay smoke-test bot (prompts windowed vs headless), tailing the game log. Debugger-attachable via 'AutoSlay + Attach'."
         },
         {
             "label": "Debug: Build + Launch FX Lab",
@@ -225,7 +248,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-FxLab", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -250,7 +273,7 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-mp.ps1",
+                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
                 "-Solo", "-FxLab", "-TailLog",
                 "-DelayMs", "4000"
             ],
@@ -275,7 +298,7 @@
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
                 "-Command",
-                "& '${workspaceFolder}/tools/launch-mp.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-mp.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-witch.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
             ],
             "dependsOn": "dotnet publish",
             "isBackground": true,
@@ -374,22 +397,33 @@
             "detail": "Stop the card design server (kills the node process on port 7820)."
         },
         {
-            "label": "Analytics: Win rate per card (prompt for mod version)",
+            "label": "Analytics: Export web stats",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
                 "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "win-rate",
-                "-ModVersion", "${input:analyticsModVersion}",
-                "-GameVersion", "${input:analyticsGameVersion}",
-                "-DaysBack", "${input:analyticsDaysBack}"
+                "-Mode", "export"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": [],
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Pull runs from Supabase and write the win-rate-per-card scatter to build/analytics/."
+            "detail": "Pull runs from Supabase and regenerate pages/analytics-data/*.json for the dashboard (same script CI runs nightly)."
+        },
+        {
+            "label": "Analytics: Serve dashboard",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Start-Process 'http://localhost:7821/pages/analytics.html'; py -m http.server 7821 --directory '${workspaceFolder}'"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+            "detail": "Serve the repo on http://localhost:7821 and open the analytics dashboard (fetch needs http, not file://). Terminate the task to stop. Live copy: https://joytis.github.io/TheWicken/pages/analytics.html"
         }
     ],
     "inputs": [
@@ -400,22 +434,14 @@
             "default": "2"
         },
         {
-            "id": "analyticsModVersion",
-            "type": "promptString",
-            "description": "Mod version to analyze, as uploaded from TheWitch.json (blank = all versions; seed-test = fabricated rows)",
-            "default": "v0.6.0"
-        },
-        {
-            "id": "analyticsGameVersion",
-            "type": "promptString",
-            "description": "Slay the Spire 2 build to analyze, as uploaded (blank = all game versions)",
+            "id": "autoSlayHeadless",
+            "type": "pickString",
+            "description": "Run AutoSlay windowed or headless (no window/GPU)?",
+            "options": [
+                { "label": "Windowed", "value": "" },
+                { "label": "Headless", "value": "-Headless" }
+            ],
             "default": ""
-        },
-        {
-            "id": "analyticsDaysBack",
-            "type": "promptString",
-            "description": "Only analyze runs from the last N days (0 = all time)",
-            "default": "0"
         },
         {
             "id": "changeNote",

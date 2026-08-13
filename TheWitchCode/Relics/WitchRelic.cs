@@ -18,7 +18,7 @@ namespace TheWitch.TheWitchCode.Relics;
 [Pool(typeof(WitchRelicPool))]
 public abstract class WitchRelic : CustomRelicModel
 {
-    public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-    protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicOutlineImagePath();
+    public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.tres".RelicAtlasPath();
+    protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.tres".RelicOutlineAtlasPath();
     protected override string BigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigRelicImagePath();
 }

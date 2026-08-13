@@ -48,6 +48,10 @@ public partial class MainFile : Node
         // user's Upload Data setting on) + our own AnalyticsEnabled config toggle.
         CommonCode.Data.WitchMetrics.Initialize();
 
+        // Workshop self-update: if our installed Workshop item is stale (the Steam client's
+        // manifest can desync and skip updates), force a re-download and prompt for a restart.
+        CommonCode.Steam.WorkshopSelfUpdate.Initialize();
+
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();

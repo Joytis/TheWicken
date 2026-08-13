@@ -16,6 +16,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class EmbraceTheWilds : WitchCard
 {
+    public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("DrawReduction", 2m),
         new DynamicVar("Familiars", 3m)
@@ -48,5 +50,8 @@ public sealed class EmbraceTheWilds : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars["Familiars"].UpgradeValueBy(1m);
+    protected override void OnUpgrade() {
+        DynamicVars["DrawReduction"].UpgradeValueBy(1m);
+        DynamicVars["Familiars"].UpgradeValueBy(1m);
+    }
 }
