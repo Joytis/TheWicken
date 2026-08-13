@@ -224,9 +224,8 @@
             "args": [
                 "-NoProfile",
                 "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-AutoSlay", "-TailLog",
-                "-DelayMs", "4000"
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -AutoSlay -TailLog -DelayMs 4000 ${input:autoSlayHeadless}"
             ],
             "dependsOn": "dotnet build",
             "isBackground": true,
@@ -240,7 +239,7 @@
                 }
             },
             "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet build (deploys mod), then launch STS2 with the AutoSlay smoke-test bot, tailing the game log. Debugger-attachable via 'AutoSlay + Attach'."
+            "detail": "dotnet build (deploys mod), then launch STS2 with the AutoSlay smoke-test bot (prompts windowed vs headless), tailing the game log. Debugger-attachable via 'AutoSlay + Attach'."
         },
         {
             "label": "Debug: Build + Launch FX Lab",
@@ -433,6 +432,16 @@
             "type": "promptString",
             "description": "Total players to launch (1 host + rest clients)",
             "default": "2"
+        },
+        {
+            "id": "autoSlayHeadless",
+            "type": "pickString",
+            "description": "Run AutoSlay windowed or headless (no window/GPU)?",
+            "options": [
+                { "label": "Windowed", "value": "" },
+                { "label": "Headless", "value": "-Headless" }
+            ],
+            "default": ""
         },
         {
             "id": "changeNote",

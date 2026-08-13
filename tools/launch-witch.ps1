@@ -35,6 +35,8 @@ param(
     # Solo-only debug launch modes (see TheWitchCode/Debug/WitchDebug.cs):
     [switch]$WitchBootstrap,   # -witch-debug -witch-bootstrap: skip menu, enter combat with 100 energy
     [switch]$AutoSlay,         # -witch-debug -autoslay: run the smoke-test bot
+    [switch]$Headless,         # solo only: pass Godot --headless (no window/GPU); waits for
+                               # exit and propagates the game's exit code (AutoSlay: 0=run done, 1=fail)
     [switch]$FxLab,            # -witch-debug -witch-fxlab: open the SFX/VFX browser scene
     [switch]$IconLab,          # -witch-debug -witch-iconlab: open the relic/potion icon browser scene
     [string]$Encounter = "",   # optional encounter id for -WitchBootstrap (e.g. SLIMES_WEAK)
@@ -103,6 +105,12 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
         $gameArgs += '-witch-iconlab'
     }
+    if ($Headless) {
+        # Godot engine flag: dummy display server, no window/render/GPU. The game is
+        # headless-aware (Logger switches to console printing, graphics prefs skipped,
+        # AutoSlay's UiHelper bypasses hover/focus checks).
+        $gameArgs += '--headless'
+    }
     # Workshop self-update debug flags (not gated on -witch-debug; handled in
     # WorkshopSelfUpdate.Initialize).
     if ($TestUpdatePopup) {
@@ -132,6 +140,14 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
     }
     Write-Host "Launched 1 solo instance."
 
+    # --- Headless without a tail: block until the game exits, report the code ---
+    if ($Headless -and -not $TailLog) {
+        Write-Host "[headless] waiting for game exit (AutoSlay run cap is 25 min)..."
+        $proc.WaitForExit()
+        Write-Host "[headless] game exited (code $($proc.ExitCode))"
+        exit $proc.ExitCode
+    }
+
     # --- Live log tail (the game is a GUI app; its output only goes to godot.log) ---
     if ($TailLog) {
         $logFile = Join-Path $env:APPDATA 'SlayTheSpire2\logs\godot.log'
@@ -153,9 +169,12 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
             while ($null -ne ($line = $sr.ReadLine())) { Write-Host $line }
         } finally { $sr.Dispose() }
         Write-Host "--- game exited (code $($proc.ExitCode)) ---"
+        if ($Headless) { exit $proc.ExitCode }
     }
     return
 }
+
+if ($Headless) { Write-Warning "-Headless is solo-only; ignoring for multiplayer launch." }
 
 Write-Host "Players  : $Players (1 host + $($Players - 1) client(s))"
 
