@@ -118,7 +118,7 @@
   "THEWITCH-CAULDRON_DANCE.title": "Cauldron Dance",
   "THEWITCH-CAULDRON_DANCE.description": "Whenever you play a Skill this turn, draw a card.",
   "THEWITCH-RUMMAGE.title": "Rummage",
-  "THEWITCH-RUMMAGE.description": "Put {Cards:diff()} {Cards:plural:card|cards} from your [gold]Discard Pile[/gold] into your [gold]Hand[/gold].{IfUpgraded:show:\nIt costs 1 less this turn.|}",
+  "THEWITCH-RUMMAGE.description": "Put {Cards:diff()} {Cards:plural:card|cards} from your [gold]Discard Pile[/gold] into your [gold]Hand[/gold].{IfUpgraded:show:\nIt costs 1 less {energyPrefix:energyIcons(1)} this turn.|}",
   "THEWITCH-RUMMAGE.selectionScreenPrompt": "Choose {Cards} {Cards:plural:card|cards} to put into your [gold]Hand[/gold]",
   "THEWITCH-SWARM.title": "Swarm",
   "THEWITCH-SWARM.description": "Add a [gold]{IfUpgraded:show:Rats+|Rats}[/gold] into your [gold]Hand[/gold], [gold]Draw Pile[/gold], and [gold]Discard Pile[/gold].",
