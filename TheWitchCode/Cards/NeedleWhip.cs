@@ -7,12 +7,15 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Powers;
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Artists;
 
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>Needle Whip: lash out with a thorned vine — damage plus Brambles.</summary>
 public sealed class NeedleWhip : WitchCard
 {
+    public override Artist? ArtBy => Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<BramblesPower>(),
     ];

@@ -10,7 +10,8 @@ namespace TheWitch.TheWitchCode.Powers;
 /// <summary>
 /// Ritual Casting: whenever the owner plays a card that costs 2 or more (its cost when played,
 /// <see cref="ResourceInfo.EnergyValue" /> — so auto-plays of big cards count too), a random card
-/// in their hand becomes free to play this turn.
+/// in their hand becomes free to play this turn. Only cards that would actually benefit are
+/// eligible: Unplayable cards (curses/statuses) and cards already costing 0 (incl. X) are skipped.
 /// </summary>
 public sealed class RitualCastingPower : WitchPower
 {
@@ -27,7 +28,10 @@ public sealed class RitualCastingPower : WitchPower
             return Task.CompletedTask;
         }
 
-        List<CardModel> hand = PileType.Hand.GetPile(player).Cards.ToList();
+        List<CardModel> hand = PileType.Hand.GetPile(player).Cards
+            .Where(c => !c.Keywords.Contains(CardKeyword.Unplayable)
+                && c.EnergyCost.GetWithModifiers(CostModifiers.All) > 0)
+            .ToList();
         CardModel? pick = player.RunState.Rng.CombatCardSelection.NextItem(hand);
         if (pick == null)
         {
