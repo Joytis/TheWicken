@@ -67,14 +67,18 @@ def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
         keys = base_keys(run, day, data)
         deck = data.get("deck", [])
 
+        arch = dominant_archetype(deck, mechanics)
         run_rows.append(keys | {"runs": 1, "wins": win})
-        arch_rows.append(keys | {"arch": dominant_archetype(deck, mechanics),
-                                 "runs": 1, "wins": win})
+        arch_rows.append(keys | {"arch": arch, "runs": 1, "wins": win})
 
-        for card, copies in Counter(deck).items():
-            if rarities.get(card) != "Starter":  # forced picks carry no signal
-                card_rows.append(keys | {"card": card, "copies": copies_bucket(copies),
-                                         "runs": 1, "wins": win})
+        signal_cards = {c: n for c, n in Counter(deck).items()
+                        if rarities.get(c) != "Starter"}  # forced picks carry no signal
+        for card, copies in signal_cards.items():
+            # arch rides along so the page can slice a card's win rate by the deck's
+            # dominant archetype (step 1 of the cluster ladder); summing over it
+            # recovers the plain per-card counts.
+            card_rows.append(keys | {"card": card, "copies": copies_bucket(copies),
+                                     "arch": arch, "runs": 1, "wins": win})
 
         for screen in data.get("cardChoices", []):
             for card in screen.get("picked", []):
@@ -95,7 +99,8 @@ def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
     keys = ["day", "mod", "game", "asc", "mp"]
     return {
         "runs_daily": aggregate(run_rows, keys, ["runs", "wins"]),
-        "cards_daily": aggregate(card_rows, keys + ["card", "copies"], ["runs", "wins"]),
+        "cards_daily": aggregate(card_rows, keys + ["card", "copies", "arch"],
+                                 ["runs", "wins"]),
         "choices_daily": aggregate(choice_rows, keys + ["card"], ["offered", "picked"]),
         "deaths_daily": aggregate(death_rows, keys + ["enc"], ["deaths"]),
         "death_floors_daily": aggregate(floor_rows, keys + ["floor"], ["deaths"]),
