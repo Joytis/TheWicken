@@ -31,6 +31,21 @@
   select,input[type=search]{
     background:var(--ground);color:var(--ink);border:1px solid var(--frame);
     border-radius:6px;padding:4px 8px;font:inherit;font-size:13px}
+  .msel{position:relative}
+  .msel>button{background:var(--ground);color:var(--ink);border:1px solid var(--frame);
+    border-radius:6px;padding:4px 8px;font:inherit;font-size:13px;cursor:pointer;
+    max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .msel>button::after{content:" ▾";color:var(--muted)}
+  .msel>button:hover,.msel.open>button{border-color:var(--sage)}
+  .msel .pop{display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:20;
+    background:var(--panel);border:1px solid var(--frame);border-radius:8px;
+    padding:6px;min-width:150px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .msel.open .pop{display:block}
+  .msel .pop label{display:flex;gap:7px;align-items:center;padding:4px 6px;
+    border-radius:5px;cursor:pointer;font-size:13px;color:var(--ink);white-space:nowrap}
+  .msel .pop label:hover{background:#41302f}
+  .msel .pop .all{border-bottom:1px solid var(--grid);margin-bottom:4px;padding-bottom:6px;
+    color:var(--ink-2)}
   input[type=checkbox]{appearance:none;-webkit-appearance:none;width:15px;height:15px;
     border:1px solid var(--frame);border-radius:4px;background:var(--ground);
     cursor:pointer;position:relative;vertical-align:-3px;margin:0 2px 0 0}
@@ -120,8 +135,8 @@
 
   <div class="filters" id="filters" hidden>
     <div class="chips" id="dateChips"></div>
-    <label>Mod <select id="modSel"></select></label>
-    <label>Game <select id="gameSel"></select></label>
+    <label>Mod <span class="msel" id="modSel"></span></label>
+    <label>Game <span class="msel" id="gameSel"></span></label>
     <label class="toggle"><input type="checkbox" id="showOther" /> Include other mods' content</label>
   <label class="toggle"><input type="checkbox" id="includeMP" /> Include multiplayer runs</label>
     <div class="chips" id="mechChips"></div>
@@ -248,7 +263,9 @@ const DATE_PRESETS = [["7d", 7], ["30d", 30], ["90d", 90], ["All time", 0]];
 
 let META, RUNS, CARDS, CMETA, CHOICES, DEATHS, DFLOORS, ENCS, ARCHS;  // fetched data
 let BASE_ENC = new Set();              // base-game encounter whitelist
-const state = {days: 0, mod: "", game: "", showOther: false, includeMP: false, mech: "All",
+// mod/game are Sets of selected versions; empty Set = all (every run counts — the data
+// is thin, so pooling releases with similar balance profiles is the default).
+const state = {days: 0, mod: new Set(), game: new Set(), showOther: false, includeMP: false, mech: "All",
                minRuns: 3, search: "", sortKey: "runs", sortAsc: false,
                diffA: "", diffB: "", encSort: "deaths", encAsc: false, xMetric: "Pick rate"};
 const matchesSearch = name => !state.search ||
@@ -256,11 +273,11 @@ const matchesSearch = name => !state.search ||
 
 // ---------- data recomposition (counts are additive; rates never stored) ----------
 
-// mod: undefined = use the global mod filter; "" = all versions; "x" = that version.
+// mod: undefined = use the global mod filter (a Set; empty = all); "x" = that version only.
 function sliceFilter(row, mod) {
-  const wantMod = mod === undefined ? state.mod : mod;
-  if (wantMod && row.mod !== wantMod) return false;
-  if (state.game && row.game !== state.game) return false;
+  if (mod === undefined ? state.mod.size && !state.mod.has(row.mod) : row.mod !== mod)
+    return false;
+  if (state.game.size && !state.game.has(row.game)) return false;
   if (!state.includeMP && row.mp) return false;  // MP team runs skew solo balance reads
   if (state.days) {
     const cutoff = new Date(META.last_day + "T00:00:00Z");
@@ -889,11 +906,38 @@ function chipRow(host, labels, get, set) {
   }));
 }
 
-function fillSelect(sel, values, allLabel) {
-  sel.replaceChildren(...[["", allLabel], ...values.map(v => [v, v])].map(([v, lab]) => {
-    const o = document.createElement("option"); o.value = v; o.textContent = lab; return o;
-  }));
+// Multi-select dropdown over a Set in state. Empty Set = "all"; toggling every value on is
+// collapsed back to "all" so the label always says what it means.
+function multiSelect(host, values, allLabel, set) {
+  const btn = document.createElement("button"); btn.type = "button";
+  const pop = document.createElement("div"); pop.className = "pop";
+  const label = () => btn.textContent = !set.size ? allLabel
+    : set.size === values.length ? allLabel : values.filter(v => set.has(v)).join(", ");
+  const boxes = [];
+  const sync = () => { if (set.size === values.length) set.clear();
+    boxes.forEach(([v, cb]) => cb.checked = set.has(v)); allBox.checked = !set.size;
+    label(); renderAll(); };
+  const allLab = document.createElement("label"); allLab.className = "all";
+  const allBox = document.createElement("input"); allBox.type = "checkbox";
+  allBox.addEventListener("change", () => { set.clear(); sync(); });
+  allLab.append(allBox, allLabel);
+  pop.append(allLab);
+  for (const v of values) {
+    const lab = document.createElement("label");
+    const cb = document.createElement("input"); cb.type = "checkbox";
+    cb.addEventListener("change", () => { cb.checked ? set.add(v) : set.delete(v); sync(); });
+    lab.append(cb, v); pop.append(lab); boxes.push([v, cb]);
+  }
+  btn.addEventListener("click", e => { e.stopPropagation();
+    const open = host.classList.contains("open");
+    document.querySelectorAll(".msel.open").forEach(m => m.classList.remove("open"));
+    host.classList.toggle("open", !open); });
+  pop.addEventListener("click", e => e.stopPropagation());
+  host.replaceChildren(btn, pop);
+  boxes.forEach(([v, cb]) => cb.checked = set.has(v)); allBox.checked = !set.size; label();
 }
+addEventListener("click", () =>
+  document.querySelectorAll(".msel.open").forEach(m => m.classList.remove("open")));
 
 async function init() {
   let files;
@@ -924,10 +968,8 @@ async function init() {
     () => DATE_PRESETS.find(p => p[1] === state.days)[0],
     label => state.days = DATE_PRESETS.find(p => p[0] === label)[1]);
   chipRow($("mechChips"), MECHANICS, () => state.mech, m => state.mech = m);
-  fillSelect($("modSel"), META.mod_versions, "all versions");
-  fillSelect($("gameSel"), META.game_versions, "all builds");
-  $("modSel").addEventListener("change", e => { state.mod = e.target.value; renderAll(); });
-  $("gameSel").addEventListener("change", e => { state.game = e.target.value; renderAll(); });
+  multiSelect($("modSel"), META.mod_versions, "all versions", state.mod);
+  multiSelect($("gameSel"), META.game_versions, "all builds", state.game);
   $("showOther").addEventListener("change", e => { state.showOther = e.target.checked; renderAll(); });
   $("includeMP").addEventListener("change", e => { state.includeMP = e.target.checked; renderAll(); });
   const bumpMinRuns = d => { state.minRuns = Math.max(1, state.minRuns + d);
@@ -953,7 +995,8 @@ async function init() {
 
   $("modalClose").addEventListener("click", closeModal);
   $("modalBack").addEventListener("click", e => { if (e.target === $("modalBack")) closeModal(); });
-  addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+  addEventListener("keydown", e => { if (e.key === "Escape") { closeModal();
+    document.querySelectorAll(".msel.open").forEach(m => m.classList.remove("open")); } });
 
   document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t === tab));
