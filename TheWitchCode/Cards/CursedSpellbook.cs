@@ -20,7 +20,7 @@ public sealed class CursedSpellbook : WitchCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(2),
         new CardsVar(3),
-        new PowerVar<HexPower>(5m)
+        new PowerVar<HexPower>(3m)
     ];
 
     public CursedSpellbook()
@@ -40,6 +40,5 @@ public sealed class CursedSpellbook : WitchCard
     protected override void OnUpgrade()
     {
         DynamicVars.Energy.UpgradeValueBy(1);
-        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

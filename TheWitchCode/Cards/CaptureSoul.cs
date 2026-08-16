@@ -41,7 +41,7 @@ public sealed class CaptureSoul : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(8m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         new PowerVar<HexPower>(1 + BonusHex)
     ];
 
@@ -78,5 +78,5 @@ public sealed class CaptureSoul : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);
 }
