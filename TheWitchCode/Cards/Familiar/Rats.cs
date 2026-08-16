@@ -18,6 +18,8 @@ public sealed class Rats : WitchFamiliarCard
         new CardsVar(1)
     ];
 
+    protected override IEnumerable<string> ExtraRunAssetPaths => [NRatsThrowVfx.scenePath];
+
     public Rats()
         : base(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
     {

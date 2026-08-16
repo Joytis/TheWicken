@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,6 +8,7 @@ using TheWitch.TheWitchCode.Potions;
 
 using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Character;
+using TheWitch.TheWitchCode.Artists;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -19,6 +18,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class LightTheCandle : WitchCard
 {
+    public override Artist? ArtBy => Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPotion<VialOfSmoke>(),
     ];
@@ -46,7 +47,7 @@ public sealed class LightTheCandle : WitchCard
             CardCmd.Upgrade(pick);
         }
 
-        await Witch.ProducePotion<VialOfSmoke>(Owner);
+        await Witch.ProducePotion<VialOfSmoke>(Owner, Witch.PotionMode.Unstable);
     }
 
     protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(2m);

@@ -40,6 +40,5 @@ public sealed class CursedSpellbook : WitchCard
     protected override void OnUpgrade()
     {
         DynamicVars.Energy.UpgradeValueBy(1);
-        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

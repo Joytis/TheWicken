@@ -28,6 +28,8 @@ public partial class NUnstablePotionVfx : Control
     private static readonly string AmbientScenePath = "unstable_potion_vfx.tscn".VfxScenePath();
     private static readonly string BurstScenePath = "unstable_potion_burst.tscn".VfxScenePath();
 
+    public static IEnumerable<string> AssetPaths => [AmbientScenePath, BurstScenePath];
+
     private NPotion _potion = null!;
     private double _t;
     private float _shakeLeft;

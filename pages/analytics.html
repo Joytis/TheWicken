@@ -222,6 +222,12 @@
     <div id="chartCardAsc"></div>
     <div class="legend"><span><span class="sw" style="background:var(--sage)"></span>card win rate</span>
       <span><span class="ln"></span>all-runs baseline</span></div>
+    <div id="archSection">
+      <h2 style="margin-top:16px">Win rate by archetype</h2>
+      <div class="note">This card inside each dominant archetype (deck bucketed by its most
+        common Witch mechanic). Dashed = that archetype's overall win rate.</div>
+      <div id="chartCardArch"></div>
+    </div>
     <div id="copiesSection">
       <h2 style="margin-top:16px">Copies in deck</h2>
       <div class="note">Does stacking it pay off? Dashed = this card's overall win rate.</div>
@@ -674,6 +680,15 @@ function openModal(row, mod) {
     label: "A" + asc, tipTitle: "Ascension " + asc,
     v: g.wins / g.runs, runs: g.runs, wins: g.wins,
     baseline: baseline.has(asc) ? baseline.get(asc).wins / baseline.get(asc).runs : null})));
+
+  const archBase = groupSum(ARCHS.filter(r => sliceFilter(r, mod)), r => r.arch);
+  const byArch = groupSum(cardRows, r => r.arch);
+  const archRows = ARCH_ORDER.filter(a => byArch.has(a)).map(a => ({
+    label: a, tipTitle: a + " decks", v: byArch.get(a).wins / byArch.get(a).runs,
+    runs: byArch.get(a).runs, wins: byArch.get(a).wins,
+    baseline: archBase.has(a) ? archBase.get(a).wins / archBase.get(a).runs : null}));
+  $("archSection").hidden = archRows.length < 2;
+  if (archRows.length >= 2) rateBarChart($("chartCardArch"), archRows, 220);
 
   const byCopies = [...groupSum(cardRows, r => r.copies)].sort((a, b) => a[0] - b[0]);
   $("copiesSection").hidden = byCopies.length < 2;

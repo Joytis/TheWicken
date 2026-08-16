@@ -46,7 +46,7 @@ public sealed class CaptureSoul : WitchCard
     ];
 
     public CaptureSoul()
-        : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+        : base(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }
 
@@ -78,5 +78,5 @@ public sealed class CaptureSoul : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);
 }

@@ -33,6 +33,8 @@ public sealed class Plaguestorm : WitchCard
             .WithMultiplier((card, _) => card.Owner?.Creature is { } creature ? CombatHistoryQueries.RatsPlayedThisCombat(creature) : 0)
     ];
 
+    protected override IEnumerable<string> ExtraRunAssetPaths => [NRatsThrowVfx.scenePath];
+
     public Plaguestorm()
         : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-13",
+  "generated": "2026-08-14",
   "cards": [
     {
       "name": "Defend",
@@ -447,7 +447,7 @@
       "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
       "mechanics": [
@@ -1172,7 +1172,7 @@
       "upgrade": "Cards +2",
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
       "mechanics": [
@@ -2925,13 +2925,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Put 1 card from your Discard Pile into your Hand.",
+      "text": "Put 1 card from your Discard Pile into your Hand.{IfUpgraded:show: It costs 1 less [E] this turn.|}",
       "numbers": {
         "Cards": 1
       },
       "upgrade": "none",
       "note": "Rat familiar token: dig a card back out of the discard pile (base-game Dredge pattern).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
