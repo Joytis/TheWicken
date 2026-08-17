@@ -208,5 +208,5 @@
   "THEWITCH-BIG_BATCH.title": "Big Batch",
   "THEWITCH-BIG_BATCH.description": "Create {Brews:diff()} [gold]Unstable[/gold] [gold]Noxious {Brews:plural:Brew|Brews}[/gold].",
   "THEWITCH-PRICES_PAID.title": "Prices Paid",
-  "THEWITCH-PRICES_PAID.description": "Lose {HpLoss:diff()} HP.\nDeal {Damage:diff()} damage.\nCreate {Brews:diff()} [gold]{Brews:plural:Noxious Brew|Noxious Brews}[/gold]."
+  "THEWITCH-PRICES_PAID.description": "Lose {HpLoss:diff()} HP.\nDeal {Damage:diff()} damage.\nCreate {Brews:diff()} [gold]Unstable[/gold] [gold]{Brews:plural:Noxious Brew|Noxious Brews}[/gold]."
 }

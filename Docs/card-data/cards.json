@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-14",
+  "generated": "2026-08-17",
   "cards": [
     {
       "name": "Defend",
@@ -65,14 +65,14 @@
       "type": "Skill",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Gain 8 Block. Apply 1 Hex if you have used a Potion this turn.",
+      "text": "Gain 7 Block. Apply 1 Hex if you have used a Potion this turn.",
       "numbers": {
         "Hex": 1,
-        "Block": 8
+        "Block": 7
       },
       "upgrade": "Hex +1",
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -377,14 +377,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 7 Block. Gain 3 Brambles.",
+      "text": "Gain 6 Block. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Block": 7
+        "Block": 6
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -439,14 +439,14 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 8 damage. Gain 3 Brambles.",
+      "text": "Deal 9 damage. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Damage": 8
+        "Damage": 9
       },
       "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -501,14 +501,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 5 Block. At the start of the next {:diff() turns}, create an Unstable Ember Jar.",
+      "text": "Gain 4 Block. At the start of the next {:diff() turns}, create an Unstable Ember Jar.",
       "numbers": {
         "Smolder": 2,
-        "Block": 5
+        "Block": 4
       },
       "upgrade": "Block +3",
       "note": "Smolder: block now, and the embers keep producing — an Ember Jar at the start of each of your next couple of turns (see <see cref=\"SmolderPower\" />).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -651,10 +651,10 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 8 Block. Next turn, apply 1 Hex to ALL enemies.",
+      "text": "Gain 7 Block. Next turn, apply 1 Hex to ALL enemies.",
       "numbers": {
         "WaxAndWane": 1,
-        "Block": 8
+        "Block": 7
       },
       "upgrade": "Block +1, WaxAndWane +1",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
@@ -1354,14 +1354,14 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Noxious Brews.",
+      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Unstable Noxious Brews.",
       "numbers": {
         "Damage": 6,
         "HpLoss": 1
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2072,7 +2072,7 @@
       "name": "Capture Soul",
       "entry": "CAPTURE_SOUL",
       "file": "TheWitchCode/Cards/CaptureSoul.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
@@ -2081,9 +2081,9 @@
         "Hex": 1,
         "Damage": 10
       },
-      "upgrade": "Damage +4",
+      "upgrade": "Damage +3",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
@@ -2175,9 +2175,9 @@
         "Energy": 2,
         "Cards": 3
       },
-      "upgrade": "Energy +1, Cards +1",
+      "upgrade": "Energy +1",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2234,9 +2234,9 @@
       "target": "Self",
       "text": "Summon {Familiars:diff()} random Familiars. Draw {DrawReduction} fewer cards at the start of each turn.",
       "numbers": {},
-      "upgrade": "DrawReduction +1, Familiars +1",
+      "upgrade": "Familiars +1",
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,

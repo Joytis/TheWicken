@@ -23,7 +23,7 @@ public sealed class Smolder : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5m, ValueProp.Move),
+        new BlockVar(4m, ValueProp.Move),
         new PowerVar<SmolderPower>(2m)
     ];
 

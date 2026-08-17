@@ -28,7 +28,7 @@ public sealed class Incant : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(8m, ValueProp.Move),
+        new BlockVar(7m, ValueProp.Move),
         new PowerVar<HexPower>(1m)
     ];
 
