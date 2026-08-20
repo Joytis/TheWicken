@@ -1,8 +1,10 @@
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -11,16 +13,16 @@ namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
 /// Wormy: a playable nuisance status (from Wormy Apple). Pay 1 energy to clear one, but it bites — lose 1 life.
-/// Retain keeps it clinging to your hand; Exhaust removes it once played. Status rarity keeps it out of random
-/// rewards (like base-game Wound).
+/// Retain keeps it clinging to your hand; Exhaust removes it once played. Lives in the base-game StatusCardPool
+/// (own [Pool] overrides WitchCard's, same as Ash) so it renders with the default grey status styling.
 /// </summary>
+[Pool(typeof(StatusCardPool))]
 public sealed class Wormy : WitchCard
 {
     public override int MaxUpgradeLevel => 0;
 
-    /* Status rarity keeps Wormy out of card rewards, but in-combat generation (Discovery, Attack Potion)
-       filters only Basic/Ancient/Event rarity out of the character's pool — and Wormy, unlike base-game
-       statuses, lives in WitchCardPool rather than the shared StatusCardPool. Opt out explicitly. */
+    // Kept for safety even though StatusCardPool membership already keeps it out of in-combat
+    // generation (Discovery, Attack Potion pull from the character's pool).
     public override bool CanBeGeneratedInCombat => false;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];

@@ -183,7 +183,7 @@
   "THEWITCH-BOTTLE_BARRAGE.title": "Bottle Barrage",
   "THEWITCH-BOTTLE_BARRAGE.description": "Deal {Damage:diff()} damage for each [gold]Potion[/gold] created this combat.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
   "THEWITCH-IMPALE.title": "Impale",
-  "THEWITCH-IMPALE.description": "Deal {Damage:diff()} damage.\n[gold]Brambles[/gold] deal double damage to the enemy this turn.",
+  "THEWITCH-IMPALE.description": "Deal {Damage:diff()} damage.\n[gold]Brambles[/gold] deal double damage this turn.",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.title": "Message in a Bottle",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.description": "Bottle a card in your [gold]Hand[/gold] into a [gold]Potion[/gold].",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.selectionScreenPrompt": "Choose a card to bottle",

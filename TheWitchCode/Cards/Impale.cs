@@ -9,7 +9,7 @@ using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Impale: skewer an enemy — damage, and Brambles deal double damage to it this turn.</summary>
+/// <summary>Impale: skewer an enemy — damage, and your Brambles deal double damage this turn.</summary>
 public sealed class Impale : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
@@ -35,7 +35,7 @@ public sealed class Impale : WitchCard
             // Thorn hit: swamp-green slice (preloaded via Witch.ExtraAssetPaths).
             .WithHitVfxNode(WitchFx.BrambleSliceNode)
             .Execute(choiceContext);
-        await PowerCmd.Apply<ImpaledPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this);
+        await PowerCmd.Apply<ImpaledPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
     }
 
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);

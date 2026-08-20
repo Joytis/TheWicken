@@ -99,7 +99,7 @@ A ratio far from 1.0 is a *scrutiny flag*, not a verdict — riders (debuffs, dr
 | Potions | 19 | 8 | 7 | 0 | 2.4:1 |
 | Hex | 13 | 6 | 3 | 1 | 2.2:1 |
 | Familiars | 14 | 6 | 4 | 12 | 2.3:1 |
-| Brambles | 6 | 2 | 0 | 0 | 3.0:1 |
+| Brambles | 6 | 3 | 0 | 0 | 2.0:1 |
 
 ### silent
 

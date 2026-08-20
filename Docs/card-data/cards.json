@@ -994,9 +994,9 @@
       "numbers": {
         "DeepRoots": 3
       },
-      "upgrade": "DeepRoots +2",
+      "upgrade": "DeepRoots +1",
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -1135,12 +1135,12 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 12 damage. Brambles deal double damage to the enemy this turn.",
+      "text": "Deal 12 damage. Brambles deal double damage this turn.",
       "numbers": {
         "Damage": 12
       },
       "upgrade": "Damage +3",
-      "note": "Impale: skewer an enemy — damage, and Brambles deal double damage to it this turn.",
+      "note": "Impale: skewer an enemy — damage, and your Brambles deal double damage this turn.",
       "tested": false,
       "artFinal": false,
       "vfxPass": false,
@@ -1916,9 +1916,9 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Exhaust 2 cards. Gain [E] [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
+      "text": "Exhaust 2 cards. Gain [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
       "numbers": {
-        "Energy": 4,
+        "Energy": 3,
         "Cards": 2
       },
       "upgrade": "Energy +1",
