@@ -11,6 +11,7 @@ public sealed class WolfFamiliar : WitchCard, IFamiliarSummon
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<WolfFamiliarPower>(),
         HoverTipFactory.FromCard<Gnash>(IsUpgraded),
+        HoverTipFactory.FromCard<PackTactics>(IsUpgraded),
     ];
 
     public WolfFamiliar()

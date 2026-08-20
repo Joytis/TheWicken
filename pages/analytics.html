@@ -166,6 +166,18 @@
         <div class="legend"><span><span class="ln"></span>overall win rate</span></div>
       </div>
     </div>
+    <div class="row2">
+      <div class="panel">
+        <h2>Runs per day</h2>
+        <div class="note">Uploaded runs per day across the current filters.</div>
+        <div id="chartRunsDay"></div>
+      </div>
+      <div class="panel">
+        <h2>Runs by hour (UTC)</h2>
+        <div class="note">When people play — uploaded runs bucketed by hour of day.</div>
+        <div id="chartRunsHour"></div>
+      </div>
+    </div>
     <div class="panel">
       <h2>Win rate by archetype</h2>
       <div class="note">Each run bucketed by the mechanic with the most Witch cards in its
@@ -262,6 +274,7 @@ const MECHANICS = ["All", "Hex", "Potions", "Familiars", "Brambles", "None"];
 const DATE_PRESETS = [["7d", 7], ["30d", 30], ["90d", 90], ["All time", 0]];
 
 let META, RUNS, CARDS, CMETA, CHOICES, DEATHS, DFLOORS, ENCS, ARCHS;  // fetched data
+let HOURS = [];  // runs_hourly.json — optional (absent until the exporter re-runs)
 let BASE_ENC = new Set();              // base-game encounter whitelist
 // mod/game are Sets of selected versions; empty Set = all (every run counts — the data
 // is thin, so pooling releases with similar balance profiles is the default).
@@ -621,6 +634,22 @@ function renderOverview() {
     svg.append(el("line", {x1: 52, x2: HALF - 16, y1: y, y2: y, stroke: C("--rose"),
                            "stroke-width": 2, "stroke-dasharray": "6 5"}));
   }
+
+  countColumns($("chartRunsDay"),
+    byDay.map(([day, g]) => ({label: day.slice(5), v: g.runs, day})),
+    {width: HALF, color: C("--sage"),
+     tipLines: r => [[r.day, "", false], ["runs", String(r.v), true]]});
+
+  const byHour = groupSum(HOURS.filter(r => sliceFilter(r)), r => r.hour);
+  countColumns($("chartRunsHour"),
+    HOURS.length ? Array.from({length: 24}, (_, h) => ({
+      label: String(h).padStart(2, "0"),
+      v: byHour.has(h) ? byHour.get(h).runs : 0})) : [],
+    {width: HALF, color: C("--sage"), labelStep: 3,
+     tipLines: r => [[`${r.label}:00–${r.label}:59 UTC`, "", false],
+                     ["runs", String(r.v), true]],
+     emptyMsg: HOURS.length ? undefined
+       : "No hourly data yet — appears after the next stats refresh."});
 }
 
 function renderCards() {
@@ -719,11 +748,14 @@ function openModal(row, mod) {
 
 function closeModal() { $("modalBack").hidden = true; hideTip(); }
 
-// Integer-count columns (death floors) — same chrome as the % charts, count axis.
-function countColumns(host, rows) {  // rows: [{label, v}]
+// Integer-count columns (death floors, run volume) — same chrome as the % charts, count axis.
+function countColumns(host, rows, opts = {}) {  // rows: [{label, v}]
+  const tipLines = opts.tipLines ||
+    ((r, evt) => [["Floor " + r.label, "", false], ["deaths", String(r.v), true]]);
+  const color = opts.color || C("--rose");
   host.replaceChildren();
-  if (!rows.length || !rows.some(r => r.v)) return host.append(emptyNote());
-  const W = 900, H = 250, pad = {l: 46, t: 14, r: 12, b: 30};
+  if (!rows.length || !rows.some(r => r.v)) return host.append(emptyNote(opts.emptyMsg));
+  const W = opts.width || 900, H = 250, pad = {l: 46, t: 14, r: 12, b: 30};
   const maxV = Math.max(...rows.map(r => r.v));
   const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, role: "img"});
   const py = v => H - pad.b - v / maxV * (H - pad.t - pad.b);
@@ -735,7 +767,7 @@ function countColumns(host, rows) {  // rows: [{label, v}]
                            "font-size": 11, fill: C("--ink-2")}, String(g)));
   }
   const slot = (W - pad.l - pad.r) / rows.length, bw = Math.min(24, slot * .6);
-  const labelStep = Math.ceil(rows.length / 24);
+  const labelStep = opts.labelStep || Math.ceil(rows.length / Math.floor(W / 38));
   rows.forEach((r, i) => {
     const cx = pad.l + slot * (i + .5), y = py(r.v), y0 = py(0);
     if (r.v > 0) {
@@ -743,15 +775,14 @@ function countColumns(host, rows) {  // rows: [{label, v}]
       svg.append(el("path", {d: `M${cx - bw / 2},${y0} V${y + rad}
           Q${cx - bw / 2},${y} ${cx - bw / 2 + rad},${y}
           H${cx + bw / 2 - rad} Q${cx + bw / 2},${y} ${cx + bw / 2},${y + rad} V${y0} Z`,
-          fill: C("--rose")}));
+          fill: color}));
     }
     if (i % labelStep === 0)
       svg.append(el("text", {x: cx, y: H - 10, "text-anchor": "middle",
                              "font-size": 11, fill: C("--ink-2")}, r.label));
     const hit = el("rect", {x: cx - slot / 2, y: pad.t, width: slot, height: H - pad.t - pad.b,
                             fill: "transparent"});
-    hit.addEventListener("pointermove", evt =>
-      showTip(evt, [["Floor " + r.label, "", false], ["deaths", String(r.v), true]]));
+    hit.addEventListener("pointermove", evt => showTip(evt, tipLines(r, evt)));
     hit.addEventListener("pointerleave", hideTip);
     svg.append(hit);
   });
@@ -958,6 +989,9 @@ async function init() {
   }
   [META, RUNS, CARDS, CMETA, CHOICES, DEATHS, DFLOORS, ENCS, ARCHS] = files;
   BASE_ENC = new Set(files[9]);
+  // Optional — older exports don't have it; the hourly panel explains itself when empty.
+  HOURS = await fetch("analytics-data/runs_hourly.json")
+    .then(r => r.ok ? r.json() : []).catch(() => []);
 
   $("fresh").textContent = `Data refreshed ${META.generated_at.replace("T", " ").replace("Z", " UTC")}` +
     ` · ${META.total_runs} runs · ${META.first_day} → ${META.last_day}`;

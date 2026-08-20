@@ -29,5 +29,5 @@ public sealed class DeepRoots : WitchCard
         await PowerCmd.Apply<DeepRootsPower>(choiceContext, Owner.Creature, DynamicVars["DeepRootsPower"].BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => DynamicVars["DeepRootsPower"].UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars["DeepRootsPower"].UpgradeValueBy(1m);
 }

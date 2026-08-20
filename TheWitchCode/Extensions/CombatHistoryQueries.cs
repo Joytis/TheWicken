@@ -34,5 +34,14 @@ public static class CombatHistoryQueries
     public static int CardsPlayedThisCombat<T>(Creature player) where T : CardModel =>
         History?.CardPlaysFinished.Count(e => e.CardPlay.Card is T && e.CardPlay.Card.Owner.Creature == player) ?? 0;
 
+    /// <summary>
+    /// Sum of <c>ExtraDamage</c> over every Gnash played this combat — each Gnash raises ALL Gnash by its OWN
+    /// bonus (3, or 4 for Gnash+), so the pack total is per-card, not count × this card's bonus.
+    /// </summary>
+    public static decimal GnashBonusThisCombat(Creature player) =>
+        History?.CardPlaysFinished
+            .Where(e => e.CardPlay.Card is Gnash && e.CardPlay.Card.Owner.Creature == player)
+            .Sum(e => e.CardPlay.Card.DynamicVars.ExtraDamage.BaseValue) ?? 0m;
+
     public static int RatsPlayedThisCombat(Creature player) => CardsPlayedThisCombat<Rats>(player);
 }

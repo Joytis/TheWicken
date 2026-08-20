@@ -25,5 +25,5 @@ public sealed class BottomlessCauldron : WitchCard
         await PowerCmd.Apply<BottomlessCauldronPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => AddKeyword(CardKeyword.Innate);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

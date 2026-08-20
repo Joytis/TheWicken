@@ -2,15 +2,18 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
+using TheWitch.TheWitchCode.Character;
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Potions;
 using TheWitch.TheWitchCode.Potions.Brewing;
 
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Witchcraft: spend X Energy, create X random potions. Each roll uses the game's own drop weights
+/// Witchcraft: spend X Energy, create X random Unstable potions. Each roll uses the game's own drop weights
 /// (10% Rare / 25% Uncommon / 65% Common, the <c>PotionFactory</c> thresholds) over the Randomizable
 /// pool (Witch + Shared, no healing).
 /// </summary>
@@ -21,6 +24,8 @@ public sealed class Witchcraft : WitchCard
     protected override bool HasEnergyCostX => true;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [ UnstablePotions.UnstableHoverTip ];
 
     public Witchcraft()
         : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
@@ -53,7 +58,7 @@ public sealed class Witchcraft : WitchCard
             if (potion != null)
             {
                 WitchFx.Splash(Owner.Creature, new Godot.Color("ac54b3")); // conjured brew: purple splash
-                await PotionCmd.TryToProcure(potion.ToMutable(), Owner);
+                await Witch.ProducePotion(potion, Owner, Witch.PotionMode.Unstable);
             }
         }
     }

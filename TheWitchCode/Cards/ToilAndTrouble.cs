@@ -19,7 +19,7 @@ public sealed class ToilAndTrouble : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5m, ValueProp.Move),
+        new DamageVar(4m, ValueProp.Move),
         new IntVar("Replay", 1m)
     ];
 

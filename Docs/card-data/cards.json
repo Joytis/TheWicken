@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-17",
+  "generated": "2026-08-20",
   "cards": [
     {
       "name": "Defend",
@@ -590,11 +590,11 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Exhaust a card. Next turn, gain [E].",
+      "text": "Exhaust a card. Next turn, gain [E]. Add an Ash into your Discard Pile.",
       "numbers": {},
       "upgrade": "EnergyNextTurn +1",
-      "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": true,
+      "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />) and an <see cref=\"Ash\" /> is left in the discard pile.",
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -688,9 +688,9 @@
       "numbers": {
         "Block": 10
       },
-      "upgrade": "Block +3",
+      "upgrade": "Block +2",
       "note": "Weathered Witch Hat: Block, then play a random Skill from your draw pile (free auto-play; nothing happens if the pile holds none).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -1014,36 +1014,6 @@
       ]
     },
     {
-      "name": "Gather Herbs",
-      "entry": "GATHER_HERBS",
-      "file": "TheWitchCode/Cards/GatherHerbs.cs",
-      "cost": 2,
-      "type": "Skill",
-      "rarity": "Uncommon",
-      "target": "Self",
-      "text": "Gain 11 Block. Copy the next 1 Potion you create.",
-      "numbers": {
-        "NextPotionCopied": 1,
-        "Block": 11
-      },
-      "upgrade": "Block +2, NextPotionCopied +1",
-      "note": "Gain Block, and copy the next potion you create this combat.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Potions"
-      ],
-      "role": [
-        "Enabler"
-      ],
-      "sub": [
-        "Potions:Economy"
-      ],
-      "threads": []
-    },
-    {
       "name": "Grind Down",
       "entry": "GRIND_DOWN",
       "file": "TheWitchCode/Cards/GrindDown.cs",
@@ -1156,6 +1126,33 @@
       "threads": [
         "TurnEngine"
       ]
+    },
+    {
+      "name": "Impale",
+      "entry": "IMPALE",
+      "file": "TheWitchCode/Cards/Impale.cs",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "target": "AnyEnemy",
+      "text": "Deal 12 damage. Brambles deal double damage to the enemy this turn.",
+      "numbers": {
+        "Damage": 12
+      },
+      "upgrade": "Damage +3",
+      "note": "Impale: skewer an enemy — damage, and Brambles deal double damage to it this turn.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Brambles"
+      ],
+      "role": [
+        "Payoff"
+      ],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Light the Candle",
@@ -1709,13 +1706,13 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage twice. Add Replay {Replay:diff()} to a random card in your Draw Pile.",
+      "text": "Deal 4 damage twice. Add Replay {Replay:diff()} to a random card in your Draw Pile.",
       "numbers": {
-        "Damage": 5
+        "Damage": 4
       },
       "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1768,13 +1765,13 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 5 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 4 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 5
+        "VolatileVapors": 4
       },
-      "upgrade": "VolatileVapors +3",
+      "upgrade": "VolatileVapors +2",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1919,14 +1916,14 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain [E] [E] [E]. Exhaust 2 cards from your Hand.",
+      "text": "Exhaust 2 cards. Gain [E] [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
       "numbers": {
-        "Energy": 3,
+        "Energy": 4,
         "Cards": 2
       },
       "upgrade": "Energy +1",
-      "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
-      "tested": true,
+      "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards; the fire leaves <see cref=\"Ash\" /> behind in the discard pile.",
+      "tested": false,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -1983,9 +1980,9 @@
       "target": "Self",
       "text": "Whenever you use a Potion, create an Unstable Noxious Brew.",
       "numbers": {},
-      "upgrade": "custom (see code)",
+      "upgrade": "Cost -1",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2631,11 +2628,11 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Create X random Potions.",
+      "text": "Create X random Unstable Potions.",
       "numbers": {},
       "upgrade": "none",
-      "note": "Witchcraft: spend X Energy, create X random potions.",
-      "tested": true,
+      "note": "Witchcraft: spend X Energy, create X random Unstable potions.",
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2660,13 +2657,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Apply 2 Hex.",
+      "text": "Apply 1 Hex.",
       "numbers": {
-        "Hex": 2
+        "Hex": 1
       },
       "upgrade": "Hex +1",
       "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex a single target.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2732,11 +2729,12 @@
       "text": "Deal {CalculatedDamage:diff()} damage. Increase the damage of ALL Gnash cards by 3 this combat.",
       "numbers": {
         "CalculationBase": 3,
-        "ExtraDamage": 3
+        "ExtraDamage": 3,
+        "CalculationExtra": 1
       },
       "upgrade": "ExtraDamage +1",
       "note": "Wolf familiar token.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2883,6 +2881,29 @@
         "Energy",
         "SelfExhaust"
       ]
+    },
+    {
+      "name": "Pack Tactics",
+      "entry": "PACK_TACTICS",
+      "file": "TheWitchCode/Cards/Familiar/PackTactics.cs",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Token",
+      "target": "Self",
+      "text": "Gain 2 Strength this turn.",
+      "numbers": {
+        "Strength": 2
+      },
+      "upgrade": "Strength +2",
+      "note": "Wolf familiar token: the pack closes in — a burst of Strength for this turn only (<see cref=\"PackTacticsPower\" />, the base-game Coordinate / Flex Potion temporary-strength pattern).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Rats",
@@ -3047,6 +3068,27 @@
         "Discard",
         "SelfExhaust"
       ]
+    },
+    {
+      "name": "Ash",
+      "entry": "ASH",
+      "file": "TheWitchCode/Cards/Ash.cs",
+      "cost": "-1",
+      "type": "Status",
+      "rarity": "Status",
+      "target": "None",
+      "text": "",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Ash: inert Unplayable status left behind by Bonfire / Tinder (base-game Soot pattern).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Catalyst",
