@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Extensions;
 
@@ -9,20 +10,31 @@ namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
 /// Wolf familiar token. Escalates with the "pack": deals its base damage plus a per-Gnash bonus for every Gnash
-/// already played this combat. Built on a <see cref="CalculatedDamageVar" /> (the base-game Soul Storm pattern) so
-/// the growing total is computed live and shown correctly on the card face — base + ExtraDamage × Gnash-played.
+/// already played this combat — each played Gnash contributes ITS OWN ExtraDamage (3, or 4 for Gnash+), so the pack
+/// bonus is the sum over played Gnashes, not count × this card's bonus. Built on a <see cref="CalculatedDamageVar" />
+/// (the base-game Soul Storm pattern) so the growing total is computed live and shown on the card face. The
+/// calc var multiplies a hidden unit <see cref="CalculationExtraVar" /> (1) by the pack sum, so damage = base + sum;
+/// <c>ExtraDamage</c> stays the displayed/upgradable "increase ALL Gnash by" number and this card's contribution.
 /// </summary>
 public sealed class Gnash : WitchFamiliarCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(3m),
         new ExtraDamageVar(3m),
-        new CalculatedDamageVar(ValueProp.Move)
+        new CalculationExtraVar(1m),
+        new PackDamageVar(ValueProp.Move)
             .WithMultiplier((card, _) =>
                 card.Owner?.Creature is { } creature
-                    ? CombatHistoryQueries.CardsPlayedThisCombat<Gnash>(creature)
-                    : 0),
+                    ? CombatHistoryQueries.GnashBonusThisCombat(creature)
+                    : 0m),
     ];
+
+    /// <summary><see cref="CalculatedDamageVar" /> whose per-unit extra is the hidden unit
+    /// <see cref="CalculationExtraVar" /> rather than <c>ExtraDamage</c>, so the multiplier can be the pack's summed bonus.</summary>
+    private sealed class PackDamageVar(ValueProp props) : CalculatedDamageVar(props)
+    {
+        protected override DynamicVar GetExtraVar() => ((CardModel)_owner!).DynamicVars["CalculationExtra"];
+    }
 
     public Gnash()
         : base(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)

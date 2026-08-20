@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-14",
+  "generated": "2026-08-20",
   "cards": [
     {
       "name": "Defend",
@@ -65,14 +65,14 @@
       "type": "Skill",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Gain 8 Block. Apply 1 Hex if you have used a Potion this turn.",
+      "text": "Gain 7 Block. Apply 1 Hex if you have used a Potion this turn.",
       "numbers": {
         "Hex": 1,
-        "Block": 8
+        "Block": 7
       },
       "upgrade": "Hex +1",
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -377,14 +377,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 7 Block. Gain 3 Brambles.",
+      "text": "Gain 6 Block. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Block": 7
+        "Block": 6
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -439,14 +439,14 @@
       "type": "Attack",
       "rarity": "Common",
       "target": "AnyEnemy",
-      "text": "Deal 8 damage. Gain 3 Brambles.",
+      "text": "Deal 9 damage. Gain 3 Brambles.",
       "numbers": {
         "Brambles": 3,
-        "Damage": 8
+        "Damage": 9
       },
       "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -501,14 +501,14 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 5 Block. At the start of the next {:diff() turns}, create an Unstable Ember Jar.",
+      "text": "Gain 4 Block. At the start of the next {:diff() turns}, create an Unstable Ember Jar.",
       "numbers": {
         "Smolder": 2,
-        "Block": 5
+        "Block": 4
       },
       "upgrade": "Block +3",
       "note": "Smolder: block now, and the embers keep producing — an Ember Jar at the start of each of your next couple of turns (see <see cref=\"SmolderPower\" />).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -590,11 +590,11 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Exhaust a card. Next turn, gain [E].",
+      "text": "Exhaust a card. Next turn, gain [E]. Add an Ash into your Discard Pile.",
       "numbers": {},
       "upgrade": "EnergyNextTurn +1",
-      "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
-      "tested": true,
+      "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />) and an <see cref=\"Ash\" /> is left in the discard pile.",
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -651,10 +651,10 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 8 Block. Next turn, apply 1 Hex to ALL enemies.",
+      "text": "Gain 7 Block. Next turn, apply 1 Hex to ALL enemies.",
       "numbers": {
         "WaxAndWane": 1,
-        "Block": 8
+        "Block": 7
       },
       "upgrade": "Block +1, WaxAndWane +1",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
@@ -688,9 +688,9 @@
       "numbers": {
         "Block": 10
       },
-      "upgrade": "Block +3",
+      "upgrade": "Block +2",
       "note": "Weathered Witch Hat: Block, then play a random Skill from your draw pile (free auto-play; nothing happens if the pile holds none).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -994,9 +994,9 @@
       "numbers": {
         "DeepRoots": 3
       },
-      "upgrade": "DeepRoots +2",
+      "upgrade": "DeepRoots +1",
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -1012,36 +1012,6 @@
       "threads": [
         "TurnEngine"
       ]
-    },
-    {
-      "name": "Gather Herbs",
-      "entry": "GATHER_HERBS",
-      "file": "TheWitchCode/Cards/GatherHerbs.cs",
-      "cost": 2,
-      "type": "Skill",
-      "rarity": "Uncommon",
-      "target": "Self",
-      "text": "Gain 11 Block. Copy the next 1 Potion you create.",
-      "numbers": {
-        "NextPotionCopied": 1,
-        "Block": 11
-      },
-      "upgrade": "Block +2, NextPotionCopied +1",
-      "note": "Gain Block, and copy the next potion you create this combat.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Potions"
-      ],
-      "role": [
-        "Enabler"
-      ],
-      "sub": [
-        "Potions:Economy"
-      ],
-      "threads": []
     },
     {
       "name": "Grind Down",
@@ -1156,6 +1126,33 @@
       "threads": [
         "TurnEngine"
       ]
+    },
+    {
+      "name": "Impale",
+      "entry": "IMPALE",
+      "file": "TheWitchCode/Cards/Impale.cs",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "target": "AnyEnemy",
+      "text": "Deal 12 damage. Brambles deal double damage this turn.",
+      "numbers": {
+        "Damage": 12
+      },
+      "upgrade": "Damage +3",
+      "note": "Impale: skewer an enemy — damage, and your Brambles deal double damage this turn.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Brambles"
+      ],
+      "role": [
+        "Payoff"
+      ],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Light the Candle",
@@ -1354,14 +1351,14 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Noxious Brews.",
+      "text": "Lose 1 HP. Deal 6 damage. Create {Brews:diff()} Unstable Noxious Brews.",
       "numbers": {
         "Damage": 6,
         "HpLoss": 1
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1709,13 +1706,13 @@
       "type": "Attack",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Deal 5 damage twice. Add Replay {Replay:diff()} to a random card in your Draw Pile.",
+      "text": "Deal 4 damage twice. Add Replay {Replay:diff()} to a random card in your Draw Pile.",
       "numbers": {
-        "Damage": 5
+        "Damage": 4
       },
       "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1768,13 +1765,13 @@
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Whenever you use or create a Potion, deal 5 damage to a random enemy.",
+      "text": "Whenever you use or create a Potion, deal 4 damage to a random enemy.",
       "numbers": {
-        "VolatileVapors": 5
+        "VolatileVapors": 4
       },
-      "upgrade": "VolatileVapors +3",
+      "upgrade": "VolatileVapors +2",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1919,14 +1916,14 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Gain [E] [E] [E]. Exhaust 2 cards from your Hand.",
+      "text": "Exhaust 2 cards. Gain [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
       "numbers": {
         "Energy": 3,
         "Cards": 2
       },
       "upgrade": "Energy +1",
-      "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards.",
-      "tested": true,
+      "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards; the fire leaves <see cref=\"Ash\" /> behind in the discard pile.",
+      "tested": false,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -1983,9 +1980,9 @@
       "target": "Self",
       "text": "Whenever you use a Potion, create an Unstable Noxious Brew.",
       "numbers": {},
-      "upgrade": "custom (see code)",
+      "upgrade": "Cost -1",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2072,7 +2069,7 @@
       "name": "Capture Soul",
       "entry": "CAPTURE_SOUL",
       "file": "TheWitchCode/Cards/CaptureSoul.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
@@ -2081,9 +2078,9 @@
         "Hex": 1,
         "Damage": 10
       },
-      "upgrade": "Damage +4",
+      "upgrade": "Damage +3",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
-      "tested": true,
+      "tested": false,
       "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
@@ -2175,9 +2172,9 @@
         "Energy": 2,
         "Cards": 3
       },
-      "upgrade": "Energy +1, Cards +1",
+      "upgrade": "Energy +1",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2234,9 +2231,9 @@
       "target": "Self",
       "text": "Summon {Familiars:diff()} random Familiars. Draw {DrawReduction} fewer cards at the start of each turn.",
       "numbers": {},
-      "upgrade": "DrawReduction +1, Familiars +1",
+      "upgrade": "Familiars +1",
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2631,11 +2628,11 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Create X random Potions.",
+      "text": "Create X random Unstable Potions.",
       "numbers": {},
       "upgrade": "none",
-      "note": "Witchcraft: spend X Energy, create X random potions.",
-      "tested": true,
+      "note": "Witchcraft: spend X Energy, create X random Unstable potions.",
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2660,13 +2657,13 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "AnyEnemy",
-      "text": "Apply 2 Hex.",
+      "text": "Apply 1 Hex.",
       "numbers": {
-        "Hex": 2
+        "Hex": 1
       },
       "upgrade": "Hex +1",
       "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex a single target.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2732,11 +2729,12 @@
       "text": "Deal {CalculatedDamage:diff()} damage. Increase the damage of ALL Gnash cards by 3 this combat.",
       "numbers": {
         "CalculationBase": 3,
-        "ExtraDamage": 3
+        "ExtraDamage": 3,
+        "CalculationExtra": 1
       },
       "upgrade": "ExtraDamage +1",
       "note": "Wolf familiar token.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2883,6 +2881,29 @@
         "Energy",
         "SelfExhaust"
       ]
+    },
+    {
+      "name": "Pack Tactics",
+      "entry": "PACK_TACTICS",
+      "file": "TheWitchCode/Cards/Familiar/PackTactics.cs",
+      "cost": 0,
+      "type": "Skill",
+      "rarity": "Token",
+      "target": "Self",
+      "text": "Gain 2 Strength this turn.",
+      "numbers": {
+        "Strength": 2
+      },
+      "upgrade": "Strength +2",
+      "note": "Wolf familiar token: the pack closes in — a burst of Strength for this turn only (<see cref=\"PackTacticsPower\" />, the base-game Coordinate / Flex Potion temporary-strength pattern).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Rats",
@@ -3047,6 +3068,27 @@
         "Discard",
         "SelfExhaust"
       ]
+    },
+    {
+      "name": "Ash",
+      "entry": "ASH",
+      "file": "TheWitchCode/Cards/Ash.cs",
+      "cost": "-1",
+      "type": "Status",
+      "rarity": "Status",
+      "target": "None",
+      "text": "",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Ash: inert Unplayable status left behind by Bonfire / Tinder (base-game Soot pattern).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Catalyst",

@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Character;
 using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Cards;
@@ -14,6 +15,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class PricesPaid : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        UnstablePotions.UnstableHoverTip,
         HoverTipFactory.FromPotion<NoxiousBrew>(),
     ];
 
@@ -44,8 +46,12 @@ public sealed class PricesPaid : WitchCard
             .WithHitFx(VfxCmd.bloodyImpactPath)
             .Execute(choiceContext);
 
-        // Make brews.
-        await WitchCmd.TryProcureNoxiousBrews(Owner, DynamicVars["Brews"].IntValue);
+        // Make brews (Unstable, like every other combat-created Noxious Brew).
+        WitchFx.Splash(Owner.Creature, WitchFx.Purple); // conjured brew: purple splash
+        for (int i = 0; i < DynamicVars["Brews"].IntValue; i++)
+        {
+            await Witch.ProducePotion<NoxiousBrew>(Owner, Witch.PotionMode.Unstable);
+        }
     }
 
     protected override void OnUpgrade()

@@ -6,6 +6,16 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 321. Tinder leaves an Ash (2026-08-17) — 1e Common Skill: Exhaust a card (Ash filtered out of the pick via `FromHand` filter), Next turn +2e, add an Ash to Discard; hover tip for Ash; needs in-game playtest.
+
+### 320. Bonfire rework (2026-08-17) — 0e Rare Skill: Exhaust 2 cards (Ash not selectable), gain 4e (+1 upgraded), add 2 Ash to Discard (`Ashes` var, FightThrough pattern); needs in-game playtest.
+
+### 319. New Card: Ash (2026-08-17) — Unplayable + Ethereal Status ("blows away" at turn end), no upgrade, `CanBeGeneratedInCombat=false` (Soot/Wormy pattern), lives in WitchCardPool; loc `THEWITCH-ASH.*`; NO ART (placeholder fallback).
+
+### 318. New Card: Pack Tactics (Wolf token) (2026-08-17) — 0e Skill familiar token "Gain 2 Strength this turn" (+2 upgraded) via `PackTacticsPower : TemporaryStrengthPower` (Coordinate pattern, no own loc/icon like RottingRootsStrengthDown); `WolfFamiliarPower` → `LootTableFamiliarPower` (Gnash + Pack Tactics, equal weight); WolfFamiliar hover tip added; NO ART; needs in-game playtest (loot roll, temp-strength icon).
+
+### 317. Bug: Gnash+ scaling (2026-08-17) — each played Gnash now raises ALL Gnash by ITS OWN ExtraDamage (3 / 4 for +): new `CombatHistoryQueries.GnashBonusThisCombat` sums played Gnashes' ExtraDamage; Gnash uses a `CalculatedDamageVar` subclass whose extra var is a hidden unit `CalculationExtraVar(1)` so damage = base + sum with an integer multiplier (fractional multiplier avoided — decimal 4/3×3 rounds wrong); needs in-game playtest (card-face preview).
+
 ### 316. Art By presentation removed, tagging kept (2026-08-12) — user disliked the tooltip look; deleted ArtistHoverTip/CardArtistHoverTipPatch/ArtistTipRenderPatch + AlwaysShowArtCredits setting + loc keys (prototypes in git history). `Artist` record + `WitchCard.ArtBy` (Kitsu default, 5 per-card overrides) remain data-only.
 
 ### 315. 'Art By' artist-credit system (2026-08-12) — Downfall pattern adapted: `Artists/Artist.cs` (singleton marker classes, hardcoded names, "Art By" loc key in static_hover_tips.json) + `CardArtistHoverTipPatch` (postfix on non-virtual `CardModel.HoverTips` getter) + `WitchCard.ArtBy` virtual; seeded 7 cards from card-briefs.json (Defend/Strike/Bag of Teeth/Wicked Brew/Torment/Capture Soul/Bonfire). Skipped Downfall's custom NHoverTipSet render patch — plain `HoverTip(title, description)` rides the normal tip pipeline. Needs in-game playtest (hover a credited card).

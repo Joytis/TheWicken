@@ -90,14 +90,14 @@ public abstract class TreasurePotion : WitchPotion
 /// <summary>A small Treasure: 5 damage or 15 gold.</summary>
 public abstract class SmallTreasurePotion : TreasurePotion
 {
-    protected override decimal DamageAmount => 5m;
+    protected override decimal DamageAmount => 4m;
     protected override int GoldAmount => 15;
 }
 
 /// <summary>A Big Treasure: 7 damage or 30 gold.</summary>
 public abstract class BigTreasurePotion : TreasurePotion
 {
-    protected override decimal DamageAmount => 7m;
+    protected override decimal DamageAmount => 6m;
     protected override int GoldAmount => 30;
 }
 

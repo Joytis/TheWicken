@@ -57,11 +57,12 @@ def dominant_archetype(deck: list[str], mechanics: dict[str, set[str]]) -> str:
 def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
     rarities = common.card_rarities()
     mechanics = common.card_mechanics()
-    run_rows, card_rows, choice_rows = [], [], []
+    run_rows, card_rows, choice_rows, hour_rows = [], [], [], []
     death_rows, floor_rows, enc_rows, arch_rows = [], [], [], []
 
     for run in runs.itertuples():
-        day = pd.to_datetime(run.created_at).strftime("%Y-%m-%d")
+        created = pd.to_datetime(run.created_at)
+        day = created.strftime("%Y-%m-%d")
         win = int(run.victory)
         data = run.data or {}
         keys = base_keys(run, day, data)
@@ -69,6 +70,7 @@ def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
 
         arch = dominant_archetype(deck, mechanics)
         run_rows.append(keys | {"runs": 1, "wins": win})
+        hour_rows.append(keys | {"hour": int(created.hour), "runs": 1, "wins": win})
         arch_rows.append(keys | {"arch": arch, "runs": 1, "wins": win})
 
         signal_cards = {c: n for c, n in Counter(deck).items()
@@ -99,6 +101,8 @@ def build_tables(runs: pd.DataFrame) -> dict[str, list[dict]]:
     keys = ["day", "mod", "game", "asc", "mp"]
     return {
         "runs_daily": aggregate(run_rows, keys, ["runs", "wins"]),
+        # UTC hour-of-day rides on the daily keys so the page's filters still apply.
+        "runs_hourly": aggregate(hour_rows, keys + ["hour"], ["runs", "wins"]),
         "cards_daily": aggregate(card_rows, keys + ["card", "copies", "arch"],
                                  ["runs", "wins"]),
         "choices_daily": aggregate(choice_rows, keys + ["card"], ["offered", "picked"]),

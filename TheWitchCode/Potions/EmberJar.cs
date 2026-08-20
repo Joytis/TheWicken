@@ -20,7 +20,7 @@ public sealed class EmberJar : WitchPotion
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5m, ValueProp.Unpowered)
+        new DamageVar(4m, ValueProp.Unpowered)
     ];
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)

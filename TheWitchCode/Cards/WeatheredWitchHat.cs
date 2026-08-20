@@ -42,5 +42,5 @@ public sealed class WeatheredWitchHat : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3m);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(2m);
 }
