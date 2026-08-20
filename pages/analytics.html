@@ -173,8 +173,8 @@
         <div id="chartRunsDay"></div>
       </div>
       <div class="panel">
-        <h2>Runs by hour (UTC)</h2>
-        <div class="note">When people play — uploaded runs bucketed by hour of day.</div>
+        <h2>Runs in the past 24 hours</h2>
+        <div class="note">Hourly run volume over the 24h before the last data refresh (UTC).</div>
         <div id="chartRunsHour"></div>
       </div>
     </div>
@@ -640,15 +640,25 @@ function renderOverview() {
     {width: HALF, color: C("--sage"),
      tipLines: r => [[r.day, "", false], ["runs", String(r.v), true]]});
 
-  const byHour = groupSum(HOURS.filter(r => sliceFilter(r)), r => r.hour);
-  countColumns($("chartRunsHour"),
-    HOURS.length ? Array.from({length: 24}, (_, h) => ({
-      label: String(h).padStart(2, "0"),
-      v: byHour.has(h) ? byHour.get(h).runs : 0})) : [],
+  // Past-24h timeline: one bucket per hour, ending at the export's generated_at hour.
+  // Bucketed by day+hour so the same row also serves any future hour-of-day view.
+  const byStamp = groupSum(HOURS.filter(r => sliceFilter(r)),
+                           r => `${r.day}T${String(r.hour).padStart(2, "0")}`);
+  const anchor = new Date(META.generated_at);
+  anchor.setUTCMinutes(0, 0, 0);
+  const buckets = Array.from({length: 24}, (_, i) => {
+    const d = new Date(anchor); d.setUTCHours(d.getUTCHours() - (23 - i));
+    const iso = d.toISOString();
+    const key = iso.slice(0, 13), hh = iso.slice(11, 13);
+    return {label: hh + ":00", day: iso.slice(0, 10), hh,
+            v: byStamp.has(key) ? byStamp.get(key).runs : 0};
+  });
+  countColumns($("chartRunsHour"), HOURS.length ? buckets : [],
     {width: HALF, color: C("--sage"), labelStep: 3,
-     tipLines: r => [[`${r.label}:00–${r.label}:59 UTC`, "", false],
+     tipLines: r => [[`${r.day} ${r.hh}:00–${r.hh}:59 UTC`, "", false],
                      ["runs", String(r.v), true]],
-     emptyMsg: HOURS.length ? undefined
+     emptyMsg: HOURS.length
+       ? "No runs in the 24h before the last data refresh."
        : "No hourly data yet — appears after the next stats refresh."});
 }
 
