@@ -11,6 +11,6 @@ public sealed class CrowFamiliarPower : LootTableFamiliarPower
 
     protected override FamiliarLootTable BuildLootTable() =>
         new FamiliarLootTable()
-            .Add<DarkOmen>(1)
-            .Add<Shiny>(1);
+            .Add<DarkOmen>()
+            .Add<Shiny>();
 }

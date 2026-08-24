@@ -4,13 +4,12 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Character;
 using TheWitch.TheWitchCode.Potions;
-using TheWitch.TheWitchCode.Powers;
 
 namespace TheWitch.TheWitchCode.Cards;
 
-/// <summary>Smolder: block now, and the embers keep producing — an Ember Jar at the start of each of
-/// your next couple of turns (see <see cref="SmolderPower" />).</summary>
+/// <summary>Smolder: block now, and bottle the embers — create an Unstable Ember Jar.</summary>
 public sealed class Smolder : WitchCard
 {
     public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
@@ -23,8 +22,7 @@ public sealed class Smolder : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(4m, ValueProp.Move),
-        new PowerVar<SmolderPower>(2m)
+        new BlockVar(4m, ValueProp.Move)
     ];
 
     public Smolder()
@@ -36,8 +34,7 @@ public sealed class Smolder : WitchCard
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
-        await PowerCmd.Apply<SmolderPower>(
-            choiceContext, Owner.Creature, DynamicVars["SmolderPower"].BaseValue, Owner.Creature, this);
+        await Witch.ProducePotion<EmberJar>(Owner, Witch.PotionMode.Unstable);
     }
 
     protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3m);

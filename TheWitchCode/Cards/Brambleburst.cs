@@ -17,7 +17,7 @@ public sealed class Brambleburst : WitchCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(12m),
 		new ExtraDamageVar(2m),
-		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() * 2 ?? 0)
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() ?? 0)
     ];
 
     public Brambleburst()

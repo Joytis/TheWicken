@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.TestSupport;
+using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Powers;
 
@@ -44,8 +45,6 @@ public sealed class NeverendingPotionPower : WitchPower
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    private static readonly MethodInfo OnUseMethod = AccessTools.Method(typeof(PotionModel), "OnUse");
-
     // Not readonly: DeepCloneFields must give each mutable clone its own list. MemberwiseClone shares the
     // canonical's list with every clone, so bottled potions would leak into every future combat's instance.
     private List<PotionModel> _bottled = [];
@@ -73,7 +72,7 @@ public sealed class NeverendingPotionPower : WitchPower
             if (potion is TouchOfInsanity)
             {
                 Flash();
-                await PlayThrowVfx(potion, Owner, combat);
+                await PotionAutoPlay.PlayThrowVfx(potion, Owner, Owner, combat);
                 List<CardModel> eligible = PileType.Hand.GetPile(player).Cards
                     .Where(c => c.CostsEnergyOrStars(includeGlobalModifiers: false)
                              || c.CostsEnergyOrStars(includeGlobalModifiers: true))
@@ -86,14 +85,14 @@ public sealed class NeverendingPotionPower : WitchPower
                 continue;
             }
 
-            Creature? target = ResolveTarget(potion, player, combat);
+            Creature? target = PotionAutoPlay.ResolveTarget(potion, player, Owner, combat);
             if (potion.TargetType == TargetType.AnyEnemy && target == null)
             {
                 continue; // no living enemy this turn — skip, don't drop the bottle
             }
 
             Flash();
-            await PlayThrowVfx(potion, target, combat);
+            await PotionAutoPlay.PlayThrowVfx(potion, Owner, target, combat);
             HookPlayerChoiceContext replayContext = new(this, LocalContext.NetId.Value, combat, GameActionType.CombatPlayPhaseOnly);
             Task replay = Replay(replayContext, potion, target, player);
             if (await replayContext.AssignTaskAndWaitForPauseOrCompletion(replay))
@@ -110,7 +109,7 @@ public sealed class NeverendingPotionPower : WitchPower
         CombatId? combatId = CombatManager.Instance.BeginCardOrPotionEffect(player);
         try
         {
-            await (Task)OnUseMethod.Invoke(potion, [replayContext, target])!;
+            await (Task)PotionAutoPlay.OnUseMethod.Invoke(potion, [replayContext, target])!;
         }
         finally
         {
@@ -118,49 +117,4 @@ public sealed class NeverendingPotionPower : WitchPower
         }
     }
 
-    /// <summary>
-    /// The bottle-throw animation from <c>PotionModel.OnUseWrapper</c> (which the reflection replay bypasses):
-    /// arc the potion's image from the owner to the resolved target — single-target potions to the target's
-    /// hitbox, side-wide potions to the average vfx position of the affected side. NItemThrowVfx is globally
-    /// preloaded (VfxCmd.AssetPaths), so spawning it from a power is safe.
-    /// </summary>
-    private async Task PlayThrowVfx(PotionModel potion, Creature? target, ICombatState combat)
-    {
-        if (TestMode.IsOn || NCombatRoom.Instance is not { } room)
-        {
-            return;
-        }
-
-        Vector2 targetPosition;
-        if (potion.TargetType.IsSingleTarget())
-        {
-            targetPosition = room.GetCreatureNode(target ?? Owner)?.GetBottomOfHitbox() ?? Vector2.Zero;
-        }
-        else
-        {
-            CombatSide side = potion.TargetType == TargetType.AllEnemies ? CombatSide.Enemy : CombatSide.Player;
-            List<Creature> creatures = combat.GetCreaturesOnSide(side).Where(c => c.IsHittable).ToList();
-            targetPosition = Vector2.Zero;
-            foreach (Creature creature in creatures)
-            {
-                targetPosition += room.GetCreatureNode(creature)?.VfxSpawnPosition ?? Vector2.Zero;
-            }
-            if (creatures.Count > 0)
-            {
-                targetPosition /= creatures.Count;
-            }
-        }
-
-        Vector2 sourcePosition = room.GetCreatureNode(Owner)?.VfxSpawnPosition ?? Vector2.Zero;
-        room.CombatVfxContainer.AddChildSafely(NItemThrowVfx.Create(sourcePosition, targetPosition, potion.Image));
-        await Cmd.Wait(0.5f);
-    }
-
-    private Creature? ResolveTarget(PotionModel potion, Player player, ICombatState combat) => potion.TargetType switch
-    {
-        TargetType.AnyEnemy => player.RunState.Rng.CombatTargets.NextItem(
-            combat.HittableEnemies.Where(e => e.IsAlive).ToList()),
-        TargetType.Self or TargetType.AnyPlayer or TargetType.AnyAlly => Owner,
-        _ => null,
-    };
 }

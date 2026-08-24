@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-20",
+  "generated": "2026-08-24",
   "cards": [
     {
       "name": "Defend",
@@ -36,13 +36,13 @@
       "type": "Attack",
       "rarity": "Starter",
       "target": "AnyEnemy",
-      "text": "Deal 3 damage. Create {Potions:diff()} Unstable Potions.",
+      "text": "Deal 3 damage. Create a small Unstable Potions.",
       "numbers": {
         "Damage": 3
       },
       "upgrade": "Damage +2",
       "note": "Harvest: deal damage and create small potions from a HARD-CODED loot table (hand-tuned — trim/add freely).",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -72,7 +72,7 @@
       },
       "upgrade": "Hex +1",
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -116,39 +116,6 @@
       ],
       "sub": [],
       "threads": []
-    },
-    {
-      "name": "Bag of Teeth",
-      "entry": "BAG_OF_TEETH",
-      "file": "TheWitchCode/Cards/BagOfTeeth.cs",
-      "cost": 1,
-      "type": "Attack",
-      "rarity": "Common",
-      "target": "AnyEnemy",
-      "text": "Deal 2 damage 4 times.",
-      "numbers": {
-        "Damage": 2,
-        "Repeat": 4
-      },
-      "upgrade": "Repeat +1",
-      "note": "",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": true,
-      "sfxPass": true,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Payoff"
-      ],
-      "sub": [
-        "Hex:Exploit"
-      ],
-      "threads": [
-        "MultiHit",
-        "DebuffPayoff"
-      ]
     },
     {
       "name": "Bewitching Grin",
@@ -279,7 +246,7 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 7 Block. Shuffle 2 {IfUpgraded:Gnash+|Gnash} into your Draw Pile.",
+      "text": "Gain 7 Block. Shuffle 2 Gnash into your Draw Pile.",
       "numbers": {
         "Block": 7,
         "Cards": 2
@@ -384,7 +351,7 @@
       },
       "upgrade": "Block +2, Brambles +1",
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -446,7 +413,7 @@
       },
       "upgrade": "Damage +2, Brambles +1",
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -501,14 +468,13 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 4 Block. At the start of the next {:diff() turns}, create an Unstable Ember Jar.",
+      "text": "Gain 4 Block. Create an Unstable Ember Jar.",
       "numbers": {
-        "Smolder": 2,
         "Block": 4
       },
       "upgrade": "Block +3",
-      "note": "Smolder: block now, and the embers keep producing — an Ember Jar at the start of each of your next couple of turns (see <see cref=\"SmolderPower\" />).",
-      "tested": false,
+      "note": "Smolder: block now, and bottle the embers — create an Unstable Ember Jar.",
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -594,7 +560,7 @@
       "numbers": {},
       "upgrade": "EnergyNextTurn +1",
       "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />) and an <see cref=\"Ash\" /> is left in the discard pile.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -609,6 +575,35 @@
         "Energy",
         "DelayedEffect",
         "ExhaustOutlet"
+      ]
+    },
+    {
+      "name": "Torment",
+      "entry": "TORMENT",
+      "file": "TheWitchCode/Cards/Torment.cs",
+      "cost": 0,
+      "type": "Attack",
+      "rarity": "Common",
+      "target": "AnyEnemy",
+      "text": "Deal 5 damage. Does not consume Hex.",
+      "numbers": {
+        "Damage": 5
+      },
+      "upgrade": "Damage +3",
+      "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
+      "tested": true,
+      "artFinal": true,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Enabler"
+      ],
+      "sub": [],
+      "threads": [
+        "Draw"
       ]
     },
     {
@@ -658,7 +653,7 @@
       },
       "upgrade": "Block +1, WaxAndWane +1",
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -688,9 +683,9 @@
       "numbers": {
         "Block": 10
       },
-      "upgrade": "Block +2",
+      "upgrade": "Block +3",
       "note": "Weathered Witch Hat: Block, then play a random Skill from your draw pile (free auto-play; nothing happens if the pile holds none).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -733,10 +728,43 @@
       "threads": []
     },
     {
+      "name": "Bag of Teeth",
+      "entry": "BAG_OF_TEETH",
+      "file": "TheWitchCode/Cards/BagOfTeeth.cs",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "target": "AnyEnemy",
+      "text": "Deal 2 damage 4 times.",
+      "numbers": {
+        "Damage": 2,
+        "Repeat": 4
+      },
+      "upgrade": "Repeat +1",
+      "note": "",
+      "tested": true,
+      "artFinal": false,
+      "vfxPass": true,
+      "sfxPass": true,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Payoff"
+      ],
+      "sub": [
+        "Hex:Exploit"
+      ],
+      "threads": [
+        "MultiHit",
+        "DebuffPayoff"
+      ]
+    },
+    {
       "name": "Bear Familiar",
       "entry": "BEAR_FAMILIAR",
       "file": "TheWitchCode/Cards/BearFamiliar.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Power",
       "rarity": "Uncommon",
       "target": "Self",
@@ -763,6 +791,33 @@
       ]
     },
     {
+      "name": "Blood Anointment",
+      "entry": "BLOOD_ANOINTMENT",
+      "file": "TheWitchCode/Cards/BloodAnointment.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Uncommon",
+      "target": "AnyPlayer",
+      "text": "Choose a player. Their Attacks apply 1 Hex this turn.",
+      "numbers": {
+        "BloodAnointment": 1
+      },
+      "upgrade": "Cost -1",
+      "note": "Multiplayer-only. Blood Anointment (MP-only): anoint a chosen player — their Attacks apply Hex this turn (see <see cref=\"BloodAnointmentPower\" />).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Hex"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [],
+      "threads": []
+    },
+    {
       "name": "Bottle Barrage",
       "entry": "BOTTLE_BARRAGE",
       "file": "TheWitchCode/Cards/BottleBarrage.cs",
@@ -778,7 +833,7 @@
       },
       "upgrade": "Damage +2",
       "note": "Hurl the whole belt: one 10-damage hit per potion you've brewed this combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -929,9 +984,9 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Gain 7 Brambles X times.",
+      "text": "Gain 5 Brambles X times.",
       "numbers": {
-        "Brambles": 7
+        "Brambles": 5
       },
       "upgrade": "Brambles +2",
       "note": "Spend X energy to pile Brambles on yourself, 7 at a time, X times — a fast way to stack a big Bramble count.",
@@ -996,7 +1051,7 @@
       },
       "upgrade": "DeepRoots +1",
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -1108,7 +1163,7 @@
       "target": "Self",
       "text": "At the start of your turn, create an Unstable Puff of Smoke.",
       "numbers": {},
-      "upgrade": "custom (see code)",
+      "upgrade": "Cost -1",
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
       "tested": true,
       "artFinal": false,
@@ -1141,7 +1196,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Impale: skewer an enemy — damage, and your Brambles deal double damage this turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1162,7 +1217,7 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "Self",
-      "text": "Create a Vial of Smoke. Upgrade 2 random cards in your Hand.",
+      "text": "Create an Unstable Vial of Smoke. Upgrade 2 random cards in your Hand.",
       "numbers": {
         "Cards": 2
       },
@@ -1259,7 +1314,7 @@
       },
       "upgrade": "PotionDamageMultiplier +1",
       "note": "Pact of Agony: hex yourself to charge your potions — they hit far harder for the rest of the turn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1358,7 +1413,7 @@
       },
       "upgrade": "HpLoss +1, Brews +1",
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1424,7 +1479,7 @@
       },
       "upgrade": "Block +3",
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1449,12 +1504,12 @@
       "type": "Skill",
       "rarity": "Uncommon",
       "target": "AnyEnemy",
-      "text": "Sacrifice a random Familiar. Draw 3 cards. Apply 7 Hex.",
+      "text": "Sacrifice a random Familiar. Draw 2 cards. Apply 6 Hex.",
       "numbers": {
-        "Hex": 7,
-        "Cards": 3
+        "Hex": 6,
+        "Cards": 2
       },
-      "upgrade": "Hex +3",
+      "upgrade": "Cards +1, Hex +1",
       "note": "Only gains Block if a Familiar was actually sacrificed.",
       "tested": true,
       "artFinal": false,
@@ -1712,7 +1767,7 @@
       },
       "upgrade": "Damage +2",
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1725,36 +1780,6 @@
       "sub": [],
       "threads": [
         "MultiHit"
-      ]
-    },
-    {
-      "name": "Torment",
-      "entry": "TORMENT",
-      "file": "TheWitchCode/Cards/Torment.cs",
-      "cost": 0,
-      "type": "Attack",
-      "rarity": "Uncommon",
-      "target": "AnyEnemy",
-      "text": "Deal 3 damage. Draw 1 card. Does not consume Hex.",
-      "numbers": {
-        "Damage": 3,
-        "Cards": 1
-      },
-      "upgrade": "Damage +2",
-      "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
-      "tested": true,
-      "artFinal": true,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Hex"
-      ],
-      "role": [
-        "Enabler"
-      ],
-      "sub": [],
-      "threads": [
-        "Draw"
       ]
     },
     {
@@ -1771,7 +1796,7 @@
       },
       "upgrade": "VolatileVapors +2",
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1828,7 +1853,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1892,7 +1917,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1916,14 +1941,14 @@
       "type": "Skill",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Exhaust 2 cards. Gain [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
+      "text": "Exhaust 2 cards. Gain [E] [E] [E] [E]. Add {Ashes} Ashes into your Discard Pile.",
       "numbers": {
-        "Energy": 3,
+        "Energy": 4,
         "Cards": 2
       },
       "upgrade": "Energy +1",
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards; the fire leaves <see cref=\"Ash\" /> behind in the discard pile.",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,
@@ -1938,6 +1963,35 @@
         "Energy",
         "ExhaustOutlet"
       ]
+    },
+    {
+      "name": "Bottle Bombardment",
+      "entry": "BOTTLE_BOMBARDMENT",
+      "file": "TheWitchCode/Cards/BottleBombardment.cs",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Rare",
+      "target": "AnyEnemy",
+      "text": "Deal 6 damage for each Potion created by ANY player this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "numbers": {
+        "Damage": 6,
+        "CalculationBase": 0,
+        "CalculationExtra": 1
+      },
+      "upgrade": "Damage +4",
+      "note": "Multiplayer-only. Bottle Bombardment (MP-only): the whole party's brews rain down — one hit per potion created by ANY player this combat.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Potions"
+      ],
+      "role": [
+        "Payoff"
+      ],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Bottle Wall",
@@ -1982,7 +2036,7 @@
       "numbers": {},
       "upgrade": "Cost -1",
       "note": "",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2003,14 +2057,14 @@
       "name": "Brambleburst",
       "entry": "BRAMBLEBURST",
       "file": "TheWitchCode/Cards/Brambleburst.cs",
-      "cost": 2,
+      "cost": 3,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal {CalculatedDamage:diff()} damage. Deals 1 additional damage for each of your Brambles.",
+      "text": "Deal {CalculatedDamage:diff()} damage. Deals 2 additional damage for each of your Brambles.",
       "numbers": {
         "CalculationBase": 12,
-        "ExtraDamage": 1
+        "ExtraDamage": 2
       },
       "upgrade": "CalculationBase +6",
       "note": "Hits once per Bramble; does nothing if you have no Brambles.",
@@ -2080,7 +2134,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
@@ -2174,7 +2228,7 @@
       },
       "upgrade": "Energy +1",
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2233,7 +2287,7 @@
       "numbers": {},
       "upgrade": "Familiars +1",
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2270,8 +2324,12 @@
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
-      "mechanics": [],
-      "role": [],
+      "mechanics": [
+        "None"
+      ],
+      "role": [
+        "Enabler"
+      ],
       "sub": [],
       "threads": []
     },
@@ -2312,14 +2370,14 @@
       "name": "Hexblast",
       "entry": "HEXBLAST",
       "file": "TheWitchCode/Cards/Hexblast.cs",
-      "cost": 3,
+      "cost": 2,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
-      "text": "Deal 8 damage twice to ALL enemies. Apply 2 Hex to ALL enemies.",
+      "text": "Deal 7 damage twice to ALL enemies. Apply 2 Hex to ALL enemies.",
       "numbers": {
         "Hex": 2,
-        "Damage": 8
+        "Damage": 7
       },
       "upgrade": "Damage +2, Hex +1",
       "note": "Hexblast: blast every enemy, then lay Hex on all of them.",
@@ -2406,7 +2464,7 @@
       "name": "Owl Familiar",
       "entry": "OWL_FAMILIAR",
       "file": "TheWitchCode/Cards/OwlFamiliar.cs",
-      "cost": 1,
+      "cost": 2,
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
@@ -2414,7 +2472,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Summons a cosmetic owl pet alongside the familiar power.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2431,6 +2489,31 @@
         "CardGen",
         "TurnEngine"
       ]
+    },
+    {
+      "name": "Plague Tide",
+      "entry": "PLAGUE_TIDE",
+      "file": "TheWitchCode/Cards/PlagueTide.cs",
+      "cost": 2,
+      "type": "Power",
+      "rarity": "Rare",
+      "target": "AllAllies",
+      "text": "ALL players Summon a Rat Familiar.",
+      "numbers": {},
+      "upgrade": "none",
+      "note": "Multiplayer-only. Plague Tide (MP-only): the rats spread to every ship — ALL players summon a Rat Familiar (upgraded: a Rat Familiar+, per-stack like every summon).",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Familiars"
+      ],
+      "role": [
+        "Generator"
+      ],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Plaguestorm",
@@ -2482,7 +2565,7 @@
       },
       "upgrade": "Cards +1",
       "note": "Polymorph (was Repurpose): choose {Cards} cards in your draw pile (1, upgraded 2) — each becomes a Rats token, 1:1 (combat-scoped <c>CardCmd.Transform</c>, native one-to-one overlay per choice).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2534,7 +2617,7 @@
       "name": "Rat Familiar",
       "entry": "RAT_FAMILIAR",
       "file": "TheWitchCode/Cards/RatFamiliar.cs",
-      "cost": 1,
+      "cost": 2,
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
@@ -2632,7 +2715,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Witchcraft: spend X Energy, create X random Unstable potions.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2640,7 +2723,7 @@
         "Potions"
       ],
       "role": [
-        "Payoff"
+        "Generator"
       ],
       "sub": [
         "Potions:Brew"
@@ -2656,14 +2739,14 @@
       "cost": 0,
       "type": "Skill",
       "rarity": "Token",
-      "target": "AnyEnemy",
-      "text": "Apply 1 Hex.",
+      "target": "AllEnemies",
+      "text": "Apply 1 Hex to ALL enemies.",
       "numbers": {
         "Hex": 1
       },
       "upgrade": "Hex +1",
-      "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex a single target.",
-      "tested": false,
+      "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex ALL enemies.",
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2734,7 +2817,7 @@
       },
       "upgrade": "ExtraDamage +1",
       "note": "Wolf familiar token.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2857,11 +2940,12 @@
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
-      "text": "Gain [E].",
+      "text": "Gain [E].{GainsBlock:cond: Gain {Block:diff()} Block.|}",
       "numbers": {
-        "Energy": 1
+        "Energy": 1,
+        "Block": 0
       },
-      "upgrade": "none",
+      "upgrade": "Block +2",
       "note": "Cat familiar token: feline agility bottled as tempo — gain Energy.",
       "tested": true,
       "artFinal": false,
@@ -2896,12 +2980,17 @@
       },
       "upgrade": "Strength +2",
       "note": "Wolf familiar token: the pack closes in — a burst of Strength for this turn only (<see cref=\"PackTacticsPower\" />, the base-game Coordinate / Flex Potion temporary-strength pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
-      "mechanics": [],
-      "role": [],
+      "mechanics": [
+        "Familiars"
+      ],
+      "role": [
+        "Token",
+        "Enabler"
+      ],
       "sub": [],
       "threads": []
     },
@@ -2942,7 +3031,7 @@
       "name": "Rummage",
       "entry": "RUMMAGE",
       "file": "TheWitchCode/Cards/Familiar/Rummage.cs",
-      "cost": 1,
+      "cost": 0,
       "type": "Skill",
       "rarity": "Token",
       "target": "Self",
@@ -2952,7 +3041,7 @@
       },
       "upgrade": "none",
       "note": "Rat familiar token: dig a card back out of the discard pile (base-game Dredge pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -3081,12 +3170,16 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Ash: inert Unplayable status left behind by Bonfire / Tinder (base-game Soot pattern).",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
-      "mechanics": [],
-      "role": [],
+      "mechanics": [
+        "None"
+      ],
+      "role": [
+        "Standalone"
+      ],
       "sub": [],
       "threads": []
     },
@@ -3134,7 +3227,7 @@
       },
       "upgrade": "Damage +5",
       "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, Hex, and one random Unstable potion (any non-healing potion the Witch can roll, any rarity).",
-      "tested": false,
+      "tested": true,
       "artFinal": true,
       "vfxPass": true,
       "sfxPass": true,

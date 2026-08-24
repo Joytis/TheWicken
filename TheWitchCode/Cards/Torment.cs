@@ -29,7 +29,7 @@ public sealed class Torment : WitchCard, IHexPreserving
     ];
 
     public Torment()
-        : base(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 

@@ -16,8 +16,7 @@ public sealed class CatFamiliar : WitchCard, IFamiliarSummon
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<CatFamiliarPower>(),
         HoverTipFactory.FromCard<Ferocity>(IsUpgraded),
-        // Nimble has MaxUpgradeLevel 0 — FromCard(upgrade: true) would throw in UpgradeInternal, killing every hover tip on Cat+.
-        HoverTipFactory.FromCard<Nimble>(),
+        HoverTipFactory.FromCard<Nimble>(IsUpgraded),
     ];
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

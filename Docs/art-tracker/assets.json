@@ -253,20 +253,11 @@
           "path": "TheWitch/images/relics/bottled_curiosity.png"
         },
         {
-          "name": "Bottomless Pockets",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Starter",
-          "effect": "Orobas upgrade of Large Pockets: potion slot bonus becomes 3.",
-          "path": "TheWitch/images/relics/bottomless_pockets.png"
-        },
-        {
           "name": "Cozy Nest",
           "artist": "",
           "done": false,
           "brief": "",
-          "rarity": "Shop",
+          "rarity": "Rare",
           "effect": "At the start of combat, summon a Crow Familiar.",
           "path": "TheWitch/images/relics/cozy_nest.png"
         },
@@ -302,8 +293,8 @@
           "artist": "",
           "done": false,
           "brief": "",
-          "rarity": "Rare",
-          "effect": "Whenever an effect would create a random Potion, choose it instead.",
+          "rarity": "Starter",
+          "effect": "Orobas upgrade of Large Pockets: whenever an effect would create a random Potion, choose it instead.",
           "path": "TheWitch/images/relics/separatory_funnel.png"
         },
         {

@@ -11,7 +11,7 @@ public sealed class OwlFamiliar : WitchCard, IFamiliarSummon
     public override Artists.Artist? ArtBy => Artists.Artist.Joytis;
 
     public OwlFamiliar()
-        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 
