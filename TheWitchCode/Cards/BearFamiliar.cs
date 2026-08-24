@@ -15,7 +15,7 @@ public sealed class BearFamiliar : WitchCard, IFamiliarSummon
     ];
 
     public BearFamiliar()
-        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

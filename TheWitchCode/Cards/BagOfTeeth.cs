@@ -17,7 +17,7 @@ public sealed class BagOfTeeth : WitchCard
     ];
 
     public BagOfTeeth()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 

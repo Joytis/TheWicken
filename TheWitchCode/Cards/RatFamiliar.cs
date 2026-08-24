@@ -15,7 +15,7 @@ public sealed class RatFamiliar : WitchCard, IFamiliarSummon
     ];
 
     public RatFamiliar()
-        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 

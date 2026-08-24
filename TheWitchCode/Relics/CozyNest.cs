@@ -14,7 +14,7 @@ namespace TheWitch.TheWitchCode.Relics;
 /// </summary>
 public sealed class CozyNest : WitchRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Shop;
+    public override RelicRarity Rarity => RelicRarity.Rare;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<CrowFamiliarPower>(),

@@ -25,8 +25,7 @@ public sealed class Torment : WitchCard, IHexPreserving
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3m, ValueProp.Move),
-        new CardsVar(1)
+        new DamageVar(5m, ValueProp.Move)
     ];
 
     public Torment()
@@ -43,9 +42,7 @@ public sealed class Torment : WitchCard, IHexPreserving
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);
-
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(2m);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3m);
 }

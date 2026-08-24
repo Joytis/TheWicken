@@ -3,10 +3,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using TheWitch.TheWitchCode.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.Models;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -18,12 +16,12 @@ public sealed class Brambleburst : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(12m),
-		new ExtraDamageVar(1m),
-		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() ?? 0)
+		new ExtraDamageVar(2m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() * 2 ?? 0)
     ];
 
     public Brambleburst()
-        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+        : base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }
 

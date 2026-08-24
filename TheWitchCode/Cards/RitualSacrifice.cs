@@ -15,8 +15,8 @@ public sealed class RitualSacrifice : WitchCard
     ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(3),
-        new PowerVar<HexPower>(7m)
+        new CardsVar(2),
+        new PowerVar<HexPower>(6m)
     ];
 
     public RitualSacrifice()
@@ -36,5 +36,9 @@ public sealed class RitualSacrifice : WitchCard
         }
     }
 
-    protected override void OnUpgrade() => DynamicVars.Hex().UpgradeValueBy(3m);
+    protected override void OnUpgrade() 
+    {
+        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Hex().UpgradeValueBy(1);
+    }
 }

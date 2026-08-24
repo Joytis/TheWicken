@@ -21,11 +21,11 @@ public sealed class Hexblast : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(2m),
-        new DamageVar(8m, ValueProp.Move)
+        new DamageVar(7m, ValueProp.Move)
     ];
 
     public Hexblast()
-        : base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
     }
 
