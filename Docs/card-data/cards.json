@@ -797,13 +797,13 @@
       "cost": 1,
       "type": "Skill",
       "rarity": "Uncommon",
-      "target": "AnyPlayer",
-      "text": "Choose a player. Their Attacks apply 1 Hex this turn.",
+      "target": "AnyAlly",
+      "text": "Choose another player. Their Attacks apply 1 Hex this turn.",
       "numbers": {
         "BloodAnointment": 1
       },
       "upgrade": "Cost -1",
-      "note": "Multiplayer-only. Blood Anointment (MP-only): anoint a chosen player — their Attacks apply Hex this turn (see <see cref=\"BloodAnointmentPower\" />).",
+      "note": "Multiplayer-only. Blood Anointment (MP-only): anoint another player (AnyAlly — cannot target yourself) — their Attacks apply Hex this turn (see <see cref=\"BloodAnointmentPower\" />).",
       "tested": false,
       "artFinal": false,
       "vfxPass": false,
@@ -1972,9 +1972,9 @@
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
-      "text": "Deal 6 damage for each Potion created by ANY player this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
+      "text": "Deal 10 damage for each Potion created by ANY player this combat.{InCombat: (Hits {CalculatedHits:diff()} times)|}",
       "numbers": {
-        "Damage": 6,
+        "Damage": 10,
         "CalculationBase": 0,
         "CalculationExtra": 1
       },

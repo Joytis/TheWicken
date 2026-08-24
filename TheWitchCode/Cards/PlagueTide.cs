@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using TheWitch.TheWitchCode.Powers;
@@ -29,12 +30,15 @@ public sealed class PlagueTide : WitchCard, IFamiliarSummon
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
-        IEnumerable<Creature> players = CombatState!.GetTeammatesOf(Owner.Creature)
-            .Where(c => c != null && c.IsAlive && c.IsPlayer);
-        foreach (Creature player in players)
+        // Iterate the combat's Players directly — unambiguously includes the caster.
+        foreach (Player player in CombatState!.Players)
         {
-            await PowerCmd.Apply<RatFamiliarPower>(choiceContext, player, 1m, Owner.Creature, this);
-            if (IsUpgraded && player.GetPower<RatFamiliarPower>() is { } power)
+            if (!player.Creature.IsAlive)
+            {
+                continue;
+            }
+            await PowerCmd.Apply<RatFamiliarPower>(choiceContext, player.Creature, 1m, Owner.Creature, this);
+            if (IsUpgraded && player.Creature.GetPower<RatFamiliarPower>() is { } power)
             {
                 power.UpgradedStacks++;
             }

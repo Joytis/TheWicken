@@ -19,7 +19,7 @@ public sealed class BottleBombardment : WitchCard
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6m, ValueProp.Move),
+        new DamageVar(10m, ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHitsKey)

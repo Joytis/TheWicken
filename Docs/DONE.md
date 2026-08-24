@@ -6,6 +6,10 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 342. Witch Yummy Cookie variant wired (2026-08-24) — art moved charui/yummy_cookie_witch.png → relics/yummy_cookie.png (downsized 512→256); `CustomYummyCookie` override on Witch returns the standard relic path triple (BigRelicImagePath / RelicAtlasPath / RelicOutlineAtlasPath); needs `dotnet publish` to pack + in-game check (`relic YUMMY_COOKIE` on a Witch run).
+
+### 341. MP card fixes (2026-08-24) — Blood Anointment target `AnyPlayer`→`AnyAlly` ("Choose another player" — can't target self); Plague Tide now iterates `CombatState.Players` directly so the caster unambiguously gets a Rat Familiar too; needs in-game MP playtest.
+
 ### 340. Smolder rework (2026-08-24) — now "Gain 4 Block. Create an Unstable Ember Jar." (immediate, via Witch.ProducePotion); SmolderPower deleted (orphaned — .cs, loc keys, no art existed); upgrade still +3 Block; needs in-game playtest.
 
 ### 339. Cat+ hover shows Nimble+ (2026-08-24) — removed the stale MaxUpgradeLevel-0 workaround: CatFamiliar's Nimble hover tip now takes IsUpgraded like Ferocity's; needs in-game hover check.

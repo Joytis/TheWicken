@@ -146,7 +146,7 @@
   "THEWITCH-BOTTLE_BOMBARDMENT.title": "Bottle Bombardment",
   "THEWITCH-BOTTLE_BOMBARDMENT.description": "Deal {Damage:diff()} damage for each [gold]Potion[/gold] created by ANY player this combat.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
   "THEWITCH-BLOOD_ANOINTMENT.title": "Blood Anointment",
-  "THEWITCH-BLOOD_ANOINTMENT.description": "Choose a player.\nTheir [gold]Attacks[/gold] apply {BloodAnointmentPower:diff()} [gold]Hex[/gold] this turn.",
+  "THEWITCH-BLOOD_ANOINTMENT.description": "Choose another player.\nTheir [gold]Attacks[/gold] apply {BloodAnointmentPower:diff()} [gold]Hex[/gold] this turn.",
   "THEWITCH-PLAGUE_TIDE.title": "Plague Tide",
   "THEWITCH-PLAGUE_TIDE.description": "ALL players Summon a [gold]{IfUpgraded:show:Rat Familiar+|Rat Familiar}[/gold].",
   "THEWITCH-BEAR_FAMILIAR.title": "Bear Familiar",

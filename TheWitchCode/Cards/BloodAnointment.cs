@@ -8,7 +8,7 @@ using TheWitch.TheWitchCode.Powers;
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>
-/// Blood Anointment (MP-only): anoint a chosen player — their Attacks apply Hex this turn
+/// Blood Anointment (MP-only): anoint another player (AnyAlly — cannot target yourself) — their Attacks apply Hex this turn
 /// (see <see cref="BloodAnointmentPower" />). Upgrade: costs 0.
 /// </summary>
 public sealed class BloodAnointment : WitchCard
@@ -24,7 +24,7 @@ public sealed class BloodAnointment : WitchCard
     ];
 
     public BloodAnointment()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
     {
     }
 
