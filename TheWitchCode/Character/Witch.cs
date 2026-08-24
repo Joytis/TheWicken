@@ -137,7 +137,8 @@ public class Witch : PlaceholderCharacterModel
     public override RelicIconData CustomYummyCookie => new(
         "yummy_cookie.png".BigRelicImagePath(),
         "yummy_cookie.tres".RelicAtlasPath(),
-        "yummy_cookie_outline.tres".RelicOutlineAtlasPath());
+        "yummy_cookie_outline.tres".RelicOutlineAtlasPath()
+    );
     
     /*
     // Anims / visuals

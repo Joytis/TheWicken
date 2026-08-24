@@ -2472,7 +2472,7 @@
       "numbers": {},
       "upgrade": "none",
       "note": "Summons a cosmetic owl pet alongside the familiar power.",
-      "tested": false,
+      "tested": true,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
