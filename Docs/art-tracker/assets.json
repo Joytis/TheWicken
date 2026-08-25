@@ -107,56 +107,6 @@
           "path": "TheWitch/images/potions/prickly_vial.png"
         },
         {
-          "name": "Cat Whisker",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Ferocity. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/cat_whisker.png"
-        },
-        {
-          "name": "Crow Talon",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Shiny. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/crow_talon.png"
-        },
-        {
-          "name": "Owl Feather",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Wisdom. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/owl_feather.png"
-        },
-        {
-          "name": "Wolf Fang",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Gnash. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/wolf_fang.png"
-        },
-        {
-          "name": "Rat Tail",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Rats. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/rat_tail.png"
-        },
-        {
           "name": "Potion-Shaped Pebble",
           "artist": "",
           "done": false,
@@ -225,16 +175,6 @@
           "orientation": "Offensive",
           "effect": "Big Treasure: deal 7 damage, or sell to the shopkeeper for 30 Gold. (Card-only payload: Shiny!+)",
           "path": "TheWitch/images/potions/impeccable_silverware.png"
-        },
-        {
-          "name": "Bear Fur",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Token",
-          "orientation": "Utility",
-          "effect": "Create a Mutilate. (Card-only payload: Harvest)",
-          "path": "TheWitch/images/potions/bear_fur.png"
         }
       ]
     },
