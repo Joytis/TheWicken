@@ -17,7 +17,7 @@ namespace TheWitch.TheWitchCode.Relics;
 /// </summary>
 public sealed class WormysApple : WitchRelic
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon;
+    public override RelicRarity Rarity => RelicRarity.Shop;
 
     public override bool HasUponPickupEffect => true;
 

@@ -85,7 +85,7 @@ const powersCat = {
       done: !!o.done,
       brief: o.brief || '',
       effect: clean(String(powerLoc[`THEWITCH-${entry}.description`] || '').replace(/\[\/?[a-z]+\]/g, '')),
-      path: 'TheWitch/images/powers/big/' + entry.toLowerCase() + '.png',
+      path: 'TheWitch/images/powers/' + entry.toLowerCase() + '.png',
     };
   }),
 };

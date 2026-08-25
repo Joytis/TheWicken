@@ -115,7 +115,7 @@ public static class PotionQuickUsePatch
             return false;
         }
         Creature owner = potion.Owner.Creature;
-        if (potion.Owner.RunState.IsGameOver || owner.IsDead || !potion.Owner.CanRemovePotions
+        if (potion.Owner.RunState.IsGameOver || owner.IsDead || !potion.Owner.CanUseOrRemovePotions
             || !potion.PassesCustomUsabilityCheck)
         {
             return false;

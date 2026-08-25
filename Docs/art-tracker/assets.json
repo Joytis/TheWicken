@@ -1,4 +1,4 @@
-﻿{
+{
   "comment": "Non-card art assets for the art tracker. Hand-maintained. Per asset: 'artist' (who is working on it â€” fill in manually) and 'done': true when final art is in. Status is DERIVED: done â†’ Done; artist set â†’ In Progress; else Placeholder. Cards are NOT listed here â€” they come from ../card-data/cards.json (artFinal) + ./card-briefs.json (artist/brief).",
   "categories": [
     {
@@ -253,20 +253,11 @@
           "path": "TheWitch/images/relics/bottled_curiosity.png"
         },
         {
-          "name": "Bottomless Pockets",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Starter",
-          "effect": "Orobas upgrade of Large Pockets: potion slot bonus becomes 3.",
-          "path": "TheWitch/images/relics/bottomless_pockets.png"
-        },
-        {
           "name": "Cozy Nest",
           "artist": "",
           "done": false,
           "brief": "",
-          "rarity": "Shop",
+          "rarity": "Rare",
           "effect": "At the start of combat, summon a Crow Familiar.",
           "path": "TheWitch/images/relics/cozy_nest.png"
         },
@@ -300,10 +291,10 @@
         {
           "name": "Separatory Funnel",
           "artist": "",
-          "done": false,
+          "done": true,
           "brief": "",
-          "rarity": "Rare",
-          "effect": "Whenever an effect would create a random Potion, choose it instead.",
+          "rarity": "Starter",
+          "effect": "Orobas upgrade of Large Pockets: whenever an effect would create a random Potion, choose it instead.",
           "path": "TheWitch/images/relics/separatory_funnel.png"
         },
         {
@@ -460,5 +451,17 @@
         }
       ]
     }
-  ]
+  ],
+  "powerOverrides": {
+    "BLOOD_ANOINTMENT_POWER": {
+      "artist": "",
+      "done": true,
+      "brief": ""
+    },
+    "POTION_DAMAGE_MULTIPLIER_POWER": {
+      "artist": "",
+      "done": true,
+      "brief": ""
+    }
+  }
 }

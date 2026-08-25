@@ -3,12 +3,15 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using TheWitch.TheWitchCode.Potions.Brewing;
 
 namespace TheWitch.TheWitchCode.Powers;
 
 /// <summary>
 /// Crystal Bottle (armed): the next potion the player uses is bottled — its consumed instance is handed to
 /// <see cref="NeverendingPotionPower" />, which replays its effect at the start of each turn. One stack per potion.
+/// Healing potions (<see cref="PotionTraits.IsHealing" /> — Fruit Juice, Blood Potion, …) are never bottled:
+/// the potion works normally and the bottle stays armed.
 /// </summary>
 public sealed class CrystalBottlePower : WitchPower
 {
@@ -18,7 +21,7 @@ public sealed class CrystalBottlePower : WitchPower
 
     public override async Task AfterPotionUsed(PotionModel potion, Creature? target)
     {
-        if (Amount <= 0 || potion.Owner != Owner.Player)
+        if (Amount <= 0 || potion.Owner != Owner.Player || PotionTraits.IsHealing(potion))
         {
             return;
         }

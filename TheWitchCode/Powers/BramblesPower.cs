@@ -30,9 +30,8 @@ public sealed class BramblesPower : WitchPower
 			Flash();
 			// Thorn retaliation visual: swamp-green slice on the attacker (preloaded via Witch.ExtraAssetPaths).
 			WitchFx.BrambleSlice(dealer);
-			// Impale buffs the owner: their Brambles deal 2^stacks damage this turn.
 			decimal damage = Amount * ImpaledPower.MultiplierFor(Owner.GetPowerAmount<ImpaledPower>());
-			await CreatureCmd.Damage(choiceContext, dealer, damage, ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner, null);
+			await CreatureCmd.Damage(choiceContext, dealer, damage, ValueProp.Unpowered | ValueProp.SkipHurtAnim, Owner, null, null);
 			await PowerCmd.Decrement(this);
 		}
 	}

@@ -17,7 +17,7 @@ public sealed class BagOfTeeth : WitchCard
     ];
 
     public BagOfTeeth()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -26,7 +26,7 @@ public sealed class BagOfTeeth : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithSilentAttack()
             .WithHitFx(VfxCmd.bluntPath, "event:/sfx/enemy/enemy_attacks/obscura/obscura_attack")

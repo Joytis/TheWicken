@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.Entities.Players;
 using TheWitch.TheWitchCode.Potions;
 using MegaCrit.Sts2.Core.Commands;
+using BaseLib.Patches.UI;
 
 namespace TheWitch.TheWitchCode.Character;
 
@@ -131,6 +132,14 @@ public class Witch : PlaceholderCharacterModel
     public override string CustomArmScissorsTexturePath => "multiplayer_hand_witch_scissors.png".CharacterUiPath();
     public override string CharacterSelectSfx => "witch_screen_selection.wav".CharacterSfxPath();
 
+    // Witch-flavored Yummy Cookie: BaseLib swaps the base relic's art only while a mutable instance is
+    // owned by a Witch. Source art at relics/yummy_cookie.png (256) — packed + outlined like any relic.
+    public override RelicIconData CustomYummyCookie => new(
+        "yummy_cookie.png".BigRelicImagePath(),
+        "yummy_cookie.tres".RelicAtlasPath(),
+        "yummy_cookie_outline.tres".RelicOutlineAtlasPath()
+    );
+    
     /*
     // Anims / visuals
     // public override float DeathAnimTime => ...;
@@ -138,7 +147,6 @@ public class Witch : PlaceholderCharacterModel
     // public override CreatureAnimator SetupCustomAnimationStates(MegaSprite controller) => ...;
     // public override void RegisterSceneConversions() => ...;
 
-    // public override RelicIconData CustomYummyCookie => ...;
 
     // Currently provided by PlaceholderCharacterModel — must supply once off the placeholder base:
     // public override string CharacterTransitionSfx => ...;

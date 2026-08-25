@@ -34,10 +34,16 @@ def add_common_args(parser) -> None:
     parser.add_argument("--days-back", type=int, default=None, help="only runs from the last N days")
 
 
+# Supabase caps a single response at 1000 rows regardless of the requested limit, and with no
+# explicit order the truncated tail was the NEWEST runs (the 2026-08-21/22 dashboard gap). Page
+# through everything instead.
+PAGE_SIZE = 1000
+
+
 def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
                days_back: int | None) -> pd.DataFrame:
     params = {"select": "victory,ascension,floor,data,mod_version,game_version,created_at",
-              "limit": "10000"}
+              "order": "created_at.asc", "limit": str(PAGE_SIZE)}
     if mod_version:
         params["mod_version"] = f"eq.{mod_version}"
     if game_version:
@@ -45,14 +51,21 @@ def fetch_runs(key: str, mod_version: str | None, game_version: str | None,
     if days_back:
         since = datetime.now(timezone.utc) - timedelta(days=days_back)
         params["created_at"] = f"gte.{since.isoformat()}"
-    resp = requests.get(
-        SUPABASE_URL,
-        params=params,
-        headers={"apikey": key, "Authorization": f"Bearer {key}"},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    return pd.DataFrame(resp.json())
+    rows: list[dict] = []
+    offset = 0
+    while True:
+        resp = requests.get(
+            SUPABASE_URL,
+            params=params | {"offset": str(offset)},
+            headers={"apikey": key, "Authorization": f"Bearer {key}"},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        page = resp.json()
+        rows.extend(page)
+        if len(page) < PAGE_SIZE:
+            return pd.DataFrame(rows)
+        offset += PAGE_SIZE
 
 
 def card_rarities() -> dict[str, str]:

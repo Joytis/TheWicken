@@ -39,7 +39,7 @@ public sealed class RottingRootsPower : WitchPower
         {
             WitchFx.GreenGas(enemy); // rot tick (mirrors base Noxious Fumes; globally preloaded)
         }
-        await CreatureCmd.Damage(choiceContext, enemies, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(choiceContext, enemies, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, null, null);
         foreach (Creature enemy in enemies.Where(e => e.IsAlive))
         {
             await PowerCmd.Apply<HexPower>(choiceContext, enemy, HexPerTurn, Owner, null);

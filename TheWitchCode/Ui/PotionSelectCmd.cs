@@ -38,7 +38,7 @@ public static class PotionSelectCmd
         }
 
         uint choiceId = RunManager.Instance.PlayerChoiceSynchronizer.ReserveChoiceId(player);
-        await context.SignalPlayerChoiceBegun(PlayerChoiceOptions.None);
+        await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
         PotionModel? potion;
         if (ShouldSelectLocal(player))
         {

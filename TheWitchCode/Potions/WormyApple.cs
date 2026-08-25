@@ -28,7 +28,7 @@ public sealed class WormyApple : WitchPotion
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new HealVar(10m),
+        new HealVar(15m),
         new CardsVar(3)
     ];
 

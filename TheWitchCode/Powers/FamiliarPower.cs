@@ -10,7 +10,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWitch.TheWitchCode.Cards;
 using TheWitch.TheWitchCode.Extensions;
@@ -33,9 +32,9 @@ public enum FamiliarPetAnim
 /// (see <c>WitchCard.GainFamiliar</c>). The player's total familiar count is the sum of all
 /// <see cref="FamiliarPower" /> stacks across the creature (see <see cref="Familiars" />).
 ///
-/// Payoff: just BEFORE the owner's turn hand-draw, the familiar adds one random card it can produce to your
-/// hand PER STACK (see <see cref="CreateTurnStartCard" /> — each stack rolls independently), so tokens sit in
-/// front of the drawn cards. This replaces the old
+/// Payoff: just BEFORE the owner's turn hand-draw, the familiar adds one card it can produce to your
+/// hand PER STACK (see <see cref="CreateTurnStartCard" /> — each stack cycles through the familiar's card
+/// list independently), so tokens sit in front of the drawn cards. This replaces the old
 /// "shuffle N token cards into your deck on summon" — ongoing, immediate value, and sacrificing the power
 /// (<c>PowerCmd.Decrement</c> to zero, which auto-removes the <see cref="PowerStackType.Counter" />) actually
 /// costs you those recurring cards.
@@ -57,15 +56,19 @@ public abstract class FamiliarPower : WitchPower
     /// <summary>Does the stack at <paramref name="stackIndex" /> produce Upgraded tokens?</summary>
     protected bool IsStackUpgraded(int stackIndex) => stackIndex < UpgradedStacks;
 
-    /// <summary>Create one real combat card this familiar can produce (Upgraded per <paramref name="upgraded" />), chosen at random if it has several.</summary>
-    protected abstract CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded);
+    /// <summary>
+    /// Create one real combat card this familiar can produce (Upgraded per <paramref name="upgraded" />).
+    /// Multi-card familiars CYCLE deterministically through their card list per stack (first generation →
+    /// first card, second → second, …, wrap), keyed by <paramref name="stackIndex" />.
+    /// </summary>
+    protected abstract CardModel CreateTurnStartCard(Player owner, ICombatState combat, bool upgraded, int stackIndex);
 
     /// <summary>
     /// Every card this familiar can produce, one of each (Sack of Treats path). Single-card familiars
     /// produce their one card; loot-table familiars override to yield one of EACH table entry.
     /// </summary>
-    protected virtual IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
-        [CreateTurnStartCard(owner, combat, rng, upgraded)];
+    protected virtual IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, bool upgraded, int stackIndex) =>
+        [CreateTurnStartCard(owner, combat, upgraded, stackIndex)];
 
     /// <summary>
     /// Canonical cosmetic pet shown at the player's feet — ONE PET PER STACK, so the board shows how many of
@@ -93,8 +96,7 @@ public abstract class FamiliarPower : WitchPower
     {
         Flash();
         RequestPetAnimation(stackIndex, FamiliarPetAnim.Create);
-        Rng rng = player.RunState.Rng.CombatCardGeneration;
-        CardModel card = CreateTurnStartCard(player, combatState, rng, IsStackUpgraded(stackIndex));
+        CardModel card = CreateTurnStartCard(player, combatState, IsStackUpgraded(stackIndex), stackIndex);
         TagSource(card, stackIndex);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player, CardPilePosition.Top);
     }
@@ -107,7 +109,6 @@ public abstract class FamiliarPower : WitchPower
     {
         Flash();
 
-        Rng rng = player.RunState.Rng.CombatCardGeneration;
         SackOfTreats? sack = player.GetRelic<SackOfTreats>();
         sack?.Flash();
 
@@ -117,8 +118,8 @@ public abstract class FamiliarPower : WitchPower
 
             bool upgraded = IsStackUpgraded(i);
             IEnumerable<CardModel> cards = sack != null
-                ? CreateAllTurnStartCards(player, combatState, rng, upgraded)
-                : [CreateTurnStartCard(player, combatState, rng, upgraded)];
+                ? CreateAllTurnStartCards(player, combatState, upgraded, i)
+                : [CreateTurnStartCard(player, combatState, upgraded, i)];
 
             foreach (CardModel card in cards)
             {
@@ -127,6 +128,7 @@ public abstract class FamiliarPower : WitchPower
                 // Use the "generated" path (not a plain Add) so the card counts as created — records combat
                 // history and fires AfterCardGeneratedForCombat, which card-creation payoffs like Cloak of Moonlight listen to.
                 await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player, CardPilePosition.Top);
+                await Cmd.Wait(0.1f);
             }
         }
     }
@@ -271,30 +273,29 @@ public abstract class FamiliarPower : WitchPower
 /// </summary>
 public abstract class FamiliarPower<TCard> : FamiliarPower where TCard : WitchFamiliarCard
 {
-    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, bool upgraded, int stackIndex) =>
         FamiliarCardRegistry.CreateFamiliarCards<TCard>(owner, 1, combat, upgraded).First();
 }
 
 /// <summary>
-/// A weighted "loot table" of familiar token-cards. Each <c>Add&lt;TCard&gt;(weight)</c> registers a card type
-/// the familiar can produce; <see cref="Roll" /> picks one with probability proportional to its weight
-/// (default weight 1 = uniform). Built once per power via <see cref="LootTableFamiliarPower.BuildLootTable" />.
+/// The ordered card list of a multi-card familiar. Each <c>Add&lt;TCard&gt;()</c> registers a card type the
+/// familiar can produce; generation CYCLES through the entries in declaration order (see
+/// <see cref="LootTableFamiliarPower" />). Built once per power via <see cref="LootTableFamiliarPower.BuildLootTable" />.
 /// </summary>
 public sealed class FamiliarLootTable
 {
-    private readonly List<(int Weight, Func<Player, ICombatState, bool, CardModel> Create)> _entries = [];
-    private int _totalWeight;
+    /// <summary>One producible card type. The delegate exists because card creation is generic
+    /// (<c>FamiliarCardRegistry.CreateFamiliarCards&lt;TCard&gt;</c>) — <see cref="Add{TCard}" /> captures the
+    /// type in a closure at registration so lookup needs no reflection.</summary>
+    private readonly record struct Entry(Func<Player, ICombatState, bool, CardModel> Create);
 
-    /// <summary>Register a card type the familiar can roll, with optional relative <paramref name="weight" /> (default 1).</summary>
-    public FamiliarLootTable Add<TCard>(int weight = 1) where TCard : WitchFamiliarCard
+    private readonly List<Entry> _entries = [];
+
+    /// <summary>Register a card type the familiar can produce; declaration order is the cycle order.</summary>
+    public FamiliarLootTable Add<TCard>() where TCard : WitchFamiliarCard
     {
-        if (weight <= 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(weight), "Loot-table weight must be positive.");
-        }
-
-        _entries.Add((weight, (owner, combat, upgraded) => FamiliarCardRegistry.CreateFamiliarCards<TCard>(owner, 1, combat, upgraded).First()));
-        _totalWeight += weight;
+        _entries.Add(new Entry((owner, combat, upgraded) =>
+            FamiliarCardRegistry.CreateFamiliarCards<TCard>(owner, 1, combat, upgraded).First()));
         return this;
     }
 
@@ -302,44 +303,75 @@ public sealed class FamiliarLootTable
     public IEnumerable<CardModel> CreateAll(Player owner, ICombatState combat, bool upgraded) =>
         _entries.Select(e => e.Create(owner, combat, upgraded));
 
-    /// <summary>Roll one real combat card from the table, weighted by each entry's weight (Upgraded if <paramref name="upgraded" />).</summary>
-    public CardModel Roll(Player owner, ICombatState combat, Rng rng, bool upgraded)
+    /// <summary>Number of entries in the table (the cycle length).</summary>
+    public int Count => _entries.Count;
+
+    /// <summary>The card at <paramref name="position" /> in table order, wrapping past the end (cycling path).</summary>
+    public CardModel CardAt(int position, Player owner, ICombatState combat, bool upgraded)
     {
         if (_entries.Count == 0)
         {
             throw new InvalidOperationException("Familiar loot table is empty.");
         }
 
-        int roll = rng.NextInt(_totalWeight);
-        foreach ((int weight, Func<Player, ICombatState, bool, CardModel> create) in _entries)
-        {
-            if (roll < weight)
-            {
-                return create(owner, combat, upgraded);
-            }
-
-            roll -= weight;
-        }
-
-        return _entries[^1].Create(owner, combat, upgraded); // unreachable; satisfies the compiler
+        return _entries[position % _entries.Count].Create(owner, combat, upgraded);
     }
 }
 
 /// <summary>
 /// Convenience base for a familiar that can produce one of several token-cards (a "loot table"), e.g. Bear.
-/// Declare the cards (and optional weights) by overriding <see cref="BuildLootTable" />; the table is built
-/// once and rolled at the start of each owner turn. Single-card familiars should use <see cref="FamiliarPower{TCard}" />.
+/// Declare the cards by overriding <see cref="BuildLootTable" />; each stack CYCLES deterministically through
+/// the table in declaration order — its first generation makes the first card, the next the second, …, then
+/// wraps — tracked per stack in <see cref="_cyclePositionByStack" />. (Plain instance field, not DynamicVars:
+/// mid-combat state is never save-restored and MP is lockstep, so a field is safe — see the NeverendingPotion
+/// precedent.) Single-card familiars should use <see cref="FamiliarPower{TCard}" />.
 /// </summary>
 public abstract class LootTableFamiliarPower : FamiliarPower
 {
     private FamiliarLootTable? _lootTable;
 
+    // Not readonly: DeepCloneFields must give each mutable clone its own list — MemberwiseClone would share
+    // the canonical's list with every clone, leaking cycle positions across combats (Crystal Bottle bug class).
+    private List<int> _cyclePositionByStack = [];
+
     /// <summary>Declare the cards this familiar can produce. Called once, lazily.</summary>
     protected abstract FamiliarLootTable BuildLootTable();
 
-    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
-        (_lootTable ??= BuildLootTable()).Roll(owner, combat, rng, upgraded);
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _cyclePositionByStack = [];
+    }
 
-    protected override IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, Rng rng, bool upgraded) =>
+    /// <summary>
+    /// Sacrificed stacks drop their cycle state, so a later re-summon starts at the first card again.
+    /// Trimming the TAIL mirrors the base <c>UpgradedStacks</c> clamp: normal stacks (high indices) are
+    /// spent first, so stack identity below <see cref="PowerModel.Amount" /> is stable.
+    /// </summary>
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        await base.AfterPowerAmountChanged(choiceContext, power, amount, applier, cardSource);
+        int keep = Math.Max(0, Amount);
+        if (power == this && _cyclePositionByStack.Count > keep)
+        {
+            _cyclePositionByStack.RemoveRange(keep, _cyclePositionByStack.Count - keep);
+        }
+    }
+
+    /// <summary>This stack's current cycle position, post-incremented so its next generation advances.</summary>
+    private int NextCyclePosition(int stackIndex)
+    {
+        while (_cyclePositionByStack.Count <= stackIndex)
+        {
+            _cyclePositionByStack.Add(0);
+        }
+
+        return _cyclePositionByStack[stackIndex]++;
+    }
+
+    protected override CardModel CreateTurnStartCard(Player owner, ICombatState combat, bool upgraded, int stackIndex) =>
+        (_lootTable ??= BuildLootTable()).CardAt(NextCyclePosition(stackIndex), owner, combat, upgraded);
+
+    protected override IEnumerable<CardModel> CreateAllTurnStartCards(Player owner, ICombatState combat, bool upgraded, int stackIndex) =>
         (_lootTable ??= BuildLootTable()).CreateAll(owner, combat, upgraded);
 }

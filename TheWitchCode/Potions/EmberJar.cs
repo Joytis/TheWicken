@@ -27,6 +27,6 @@ public sealed class EmberJar : WitchPotion
     {
         PotionModel.AssertValidForTargetedPotion(target);
         DamageVar damage = DynamicVars.Damage;
-        await CreatureCmd.Damage(choiceContext, target!, damage.BaseValue, damage.Props, Owner.Creature, null);
+        await CreatureCmd.Damage(choiceContext, target!, damage.BaseValue, damage.Props, Owner.Creature, null, null);
     }
 }

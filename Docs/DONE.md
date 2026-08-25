@@ -6,6 +6,50 @@ Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what
 
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
 
+### 342. Witch Yummy Cookie variant wired (2026-08-24) — art moved charui/yummy_cookie_witch.png → relics/yummy_cookie.png (downsized 512→256); `CustomYummyCookie` override on Witch returns the standard relic path triple (BigRelicImagePath / RelicAtlasPath / RelicOutlineAtlasPath); needs `dotnet publish` to pack + in-game check (`relic YUMMY_COOKIE` on a Witch run).
+
+### 341. MP card fixes (2026-08-24) — Blood Anointment target `AnyPlayer`→`AnyAlly` ("Choose another player" — can't target self); Plague Tide now iterates `CombatState.Players` directly so the caster unambiguously gets a Rat Familiar too; needs in-game MP playtest.
+
+### 340. Smolder rework (2026-08-24) — now "Gain 4 Block. Create an Unstable Ember Jar." (immediate, via Witch.ProducePotion); SmolderPower deleted (orphaned — .cs, loc keys, no art existed); upgrade still +3 Block; needs in-game playtest.
+
+### 339. Cat+ hover shows Nimble+ (2026-08-24) — removed the stale MaxUpgradeLevel-0 workaround: CatFamiliar's Nimble hover tip now takes IsUpgraded like Ferocity's; needs in-game hover check.
+
+### 338. Brambleburst multiplier fix (2026-08-24) — dropped the stray `* 2` in the CalculatedDamageVar multiplier: now +2 damage per Bramble as the card text says (was silently dealing +4); needs in-game playtest.
+
+### 337. Crystal Bottle card hover tip (2026-08-24) — card now shows the CrystalBottlePower tooltip (carries the "Healing Potions cannot be bottled" note) via ExtraHoverTips.
+
+### 336. Dark Omen hits ALL enemies (2026-08-24) — Crow token now `TargetType.AllEnemies`, applies Hex to `CombatState.HittableEnemies` (Hexblast pattern); loc "to ALL enemies"; needs in-game playtest.
+
+### 335. New MP Card: Bottle Bombardment (2026-08-24) — 2e Rare Attack (MP-only): 6 damage (+4 upgraded) per potion created by ANY player this combat; `PotionProcureHistory.CountAll()` + Barrage live hit count; NO ART; needs in-game MP playtest.
+
+### 334. New MP Card: Blood Anointment (2026-08-24) — 1e Uncommon Skill (MP-only): choose a player, their Attacks apply 1 Hex this turn (`BloodAnointmentPower`: Envenom rider + Cauldron Dance end-of-turn removal); upgrade −1e; NO ART (card + power icon); needs in-game MP playtest. (User note spelled "Annointment" — implemented as "Anointment".)
+
+### 333. New MP Card: Plague Tide (2026-08-24) — 2e Rare Power (MP-only): ALL players summon a Rat Familiar (upgraded: Rat Familiar+ via per-player `UpgradedStacks`); `IFamiliarSummon` so tutors find it; NO ART; needs in-game MP playtest.
+
+### 332½. Familiar cycling hardening (2026-08-24) — cycle positions now TRIMMED on stack loss (`AfterPowerAmountChanged` tail-trim mirroring the UpgradedStacks clamp) so sacrifice→resummon starts at the first card; loot-table entries restored to a named `Entry` record (`.Create(...)` call sites).
+
+### 332. Analytics full pull + 8-21/22 gap fix (2026-08-24) — no 7-day filter existed: Supabase caps one response at 1000 rows and the unordered fetch truncated the NEWEST runs (row #999 ended 8-20). `common.fetch_runs` now pages (order=created_at.asc, offset loop); verified export covers all 1322 runs through 8-24; analytics-data regenerated.
+
+### 331. Cozy Nest rarity (2026-08-24) — code was already Rare; fixed stale art-tracker entry (said Shop).
+
+### 330. Separatory Funnel → Touch of Orobas Ancient (2026-08-24) — Orobas now upgrades Large Pockets to Separatory Funnel (rarity Rare→Starter, out of random pool); Bottomless Pockets relic deleted (.cs/.uid/loc/art/tracker entry); needs in-game playtest (Orobas event preview + swap).
+
+### 329. Knowledge: no Exhaust targets, discount this turn (2026-08-24) — REVERTED same day at user request (copying Exhaust cards is fun; combat-long discount stays).
+
+### 328. Witchcraft overflow auto-play (2026-08-24) — REVERTED same day at user request (auto-playing overflow felt overwhelming): overflow brews are simply lost again. `UseWithoutBelt` removed; the `PotionAutoPlay` helper (ResolveTarget/PlayThrowVfx/OnUse reflection) stays — NeverendingPotionPower's replay dedup kept.
+
+### 327. Crystal Bottle excludes healing potions (2026-08-24) — `CrystalBottlePower.AfterPotionUsed` skips `PotionTraits.IsHealing` (potion works normally, bottle stays armed); power tooltip notes "Healing Potions cannot be bottled"; needs in-game playtest.
+
+### 326. Familiars cycle instead of random (2026-08-24) — LootTableFamiliarPower now cycles deterministically through its card list per stack (turn 1 → first card, turn 2 → second, wrap; per-stack `_cyclePositionByStack`, DeepCloneFields-safe); weights + `Roll` removed from FamiliarLootTable; `CreateTurnStartCard` gained a stackIndex param; power loc "a random X card" → "the next X card"; needs in-game playtest (cycle order, Sack of Treats, Command's GenerateOneCard).
+
+### 325. Nimble upgrade added (2026-08-24) — Nimble+ = Gain 1 Energy + Gain 2 Block (was MaxUpgradeLevel 0, so Cat+ granted plain Nimble); `GainsBlock => IsUpgraded`, loc `{GainsBlock:cond:...}` line; needs in-game playtest.
+
+### 324. Stony Brew strictly defensive (2026-08-24) — Fertilizer removed from Stony Brew loot table; PotionTraits orientation flipped Defensive→Offensive (affects Grind Down pools: Fertilizer now rolls from Attack exhausts).
+
+### 323. Call the Pack upgrade text fix (2026-08-24) — loc token was `{IfUpgraded:Gnash+|Gnash}` missing `show:` option; now matches base-game convention.
+
+### 322. Bottle Barrage MP divergence fix (2026-08-24) — PotionProcureHistory now gates recording on `CombatManager.Instance.IsInProgress`: players keep CombatState through the reward screen, so reward potion picks were recorded AFTER the combat-end History.Clear and leaked into next combat's count, with per-client timing skew via RewardSynchronizer's fire-and-forget replay → divergence; needs in-game MP playtest.
+
 ### 321. Tinder leaves an Ash (2026-08-17) — 1e Common Skill: Exhaust a card (Ash filtered out of the pick via `FromHand` filter), Next turn +2e, add an Ash to Discard; hover tip for Ash; needs in-game playtest.
 
 ### 320. Bonfire rework (2026-08-17) — 0e Rare Skill: Exhaust 2 cards (Ash not selectable), gain 4e (+1 upgraded), add 2 Ash to Discard (`Ashes` var, FightThrough pattern); needs in-game playtest.

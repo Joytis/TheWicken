@@ -20,6 +20,5 @@ public sealed class StonyBrew : OrientationBrewCard
         ModelDb.Potion<SkillPotion>(),
         ModelDb.Potion<SpeedPotion>(),
         ModelDb.Potion<WeakPotion>(),
-        ModelDb.Potion<Fertilizer>(),
     ];
 }

@@ -21,11 +21,11 @@ public sealed class Hexblast : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<HexPower>(2m),
-        new DamageVar(8m, ValueProp.Move)
+        new DamageVar(7m, ValueProp.Move)
     ];
 
     public Hexblast()
-        : base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
     }
 
@@ -33,7 +33,7 @@ public sealed class Hexblast : WitchCard
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(2)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState!)
             // Purple occult flame under the target (preloaded via Witch.ExtraAssetPaths) + heavy sting.
             .WithHitVfxNode(t => NGroundFireVfx.Create(t, VfxColor.Purple))

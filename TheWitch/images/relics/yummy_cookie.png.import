@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj7ls6jeslpbf"
-path="res://.godot/imported/bottomless_pockets.png-d34012fe684149cd87896e34741c3a26.ctex"
+uid="uid://bltyovh26mn0a"
+path="res://.godot/imported/yummy_cookie.png-c6e63a80b8c5fae874c4f31715cbeaba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWitch/images/relics/bottomless_pockets.png"
-dest_files=["res://.godot/imported/bottomless_pockets.png-d34012fe684149cd87896e34741c3a26.ctex"]
+source_file="res://TheWitch/images/relics/yummy_cookie.png"
+dest_files=["res://.godot/imported/yummy_cookie.png-c6e63a80b8c5fae874c4f31715cbeaba.ctex"]
 
 [params]
 

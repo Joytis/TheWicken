@@ -10,12 +10,12 @@ public sealed class RatFamiliar : WitchCard, IFamiliarSummon
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<RatFamiliarPower>(),
-        HoverTipFactory.FromCard<Rummage>(IsUpgraded),
         HoverTipFactory.FromCard<Swarm>(IsUpgraded),
+        HoverTipFactory.FromCard<Rummage>(IsUpgraded),
     ];
 
     public RatFamiliar()
-        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 

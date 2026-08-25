@@ -34,7 +34,7 @@ public static class WitchFx
 
 
     public static AttackCommand WithSilentAttack(this AttackCommand cmd) =>
-        cmd.WithAttackerAnim(SilentAttackTrigger, cmd.Attacker!.Player.Character.AttackAnimDelay);
+        cmd.WithAttackerAnim(SilentAttackTrigger, cmd.Attacker!.Player!.Character.AttackAnimDelay);
 
     private static readonly System.Reflection.FieldInfo AttackerAnimNameField =
         HarmonyLib.AccessTools.Field(typeof(AttackCommand), "_attackerAnimName");

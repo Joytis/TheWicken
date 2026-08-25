@@ -19,7 +19,7 @@ public sealed class WickedBrew : OrientationBrewCard
         ModelDb.Potion<ExplosiveAmpoule>(),
         ModelDb.Potion<VulnerablePotion>(),
         ModelDb.Potion<StrengthPotion>(),
-        ModelDb.Potion<FlexPotion>(),
+        ModelDb.Potion<Fertilizer>(),
         ModelDb.Potion<AttackPotion>(),
         ModelDb.Potion<CursedBottle>(),
     ];

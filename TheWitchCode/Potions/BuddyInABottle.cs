@@ -14,7 +14,7 @@ namespace TheWitch.TheWitchCode.Potions;
 /// </summary>
 public sealed class BuddyInABottle : WitchPotion
 {
-    public override PotionRarity Rarity => PotionRarity.Rare;
+    public override PotionRarity Rarity => PotionRarity.Uncommon;
 
     public override PotionUsage Usage => PotionUsage.CombatOnly;
 
