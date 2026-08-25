@@ -32,7 +32,7 @@ public sealed class ForbiddenMagic : WitchCard
         bool wasHexed = cardPlay.Target.HasPower<HexPower>();
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.starryImpactVfx, null, "heavy_attack.mp3")
             .Execute(choiceContext);

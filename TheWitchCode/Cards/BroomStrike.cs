@@ -25,7 +25,7 @@ public sealed class BroomStrike : WitchCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .TargetingAllOpponents(CombatState!)
             .WithSilentAttack()
             .WithHitFx(VfxCmd.bluntPath, null, "blunt_attack.mp3")

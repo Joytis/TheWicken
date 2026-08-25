@@ -29,7 +29,7 @@ public sealed class Rats : WitchFamiliarCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitVfxNode((Creature c) => NRatsThrowVfx.Create(Owner.Creature, c, WitchFx.White))
             // .WithHitFx(VfxCmd.bitePath)

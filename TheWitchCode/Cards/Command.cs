@@ -31,7 +31,7 @@ public sealed class Command : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);

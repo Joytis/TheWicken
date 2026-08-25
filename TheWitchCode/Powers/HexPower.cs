@@ -54,7 +54,7 @@ public sealed class HexPower : WitchPower
         await Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target != Owner || Amount <= 0 || !props.IsPoweredAttack() || !TriggeredBy(dealer))
         {

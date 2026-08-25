@@ -97,14 +97,14 @@ public static class EyeOfNewtPotionFanoutPatch
             await ThrowBottleAt(potion, ownerCreature, other);
             await Cmd.Wait(ThrowStagger);
 
-            CombatId? combatId = CombatManager.Instance.BeginCardOrPotionEffect(owner);
+            CombatManager.Instance.BeginCardOrPotionEffect(owner);
             try
             {
                 await (Task)OnUseMethod.Invoke(potion, [choiceContext, other])!;
             }
             finally
             {
-                await CombatManager.Instance.EndCardOrPotionEffect(combatId, owner);
+                CombatManager.Instance.EndCardOrPotionEffect(owner);
             }
         }
     }

@@ -50,7 +50,7 @@ public sealed class Plaguestorm : WitchCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(hits)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .TargetingAllOpponents(CombatState!)
             .WithHitVfxNode((Creature c) => NRatsThrowVfx.Create(Owner.Creature, c, WitchFx.White))
             .WithAttackerAnim("Attack", 0.2f)

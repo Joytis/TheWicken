@@ -46,7 +46,7 @@ public sealed class Ferocity : WitchFamiliarCard
         int hits = (int)((CalculatedVar)DynamicVars[_calculatedHitsKey]).Calculate(cardPlay.Target);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(hits)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/thin_slice_vfx", null, "slash_attack.mp3")
             .WithAttackDelay(0.06f)

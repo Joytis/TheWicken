@@ -30,7 +30,7 @@ public sealed class Impale : WitchCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             // Thorn hit: swamp-green slice (preloaded via Witch.ExtraAssetPaths).
             .WithHitVfxNode(WitchFx.BrambleSliceNode)

@@ -35,7 +35,7 @@ public sealed class Moonbeam : WitchCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitVfxNode((Creature c) => WitchFx.MoonbeamNode(Owner.Creature, c))
             // Cast sound on the attacker, impact thud on the hit — the Sovereign Blade split.

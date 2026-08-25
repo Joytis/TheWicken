@@ -41,7 +41,7 @@ public sealed class BottleBombardment : WitchCard
         }
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(potions)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.rockShatterPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);

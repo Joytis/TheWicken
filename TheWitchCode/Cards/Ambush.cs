@@ -22,7 +22,7 @@ public sealed class Ambush : WitchCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .TargetingAllOpponents(CombatState!)
             .WithHitFx(VfxCmd.scratchPath)
             .Execute(choiceContext);

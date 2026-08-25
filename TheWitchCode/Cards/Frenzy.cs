@@ -29,7 +29,7 @@ public sealed class Frenzy : WitchCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(2)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.scratchPath)
             .Execute(choiceContext);

@@ -45,7 +45,7 @@ public sealed class Gnash : WitchFamiliarCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.CalculatedDamage)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.bitePath)
             .Execute(choiceContext);

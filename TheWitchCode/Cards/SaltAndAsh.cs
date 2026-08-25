@@ -33,7 +33,7 @@ public sealed class SaltAndAsh : WitchCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .TargetingAllOpponents(CombatState!)
             .WithHitFx(VfxCmd.slashPath)
             .Execute(choiceContext);

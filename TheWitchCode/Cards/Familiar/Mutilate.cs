@@ -24,7 +24,7 @@ public sealed class Mutilate : WitchFamiliarCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
+            .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.heavyBluntPath, null, "heavy_attack.mp3")
             .WithHitVfxSpawnedAtBase()
