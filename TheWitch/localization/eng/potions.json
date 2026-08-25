@@ -17,8 +17,6 @@
   "THEWITCH-PUFF_OF_SMOKE.description": "Gain [blue]{Block}[/blue] [gold]Block[/gold].",
   "THEWITCH-MUSHROOM_EXTRACT.title": "Mushroom Extract",
   "THEWITCH-MUSHROOM_EXTRACT.description": "Discard your [gold]Hand[/gold] and draw [blue]6[/blue] cards. They cost [blue]0[/blue] for the rest of combat, but they're... silly...",
-  "THEWITCH-WORMY_APPLE.title": "Wormy Apple",
-  "THEWITCH-WORMY_APPLE.description": "Heal [green]{Heal}[/green] HP. Add [blue]{Cards}[/blue] [gold]Wormy[/gold] into your [gold]Hand[/gold].",
   "THEWITCH-BOTTLED_MESSAGE.title": "Bottled Message",
   "THEWITCH-BOTTLED_MESSAGE.description": "Put the bottled card into your [gold]Hand[/gold].",
   "THEWITCH-POTION_SHAPED_PEBBLE.description": "Deal [blue]{Damage}[/blue] damage.",

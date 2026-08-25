@@ -38,5 +38,9 @@ public sealed class Sprouts : WitchCard
         CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Discard, Owner), 2.2f);
     }
 
-    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(2m);
+    protected override void OnUpgrade() 
+    {
+        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Brambles().UpgradeValueBy(2m);
+    }
 }

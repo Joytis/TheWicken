@@ -89,6 +89,18 @@
             "detail": "Fill missing big/small variants of card_portraits & powers (upscale small->big, downscale big->small, 4x). Run 'Godot: Import assets' after."
         },
         {
+            "label": "VFX: Pack sprite sheets",
+            "type": "process",
+            "command": "py",
+            "args": [
+                "${workspaceFolder}/tools/pack-atlases.py", "--vfx"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "detail": "Pack each TheWitch/images/vfx/raw/<name>/ folder into a power-of-two sprite sheet at images/vfx/sheets/<name>.png (tracked; prints hframes/vframes). Also runs the regular atlas pack."
+        },
+        {
             "label": "Images: Generate locked char-select silhouette",
             "type": "process",
             "command": "py",

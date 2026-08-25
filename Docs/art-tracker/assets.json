@@ -27,16 +27,6 @@
           "path": "TheWitch/images/potions/fertilizer.png"
         },
         {
-          "name": "Wormy Apple",
-          "artist": "",
-          "done": false,
-          "brief": "",
-          "rarity": "Uncommon",
-          "orientation": "Neutral",
-          "effect": "Heal HP. Add Wormy cards into your Hand.",
-          "path": "TheWitch/images/potions/wormy_apple.png"
-        },
-        {
           "name": "Buddy in a Bottle",
           "artist": "",
           "done": false,

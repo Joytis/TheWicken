@@ -15,6 +15,8 @@ powers           powers/*.png (256, ships)        64x64        power_atlas      
 potions          potions/*.png (256, .gdignore'd) 80x80        potion_atlas         + outline slices ->
                                                                                     potion_outline_atlas
 pets             pets/*.png (512, .gdignore'd)    512 native   pets_atlas
+vfx sheets       vfx/raw/<name>/*.png (.gdignore'd) pow2 cell   vfx/sheets/<name>.png  particle sprite sheets: uniform
+                                                                                    grid, no .tres (use hframes/vframes)
 
 The relic/power source pngs (256) also ship loose — the game's BigIcon views load them directly.
 Outline slices are generated here (dilate + soft blur, ported from the retired gen-outlines.py,
@@ -29,11 +31,19 @@ Runtime resolution: the model bases (WitchCard/WitchRelic/WitchPower/WitchPotion
 point their path overrides at the .tres via the *AtlasPath helpers in StringExtensions.cs.
 Missing art falls back to the packed placeholder slice (card/relic/power/potion.tres).
 
+VFX sheets differ from the rest: each raw/<name>/ folder becomes ONE power-of-two png in
+vfx/sheets/ (generated but TRACKED -- scenes reference them by path/uid). Frames are sorted by filename, each padded/centered into a
+power-of-two cell, laid out in a near-square grid; the sheet is then rounded up to a power of two
+so it tiles cleanly for ParticleProcessMaterial / Sprite2D hframes x vframes (printed per sheet).
+e.g. 4 x 256px bottles -> 512x512, 2x2.
+
 Run with no args; invoked automatically by `dotnet publish` (PackAtlases target).
+Pass --vfx to also rebuild the vfx sprite sheets (tracked; VS Code task 'VFX: Pack sprite sheets').
 """
 
 import hashlib
 import io
+import math
 import sys
 from pathlib import Path
 
@@ -213,6 +223,53 @@ def pack_pets(generated: set[str]) -> None:
     print(f"  pets: {len(entries)} packed, {n} .tres updated")
 
 
+VFX_RAW = IMAGES / "vfx" / "raw"
+VFX_SHEETS = IMAGES / "vfx" / "sheets"
+
+
+def next_pow2(n: int) -> int:
+    return 1 << max(0, (n - 1).bit_length())
+
+
+def pack_vfx_sheets() -> None:
+    """Each raw/<name>/ folder -> vfx/sheets/<name>.png, a power-of-two uniform-grid sprite sheet."""
+    if not VFX_RAW.is_dir():
+        return
+    keep: set[str] = set()
+    for folder in sorted(d for d in VFX_RAW.iterdir() if d.is_dir()):
+        pngs = sorted(folder.glob("*.png"))
+        if not pngs:
+            continue
+        frames = [Image.open(p).convert("RGBA") for p in pngs]
+        cell = next_pow2(max(max(f.width, f.height) for f in frames))
+        cols = math.ceil(math.sqrt(len(frames)))
+        rows = math.ceil(len(frames) / cols)
+        sheet_w, sheet_h = next_pow2(cols * cell), next_pow2(rows * cell)
+        if max(sheet_w, sheet_h) > MAX_ATLAS:
+            print(f"  vfx/{folder.name}: sheet {sheet_w}x{sheet_h} exceeds {MAX_ATLAS} -- skipped",
+                  file=sys.stderr)
+            continue
+        sheet = Image.new("RGBA", (sheet_w, sheet_h), (0, 0, 0, 0))
+        for i, f in enumerate(frames):
+            x = (i % cols) * cell + (cell - f.width) // 2
+            y = (i // cols) * cell + (cell - f.height) // 2
+            sheet.paste(f, (x, y))
+        fname = f"{folder.name}.png"
+        keep.add(fname)
+        changed = save_image_if_changed(sheet, VFX_SHEETS / fname)
+        print(f"  vfx/{fname}: {len(frames)} frames, {sheet_w}x{sheet_h}, cell {cell}, "
+              f"hframes={sheet_w // cell} vframes={sheet_h // cell}{'  (wrote)' if changed else ''}")
+
+    if VFX_SHEETS.is_dir():
+        for f in VFX_SHEETS.glob("*.png"):
+            if f.name not in keep:
+                f.unlink()
+                imp = f.with_name(f.name + ".import")
+                if imp.exists():
+                    imp.unlink()
+                print(f"  removed: vfx/sheets/{f.name}")
+
+
 def main() -> int:
     generated: set[str] = set()
 
@@ -226,6 +283,10 @@ def main() -> int:
     pack_icons("potions", list((IMAGES / "potions").glob("*.png")), 80,
                "potion_atlas", generated, outline=("potion_outline_atlas", 1.25, 0.4))
     pack_pets(generated)
+    if "--vfx" in sys.argv:
+        # Opt-in: vfx sheets are tracked in git (scenes reference them), so they're
+        # regenerated on demand via the 'VFX: Pack sprite sheets' VS Code task, not on publish.
+        pack_vfx_sheets()
 
     if not generated:
         print("pack-atlases: no source art found", file=sys.stderr)

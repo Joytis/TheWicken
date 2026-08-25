@@ -116,7 +116,6 @@ public static class PotionTraits
         [typeof(VialOfSmoke)] = PotionOrientation.Defensive,            // card-only Block potion (Light the Candle)
         [typeof(MushroomExtract)] = PotionOrientation.Utility,          // discard hand, draw 6 free gibberish cards
         [typeof(BottledMessage)] = PotionOrientation.Utility,           // card-only: returns the bottled card to hand
-        [typeof(WormyApple)] = PotionOrientation.Defensive,             // heal 15 (downside: adds 3 Wormy statuses)
     };
 
     /// <summary>
@@ -130,7 +129,6 @@ public static class PotionTraits
         typeof(RegenPotion),      // Regen heals over turns
         typeof(FairyInABottle),   // revive: heal to 30% when you'd hit 0 HP
         typeof(FruitJuice),       // gain Max HP (current HP rises with it)
-        typeof(WormyApple),       // heal 15 (plus Wormy statuses)
     };
 
     /// <summary>
