@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Utilities;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.TestSupport;
 using TheWitch.TheWitchCode.Extensions;
 
@@ -26,6 +27,7 @@ public partial class NBottleThrowVfx : Node2D
 
     public static readonly string scenePath = "vfx_bottle_throw.tscn".VfxScenePath();
 
+
     // Hard-coded against vfx_bottle_throw.tscn (exported fields don't bind in this editor setup):
     // throw/impact = every emitter under the matching container; modulate = everything except
     // the bottle-textured emitters (name contains "bottle"), which keep their own colors.
@@ -33,7 +35,9 @@ public partial class NBottleThrowVfx : Node2D
     private readonly List<GpuParticles2D> _impactParticles = [];
     private readonly List<GpuParticles2D> _modulateParticles = [];
 
+
     private Color? _pendingTint;
+    private GpuParticles2D? _bottleSpray;
 
     private CancellationTokenSource? _cts;
 
@@ -96,6 +100,8 @@ public partial class NBottleThrowVfx : Node2D
             }
         }
 
+        _bottleSpray = GetNode<GpuParticles2D>("throw_container/vfx_bottle_spray");
+
         // Bottle-textured emitters keep their authored colors; everything else takes the tint.
         _modulateParticles.AddRange(
             _throwParticles.Concat(_impactParticles).Where(p => !p.Name.ToString().Contains("bottle")));
@@ -118,6 +124,11 @@ public partial class NBottleThrowVfx : Node2D
                 p.ProcessMaterial.Set(_color, tint);
             }
         }
+
+        // Randomly choose the bottle. 
+        var mat = (ShaderMaterial)_bottleSpray!.Material.Duplicate();
+        mat.SetShaderParameter("flipbook_offset", Rng.Chaotic.NextInt(0, 4));
+
         TaskHelper.RunSafely(PlaySequence());
     }
 
@@ -133,7 +144,10 @@ public partial class NBottleThrowVfx : Node2D
         {
             _throwParticles[i].Restart();
         }
+
+        WitchFx.BottleImpact();
         await Cmd.Wait(0.15f, _cts.Token);
+        
         for (int i = 0; i < _impactParticles.Count; i++)
         {
             _impactParticles[i].Restart();

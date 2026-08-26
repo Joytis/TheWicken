@@ -52,7 +52,7 @@ public sealed class Plaguestorm : WitchCard
             .WithHitCount(hits)
             .FromCard(this)
             .TargetingAllOpponents(CombatState!)
-            .WithHitVfxNode((Creature c) => NRatsThrowVfx.Create(Owner.Creature, c, WitchFx.White))
+            .WithHitVfxNode(c => NRatsThrowVfx.Create(Owner.Creature, c, WitchFx.White))
             .WithAttackerAnim("Attack", 0.2f)
             .Execute(choiceContext);
     }

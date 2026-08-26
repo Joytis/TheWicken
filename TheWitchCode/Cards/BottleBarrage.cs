@@ -1,9 +1,12 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Extensions;
 using TheWitch.TheWitchCode.Patches;
+using TheWitch.TheWitchCode.Vfx;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -42,8 +45,8 @@ public sealed class BottleBarrage : WitchCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(potions)
             .FromCard(this)
+            .WithHitVfxNode(c => NBottleThrowVfx.Create(Owner.Creature, c, WitchFx.White))
             .Targeting(cardPlay.Target)
-            .WithHitFx(VfxCmd.rockShatterPath, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

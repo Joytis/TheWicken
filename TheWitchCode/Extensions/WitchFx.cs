@@ -1,3 +1,4 @@
+using BaseLib.Audio;
 using Godot;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.Commands;
@@ -20,6 +21,9 @@ public static class WitchFx
     /// <summary>The Regent's Guiding Star chime — the game's one star-themed event. Moonbeam's signature.</summary>
     public const string CelestialSfx = "event:/sfx/enemy/enemy_attacks/living_fog/living_fog_explode";
 
+    /// <summary>Mod-shipped glass smash for Bottle Barrage hits (res:// audio, played via BaseLib ModAudio).</summary>
+    public static readonly string BottleImpactSfx = "witch_bottle_impact.wav".CharacterSfxPath();
+
     public static readonly Color WitchGreen = new("83eb85");
 
     public static readonly Color White = new("ffffff");
@@ -31,6 +35,9 @@ public static class WitchFx
     public const string SilentAttackTrigger = "AttackSilent";
 
     public static void EnchantShimmer() => SfxCmd.Play("event:/sfx/ui/enchant_shimmer");
+
+    /// <summary>One bottle shatter with random pitch — called per hit from <see cref="NBottleThrowVfx"/> at visual impact.</summary>
+    public static void BottleImpact() => ModAudio.PlaySoundInRun(BottleImpactSfx, pitchVariation: 0.2f);
 
 
     public static AttackCommand WithSilentAttack(this AttackCommand cmd) =>

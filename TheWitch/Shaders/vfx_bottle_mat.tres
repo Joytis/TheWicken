@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bjtl6yf33imhk"]
+
+[ext_resource type="Shader" uid="uid://c3587rsvhvawb" path="res://TheWitch/Shaders/vfx_flipbook_static.gdshader" id="1_55d8d"]
+
+[resource]
+shader = ExtResource("1_55d8d")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/frame_count = 1.0
+shader_parameter/flipbook_size = Vector2(2, 2)
