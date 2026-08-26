@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using HexPower = TheWitch.TheWitchCode.Powers.HexPower;
 using TheWitch.TheWitchCode.Extensions;
+using TheWitch.TheWitchCode.Artists;
 
 namespace TheWitch.TheWitchCode.Cards;
 
@@ -16,6 +17,8 @@ namespace TheWitch.TheWitchCode.Cards;
 /// </summary>
 public sealed class ReadTheBones : WitchCard
 {
+    public override Artist? ArtBy => Artist.Joytis;
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<HexPower>(),
     ];

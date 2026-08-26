@@ -133,7 +133,7 @@
       "upgrade": "Weak +1",
       "note": "Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
       "mechanics": [
@@ -1446,7 +1446,7 @@
       "upgrade": "DrawCardsNextTurn +1",
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
       "tested": true,
-      "artFinal": false,
+      "artFinal": true,
       "vfxPass": false,
       "sfxPass": false,
       "mechanics": [

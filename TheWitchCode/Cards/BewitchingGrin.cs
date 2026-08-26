@@ -5,12 +5,15 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using TheWitch.TheWitchCode.Artists;
 
 namespace TheWitch.TheWitchCode.Cards;
 
 /// <summary>Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.</summary>
 public sealed class BewitchingGrin : WitchCard
 {
+    public override Artist? ArtBy => Artist.Kitsu;
+
     public override bool GainsBlock => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
