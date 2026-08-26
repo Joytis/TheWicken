@@ -54,6 +54,6 @@ public sealed class VolatileVaporsPower : WitchPower
         }
 
         Flash();
-        await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, Owner, null, null);
     }
 }

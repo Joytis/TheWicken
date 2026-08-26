@@ -44,7 +44,7 @@ public sealed class BottleBarrage : WitchCard
         }
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(potions)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .WithHitVfxNode(c => NBottleThrowVfx.Create(Owner.Creature, c, WitchFx.White))
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);

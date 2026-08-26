@@ -50,7 +50,7 @@ public sealed class PotionDamageMultiplierPower : WitchPower
         return Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (!_resolvingPotion || dealer != Owner || cardSource != null)
         {

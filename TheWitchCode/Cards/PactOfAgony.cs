@@ -34,7 +34,7 @@ public sealed class PactOfAgony : WitchCard
         await PowerCmd.Apply<HexPower>(choiceContext, Owner.Creature, DynamicVars["HexPower"].BaseValue, Owner.Creature, this);
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx(VfxCmd.slashPath, null, "heavy_attack.mp3")
             .Execute(choiceContext);
