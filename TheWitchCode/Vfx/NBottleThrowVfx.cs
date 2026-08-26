@@ -128,6 +128,7 @@ public partial class NBottleThrowVfx : Node2D
         // Randomly choose the bottle. 
         var mat = (ShaderMaterial)_bottleSpray!.Material.Duplicate();
         mat.SetShaderParameter("flipbook_offset", Rng.Chaotic.NextInt(0, 4));
+        _bottleSpray.Material = mat;
 
         TaskHelper.RunSafely(PlaySequence());
     }

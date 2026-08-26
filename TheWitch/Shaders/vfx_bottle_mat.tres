@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource("1_55d8d")
 shader_parameter/pivot_offset = Vector2(0, 0)
-shader_parameter/frame_count = 1.0
+shader_parameter/flipbook_offset = 0.0
 shader_parameter/flipbook_size = Vector2(2, 2)

@@ -8,11 +8,11 @@ render_mode blend_mix;
 uniform vec2 pivot_offset = vec2(0.0, 0.0);
 
 
-uniform float frame_count = 1;
+// Which cell of the flipbook to show (0-based, row-major). Set per instance from C#.
+uniform float flipbook_offset = 0.0;
 uniform vec2 flipbook_size = vec2(3,3);
 
 varying float lifetime;
-varying float flipbook_offset;
 varying vec4 vertex_color;
 
 varying vec2 flipbook_uv;
@@ -20,11 +20,9 @@ varying vec2 flipbook_uv;
 void vertex() {
 	vertex_color = COLOR;
 	lifetime = INSTANCE_CUSTOM.y/INSTANCE_CUSTOM.w;
-	flipbook_offset = INSTANCE_CUSTOM.z;
-	
 	VERTEX += pivot_offset * (1.0/TEXTURE_PIXEL_SIZE);
 	
-	flipbook_uv = flipbook(UV, flipbook_size, frame_count * 0.99);
+	flipbook_uv = flipbook(UV, flipbook_size, flipbook_offset);
 }
 
 void fragment() {
