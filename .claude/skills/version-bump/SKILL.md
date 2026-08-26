@@ -36,9 +36,9 @@ Diff the release ref against the working tree (committed + uncommitted): `git di
 
 Style rules:
 - **Player-facing only.** Skip refactors, art-pipeline changes, internal renames, doc/tooling work. A localization text change matters only if it reflects a mechanic change (or is funny flavor worth calling out).
-- Group under `## Reworks` / `## Buffs` / `## Nerfs` / `## New` / `## Other` (omit empty sections). One bullet per card/relic/potion, **bold name**, en-dash, then the change.
+- Group under `## New` / `## Reworks` / `## Changes` / `## Other` (omit empty sections). Never use `## Buffs` / `## Nerfs` — player-power direction is hard to judge; all numeric tweaks go under `## Changes`. One bullet per card/relic/potion, **bold name**, en-dash, then the change.
 - Numbers as `old → new` (e.g. `Damage 9 → 7`). Upgrade changes in parentheses.
-- Classify buffs/nerfs by *player power*, not by direction of the number. When a change is genuinely mixed, put it under Reworks.
+- `Reworks` = mechanic/behavior changed; `Changes` = numbers, cost, rarity only.
 - Lead the file with a one-line theme summary of the release.
 - Uncertain intent on a change? Ask the user rather than guessing which bucket.
 

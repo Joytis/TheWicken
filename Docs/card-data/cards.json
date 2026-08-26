@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-24",
+  "generated": "2026-08-26",
   "cards": [
     {
       "name": "Defend",
@@ -468,13 +468,13 @@
       "type": "Skill",
       "rarity": "Common",
       "target": "Self",
-      "text": "Gain 4 Block. Create an Unstable Ember Jar.",
+      "text": "Gain 5 Block. Create an Unstable Ember Jar.",
       "numbers": {
-        "Block": 4
+        "Block": 5
       },
       "upgrade": "Block +3",
       "note": "Smolder: block now, and bottle the embers — create an Unstable Ember Jar.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -1670,9 +1670,9 @@
         "Brambles": 3,
         "Block": 3
       },
-      "upgrade": "Block +2",
+      "upgrade": "Block +2, Brambles +2",
       "note": "Sprouts: a small guard that reseeds itself — block + Brambles, and a copy of this card sprouts in your Discard pile (Anger pattern).",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
