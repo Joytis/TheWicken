@@ -16,12 +16,12 @@ public sealed class Brambleburst : WitchCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(12m),
-		new ExtraDamageVar(2m),
+		new ExtraDamageVar(1m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner?.Creature?.GetPowerAmount<BramblesPower>() ?? 0)
     ];
 
     public Brambleburst()
-        : base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+        : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 

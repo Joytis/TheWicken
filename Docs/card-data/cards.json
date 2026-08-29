@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-26",
+  "generated": "2026-08-29",
   "cards": [
     {
       "name": "Defend",
@@ -852,6 +852,40 @@
       ]
     },
     {
+      "name": "Brambleburst",
+      "entry": "BRAMBLEBURST",
+      "file": "TheWitchCode/Cards/Brambleburst.cs",
+      "cost": 2,
+      "type": "Attack",
+      "rarity": "Uncommon",
+      "target": "AnyEnemy",
+      "text": "Deal {CalculatedDamage:diff()} damage. Deals 1 additional damage for each of your Brambles.",
+      "numbers": {
+        "CalculationBase": 12,
+        "ExtraDamage": 1
+      },
+      "upgrade": "CalculationBase +6",
+      "note": "Hits once per Bramble; does nothing if you have no Brambles.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [
+        "Brambles"
+      ],
+      "role": [
+        "Payoff"
+      ],
+      "sub": [
+        "Brambles:Spend"
+      ],
+      "threads": [
+        "AoE",
+        "MultiHit",
+        "BurstFinisher"
+      ]
+    },
+    {
       "name": "Cat Familiar",
       "entry": "CAT_FAMILIAR",
       "file": "TheWitchCode/Cards/CatFamiliar.cs",
@@ -1181,33 +1215,6 @@
       "threads": [
         "TurnEngine"
       ]
-    },
-    {
-      "name": "Impale",
-      "entry": "IMPALE",
-      "file": "TheWitchCode/Cards/Impale.cs",
-      "cost": 2,
-      "type": "Attack",
-      "rarity": "Uncommon",
-      "target": "AnyEnemy",
-      "text": "Deal 12 damage. Brambles deal double damage this turn.",
-      "numbers": {
-        "Damage": 12
-      },
-      "upgrade": "Damage +3",
-      "note": "Impale: skewer an enemy — damage, and your Brambles deal double damage this turn.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Brambles"
-      ],
-      "role": [
-        "Payoff"
-      ],
-      "sub": [],
-      "threads": []
     },
     {
       "name": "Light the Candle",
@@ -1907,7 +1914,7 @@
       "name": "Ambush!",
       "entry": "AMBUSH",
       "file": "TheWitchCode/Cards/Ambush.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AllEnemies",
@@ -1917,7 +1924,7 @@
       },
       "upgrade": "Damage +3",
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2052,72 +2059,6 @@
         "Potions:Brew"
       ],
       "threads": []
-    },
-    {
-      "name": "Brambleburst",
-      "entry": "BRAMBLEBURST",
-      "file": "TheWitchCode/Cards/Brambleburst.cs",
-      "cost": 3,
-      "type": "Attack",
-      "rarity": "Rare",
-      "target": "AnyEnemy",
-      "text": "Deal {CalculatedDamage:diff()} damage. Deals 2 additional damage for each of your Brambles.",
-      "numbers": {
-        "CalculationBase": 12,
-        "ExtraDamage": 2
-      },
-      "upgrade": "CalculationBase +6",
-      "note": "Hits once per Bramble; does nothing if you have no Brambles.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Brambles"
-      ],
-      "role": [
-        "Payoff"
-      ],
-      "sub": [
-        "Brambles:Spend"
-      ],
-      "threads": [
-        "AoE",
-        "MultiHit",
-        "BurstFinisher"
-      ]
-    },
-    {
-      "name": "Broken Pact",
-      "entry": "BROKEN_PACT",
-      "file": "TheWitchCode/Cards/BrokenPact.cs",
-      "cost": 2,
-      "type": "Skill",
-      "rarity": "Rare",
-      "target": "Self",
-      "text": "Sacrifice ALL Familiars. Gain 4 Strength for each Familiar sacrificed.",
-      "numbers": {
-        "Strength": 4
-      },
-      "upgrade": "Cost -1",
-      "note": "Broken Pact: end every familiar's service at once and take their strength for your own.",
-      "tested": true,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [
-        "Familiars"
-      ],
-      "role": [
-        "Payoff"
-      ],
-      "sub": [
-        "Familiars:Sacrifice"
-      ],
-      "threads": [
-        "StatRamp",
-        "SelfExhaust"
-      ]
     },
     {
       "name": "Capture Soul",
@@ -2310,7 +2251,7 @@
       "name": "Extract Life",
       "entry": "EXTRACT_LIFE",
       "file": "TheWitchCode/Cards/ExtractLife.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Attack",
       "rarity": "Rare",
       "target": "AnyEnemy",
@@ -2320,7 +2261,7 @@
       },
       "upgrade": "Replay +1",
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": false,
       "sfxPass": false,
@@ -2337,17 +2278,17 @@
       "name": "Eye of Newt",
       "entry": "EYE_OF_NEWT",
       "file": "TheWitchCode/Cards/EyeOfNewt.cs",
-      "cost": 2,
+      "cost": 1,
       "type": "Power",
       "rarity": "Rare",
       "target": "Self",
-      "text": "Your Potions hit one additional random target. Create an Unstable Ember Jar.",
+      "text": "Your Potions hit one additional random target. Create an Unstable Noxious Brew.",
       "numbers": {
         "EyeOfNewt": 1
       },
       "upgrade": "none",
       "note": "Eye of Newt: a Power that fans your potions out to one extra random target (upgraded: ALL valid targets), plus an unstable Ember Jar to throw.",
-      "tested": true,
+      "tested": false,
       "artFinal": false,
       "vfxPass": true,
       "sfxPass": true,
@@ -2702,6 +2643,76 @@
         "TurnEngine",
         "CostReduction"
       ]
+    },
+    {
+      "name": "Wicker Bones",
+      "entry": "WICKER_BONES",
+      "file": "TheWitchCode/Cards/WickerBones.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "target": "Self",
+      "text": "Gain 12 Block. If you have {TargetBrambles:diff()} Brambles, add Wicker Consumation into your Hand.",
+      "numbers": {
+        "Block": 12
+      },
+      "upgrade": "Block +4",
+      "note": "Wicker Bones: second link of the Wicker chain, created by <see cref=\"WickerHeart\" />.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
+    },
+    {
+      "name": "Wicker Consumation",
+      "entry": "WICKER_CONSUMATION",
+      "file": "TheWitchCode/Cards/WickerConsumation.cs",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Rare",
+      "target": "AnyEnemy",
+      "text": "Deal 20 damage. If you have at least {TargetBrambles:diff()} Brambles, gain Incarnation.",
+      "numbers": {
+        "Incarnation": 1,
+        "Damage": 20
+      },
+      "upgrade": "none",
+      "note": "Wicker Consumation: final link of the Wicker chain, created by <see cref=\"WickerBones\" />.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
+    },
+    {
+      "name": "Wicker Heart",
+      "entry": "WICKER_HEART",
+      "file": "TheWitchCode/Cards/WickerHeart.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Rare",
+      "target": "Self",
+      "text": "Gain 5 Brambles. If you have {TargetBrambles:diff()} Brambles, add Wicker Bones into your Hand.",
+      "numbers": {
+        "Brambles": 5
+      },
+      "upgrade": "Brambles +2",
+      "note": "Wicker Heart: first link of the Wicker chain.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
     },
     {
       "name": "Witchcraft",

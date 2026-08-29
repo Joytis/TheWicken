@@ -188,8 +188,6 @@
   "THEWITCH-SHARE_THE_BREW.description": "You and your allies each gain a random [gold]Potion[/gold].",
   "THEWITCH-BOTTLE_BARRAGE.title": "Bottle Barrage",
   "THEWITCH-BOTTLE_BARRAGE.description": "Deal {Damage:diff()} damage for each [gold]Potion[/gold] created this combat.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
-  "THEWITCH-IMPALE.title": "Impale",
-  "THEWITCH-IMPALE.description": "Deal {Damage:diff()} damage.\n[gold]Brambles[/gold] deal double damage this turn.",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.title": "Message in a Bottle",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.description": "Bottle a card in your [gold]Hand[/gold] into a [gold]Potion[/gold].",
   "THEWITCH-MESSAGE_IN_A_BOTTLE.selectionScreenPrompt": "Choose a card to bottle",
@@ -213,10 +211,14 @@
   "THEWITCH-VEXING_STRIKE.description": "Deal {Damage:diff()} damage.\nApply {HexPower:diff()} [gold]Hex[/gold].",
   "THEWITCH-BEWITCHING_GRIN.title": "Bewitching Grin",
   "THEWITCH-BEWITCHING_GRIN.description": "Gain {Block:diff()} [gold]Block[/gold].\nApply {WeakPower:diff()} [gold]Weak[/gold] to ALL enemies.",
-  "THEWITCH-BROKEN_PACT.title": "Broken Pact",
-  "THEWITCH-BROKEN_PACT.description": "Sacrifice ALL [gold]Familiars[/gold].\nGain {StrengthPower:diff()} [gold]Strength[/gold] for each [gold]Familiar[/gold] sacrificed.",
   "THEWITCH-BIG_BATCH.title": "Big Batch",
   "THEWITCH-BIG_BATCH.description": "Create {Brews:diff()} [gold]Unstable[/gold] [gold]Noxious {Brews:plural:Brew|Brews}[/gold].",
   "THEWITCH-PRICES_PAID.title": "Prices Paid",
-  "THEWITCH-PRICES_PAID.description": "Lose {HpLoss:diff()} HP.\nDeal {Damage:diff()} damage.\nCreate {Brews:diff()} [gold]Unstable[/gold] [gold]{Brews:plural:Noxious Brew|Noxious Brews}[/gold]."
+  "THEWITCH-PRICES_PAID.description": "Lose {HpLoss:diff()} HP.\nDeal {Damage:diff()} damage.\nCreate {Brews:diff()} [gold]Unstable[/gold] [gold]{Brews:plural:Noxious Brew|Noxious Brews}[/gold].",
+  "THEWITCH-WICKER_HEART.title": "Wicker Heart",
+  "THEWITCH-WICKER_HEART.description": "Gain {BramblesPower:diff()} [gold]Brambles[/gold].\nIf you have {TargetBrambles:diff()} [gold]Brambles[/gold], add [gold]{IfUpgraded:show:Wicker Bones+|Wicker Bones}[/gold] into your [gold]Hand[/gold].",
+  "THEWITCH-WICKER_BONES.title": "Wicker Bones",
+  "THEWITCH-WICKER_BONES.description": "Gain {Block:diff()} [gold]Block[/gold].\nIf you have {TargetBrambles:diff()} [gold]Brambles[/gold], add [gold]Wicker Consumation[/gold] into your [gold]Hand[/gold].",
+  "THEWITCH-WICKER_CONSUMATION.title": "Wicker Consumation",
+  "THEWITCH-WICKER_CONSUMATION.description": "Deal {Damage:diff()} damage.\nIf you have at least {TargetBrambles:diff()} [gold]Brambles[/gold], gain [gold]Incarnation[/gold]."
 }
