@@ -16,7 +16,7 @@ namespace TheWitch.TheWitchCode.Cards;
 public sealed class EyeOfNewt : WitchCard
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromPotion(ModelDb.Potion<EmberJar>()),
+        HoverTipFactory.FromPotion(ModelDb.Potion<NoxiousBrew>()),
         UnstablePotions.UnstableHoverTip,
     ];
 
@@ -25,7 +25,7 @@ public sealed class EyeOfNewt : WitchCard
     ];
 
     public EyeOfNewt()
-        : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+        : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 
@@ -37,6 +37,6 @@ public sealed class EyeOfNewt : WitchCard
         {
             Owner.Creature.GetPower<EyeOfNewtPower>()?.EnableHitsAll();
         }
-        await Witch.ProducePotion<EmberJar>(Owner, Witch.PotionMode.Unstable);
+        await Witch.ProducePotion<NoxiousBrew>(Owner, Witch.PotionMode.Unstable);
     }
 }

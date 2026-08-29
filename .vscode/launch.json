@@ -7,7 +7,7 @@
             "type": "coreclr",
             "request": "attach",
             "processName": "SlayTheSpire2.exe",
-            "preLaunchTask": "Publish and Run",
+            "preLaunchTask": "Run",
             "justMyCode": false,
             "symbolOptions": {
                 "searchMicrosoftSymbolServer": false
@@ -19,7 +19,7 @@
             "type": "coreclr",
             "request": "attach",
             "processName": "SlayTheSpire2.exe",
-            "preLaunchTask": "Debug: Publish + Launch into combat",
+            "preLaunchTask": "Debug: Combat",
             "justMyCode": false,
             "symbolOptions": {
                 "searchMicrosoftSymbolServer": false
@@ -31,7 +31,7 @@
             "type": "coreclr",
             "request": "attach",
             "processName": "SlayTheSpire2.exe",
-            "preLaunchTask": "Debug: Build + Launch AutoSlay",
+            "preLaunchTask": "Debug: AutoSlay",
             "justMyCode": false,
             "symbolOptions": {
                 "searchMicrosoftSymbolServer": false
@@ -43,7 +43,7 @@
             "type": "coreclr",
             "request": "attach",
             "processName": "SlayTheSpire2.exe",
-            "preLaunchTask": "Debug: Build + Launch FX Lab",
+            "preLaunchTask": "Debug: FX Lab",
             "justMyCode": false,
             "symbolOptions": {
                 "searchMicrosoftSymbolServer": false

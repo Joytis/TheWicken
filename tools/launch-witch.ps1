@@ -24,6 +24,7 @@
 
 .EXAMPLE
     ./launch-witch.ps1                # one solo instance
+    ./launch-witch.ps1 -Build publish -WitchBootstrap   # publish, then straight into combat
     ./launch-witch.ps1 -TestUpdatePopup
     ./launch-witch.ps1 -Players 4    # 1 host + 3 clients
 #>
@@ -39,16 +40,64 @@ param(
                                # exit and propagates the game's exit code (AutoSlay: 0=run done, 1=fail)
     [switch]$FxLab,            # -witch-debug -witch-fxlab: open the SFX/VFX browser scene
     [switch]$IconLab,          # -witch-debug -witch-iconlab: open the relic/potion icon browser scene
+    [switch]$CardTest,         # -witch-debug -witch-cardtest: headless smoke test that plays every Witch card (WitchCardTest)
     [string]$Encounter = "",   # optional encounter id for -WitchBootstrap (e.g. SLIMES_WEAK)
     [switch]$TestUpdatePopup,          # -witch-test-update-popup: show the Workshop-update restart popup (no Steam calls)
     [switch]$ForceWorkshopDownload,    # -witch-force-workshop-download=<id>: force the Workshop download path;
                                        # item id read from workshop/mod_id.txt (local builds need it)
-    [switch]$TailLog           # solo only: stream %appdata%\SlayTheSpire2\logs\godot.log to this console
+    [switch]$TailLog,          # solo only: stream %appdata%\SlayTheSpire2\logs\godot.log to this console
+    [ValidateSet('none','build','publish')]
+    [string]$Build = 'none'    # run `dotnet build` (code deploy) or `dotnet publish` (code + .pck) first; abort on failure
 )
 
 $ErrorActionPreference = "Stop"
 
 if ($Players -lt 1) { throw "Players must be >= 1 (got $Players)." }
+
+# --- Optional build step (build = deploy dll/json; publish = also export the .pck) ---
+if ($Build -ne 'none') {
+    $repoRoot = Split-Path $PSScriptRoot -Parent
+    $csproj = Join-Path $repoRoot 'TheWitch.csproj'
+    Write-Host "[$Build] dotnet $Build $csproj"
+    & dotnet $Build $csproj
+    if ($LASTEXITCODE -ne 0) { throw "dotnet $Build failed (exit $LASTEXITCODE); not launching." }
+}
+
+# --- Card-test report: skim the tailed log, errors loud, passes routine ----------
+function Write-CardTestReport {
+    param([System.Collections.Generic.List[string]]$lines)
+    $tag = '[witch-cardtest]'
+    $started  = @($lines | Where-Object { $_ -match "\[INFO\] \[AutoSlay\] \[witch-cardtest\] (\w+)$" } | ForEach-Object { $Matches[1] })
+    $failed   = @($lines | Where-Object { $_ -match "\[witch-cardtest\] FAILED (\w+): (.*)$" } |
+                 ForEach-Object { [pscustomobject]@{ Card = $Matches[1]; Message = $Matches[2] } })
+    # Stray errors = every [ERROR] line the harness itself did not emit (game-side exceptions,
+    # missing resources, ...). Keyed by the first line so a repeated stack trace counts once.
+    $errors   = @($lines | Where-Object { $_ -match '^\[ERROR\]' -and $_ -notmatch [regex]::Escape($tag) })
+    $errGroups = $errors | Group-Object | Sort-Object Count -Descending
+    $passed = $started.Count - $failed.Count
+
+    $red = 'Red'; $yellow = 'Yellow'; $green = 'Green'; $dim = 'DarkGray'
+    Write-Host ''
+    Write-Host '================ CARD TEST REPORT ================' -ForegroundColor Cyan
+    if ($errors.Count -gt 0) {
+        Write-Host "!! $($errors.Count) stray [ERROR] line(s) during the run ($($errGroups.Count) distinct):" -ForegroundColor $red
+        foreach ($g in $errGroups) {
+            $msg = $g.Name -replace '^\[ERROR\]\s*', ''
+            if ($msg.Length -gt 200) { $msg = $msg.Substring(0, 200) + '...' }
+            Write-Host ("  {0,4}x  {1}" -f $g.Count, $msg) -ForegroundColor $red
+        }
+    }
+    if ($failed.Count -gt 0) {
+        Write-Host "!! $($failed.Count) card(s) FAILED:" -ForegroundColor $red
+        foreach ($f in $failed) { Write-Host ("  - {0}: {1}" -f $f.Card, $f.Message) -ForegroundColor $yellow }
+    }
+    if ($errors.Count -eq 0 -and $failed.Count -eq 0) {
+        Write-Host "No errors, no failures." -ForegroundColor $green
+    }
+    Write-Host ("Cards: {0} run, {1} passed, {2} failed | stray errors: {3}" -f $started.Count, $passed, $failed.Count, $errors.Count) -ForegroundColor $(if ($failed.Count -or $errors.Count) { $yellow } else { $green })
+    if ($started.Count -eq 0) { Write-Host "(no $tag lines seen - did the harness run? needs -witch-debug -witch-cardtest)" -ForegroundColor $dim }
+    Write-Host '==================================================' -ForegroundColor Cyan
+}
 
 # --- Resolve the game install folder ---------------------------------------
 function Resolve-Sts2Path {
@@ -84,7 +133,7 @@ Write-Host "Game dir : $gameDir"
 # Solo is the default; multiplayer only when -Players is given explicitly.
 if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
     $gameArgs = @()
-    if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab) {
+    if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab -or $CardTest) {
         # Game-native dev switch: skips the intro logo (checked once at startup).
         # Child processes inherit the environment, so set it just for this launch.
         $env:STS2_DEV_SKIP = '1'
@@ -104,6 +153,10 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
     if ($IconLab) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
         $gameArgs += '-witch-iconlab'
+    }
+    if ($CardTest) {
+        if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
+        $gameArgs += '-witch-cardtest'
     }
     if ($Headless) {
         # Godot engine flag: dummy display server, no window/render/GPU. The game is
@@ -161,14 +214,16 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
         # Share Read/Write/Delete so the game can keep writing and rotate freely.
         $fs = [System.IO.FileStream]::new($logFile, 'Open', 'Read', [System.IO.FileShare]'ReadWrite,Delete')
         $sr = [System.IO.StreamReader]::new($fs)
+        $captured = [System.Collections.Generic.List[string]]::new()
         try {
             while (-not $proc.HasExited) {
                 $line = $sr.ReadLine()
-                if ($null -ne $line) { Write-Host $line } else { Start-Sleep -Milliseconds 200 }
+                if ($null -ne $line) { Write-Host $line; if ($CardTest) { $captured.Add($line) } } else { Start-Sleep -Milliseconds 200 }
             }
-            while ($null -ne ($line = $sr.ReadLine())) { Write-Host $line }
+            while ($null -ne ($line = $sr.ReadLine())) { Write-Host $line; if ($CardTest) { $captured.Add($line) } }
         } finally { $sr.Dispose() }
         Write-Host "--- game exited (code $($proc.ExitCode)) ---"
+        if ($CardTest) { Write-CardTestReport $captured }
         if ($Headless) { exit $proc.ExitCode }
     }
     return

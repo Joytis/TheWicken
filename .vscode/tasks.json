@@ -2,14 +2,50 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "MP: Launch (prompt for player count)",
+            "label": "Run",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Players", "${input:playerCount}"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -TailLog -DelayMs 4000 -Build ${input:build.publish}"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch one STS2 instance, tailing the game log. Prompts for the build step (None / Build / Publish; default Publish). Debugger-attachable via 'Launch STS2 + Attach'."
+        },
+        {
+            "label": "MP: Launch",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Players ${input:playerCount} -Build ${input:build.none}"
             ],
             "problemMatcher": [],
             "presentation": {
@@ -17,50 +53,182 @@
                 "panel": "shared",
                 "clear": true
             },
-            "detail": "Launch a host + (N-1) clients of Slay the Spire 2 for local multiplayer."
+            "detail": "Launch a host + (N-1) clients for local multiplayer. Prompts for player count and build step (default None)."
         },
         {
-            "label": "MP: Launch 2 players",
+            "label": "Debug: Combat",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Players", "2"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000 -Build ${input:build.publish}"
             ],
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Launch 1 host + 1 client."
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 straight into a Witch combat with 100 energy, tailing the game log. Prompts for the build step (default Publish). Debugger-attachable via 'Combat + Attach'."
         },
         {
-            "label": "MP: Launch 4 players",
+            "label": "Debug: AutoSlay",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Players", "4"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -AutoSlay -TailLog -DelayMs 4000 -Build ${input:build.build} ${input:headless.windowed}"
             ],
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "Launch 1 host + 3 clients."
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 with the AutoSlay smoke-test bot, tailing the game log. Prompts for the build step (default Build) and windowed vs headless. Debugger-attachable via 'AutoSlay + Attach'."
         },
         {
-            "label": "MP: Build + Launch (prompt for player count)",
+            "label": "Debug: Card Test",
             "type": "process",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Players", "${input:playerCount}"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -CardTest -TailLog -DelayMs 4000 -Build ${input:build.build} ${input:headless.headless}"
             ],
-            "dependsOn": "dotnet build",
-            "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet build (deploys mod) then launch host + (N-1) clients."
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 with --witch-cardtest: plays every Witch card in a throwaway test combat and logs [witch-cardtest] FAILED lines (grep the tailed log). Prompts for the build step (default Build) and windowed vs headless (default Headless)."
+        },
+        {
+            "label": "Debug: FX Lab",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -FxLab -TailLog -DelayMs 4000 -Build ${input:build.build}"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 into the SFX/VFX browser scene, tailing the game log. Prompts for the build step (default Build). Debugger-attachable via 'FX Lab + Attach'."
+        },
+        {
+            "label": "Debug: FX Lab + Combat",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -FxLab -DelayMs 2000 -Build ${input:build.publish}; & '${workspaceFolder}/tools/launch-witch.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch TWO STS2 instances: FX Lab first, then Witch combat (tailing its log) — VFX iteration with a live combat reference. Prompts for the build step (default Publish; applied once, before the first launch)."
         },
         {
             "label": "Godot: Import assets",
@@ -68,12 +236,20 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/import-assets.ps1"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/import-assets.ps1"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Headless Godot --import: generate .import sidecars for new pngs (card portraits, etc.)."
         },
         {
@@ -83,9 +259,15 @@
             "args": [
                 "${workspaceFolder}/tools/gen-image-sizes.py"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Fill missing big/small variants of card_portraits & powers (upscale small->big, downscale big->small, 4x). Run 'Godot: Import assets' after."
         },
         {
@@ -93,11 +275,18 @@
             "type": "process",
             "command": "py",
             "args": [
-                "${workspaceFolder}/tools/pack-atlases.py", "--vfx"
+                "${workspaceFolder}/tools/pack-atlases.py",
+                "--vfx"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Pack each TheWitch/images/vfx/raw/<name>/ folder into a power-of-two sprite sheet at images/vfx/sheets/<name>.png (tracked; prints hframes/vframes). Also runs the regular atlas pack."
         },
         {
@@ -107,224 +296,54 @@
             "args": [
                 "${workspaceFolder}/tools/gen-locked-silhouette.py"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Regenerate char_select_char_name_locked.png as a flat silhouette of char_select_char_name.png (alpha shape, or background colour-key for full-bleed art)."
         },
         {
             "label": "dotnet build",
             "type": "process",
             "command": "dotnet",
-            "args": ["build", "TheWitch.csproj"],
-            "options": { "cwd": "${workspaceFolder}" },
-            "group": { "kind": "build", "isDefault": true },
+            "args": [
+                "build",
+                "TheWitch.csproj"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": "$msCompile",
-            "presentation": { "reveal": "always", "panel": "shared" }
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         },
         {
             "label": "dotnet publish",
             "type": "process",
             "command": "dotnet",
-            "args": ["publish", "TheWitch.csproj"],
-            "options": { "cwd": "${workspaceFolder}" },
+            "args": [
+                "publish",
+                "TheWitch.csproj"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": "$msCompile",
-            "presentation": { "reveal": "always", "panel": "shared" }
-        },
-        {
-            "label": "Run",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "No build — launch one STS2 instance with whatever is already deployed, tailing the game log."
-        },
-        {
-            "label": "Publish and Run",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "dependsOn": "dotnet publish",
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet publish (export .pck + deploy) then launch one STS2 instance, tailing the game log. Debugger-attachable via 'Launch STS2 + Attach'."
-        },
-        {
-            "label": "Debug: Publish + Launch into combat",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-WitchBootstrap", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "dependsOn": "dotnet publish",
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet publish (assets + code deploy), then launch STS2 straight into a Witch combat with 100 energy, tailing the game log. Debugger-attachable via 'Combat + Attach'."
-        },
-        {
-            "label": "Debug: Launch into combat (no build)",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-WitchBootstrap", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "No build — launch STS2 straight into a Witch combat with whatever is already deployed. Pair with 'Debug: Build + Launch FX Lab' for a second instance to iterate VFX."
-        },
-        {
-            "label": "Debug: Build + Launch AutoSlay",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-Command",
-                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -AutoSlay -TailLog -DelayMs 4000 ${input:autoSlayHeadless}"
-            ],
-            "dependsOn": "dotnet build",
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet build (deploys mod), then launch STS2 with the AutoSlay smoke-test bot (prompts windowed vs headless), tailing the game log. Debugger-attachable via 'AutoSlay + Attach'."
-        },
-        {
-            "label": "Debug: Build + Launch FX Lab",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-FxLab", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "dependsOn": "dotnet build",
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet build (deploys mod), then launch STS2 into the SFX/VFX browser scene, tailing the game log. Debugger-attachable via 'FX Lab + Attach'."
-        },
-        {
-            "label": "Debug: Launch FX Lab (no build)",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/launch-witch.ps1",
-                "-Solo", "-FxLab", "-TailLog",
-                "-DelayMs", "4000"
-            ],
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "No build — launch STS2 into the SFX/VFX browser scene with whatever is already deployed. Pair with 'Debug: Launch into combat (no build)' for a second instance."
-        },
-        {
-            "label": "Debug: Publish + Launch FX Lab + Combat",
-            "type": "process",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-Command",
-                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -FxLab -DelayMs 2000; & '${workspaceFolder}/tools/launch-witch.ps1' -Solo -WitchBootstrap -TailLog -DelayMs 4000"
-            ],
-            "dependsOn": "dotnet publish",
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "sts2",
-                "pattern": [{ "regexp": ".", "file": 1, "location": 2, "message": 3 }],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".",
-                    "endsPattern": "Launched 1 solo instance"
-                }
-            },
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-            "detail": "dotnet publish, then launch TWO STS2 instances: FX Lab first, then Witch combat (tailing its log). For VFX iteration with a live combat reference."
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         },
         {
             "label": "Workshop: Bundle",
@@ -332,12 +351,20 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/bundle-workshop.ps1"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/bundle-workshop.ps1"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "dotnet publish (export .pck) + stage the mod into workshop/content. Run before deploying; does NOT upload."
         },
         {
@@ -346,25 +373,43 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/bundle-workshop.ps1",
-                "-SkipPublish", "-Upload",
-                "-ChangeNote", "${input:changeNote}"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/bundle-workshop.ps1",
+                "-SkipPublish",
+                "-Upload",
+                "-ChangeNote",
+                "${input:changeNote}"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "dependsOn": "Workshop: Bundle",
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Bundle, then upload to the Steam Workshop. Requires Steam running & logged in. First upload creates a new item and writes workshop/mod_id.txt (commit it)."
         },
         {
             "label": "Card Data: Regen",
             "type": "process",
             "command": "node",
-            "args": ["${workspaceFolder}/Docs/card-data/regen.js"],
-            "options": { "cwd": "${workspaceFolder}" },
+            "args": [
+                "${workspaceFolder}/Docs/card-data/regen.js"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Rebuild Docs/card-data/cards.json from the card .cs files + localization, then regenerate pages/art-tracker.html."
         },
         {
@@ -373,13 +418,21 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/card-designs-serve.ps1"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/card-designs-serve.ps1"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "isBackground": true,
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
             "detail": "Start the card design page server (http://localhost:7820) and open it in the browser. Stop with 'Card Designs: Stop'."
         },
         {
@@ -388,10 +441,13 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-Command", "Start-Process '${workspaceFolder}/pages/art-tracker.html'"
+                "-Command",
+                "Start-Process '${workspaceFolder}/pages/art-tracker.html'"
             ],
             "problemMatcher": [],
-            "presentation": { "reveal": "never" },
+            "presentation": {
+                "reveal": "never"
+            },
             "detail": "Open the local art tracker page (pages/art-tracker.html) in the default browser. Live copy: https://joytis.github.io/TheWicken/pages/art-tracker.html"
         },
         {
@@ -400,12 +456,20 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/card-designs-stop.ps1"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/card-designs-stop.ps1"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Stop the card design server (kills the node process on port 7820)."
         },
         {
@@ -414,13 +478,22 @@
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-ExecutionPolicy", "Bypass",
-                "-File", "${workspaceFolder}/tools/analytics/analytics.ps1",
-                "-Mode", "export"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/tools/analytics/analytics.ps1",
+                "-Mode",
+                "export"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
             "detail": "Pull runs from Supabase and regenerate pages/analytics-data/*.json for the dashboard (same script CI runs nightly)."
         },
         {
@@ -434,7 +507,11 @@
             ],
             "isBackground": true,
             "problemMatcher": [],
-            "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
             "detail": "Serve the repo on http://localhost:7821 and open the analytics dashboard (fetch needs http, not file://). Terminate the task to stop. Live copy: https://joytis.github.io/TheWicken/pages/analytics.html"
         }
     ],
@@ -446,20 +523,102 @@
             "default": "2"
         },
         {
-            "id": "autoSlayHeadless",
-            "type": "pickString",
-            "description": "Run AutoSlay windowed or headless (no window/GPU)?",
-            "options": [
-                { "label": "Windowed", "value": "" },
-                { "label": "Headless", "value": "-Headless" }
-            ],
-            "default": ""
-        },
-        {
             "id": "changeNote",
             "type": "promptString",
             "description": "Steam Workshop change note for this upload (blank = leave unchanged)",
             "default": ""
+        },
+        {
+            "id": "build.none",
+            "type": "pickString",
+            "description": "Build step before launching?",
+            "options": [
+                {
+                    "label": "None (use what's deployed)",
+                    "value": "none"
+                },
+                {
+                    "label": "Build (dotnet build: dll + json)",
+                    "value": "build"
+                },
+                {
+                    "label": "Publish (dotnet publish: dll + .pck assets)",
+                    "value": "publish"
+                }
+            ],
+            "default": "none"
+        },
+        {
+            "id": "build.build",
+            "type": "pickString",
+            "description": "Build step before launching?",
+            "options": [
+                {
+                    "label": "None (use what's deployed)",
+                    "value": "none"
+                },
+                {
+                    "label": "Build (dotnet build: dll + json)",
+                    "value": "build"
+                },
+                {
+                    "label": "Publish (dotnet publish: dll + .pck assets)",
+                    "value": "publish"
+                }
+            ],
+            "default": "build"
+        },
+        {
+            "id": "build.publish",
+            "type": "pickString",
+            "description": "Build step before launching?",
+            "options": [
+                {
+                    "label": "None (use what's deployed)",
+                    "value": "none"
+                },
+                {
+                    "label": "Build (dotnet build: dll + json)",
+                    "value": "build"
+                },
+                {
+                    "label": "Publish (dotnet publish: dll + .pck assets)",
+                    "value": "publish"
+                }
+            ],
+            "default": "publish"
+        },
+        {
+            "id": "headless.windowed",
+            "type": "pickString",
+            "description": "Windowed or headless (no window/GPU)?",
+            "options": [
+                {
+                    "label": "Windowed",
+                    "value": ""
+                },
+                {
+                    "label": "Headless",
+                    "value": "-Headless"
+                }
+            ],
+            "default": ""
+        },
+        {
+            "id": "headless.headless",
+            "type": "pickString",
+            "description": "Windowed or headless (no window/GPU)?",
+            "options": [
+                {
+                    "label": "Windowed",
+                    "value": ""
+                },
+                {
+                    "label": "Headless",
+                    "value": "-Headless"
+                }
+            ],
+            "default": "-Headless"
         }
     ]
 }

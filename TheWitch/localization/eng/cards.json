@@ -158,7 +158,7 @@
   "THEWITCH-BROOM_STRIKE.title": "Broom Strike",
   "THEWITCH-BROOM_STRIKE.description": "Deal {Damage:diff()} damage to ALL enemies.\nYour next [gold]Skill[/gold] costs 1 less.",
   "THEWITCH-EYE_OF_NEWT.title": "Eye of Newt",
-  "THEWITCH-EYE_OF_NEWT.description": "Your [gold]Potions[/gold] hit {IfUpgraded:show:ALL valid targets|one additional random target}.\nCreate an [gold]Unstable[/gold] [gold]Ember Jar[/gold].",
+  "THEWITCH-EYE_OF_NEWT.description": "Your [gold]Potions[/gold] hit {IfUpgraded:show:ALL valid targets|one additional random target}.\nCreate an [gold]Unstable[/gold] [gold]Noxious Brew[/gold].",
   "THEWITCH-CRYSTAL_BOTTLE.title": "Crystal Bottle",
   "THEWITCH-CRYSTAL_BOTTLE.description": "The next [gold]Potion[/gold] you use is used again at the start of each turn.",
   "THEWITCH-EXTRACT_LIFE.title": "Extract Life",

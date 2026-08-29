@@ -3,8 +3,11 @@
 Completed items moved out of [TODO.md](TODO.md). Newest at top. Each entry: what changed, files touched, verification.
 
 ---
-
 > **Merge note (2026-07-11):** entries 173–175 below were done 2026-07-08 on another machine and merged in after the 123–172 rework batch (renumbered from their original 122/132/133 to avoid collisions). Two other entries from that machine were dropped as superseded by the rework: *Rename Plunder → The Hunt* (remote renamed it Pick Clean instead, entry 123) and the *Oxidizers choice-prompt replay fix* (Oxidizers was cut entirely, entry 125 — the `OxidizersReplayPatch.cs` it introduced was removed in the merge).
+
+### 345. Headless play-all-cards debug flag (2026-08-28) — `--witch-cardtest` runs `Debug/WitchCardTest` (Downfall TestCode shape: TestMode + FirstCardSelector, fresh test combat per Witch card; play/draw/exhaust/discard + Strike/Defend) and logs failures via AutoSlayLog. Needs in-game playtest (`launch-witch.ps1` with `--witch-debug --witch-cardtest`).
+### 344. Unstable potion FTUE (2026-08-28) — first Unstable potion created by the local player shows a one-time right-click tip (`Potions/NUnstablePotionFtue`, base `obtain_potion_ftue` scene, `localization/eng/ftues.json`), gated by the progress-save FTUE flags. Needs in-game playtest.
+### 343. Tasty Herbs rework (2026-08-28) — using an Unstable potion has a 25% chance to use it an additional time (one bonus per potion, `OnUseWrapper` replay); old end-of-combat heal removed. Needs in-game playtest.
 
 ### 342. Witch Yummy Cookie variant wired (2026-08-24) — art moved charui/yummy_cookie_witch.png → relics/yummy_cookie.png (downsized 512→256); `CustomYummyCookie` override on Witch returns the standard relic path triple (BigRelicImagePath / RelicAtlasPath / RelicOutlineAtlasPath); needs `dotnet publish` to pack + in-game check (`relic YUMMY_COOKIE` on a Witch run).
 

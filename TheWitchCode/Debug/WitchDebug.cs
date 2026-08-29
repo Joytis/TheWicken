@@ -35,6 +35,9 @@ namespace TheWitch.TheWitchCode.Debug;
 ///                                     every relic + potion, Witch above base game, drawn in
 ///                                     each composited state (owned / not seen / undiscovered /
 ///                                     locked / raw outline) for art-parity checks.
+///   --witch-cardtest                  headless smoke test: at main-menu ready, plays every Witch
+///                                     card in a throwaway test combat (WitchCardTest) and logs
+///                                     failures to the autoslay log. -seed &lt;s&gt; is honored.
 ///   --witch-test-update-popup         shows the Workshop self-update "restart required" popup
 ///                                     directly at the main menu (no Steam calls) — popup UI/loc
 ///                                     iteration. Handled in WorkshopSelfUpdate.Initialize.
@@ -57,6 +60,7 @@ public static class WitchDebug
     private static bool _bootstrapStarted;
     private static bool _fxLabStarted;
     private static bool _iconLabStarted;
+    private static bool _cardTestStarted;
 
     public static void ApplyPatches(Harmony harmony)
     {
@@ -94,6 +98,13 @@ public static class WitchDebug
             harmony.Patch(
                 AccessTools.Method(typeof(NMainMenu), "_Ready"),
                 postfix: new HarmonyMethod(typeof(WitchDebug), nameof(IconLabMenuReadyPostfix)));
+        }
+        else if (CommandLineHelper.HasArg("witch-cardtest"))
+        {
+            MainFile.Logger.Info("--witch-cardtest: will run the headless card smoke test at the main menu");
+            harmony.Patch(
+                AccessTools.Method(typeof(NMainMenu), "_Ready"),
+                postfix: new HarmonyMethod(typeof(WitchDebug), nameof(CardTestMenuReadyPostfix)));
         }
         else if (CommandLineHelper.HasArg("witch-bootstrap"))
         {
@@ -206,6 +217,38 @@ public static class WitchDebug
         catch (Exception e)
         {
             MainFile.Logger.Error($"--witch-iconlab failed: {e}");
+        }
+    }
+
+    private static void CardTestMenuReadyPostfix(NMainMenu __instance)
+    {
+        if (_cardTestStarted)
+        {
+            return;
+        }
+        _cardTestStarted = true;
+        TaskHelper.RunSafely(RunCardTest(__instance));
+    }
+
+    private static async Task RunCardTest(NMainMenu menu)
+    {
+        SceneTree tree = menu.GetTree();
+        for (int i = 0; i < 5; i++)
+        {
+            await menu.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+        }
+        string? seed = CommandLineHelper.GetValue("seed");
+        if (string.IsNullOrWhiteSpace(seed))
+        {
+            seed = SeedHelper.GetRandomSeed();
+        }
+        try
+        {
+            await WitchCardTest.RunAll(seed);
+        }
+        catch (Exception e)
+        {
+            MainFile.Logger.Error($"--witch-cardtest failed: {e}");
         }
     }
 

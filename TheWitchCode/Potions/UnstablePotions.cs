@@ -43,6 +43,7 @@ public static class UnstablePotions
         potion.AssertMutable();
         _marks.GetValue(potion, _ => new object());
         Patches.UnstablePotionPatches.RefreshBeltNode(potion);
+        NUnstablePotionFtue.TryShow(potion);
         if (_copies.TryGetValue(potion, out PotionModel? copy) && !IsUnstable(copy))
         {
             Mark(copy);

@@ -1,51 +1,47 @@
-using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
+using TheWitch.TheWitchCode.Potions;
 
 namespace TheWitch.TheWitchCode.Relics;
 
 /// <summary>
-/// Tasty Herbs: a little garnish in every bottle — heal after combat if you drank a potion during it
-/// (base-game BurningBlood victory-heal shape).
+/// Tasty Herbs: whenever you use an Unstable potion, 25% chance it's used an additional time.
+/// The replay reuses the base-game Fairy in a Bottle shape (OnUseWrapper with a throwing context);
+/// the extra use also fires AfterPotionUsed, so a flag keeps it to one bonus use per potion.
 /// </summary>
 public sealed class TastyHerbs : WitchRelic
 {
+    private const float ExtraUseChance = 0.25f;
+
     public override RelicRarity Rarity => RelicRarity.Uncommon;
 
-    // Combat history can't be read in AfterCombatVictory (EndCombatInternal clears it before the
-    // hook fires), and PotionUsedEntry is skipped entirely when the potion lands the killing blow
-    // (only recorded while IsInProgress) — so track potion use ourselves. Reset at combat start
-    // keeps between-fight map drinks from counting.
-    private bool _usedPotionThisCombat;
+    private bool _replaying;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new HealVar(3m)
-    ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [UnstablePotions.UnstableHoverTip];
 
-    public override Task BeforeCombatStart()
+    public override async Task AfterPotionUsed(PotionModel potion, Creature? target)
     {
-        _usedPotionThisCombat = false;
-        return Task.CompletedTask;
-    }
-
-    public override Task AfterPotionUsed(PotionModel potion, Creature? target)
-    {
-        if (potion.Owner == Owner)
+        if (_replaying
+            || potion.Owner != Owner
+            || !CombatManager.Instance.IsInProgress
+            || !UnstablePotions.IsUnstable(potion)
+            || Owner.RunState.Rng.Niche.NextFloat() >= ExtraUseChance)
         {
-            _usedPotionThisCombat = true;
+            return;
         }
-        return Task.CompletedTask;
-    }
-
-    public override async Task AfterCombatVictory(CombatRoom _)
-    {
-        if (_usedPotionThisCombat && !Owner.Creature.IsDead)
+        _replaying = true;
+        try
         {
             Flash();
-            await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
+            await potion.OnUseWrapper(new ThrowingPlayerChoiceContext(), target);
+        }
+        finally
+        {
+            _replaying = false;
         }
     }
 }

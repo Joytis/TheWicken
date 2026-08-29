@@ -31,7 +31,7 @@ public sealed class ExtractLife : WitchCard
     ];
 
     public ExtractLife()
-        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }
 
