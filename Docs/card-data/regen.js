@@ -148,7 +148,10 @@ function parseCard(file, srcByClass) {
   }
 
   const hasX = /HasEnergyCostX\s*=>\s*true/.test(src);
-  const rarityRaw = ctorArgs[2].replace("CardRarity.", "");
+  // Cards bound to WitchSpawnedCardPool (Wicker Bones / Consumation) keep a Rare frame in-game but
+  // only ever exist as a payload of another card's execution — never drafted. Doc them as "Special".
+  const spawned = /\[Pool\(typeof\(WitchSpawnedCardPool\)\)\]/.test(src);
+  const rarityRaw = spawned ? "Special" : ctorArgs[2].replace("CardRarity.", "");
   const vars = parseCanonicalVars(src);
 
   return {
@@ -222,6 +225,7 @@ function build() {
       text: renderText(desc, p.vars),
       numbers: p.numbers,
       upgrade: p.upgrade,
+      multiplayer: p.multiplayer,
       note,
       tested: false,
       artFinal: false,

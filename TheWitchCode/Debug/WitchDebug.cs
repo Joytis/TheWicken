@@ -38,6 +38,10 @@ namespace TheWitch.TheWitchCode.Debug;
 ///   --witch-cardtest                  headless smoke test: at main-menu ready, plays every Witch
 ///                                     card in a throwaway test combat (WitchCardTest) and logs
 ///                                     failures to the autoslay log. -seed &lt;s&gt; is honored.
+///   --witch-potiontest                same harness: procures + uses + discards every Witch potion.
+///   --witch-relictest                 same harness: equips EVERY Witch relic, then runs the card
+///                                     exercise for every card and the potion exercise for every potion.
+///   --witch-testall                   cards, potions, then relics — all three in one process.
 ///   --witch-test-update-popup         shows the Workshop self-update "restart required" popup
 ///                                     directly at the main menu (no Steam calls) — popup UI/loc
 ///                                     iteration. Handled in WorkshopSelfUpdate.Initialize.
@@ -61,6 +65,17 @@ public static class WitchDebug
     private static bool _fxLabStarted;
     private static bool _iconLabStarted;
     private static bool _cardTestStarted;
+    private static WitchCardTest.Mode _smokeTestMode;
+
+    private static bool TryGetSmokeTestMode(out WitchCardTest.Mode mode)
+    {
+        if (CommandLineHelper.HasArg("witch-cardtest")) { mode = WitchCardTest.Mode.Cards; return true; }
+        if (CommandLineHelper.HasArg("witch-potiontest")) { mode = WitchCardTest.Mode.Potions; return true; }
+        if (CommandLineHelper.HasArg("witch-relictest")) { mode = WitchCardTest.Mode.Relics; return true; }
+        if (CommandLineHelper.HasArg("witch-testall")) { mode = WitchCardTest.Mode.All; return true; }
+        mode = default;
+        return false;
+    }
 
     public static void ApplyPatches(Harmony harmony)
     {
@@ -99,9 +114,10 @@ public static class WitchDebug
                 AccessTools.Method(typeof(NMainMenu), "_Ready"),
                 postfix: new HarmonyMethod(typeof(WitchDebug), nameof(IconLabMenuReadyPostfix)));
         }
-        else if (CommandLineHelper.HasArg("witch-cardtest"))
+        else if (TryGetSmokeTestMode(out WitchCardTest.Mode mode))
         {
-            MainFile.Logger.Info("--witch-cardtest: will run the headless card smoke test at the main menu");
+            _smokeTestMode = mode;
+            MainFile.Logger.Info($"{WitchCardTest.TagFor(mode)}: will run the headless {mode} smoke test at the main menu");
             harmony.Patch(
                 AccessTools.Method(typeof(NMainMenu), "_Ready"),
                 postfix: new HarmonyMethod(typeof(WitchDebug), nameof(CardTestMenuReadyPostfix)));
@@ -244,11 +260,11 @@ public static class WitchDebug
         }
         try
         {
-            await WitchCardTest.RunAll(seed);
+            await WitchCardTest.RunAll(seed, _smokeTestMode);
         }
         catch (Exception e)
         {
-            MainFile.Logger.Error($"--witch-cardtest failed: {e}");
+            MainFile.Logger.Error($"{WitchCardTest.TagFor(_smokeTestMode)} failed: {e}");
         }
     }
 

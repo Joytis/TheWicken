@@ -161,6 +161,111 @@
             "detail": "Launch STS2 with --witch-cardtest: plays every Witch card in a throwaway test combat and logs [witch-cardtest] FAILED lines (grep the tailed log). Prompts for the build step (default Build) and windowed vs headless (default Headless)."
         },
         {
+            "label": "Debug: Potion Test",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -PotionTest -TailLog -DelayMs 4000 -Build ${input:build.build} ${input:headless.headless}"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 with --witch-potiontest: procures, uses and discards every Witch potion in a throwaway test combat and logs [witch-potiontest] FAILED lines. Prompts for the build step (default Build) and windowed vs headless (default Headless)."
+        },
+        {
+            "label": "Debug: Relic Test",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -RelicTest -TailLog -DelayMs 4000 -Build ${input:build.build} ${input:headless.headless}"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 with --witch-relictest: equips EVERY Witch relic, then plays every card and uses every potion in throwaway test combats and logs [witch-relictest] FAILED lines. Prompts for the build step (default Build) and windowed vs headless (default Headless)."
+        },
+        {
+            "label": "Debug: Test All",
+            "type": "process",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}/tools/launch-witch.ps1' -Solo -TestAll -TailLog -DelayMs 4000 -Build ${input:build.build} ${input:headless.headless}"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "sts2",
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Launched 1 solo instance"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "detail": "Launch STS2 with --witch-testall: runs the card, potion and relic smoke tests back to back in one process and logs [witch-testall] FAILED lines. Prompts for the build step (default Build) and windowed vs headless (default Headless)."
+        },
+        {
             "label": "Debug: FX Lab",
             "type": "process",
             "command": "powershell",

@@ -15,6 +15,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -35,6 +36,7 @@
       "text": "Evoke your rightmost Orb twice.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -59,6 +61,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -79,6 +82,7 @@
       "text": "Channel 1 Lightning.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -103,6 +107,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -129,6 +134,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -156,6 +162,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +1, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -180,6 +187,7 @@
         "Block": 6
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -207,6 +215,7 @@
         "Energy": 1
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -232,6 +241,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -256,6 +266,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -282,6 +293,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -308,6 +320,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -335,6 +348,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Focus"
       ],
@@ -360,6 +374,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +1, Weak +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -385,6 +400,7 @@
         "Repeat": 3
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -412,6 +428,7 @@
         "Block": 3
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -437,6 +454,7 @@
         "Focus": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Focus"
       ],
@@ -463,6 +481,7 @@
         "Block": 9
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -486,6 +505,7 @@
         "Block": 4
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -512,6 +532,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -538,6 +559,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -563,6 +585,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -590,6 +613,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -614,6 +638,7 @@
         "Block": 10
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -640,6 +665,7 @@
         "Dexterity": 2
       },
       "upgrade": "Strength +1, Dexterity +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -667,6 +693,7 @@
         "Repeat": 2
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -691,6 +718,7 @@
         "Repeat": 1
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -713,6 +741,7 @@
       "text": "Channel 1 Frost for each enemy.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -739,6 +768,7 @@
         "Block": 6
       },
       "upgrade": "Block +1",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -763,6 +793,7 @@
       "text": "Channel 1 Dark. Trigger the passive ability of all Dark Orbs.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -787,6 +818,7 @@
       "text": "Double your Energy.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -812,6 +844,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": true,
       "mechanics": [
         "None"
       ],
@@ -837,6 +870,7 @@
         "Feral": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -862,6 +896,7 @@
         "Block": 13
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -889,6 +924,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -911,6 +947,7 @@
       "text": "Channel 1 Plasma.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -937,6 +974,7 @@
         "Block": 6
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -961,6 +999,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -985,6 +1024,7 @@
         "Hailstorm": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1012,6 +1052,7 @@
         "Iteration": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -1037,6 +1078,7 @@
       "text": "At the start of your turn, trigger the passive ability of your rightmost Orb{IfUpgraded:show: 2 times}.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1064,6 +1106,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3, Weak +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1090,6 +1133,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -1118,6 +1162,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1145,6 +1190,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +1, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -1172,6 +1218,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1199,6 +1246,7 @@
         "Cards": 4
       },
       "upgrade": "Damage +3, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1225,6 +1273,7 @@
         "Block": 11
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1249,6 +1298,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1273,6 +1323,7 @@
         "Smokestack": 5
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -1299,6 +1350,7 @@
         "Storm": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1324,6 +1376,7 @@
       "text": "Whenever you play a Power, gain {energyPrefix:energyIcons(1)}.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1350,6 +1403,7 @@
         "Energy": 3
       },
       "upgrade": "Damage +8",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1375,6 +1429,7 @@
         "CalculationExtra": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs",
         "Focus"
@@ -1403,6 +1458,7 @@
         "Damage": 14
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1426,6 +1482,7 @@
       "text": "Channel X Lightning.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1450,6 +1507,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1475,6 +1533,7 @@
         "Thunder": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1498,6 +1557,7 @@
       "text": "Add a random Power into your Hand. It's free to play this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1525,6 +1585,7 @@
         "Damage": 18
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1551,6 +1612,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1576,6 +1638,7 @@
         "Buffer": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1599,6 +1662,7 @@
         "Repeat": 2
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1627,6 +1691,7 @@
         "Coolant": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1652,6 +1717,7 @@
       "text": "At the start of your turn, add a random Power into your Hand.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1678,6 +1744,7 @@
         "Focus": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Focus"
       ],
@@ -1702,6 +1769,7 @@
       "text": "The first card you play each turn is played an extra time.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1728,6 +1796,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Status"
       ],
@@ -1753,6 +1822,7 @@
       "text": "Gain {Block:diff()} Block. Permanently increase this card's Block by {Increase:diff()}.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1779,6 +1849,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1805,6 +1876,7 @@
         "Damage": 28
       },
       "upgrade": "Damage +8",
+      "multiplayer": false,
       "mechanics": [
         "Focus"
       ],
@@ -1832,6 +1904,7 @@
         "Repeat": 3
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1854,6 +1927,7 @@
       "text": "Another player Channels Plasma.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": true,
       "mechanics": [
         "Orbs"
       ],
@@ -1880,6 +1954,7 @@
         "Cards": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1905,6 +1980,7 @@
         "Damage": 24
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1930,6 +2006,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1955,6 +2032,7 @@
       "text": "Evoke your rightmost Orb X times.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -1977,6 +2055,7 @@
       "text": "Channel 1 Lightning. Channel 1 Frost. Channel 1 Dark.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -2005,6 +2084,7 @@
         "Cards": 4
       },
       "upgrade": "Cards +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2030,6 +2110,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -2057,6 +2138,7 @@
         "SignalBoost": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2082,6 +2164,7 @@
         "Spinner": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -2109,6 +2192,7 @@
         "Energy": 4
       },
       "upgrade": "Energy +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2132,6 +2216,7 @@
       "text": "Whenever you create a Status, Channel 1 random Orb.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs",
         "Status"
@@ -2160,6 +2245,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],
@@ -2189,6 +2275,7 @@
         "BiasedCognition": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Focus"
       ],
@@ -2216,6 +2303,7 @@
         "Repeat": 4
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Orbs"
       ],

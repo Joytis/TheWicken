@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-29",
+  "generated": "2026-08-30",
   "cards": [
     {
       "name": "Defend",
@@ -14,6 +14,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": true,
@@ -41,6 +42,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Harvest: deal damage and create small potions from a HARD-CODED loot table (hand-tuned — trim/add freely).",
       "tested": true,
       "artFinal": true,
@@ -71,6 +73,7 @@
         "Block": 7
       },
       "upgrade": "Hex +1",
+      "multiplayer": false,
       "note": "Incant (starter): block, plus Hex if you have already drunk a potion this turn — the second half of the starting deck's potion loop (Harvest generates, Incant pays off).",
       "tested": true,
       "artFinal": false,
@@ -103,6 +106,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "The only difference between the starting Strike cards are portrait, attack vfx, and color.",
       "tested": true,
       "artFinal": true,
@@ -131,6 +135,7 @@
         "Block": 5
       },
       "upgrade": "Weak +1",
+      "multiplayer": false,
       "note": "Bewitching Grin: a cheap one-shot skill — block up while sapping every enemy with Weak.",
       "tested": true,
       "artFinal": true,
@@ -159,6 +164,7 @@
       "text": "Create {Brews:diff()} Unstable Noxious Brews.",
       "numbers": {},
       "upgrade": "Brews +1",
+      "multiplayer": false,
       "note": "Big Batch: one cauldron, many bottles — create a batch of Noxious Brews.",
       "tested": true,
       "artFinal": false,
@@ -188,6 +194,7 @@
         "Hex": 2
       },
       "upgrade": "Hex +1",
+      "multiplayer": false,
       "note": "Bind in Blood: seed the target with Hex.",
       "tested": true,
       "artFinal": false,
@@ -220,6 +227,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "Broom Strike: one wide sweep of the broom; the follow-through sweeps your next Skill in cheaper.",
       "tested": true,
       "artFinal": false,
@@ -252,6 +260,7 @@
         "Cards": 2
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "note": "Call the Pack: hunker down behind the wolves — gain Block, shuffle Gnash tokens into the Draw Pile.",
       "tested": true,
       "artFinal": false,
@@ -285,6 +294,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -318,6 +328,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Frenzy: two quick swipes now, and the rush banks 1 Energy for next turn (base-game <see cref=\"EnergyNextTurnPower\" />).",
       "tested": true,
       "artFinal": true,
@@ -350,6 +361,7 @@
         "Block": 6
       },
       "upgrade": "Block +2, Brambles +1",
+      "multiplayer": false,
       "note": "Hide in a Bush (formerly Spines): Block plus Brambles.",
       "tested": true,
       "artFinal": false,
@@ -380,6 +392,7 @@
         "Cards": 2
       },
       "upgrade": "Brambles +2",
+      "multiplayer": false,
       "note": "Lavender and Sage: draw a card and grow a thicket of Brambles.",
       "tested": true,
       "artFinal": false,
@@ -412,6 +425,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +2, Brambles +1",
+      "multiplayer": false,
       "note": "Needle Whip: lash out with a thorned vine — damage plus Brambles.",
       "tested": true,
       "artFinal": true,
@@ -441,6 +455,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "note": "Pocket Rats: dump a handful of one-shot Rats straight into your hand.",
       "tested": true,
       "artFinal": false,
@@ -473,6 +488,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "note": "Smolder: block now, and bottle the embers — create an Unstable Ember Jar.",
       "tested": false,
       "artFinal": false,
@@ -502,6 +518,7 @@
       "text": "Create a random Unstable defensive Potion.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
@@ -532,6 +549,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2, Vulnerable +1",
+      "multiplayer": false,
       "note": "Strike Fear: a jab that leaves the target flinching — damage plus Vulnerable.",
       "tested": true,
       "artFinal": false,
@@ -559,6 +577,7 @@
       "text": "Exhaust a card. Next turn, gain [E]. Add an Ash into your Discard Pile.",
       "numbers": {},
       "upgrade": "EnergyNextTurn +1",
+      "multiplayer": false,
       "note": "Tinder: burn a card as kindling — the Energy arrives next turn (base-game <see cref=\"EnergyNextTurnPower\" />) and an <see cref=\"Ash\" /> is left in the discard pile.",
       "tested": true,
       "artFinal": false,
@@ -590,6 +609,7 @@
         "Damage": 5
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "Marker for attacks that don't burn the target's Hex — <see cref=\"HexPower\" /> skips its after-attack stack loss when the attacking card implements this.",
       "tested": true,
       "artFinal": true,
@@ -620,6 +640,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Vexing Strike (was Vexing Thwack): an Attack that also seeds the target with Hex.",
       "tested": true,
       "artFinal": true,
@@ -652,6 +673,7 @@
         "Block": 7
       },
       "upgrade": "Block +1, WaxAndWane +1",
+      "multiplayer": false,
       "note": "Wax and Wane: shore up with Block now; the curse lands at the start of next turn, on everyone.",
       "tested": true,
       "artFinal": false,
@@ -684,6 +706,7 @@
         "Block": 10
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "note": "Weathered Witch Hat: Block, then play a random Skill from your draw pile (free auto-play; nothing happens if the pile holds none).",
       "tested": true,
       "artFinal": false,
@@ -711,6 +734,7 @@
       "text": "Create a random Unstable offensive Potion.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
@@ -741,6 +765,7 @@
         "Repeat": 4
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -771,6 +796,7 @@
       "text": "Summon a Bear Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -803,6 +829,7 @@
         "BloodAnointment": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": true,
       "note": "Multiplayer-only. Blood Anointment (MP-only): anoint another player (AnyAlly — cannot target yourself) — their Attacks apply Hex this turn (see <see cref=\"BloodAnointmentPower\" />).",
       "tested": false,
       "artFinal": false,
@@ -832,6 +859,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Hurl the whole belt: one 10-damage hit per potion you've brewed this combat.",
       "tested": true,
       "artFinal": false,
@@ -865,6 +893,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "CalculationBase +6",
+      "multiplayer": false,
       "note": "Hits once per Bramble; does nothing if you have no Brambles.",
       "tested": false,
       "artFinal": false,
@@ -896,6 +925,7 @@
       "text": "Summon a Cat Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Summons a cosmetic cat pet alongside the familiar power.",
       "tested": true,
       "artFinal": true,
@@ -929,6 +959,7 @@
         "Block": 20
       },
       "upgrade": "Block +5",
+      "multiplayer": true,
       "note": "Multiplayer-only. Co-op rot ritual (MP-only): you and every ally hunker down (Block) but soak up the rot (Weak), while all enemies choke on it too.",
       "tested": true,
       "artFinal": false,
@@ -960,6 +991,7 @@
         "CloakOfMoonlight": 2
       },
       "upgrade": "CloakOfMoonlight +1",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -992,6 +1024,7 @@
         "Damage": 5
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "Command (was Throw Bait): a quick strike and an order barked at the pack — up to two random familiars each do their card production once.",
       "tested": true,
       "artFinal": false,
@@ -1023,6 +1056,7 @@
         "Brambles": 5
       },
       "upgrade": "Brambles +2",
+      "multiplayer": false,
       "note": "Spend X energy to pile Brambles on yourself, 7 at a time, X times — a fast way to stack a big Bramble count.",
       "tested": true,
       "artFinal": false,
@@ -1052,6 +1086,7 @@
       "text": "Summon a Crow Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -1084,6 +1119,7 @@
         "DeepRoots": 3
       },
       "upgrade": "DeepRoots +1",
+      "multiplayer": false,
       "note": "Deep Roots: a Power that grows Brambles at the start of every turn.",
       "tested": true,
       "artFinal": false,
@@ -1113,6 +1149,7 @@
       "text": "Exhaust a card. Create an Unstable Potion.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "Grind Down: Exhaust a card from your hand and grind it into a potion.",
       "tested": true,
       "artFinal": false,
@@ -1142,6 +1179,7 @@
       "text": "Create an Unstable Energy Potion.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Hasty Brew: fast mana — brew an Energy Potion.",
       "tested": true,
       "artFinal": false,
@@ -1171,6 +1209,7 @@
       "text": "Create a random Unstable utility Potion.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Shared base for the \"brew a potion of orientation X\" trio (Wicked / Stony / Herbal Brew).",
       "tested": true,
       "artFinal": false,
@@ -1198,6 +1237,7 @@
       "text": "At the start of your turn, create an Unstable Puff of Smoke.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "Hidden in Smoke: a Power that brews a Vial of Smoke at the start of every turn.",
       "tested": true,
       "artFinal": false,
@@ -1229,6 +1269,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +2",
+      "multiplayer": false,
       "note": "Light the Candle: upgrade random cards in your hand (via <c>CardCmd.Upgrade</c> so any on-upgrade listeners fire), then create a Vial of Smoke.",
       "tested": true,
       "artFinal": true,
@@ -1259,6 +1300,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Moonbeam: strike, then leave the beam on the target — it takes the same damage again at the start of each of your turns (<see cref=\"MoonbeamPower\" />, stacks on repeat plays).",
       "tested": true,
       "artFinal": false,
@@ -1289,6 +1331,7 @@
         "ExtraDamage": 6
       },
       "upgrade": "Damage +2, ExtraDamage +2",
+      "multiplayer": false,
       "note": "Overrun: mark one enemy for the pack — every Familiar card played this turn tramples it again.",
       "tested": true,
       "artFinal": false,
@@ -1320,6 +1363,7 @@
         "Damage": 10
       },
       "upgrade": "PotionDamageMultiplier +1",
+      "multiplayer": false,
       "note": "Pact of Agony: hex yourself to charge your potions — they hit far harder for the rest of the turn.",
       "tested": true,
       "artFinal": false,
@@ -1355,6 +1399,7 @@
         "Strength": 4
       },
       "upgrade": "Strength +2",
+      "multiplayer": true,
       "note": "Multiplayer-only. Co-op (MP-only): take 5 Weak onto yourself so every other ally gains Strength.",
       "tested": true,
       "artFinal": false,
@@ -1387,6 +1432,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -1419,6 +1465,7 @@
         "HpLoss": 1
       },
       "upgrade": "HpLoss +1, Brews +1",
+      "multiplayer": false,
       "note": "Prices Paid: bleed yourself for a strike, then brew the spilled blood into Noxious Brews.",
       "tested": true,
       "artFinal": false,
@@ -1451,6 +1498,7 @@
         "DrawCardsNextTurn": 1
       },
       "upgrade": "DrawCardsNextTurn +1",
+      "multiplayer": false,
       "note": "Read the Bones: curse the enemy now, and the reading pays off next turn — Energy and a card (base-game <see cref=\"EnergyNextTurnPower\" /> + <see cref=\"DrawCardsNextTurnPower\" />).",
       "tested": true,
       "artFinal": true,
@@ -1485,6 +1533,7 @@
         "Cards": 1
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "note": "Refuse Pile: block up and seed your piles with Rats — two into the draw pile, two into the discard.",
       "tested": true,
       "artFinal": false,
@@ -1517,6 +1566,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1, Hex +1",
+      "multiplayer": false,
       "note": "Only gains Block if a Familiar was actually sacrificed.",
       "tested": true,
       "artFinal": false,
@@ -1554,6 +1604,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3, Hex +1",
+      "multiplayer": false,
       "note": "Rot Bloom: heavy hit that leaves the target wilting — Weak and Hex.",
       "tested": true,
       "artFinal": false,
@@ -1585,6 +1636,7 @@
         "RottingRoots": 3
       },
       "upgrade": "RottingRoots +3",
+      "multiplayer": false,
       "note": "Rotting Roots: a slow rot — every turn all enemies wither and grow hexed.",
       "tested": true,
       "artFinal": false,
@@ -1618,6 +1670,7 @@
         "Damage": 12
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Salt and Ash: sweeping damage, and stabilize a CHOSEN Unstable potion (potion-select overlay, auto-picked when only one is Unstable).",
       "tested": true,
       "artFinal": false,
@@ -1648,6 +1701,7 @@
       "text": "You and your allies each gain a random Potion.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": true,
       "note": "Multiplayer-only. Co-op (MP-only): pass a round of brews — you and every ally each gain a random potion.",
       "tested": true,
       "artFinal": false,
@@ -1678,6 +1732,7 @@
         "Block": 3
       },
       "upgrade": "Block +2, Brambles +2",
+      "multiplayer": false,
       "note": "Sprouts: a small guard that reseeds itself — block + Brambles, and a copy of this card sprouts in your Discard pile (Anger pattern).",
       "tested": false,
       "artFinal": false,
@@ -1710,6 +1765,7 @@
         "Vulnerable": 1
       },
       "upgrade": "Brambles +3",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -1742,6 +1798,7 @@
         "Damage": 32
       },
       "upgrade": "Damage +8",
+      "multiplayer": false,
       "note": "Taste of Blood: one savage bite that comes easier the more blood is already spilled — costs 1 less for each Attack played this turn (base-game Stomp discount shape).",
       "tested": true,
       "artFinal": false,
@@ -1773,6 +1830,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "\"Double, double, toil and trouble\" — hit twice, then enchant a random card in your Draw Pile with Replay.",
       "tested": true,
       "artFinal": false,
@@ -1802,6 +1860,7 @@
         "VolatileVapors": 4
       },
       "upgrade": "VolatileVapors +2",
+      "multiplayer": false,
       "note": "Volatile Vapors: every brew fumes — using or creating a potion vents damage at a random enemy.",
       "tested": true,
       "artFinal": false,
@@ -1830,6 +1889,7 @@
       "text": "Double your Brambles.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "Exhausts (until upgraded).",
       "tested": true,
       "artFinal": false,
@@ -1859,6 +1919,7 @@
       "text": "Summon a Wolf Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "",
       "tested": false,
       "artFinal": false,
@@ -1891,6 +1952,7 @@
         "Strength": 1
       },
       "upgrade": "Strength +1",
+      "multiplayer": false,
       "note": "A Little Sip: a Power — whenever you use a potion, gain Strength and draw a card.",
       "tested": true,
       "artFinal": false,
@@ -1923,6 +1985,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "Ambush!: AoE strike that springs itself — auto-plays for free when drawn.",
       "tested": false,
       "artFinal": false,
@@ -1954,6 +2017,7 @@
         "Cards": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "note": "Bonfire: feed the flames — a burst of Energy, paid for by exhausting two cards; the fire leaves <see cref=\"Ash\" /> behind in the discard pile.",
       "tested": true,
       "artFinal": true,
@@ -1986,6 +2050,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +4",
+      "multiplayer": true,
       "note": "Multiplayer-only. Bottle Bombardment (MP-only): the whole party's brews rain down — one hit per potion created by ANY player this combat.",
       "tested": false,
       "artFinal": false,
@@ -2013,6 +2078,7 @@
         "Block": 8
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "note": "Bottle Wall: gain Block and brew up a Fortifier potion.",
       "tested": true,
       "artFinal": false,
@@ -2042,6 +2108,7 @@
       "text": "Whenever you use a Potion, create an Unstable Noxious Brew.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -2074,6 +2141,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "note": "Capture Soul: each kill is bottled forever — this copy permanently applies +1 Hex per enemy it has killed, across combats and save/load (<c>[SavedProperty]</c> + DeckVersion propagation, the base-game GeneticAlgorithm pattern — the setter mutates the var's BaseValue so deck previews render it too).",
       "tested": true,
       "artFinal": true,
@@ -2104,6 +2172,7 @@
       "text": "Whenever you play a Skill this turn, draw a card.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "",
       "tested": true,
       "artFinal": false,
@@ -2135,6 +2204,7 @@
         "CrystalBottle": 1
       },
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Crystal Bottle: a Power — the next potion you use becomes a Buff that repeats its effect each turn.",
       "tested": true,
       "artFinal": false,
@@ -2168,6 +2238,7 @@
         "Cards": 3
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "note": "Cursed Spellbook: a free surge of power with the curse baked in — Energy and cards now, Hex to pay for it.",
       "tested": true,
       "artFinal": false,
@@ -2200,6 +2271,7 @@
       "text": "Transform a Potion into a random Unstable Rare Potion.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "Distill: TRANSFORM a chosen belt potion into a random RARE non-healing potion, Unstable.",
       "tested": true,
       "artFinal": false,
@@ -2227,6 +2299,7 @@
       "text": "Summon {Familiars:diff()} random Familiars. Draw {DrawReduction} fewer cards at the start of each turn.",
       "numbers": {},
       "upgrade": "Familiars +1",
+      "multiplayer": false,
       "note": "Embrace the Wilds: summon a burst of random familiars at the cost of drawing fewer cards each turn for the rest of combat.",
       "tested": true,
       "artFinal": false,
@@ -2260,6 +2333,7 @@
         "Damage": 12
       },
       "upgrade": "Replay +1",
+      "multiplayer": false,
       "note": "Extract Life: an Attack that also enchants a chosen card in your hand with Replay and Exhaust — one big extra payoff this combat, then gone.",
       "tested": false,
       "artFinal": false,
@@ -2287,6 +2361,7 @@
         "EyeOfNewt": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Eye of Newt: a Power that fans your potions out to one extra random target (upgraded: ALL valid targets), plus an unstable Ember Jar to throw.",
       "tested": false,
       "artFinal": false,
@@ -2321,6 +2396,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +2, Hex +1",
+      "multiplayer": false,
       "note": "Hexblast: blast every enemy, then lay Hex on all of them.",
       "tested": true,
       "artFinal": false,
@@ -2352,6 +2428,7 @@
       "text": "Bottle a card in your Hand into a Potion.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Message in a Bottle: bottle a chosen card from your hand into a Bottled Message potion; using the potion returns the card to your hand.",
       "tested": true,
       "artFinal": false,
@@ -2382,6 +2459,7 @@
       "text": "Exhaust X cards. Add X random cards into your Hand. They are free to play this combat.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Mulch: compost X cards from your hand, and X fresh random Witch cards sprout in their place — free to play for the rest of the combat.",
       "tested": true,
       "artFinal": false,
@@ -2412,6 +2490,7 @@
       "text": "Summon an Owl Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Summons a cosmetic owl pet alongside the familiar power.",
       "tested": true,
       "artFinal": false,
@@ -2442,6 +2521,7 @@
       "text": "ALL players Summon a Rat Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": true,
       "note": "Multiplayer-only. Plague Tide (MP-only): the rats spread to every ship — ALL players summon a Rat Familiar (upgraded: a Rat Familiar+, per-stack like every summon).",
       "tested": false,
       "artFinal": false,
@@ -2471,6 +2551,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "note": "Plaguestorm (was Plague): the storm strikes — one hit against ALL enemies for each Rats card played this combat.",
       "tested": true,
       "artFinal": false,
@@ -2505,6 +2586,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "note": "Polymorph (was Repurpose): choose {Cards} cards in your draw pile (1, upgraded 2) — each becomes a Rats token, 1:1 (combat-scoped <c>CardCmd.Transform</c>, native one-to-one overlay per choice).",
       "tested": true,
       "artFinal": false,
@@ -2536,6 +2618,7 @@
         "PrimalForm": 2
       },
       "upgrade": "PrimalForm +1",
+      "multiplayer": false,
       "note": "Primal Form: shed the skin, keep the fury — your first few Attacks each turn are played an additional time.",
       "tested": true,
       "artFinal": false,
@@ -2565,6 +2648,7 @@
       "text": "Summon a Rat Familiar.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Exhausts.",
       "tested": true,
       "artFinal": false,
@@ -2597,6 +2681,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "note": "Rattling Bottles: an attack that also crams every empty potion slot full of rocks.",
       "tested": true,
       "artFinal": false,
@@ -2627,6 +2712,7 @@
       "text": "Whenever you play a card that costs [E] [E] or more, a random card in your Hand is free to play this turn.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Ritual Casting: a Power — big Skills each unlock a random free card this turn.",
       "tested": true,
       "artFinal": false,
@@ -2645,53 +2731,6 @@
       ]
     },
     {
-      "name": "Wicker Bones",
-      "entry": "WICKER_BONES",
-      "file": "TheWitchCode/Cards/WickerBones.cs",
-      "cost": 1,
-      "type": "Skill",
-      "rarity": "Rare",
-      "target": "Self",
-      "text": "Gain 12 Block. If you have {TargetBrambles:diff()} Brambles, add Wicker Consumation into your Hand.",
-      "numbers": {
-        "Block": 12
-      },
-      "upgrade": "Block +4",
-      "note": "Wicker Bones: second link of the Wicker chain, created by <see cref=\"WickerHeart\" />.",
-      "tested": false,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [],
-      "role": [],
-      "sub": [],
-      "threads": []
-    },
-    {
-      "name": "Wicker Consumation",
-      "entry": "WICKER_CONSUMATION",
-      "file": "TheWitchCode/Cards/WickerConsumation.cs",
-      "cost": 1,
-      "type": "Attack",
-      "rarity": "Rare",
-      "target": "AnyEnemy",
-      "text": "Deal 20 damage. If you have at least {TargetBrambles:diff()} Brambles, gain Incarnation.",
-      "numbers": {
-        "Incarnation": 1,
-        "Damage": 20
-      },
-      "upgrade": "none",
-      "note": "Wicker Consumation: final link of the Wicker chain, created by <see cref=\"WickerBones\" />.",
-      "tested": false,
-      "artFinal": false,
-      "vfxPass": false,
-      "sfxPass": false,
-      "mechanics": [],
-      "role": [],
-      "sub": [],
-      "threads": []
-    },
-    {
       "name": "Wicker Heart",
       "entry": "WICKER_HEART",
       "file": "TheWitchCode/Cards/WickerHeart.cs",
@@ -2704,6 +2743,7 @@
         "Brambles": 5
       },
       "upgrade": "Brambles +2",
+      "multiplayer": false,
       "note": "Wicker Heart: first link of the Wicker chain.",
       "tested": false,
       "artFinal": false,
@@ -2725,6 +2765,7 @@
       "text": "Create X random Unstable Potions.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Witchcraft: spend X Energy, create X random Unstable potions.",
       "tested": true,
       "artFinal": false,
@@ -2744,6 +2785,55 @@
       ]
     },
     {
+      "name": "Wicker Bones",
+      "entry": "WICKER_BONES",
+      "file": "TheWitchCode/Cards/WickerBones.cs",
+      "cost": 1,
+      "type": "Skill",
+      "rarity": "Special",
+      "target": "Self",
+      "text": "Gain 12 Block. If you have {TargetBrambles:diff()} Brambles, add Wicker Consumation into your Hand.",
+      "numbers": {
+        "Block": 12
+      },
+      "upgrade": "Block +4",
+      "multiplayer": false,
+      "note": "Wicker Bones: second link of the Wicker chain, created by <see cref=\"WickerHeart\" />.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
+    },
+    {
+      "name": "Wicker Consumation",
+      "entry": "WICKER_CONSUMATION",
+      "file": "TheWitchCode/Cards/WickerConsumation.cs",
+      "cost": 1,
+      "type": "Attack",
+      "rarity": "Special",
+      "target": "AnyEnemy",
+      "text": "Deal 20 damage. If you have at least {TargetBrambles:diff()} Brambles, gain Incarnation.",
+      "numbers": {
+        "Incarnation": 1,
+        "Damage": 20
+      },
+      "upgrade": "none",
+      "multiplayer": false,
+      "note": "Wicker Consumation: final link of the Wicker chain, created by <see cref=\"WickerBones\" />.",
+      "tested": false,
+      "artFinal": false,
+      "vfxPass": false,
+      "sfxPass": false,
+      "mechanics": [],
+      "role": [],
+      "sub": [],
+      "threads": []
+    },
+    {
       "name": "Dark Omen",
       "entry": "DARK_OMEN",
       "file": "TheWitchCode/Cards/Familiar/DarkOmen.cs",
@@ -2756,6 +2846,7 @@
         "Hex": 1
       },
       "upgrade": "Hex +1",
+      "multiplayer": false,
       "note": "Crow familiar token (formerly Claw Eyes): an ill portent — Hex ALL enemies.",
       "tested": true,
       "artFinal": false,
@@ -2792,6 +2883,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Cat familiar token: one 7-damage hit per Attack you played this turn, INCLUDING itself (always ≥1).",
       "tested": true,
       "artFinal": false,
@@ -2827,6 +2919,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "note": "Wolf familiar token.",
       "tested": true,
       "artFinal": false,
@@ -2860,6 +2953,7 @@
         "Block": 15
       },
       "upgrade": "Block +3, StrengthNextTurn +1",
+      "multiplayer": false,
       "note": "Bear familiar token: den up — block now, wake up stronger next turn.",
       "tested": true,
       "artFinal": false,
@@ -2890,6 +2984,7 @@
       "text": "Copy a non-Knowledge card in your Hand.{IfUpgraded:show: It costs [E] less.|}",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Owl familiar token: memorize a card — copy a chosen card in your hand (base-game Dual Wield pattern: <c>CreateClone</c>, added through the generated-card funnel so creation payoffs fire).",
       "tested": true,
       "artFinal": false,
@@ -2924,6 +3019,7 @@
         "Damage": 12
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "note": "Bear familiar token: heavy hit that leaves the target torn open (Vulnerable).",
       "tested": true,
       "artFinal": false,
@@ -2957,6 +3053,7 @@
         "Block": 0
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "note": "Cat familiar token: feline agility bottled as tempo — gain Energy.",
       "tested": true,
       "artFinal": false,
@@ -2990,6 +3087,7 @@
         "Strength": 2
       },
       "upgrade": "Strength +2",
+      "multiplayer": false,
       "note": "Wolf familiar token: the pack closes in — a burst of Strength for this turn only (<see cref=\"PackTacticsPower\" />, the base-game Coordinate / Flex Potion temporary-strength pattern).",
       "tested": true,
       "artFinal": false,
@@ -3019,6 +3117,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "note": "Rat familiar token (was Scavengers): tiny attack that cycles.",
       "tested": true,
       "artFinal": false,
@@ -3051,6 +3150,7 @@
         "Cards": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Rat familiar token: dig a card back out of the discard pile (base-game Dredge pattern).",
       "tested": true,
       "artFinal": false,
@@ -3082,6 +3182,7 @@
       "text": "Create a random Treasure.",
       "numbers": {},
       "upgrade": "custom (see code)",
+      "multiplayer": false,
       "note": "Crow familiar token: the Crow drags home a shiny — create a random Treasure potion.",
       "tested": true,
       "artFinal": false,
@@ -3114,6 +3215,7 @@
         "Cards": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Rat familiar token: flood everything — one Rat to hand, plus Rats shuffled into BOTH the draw and discard piles (Refuse Pile pattern).",
       "tested": true,
       "artFinal": false,
@@ -3148,6 +3250,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "note": "Owl familiar token: draw 2, discard 1 — the upgrade drops the discard.",
       "tested": true,
       "artFinal": false,
@@ -3180,6 +3283,7 @@
       "text": "",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Ash: inert Unplayable status left behind by Bonfire / Tinder (base-game Soot pattern).",
       "tested": true,
       "artFinal": false,
@@ -3205,6 +3309,7 @@
       "text": "Whenever you use a Potion, duplicate a random card in your Hand.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "note": "Catalyst: the Witch's unique Ancient card (granted by Dusty Tome — any <c>CardRarity.Ancient</c> card in the pool outside the transcendence map qualifies).",
       "tested": true,
       "artFinal": false,
@@ -3237,6 +3342,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "note": "Rip Soul: the Ancient (transcended) form of Extract Essence — tear the soul out of an enemy: heavy damage, Hex, and one random Unstable potion (any non-healing potion the Witch can roll, any rarity).",
       "tested": true,
       "artFinal": true,
@@ -3270,6 +3376,7 @@
         "HpLoss": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "note": "Wormy: a playable nuisance status (from Wormy Apple).",
       "tested": true,
       "artFinal": false,

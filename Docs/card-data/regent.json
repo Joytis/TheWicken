@@ -15,6 +15,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -39,6 +40,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -66,6 +68,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -88,6 +91,7 @@
         "Stars": 2
       },
       "upgrade": "Stars +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -112,6 +116,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -137,6 +142,7 @@
       "text": "Choose a card in your Hand to Transform into Minion Strike.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -162,6 +168,7 @@
         "Repeat": 3
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -186,6 +193,7 @@
         "Block": 7
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -210,6 +218,7 @@
         "Damage": 11
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -234,6 +243,7 @@
         "Block": 6
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -259,6 +269,7 @@
         "ExtraDamage": 2
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -283,6 +294,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -309,6 +321,7 @@
         "Stars": 1
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -333,6 +346,7 @@
         "Block": 11
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -358,6 +372,7 @@
         "Cards": 1
       },
       "upgrade": "Stars +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -386,6 +401,7 @@
         "Cards": 2
       },
       "upgrade": "Damage +1, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -413,6 +429,7 @@
         "Stars": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -440,6 +457,7 @@
         "Vulnerable": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -467,6 +485,7 @@
         "Block": 8
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "Vigor"
       ],
@@ -492,6 +511,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +3, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -518,6 +538,7 @@
         "Energy": 1
       },
       "upgrade": "Forge +4",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -546,6 +567,7 @@
         "Stars": 1
       },
       "upgrade": "Damage +1, Stars +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -571,6 +593,7 @@
         "Cards": 2
       },
       "upgrade": "Forge +3",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -598,6 +621,7 @@
         "Forge": 7
       },
       "upgrade": "Damage +2, Forge +2",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -622,6 +646,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -648,6 +673,7 @@
         "BlackHole": 3
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -675,6 +701,7 @@
         "Forge": 10
       },
       "upgrade": "Block +3, Forge +3",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -699,6 +726,7 @@
         "Cards": 2
       },
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -721,6 +749,7 @@
       "text": "Whenever you spend {singleStarIcon}, gain {BlockForStars:diff()} Block for each {singleStarIcon} spent.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -747,6 +776,7 @@
         "Forge": 3
       },
       "upgrade": "Forge +2",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -774,6 +804,7 @@
         "Stars": 1
       },
       "upgrade": "Stars +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -802,6 +833,7 @@
         "Damage": 30
       },
       "upgrade": "Damage +10",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -828,6 +860,7 @@
         "Forge": 5
       },
       "upgrade": "Forge +2",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -856,6 +889,7 @@
         "Damage": 13
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -883,6 +917,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -909,6 +944,7 @@
         "Energy": 2
       },
       "upgrade": "Damage +3, Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -934,6 +970,7 @@
         "Damage": 27
       },
       "upgrade": "Damage +8",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -959,6 +996,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -984,6 +1022,7 @@
         "Stars": 5
       },
       "upgrade": "Damage +8",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1008,6 +1047,7 @@
       "text": "Another player adds 1 random{IfUpgraded:show: Upgraded} Colorless card to their Hand.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": true,
       "mechanics": [
         "Colorless"
       ],
@@ -1036,6 +1076,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1061,6 +1102,7 @@
         "Block": 7
       },
       "upgrade": "Block +1",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1085,6 +1127,7 @@
       "text": "Whenever you play a card this turn, gain {Power:diff()} Strength this turn.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1109,6 +1152,7 @@
         "Energy": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1133,6 +1177,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1159,6 +1204,7 @@
         "Parry": 10
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -1185,6 +1231,7 @@
         "Block": 9
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1212,6 +1259,7 @@
         "Block": 3
       },
       "upgrade": "Block +1",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1238,6 +1286,7 @@
         "Cards": 6
       },
       "upgrade": "Cards +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1260,6 +1309,7 @@
       "text": "Choose 1 of 3 random Colorless cards to add into your Hand.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Stars",
         "Colorless"
@@ -1292,6 +1342,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1319,6 +1370,7 @@
         "Block": 15
       },
       "upgrade": "Block +5",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1343,6 +1395,7 @@
         "Strength": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1370,6 +1423,7 @@
         "Stars": 9
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1398,6 +1452,7 @@
         "Stars": 2
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1425,6 +1480,7 @@
         "Cards": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1452,6 +1508,7 @@
         "Damage": 5
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1478,6 +1535,7 @@
         "Forge": 8
       },
       "upgrade": "Forge +3",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -1507,6 +1565,7 @@
         "ExtraDamage": 3
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1533,6 +1592,7 @@
         "Vigor": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Vigor"
       ],
@@ -1557,6 +1617,7 @@
         "Arsenal": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1585,6 +1646,7 @@
         "CalculationExtra": 5
       },
       "upgrade": "Damage +2, CalculationBase +2, CalculationExtra +2",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -1612,6 +1674,7 @@
         "Forge": 5
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars",
         "Forge"
@@ -1642,6 +1705,7 @@
         "Damage": 18
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1667,6 +1731,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1696,6 +1761,7 @@
         "Damage": 33
       },
       "upgrade": "Damage +11",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1724,6 +1790,7 @@
         "Damage": 21
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1750,6 +1817,7 @@
         "Repeat": 3
       },
       "upgrade": "Cards +2",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1777,6 +1845,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1804,6 +1873,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1827,6 +1897,7 @@
       "text": "At the start of your turn, gain {StarsPerTurn:starIcons()}.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -1851,6 +1922,7 @@
       "text": "Transform any number of cards in your Hand into Minion Sacrifice.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1874,6 +1946,7 @@
       "text": "Whenever you Forge, all allies Forge as well.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": true,
       "mechanics": [
         "Forge"
       ],
@@ -1897,6 +1970,7 @@
         "Energy": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1923,6 +1997,7 @@
         "Repeat": 1
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Colorless"
       ],
@@ -1947,6 +2022,7 @@
         "Block": 10
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1973,6 +2049,7 @@
         "Cards": 3
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1996,6 +2073,7 @@
       "text": "Whenever you attack an enemy, it loses {StrengthLoss:diff()} Strength this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2020,6 +2098,7 @@
         "Plating": 8
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -2047,6 +2126,7 @@
         "Gold": 30
       },
       "upgrade": "Gold +10",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2069,6 +2149,7 @@
         "Forge": 7
       },
       "upgrade": "Forge +4",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -2096,6 +2177,7 @@
         "Repeat": 7
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -2124,6 +2206,7 @@
         "SwordSage": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Forge"
       ],
@@ -2148,6 +2231,7 @@
         "Forge": 30
       },
       "upgrade": "Forge +10",
+      "multiplayer": false,
       "mechanics": [
         "Stars",
         "Forge"
@@ -2173,6 +2257,7 @@
       "text": "At the start of your turn, draw 1 card and Exhaust 1 card from your Hand.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2198,6 +2283,7 @@
         "VoidForm": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2225,6 +2311,7 @@
         "Damage": 14
       },
       "upgrade": "Damage +7",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],
@@ -2251,6 +2338,7 @@
       "text": "Whenever you play a card, gain {singleStarIcon}.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Stars"
       ],

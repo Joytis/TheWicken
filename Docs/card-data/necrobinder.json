@@ -15,6 +15,7 @@
         "Summon": 5
       },
       "upgrade": "Summon +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -39,6 +40,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -61,6 +63,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -84,6 +87,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "CalculationBase +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -111,6 +115,7 @@
         "Summon": 6
       },
       "upgrade": "Summon +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -137,6 +142,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -161,6 +167,7 @@
         "Damage": 13
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -188,6 +195,7 @@
         "Block": 6
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -216,6 +224,7 @@
         "Cards": 2
       },
       "upgrade": "Damage +2, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -241,6 +250,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +1, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -268,6 +278,7 @@
         "OstyDamage": 12
       },
       "upgrade": "OstyDamage +4",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -297,6 +308,7 @@
         "Cards": 1
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -323,6 +335,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -349,6 +362,7 @@
         "Energy": 2
       },
       "upgrade": "Summon +1, Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -377,6 +391,7 @@
         "Block": 5
       },
       "upgrade": "Block +1, Doom +4",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -403,6 +418,7 @@
         "OstyDamage": 6
       },
       "upgrade": "OstyDamage +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -428,6 +444,7 @@
         "Block": 7
       },
       "upgrade": "Summon +1, Block +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -452,6 +469,7 @@
         "Damage": 27
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -477,6 +495,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -504,6 +523,7 @@
         "Cards": 1
       },
       "upgrade": "Doom +3, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -531,6 +551,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -557,6 +578,7 @@
         "OstyDamage": 7
       },
       "upgrade": "OstyDamage +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -585,6 +607,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -610,6 +633,7 @@
         "Energy": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -637,6 +661,7 @@
         "Block": 9
       },
       "upgrade": "OstyDamage +3, Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -664,6 +689,7 @@
         "Energy": 4
       },
       "upgrade": "Energy +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -689,6 +715,7 @@
         "Damage": 52
       },
       "upgrade": "Damage +11",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -711,6 +738,7 @@
         "Calcify": 4
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -736,6 +764,7 @@
         "Cards": 3
       },
       "upgrade": "Damage +1, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -763,6 +792,7 @@
         "Summon": 3
       },
       "upgrade": "Summon +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -788,6 +818,7 @@
         "Countdown": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -815,6 +846,7 @@
         "Energy": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -840,6 +872,7 @@
         "ExtraDamage": 4
       },
       "upgrade": "CalculationBase +1, ExtraDamage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -865,6 +898,7 @@
         "Repeat": 2
       },
       "upgrade": "Block +1",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -890,6 +924,7 @@
         "Weak": 1
       },
       "upgrade": "Doom +5",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -918,6 +953,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -944,6 +980,7 @@
         "Energy": 1
       },
       "upgrade": "Block +2, Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -968,6 +1005,7 @@
         "Summon": 3
       },
       "upgrade": "Summon +1",
+      "multiplayer": false,
       "mechanics": [
         "Osty",
         "Soul"
@@ -997,6 +1035,7 @@
         "Cards": 3
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1021,6 +1060,7 @@
       "text": "Enemy loses {StrengthLoss:diff()} Strength this turn.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1049,6 +1089,7 @@
         "Cards": 1
       },
       "upgrade": "OstyDamage +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1077,6 +1118,7 @@
         "Energy": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1103,6 +1145,7 @@
         "HpLoss": 6
       },
       "upgrade": "HpLoss +2",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -1130,6 +1173,7 @@
         "OstyDamage": 11
       },
       "upgrade": "OstyDamage +2, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1157,6 +1201,7 @@
         "Summon": 6
       },
       "upgrade": "Summon +2",
+      "multiplayer": true,
       "mechanics": [
         "Osty"
       ],
@@ -1183,6 +1228,7 @@
         "Lethality": 50
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1210,6 +1256,7 @@
         "Energy": 1
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1235,6 +1282,7 @@
         "CalculationExtra": 5
       },
       "upgrade": "CalculationBase +5",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1263,6 +1311,7 @@
         "Cards": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -1289,6 +1338,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1318,6 +1368,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -1343,6 +1394,7 @@
       "text": "Apply {Power:diff()} Weak. Apply {Power:diff()} Vulnerable.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1371,6 +1423,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "OstyDamage +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1399,6 +1452,7 @@
         "Energy": 2
       },
       "upgrade": "OstyDamage +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1426,6 +1480,7 @@
         "Damage": 13
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -1452,6 +1507,7 @@
         "Block": 2
       },
       "upgrade": "Block +1",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1479,6 +1535,7 @@
         "OstyDamage": 5
       },
       "upgrade": "OstyDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1505,6 +1562,7 @@
         "SleightOfFlesh": 9
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1530,6 +1588,7 @@
         "Heal": 5
       },
       "upgrade": "Summon +2, Heal +2",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1556,6 +1615,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -1581,6 +1641,7 @@
         "Energy": 2
       },
       "upgrade": "Cost -2",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -1609,6 +1670,7 @@
         "Cards": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -1638,6 +1700,7 @@
         "Cards": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1667,6 +1730,7 @@
         "DevourLife": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Osty",
         "Soul"
@@ -1691,6 +1755,7 @@
       "text": "Exhaust your Hand. If 9 cards were Exhausted this way, gain 1 Intangible.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1713,6 +1778,7 @@
         "Doom": 29
       },
       "upgrade": "Doom +8",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1742,6 +1808,7 @@
         "Damage": 11
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1767,6 +1834,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": true,
       "mechanics": [
         "Soul"
       ],
@@ -1794,6 +1862,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1818,6 +1887,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1844,6 +1914,7 @@
         "Summon": 5
       },
       "upgrade": "Summon +3",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1872,6 +1943,7 @@
         "Cards": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1899,6 +1971,7 @@
         "Doom": 3
       },
       "upgrade": "Doom +1",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1923,6 +1996,7 @@
         "Summon": 20
       },
       "upgrade": "Summon +5",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1947,6 +2021,7 @@
       "text": "Whenever Attacks deal damage, apply that much Doom.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -1972,6 +2047,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -1998,6 +2074,7 @@
         "Cards": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -2026,6 +2103,7 @@
         "SentryMode": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2049,6 +2127,7 @@
       "text": "Lose {PlayerStrengthLoss:diff()} Strength. Enemy loses {EnemyStrengthLoss:diff()} Strength.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2076,6 +2155,7 @@
         "ExtraDamage": 2
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Soul"
       ],
@@ -2100,6 +2180,7 @@
       "text": "Whenever you play an Ethereal card, gain {BlockOnExhaust:diff()} Block.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Ethereal"
       ],
@@ -2127,6 +2208,7 @@
         "ExtraDamage": 5
       },
       "upgrade": "CalculationBase +5, ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],
@@ -2151,6 +2233,7 @@
       "text": "Deal {Damage:diff()} damage. Permanently increase this card's damage by {Increase:diff()}.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2177,6 +2260,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Doom"
       ],
@@ -2204,6 +2288,7 @@
         "Energy": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2229,6 +2314,7 @@
         "Block": 7
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2252,6 +2338,7 @@
       "text": "At the end of combat, you may remove a card from your Deck.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2275,6 +2362,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "CalculationBase +5, Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Osty"
       ],

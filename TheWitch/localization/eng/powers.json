@@ -1,6 +1,6 @@
 {
-  "THEWITCH-BRAMBLES_POWER.description": "When hit by an attack, deal damage back, then lose [blue]1[/blue].",
-  "THEWITCH-BRAMBLES_POWER.smartDescription": "When hit by an attack, deal [blue]{Amount}[/blue] back, then lose [blue]1[/blue].",
+  "THEWITCH-BRAMBLES_POWER.description": "When hit by an attack, deal damage back, then reduce [gold]Brambles[/gold] by [blue]1[/blue].",
+  "THEWITCH-BRAMBLES_POWER.smartDescription": "When hit by an attack, deal [blue]{Amount}[/blue] back, then reduce [gold]Brambles[/gold] by [blue]1[/blue].",
   "THEWITCH-BRAMBLES_POWER.title": "Brambles",
   "THEWITCH-CATALYST_POWER.description": "Whenever you use a [gold]Potion[/gold], copy cards in your [gold]Hand[/gold].",
   "THEWITCH-CATALYST_POWER.smartDescription": "Whenever you use a [gold]Potion[/gold], copy [blue]{Amount}[/blue] {Amount:plural:card|cards} in your [gold]Hand[/gold].",

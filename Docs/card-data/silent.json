@@ -15,6 +15,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -38,6 +39,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +1, Weak +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -62,6 +64,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -84,6 +87,7 @@
         "Block": 8
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -111,6 +115,7 @@
         "Dexterity": 2
       },
       "upgrade": "Dexterity +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -134,6 +139,7 @@
         "Cards": 2
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -158,6 +164,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -186,6 +193,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -212,6 +220,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -237,6 +246,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -265,6 +275,7 @@
         "Poison": 5
       },
       "upgrade": "Poison +2",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -289,6 +300,7 @@
         "Block": 4
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -311,6 +323,7 @@
         "Block": 4
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -335,6 +348,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -361,6 +375,7 @@
         "Damage": 3
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -385,6 +400,7 @@
       "text": "ALL enemies lose {StrengthLoss:diff()} Strength this turn.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -412,6 +428,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +2, Poison +1",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -436,6 +453,7 @@
         "Damage": 15
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -461,6 +479,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -490,6 +509,7 @@
         "Repeat": 4
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -516,6 +536,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -538,6 +559,7 @@
         "Poison": 7
       },
       "upgrade": "Poison +3",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -565,6 +587,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2, Weak +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -589,6 +612,7 @@
         "Block": 6
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -613,6 +637,7 @@
         "Accuracy": 4
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -637,6 +662,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -665,6 +691,7 @@
         "Damage": 11
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -690,6 +717,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -715,6 +743,7 @@
         "Repeat": 3
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -739,6 +768,7 @@
         "Poison": 9
       },
       "upgrade": "Poison +3",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -763,6 +793,7 @@
       "text": "Discard your Hand, then draw that many cards.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -793,6 +824,7 @@
         "Block": 10
       },
       "upgrade": "Damage +3, Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -815,6 +847,7 @@
         "Block": 3
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -841,6 +874,7 @@
         "Cards": 6
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -863,6 +897,7 @@
       "text": "Remove all Artifact and Block from the enemy. Apply {Power:diff()} Vulnerable.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -890,6 +925,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -913,6 +949,7 @@
       "text": "The enemy takes double attack damage from other players this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": true,
       "mechanics": [
         "None"
       ],
@@ -939,6 +976,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -964,6 +1002,7 @@
         "Dexterity": 2
       },
       "upgrade": "Dexterity +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -988,6 +1027,7 @@
         "Block": 7
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1014,6 +1054,7 @@
         "Poison": 4
       },
       "upgrade": "Poison +2",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1041,6 +1082,7 @@
         "Cards": 2
       },
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Shivs",
         "Discard"
@@ -1068,6 +1110,7 @@
       "text": "At the start of your turn, add 1 Shiv into your Hand.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1096,6 +1139,7 @@
         "Block": 11
       },
       "upgrade": "Block +3, Weak +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1121,6 +1165,7 @@
         "ExtraDamage": 4
       },
       "upgrade": "CalculationBase +2, ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -1144,6 +1189,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1169,6 +1215,7 @@
       "text": "At the start of your turn, apply {PoisonPerTurn:diff()} Poison to ALL enemies.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1197,6 +1244,7 @@
         "Repeat": 3
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1224,6 +1272,7 @@
         "PhantomBlades": 9
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1250,6 +1299,7 @@
         "Damage": 15
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1275,6 +1325,7 @@
         "Damage": 14
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1301,6 +1352,7 @@
         "ExtraDamage": 2
       },
       "upgrade": "CalculationBase +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1325,6 +1377,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1349,6 +1402,7 @@
       "text": "Apply 1 Weak to ALL enemies.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1375,6 +1429,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1399,6 +1454,7 @@
         "Speedster": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1425,6 +1481,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1450,6 +1507,7 @@
         "Energy": 1
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1476,6 +1534,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1501,6 +1560,7 @@
       "text": "At the end of your turn, Retain up to {RetainAmount:diff()} cards.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -1527,6 +1587,7 @@
         "Dexterity": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1551,6 +1612,7 @@
       "text": "Poison is triggered {Accelerant:diff()} additional times.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1578,6 +1640,7 @@
         "Cards": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1604,6 +1667,7 @@
         "Afterimage": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1630,6 +1694,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1656,6 +1721,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1681,6 +1747,7 @@
       "text": "You cannot draw additional cards this turn. ALL cards in your Hand are free to play this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1704,6 +1771,7 @@
       "text": "This turn, your next {:diff() Skills are} played an extra time.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1726,6 +1794,7 @@
       "text": "Whenever you draw a card this turn, apply {CorrosiveWave:diff()} Poison to ALL enemies.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1754,6 +1823,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1778,6 +1848,7 @@
         "Envenom": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Poison"
       ],
@@ -1800,6 +1871,7 @@
       "text": "Shivs now hit ALL enemies. Add {Shivs:diff()} Shivs into your Hand.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1828,6 +1900,7 @@
         "Damage": 60
       },
       "upgrade": "Damage +15",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1855,6 +1928,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Shivs"
       ],
@@ -1878,6 +1952,7 @@
       "text": "Enemy loses X{IfUpgraded:show:+1} Strength. Apply X{IfUpgraded:show:+1} Weak.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1902,6 +1977,7 @@
       "text": "When you play a Skill, it gains Sly.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1929,6 +2005,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1953,6 +2030,7 @@
       "text": "Choose a card. Next turn, add 3 copies of that card into your Hand.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1979,6 +2057,7 @@
         "SerpentForm": 4
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2003,6 +2082,7 @@
         "Cards": 3
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -2028,6 +2108,7 @@
       "text": "Double your Block gain this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2052,6 +2133,7 @@
         "Sneaky": 1
       },
       "upgrade": "custom",
+      "multiplayer": true,
       "mechanics": [
         "None"
       ],
@@ -2076,6 +2158,7 @@
       "text": "Discard your Hand. Add 1 Shiv into your Hand for each card discarded.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Shivs",
         "Discard"
@@ -2105,6 +2188,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2127,6 +2211,7 @@
       "text": "At the start of your turn, draw 1 card and discard 1 card.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Discard"
       ],
@@ -2154,6 +2239,7 @@
       "text": "Weak enemies take double damage from Attacks.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2179,6 +2265,7 @@
         "Damage": 11
       },
       "upgrade": "Damage +6, Weak +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2205,6 +2292,7 @@
         "WraithForm": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],

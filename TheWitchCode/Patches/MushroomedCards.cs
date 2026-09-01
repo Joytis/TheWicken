@@ -1,8 +1,11 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -94,9 +97,23 @@ internal static class MushroomedTitlePatch
     }
 }
 
-[HarmonyPatch(typeof(CardModel), nameof(CardModel.GetDescriptionForPile), new[] { typeof(PileType), typeof(Creature) })]
+/// <summary>
+/// Targets the PRIVATE 3-arg <c>GetDescriptionForPile(PileType, DescriptionPreviewType, Creature)</c> — the real
+/// body that every description path (hand, hover previews, upgrade preview) funnels into. The public 2-arg overload
+/// is a one-line forwarder that the JIT inlines into <c>NCard</c> once it goes hot (tier-1 rejit), which silently
+/// bypasses a patch placed on it — the "Mushroom Extract sometimes shows the real text" bug.
+/// </summary>
+[HarmonyPatch]
 internal static class MushroomedDescriptionPatch
 {
+    private static MethodBase TargetMethod()
+    {
+        Type previewType = AccessTools.Inner(typeof(CardModel), "DescriptionPreviewType")
+            ?? throw new MissingMemberException("CardModel.DescriptionPreviewType not found");
+        return AccessTools.Method(typeof(CardModel), "GetDescriptionForPile", [typeof(PileType), previewType, typeof(Creature)])
+            ?? throw new MissingMethodException("CardModel.GetDescriptionForPile(PileType, DescriptionPreviewType, Creature) not found");
+    }
+
     private static void Postfix(CardModel __instance, ref string __result)
     {
         if (MushroomedCards.TryGet(__instance, out MushroomedCards.Gibberish g))
@@ -158,5 +175,33 @@ internal static class MushroomedNCardPortraitPatch
         }
         PortraitField(__instance).Texture = mystery;
         AncientPortraitField(__instance).Texture = mystery;
+    }
+}
+
+/// <summary>
+/// Belt-and-suspenders for the text, same reasoning as <see cref="MushroomedNCardPortraitPatch" />: after the card
+/// view rebuilds its labels, force the gibberish onto the title + description labels directly, so even an inlined
+/// model getter (or a PGO-devirtualized <c>Title</c>) can't leak the real text.
+/// </summary>
+[HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals), new[] { typeof(PileType), typeof(CardPreviewMode) })]
+internal static class MushroomedNCardTextPatch
+{
+    private static readonly AccessTools.FieldRef<NCard, MegaLabel> TitleLabelField =
+        AccessTools.FieldRefAccess<NCard, MegaLabel>("_titleLabel");
+    private static readonly AccessTools.FieldRef<NCard, MegaRichTextLabel> DescriptionLabelField =
+        AccessTools.FieldRefAccess<NCard, MegaRichTextLabel>("_descriptionLabel");
+
+    private static void Postfix(NCard __instance)
+    {
+        // UpdateVisuals early-returns before touching labels when the node isn't ready; mirror that.
+        if (!__instance.IsNodeReady()
+            || __instance.Model is not { } model
+            || __instance.Visibility != ModelVisibility.Visible
+            || !MushroomedCards.TryGet(model, out MushroomedCards.Gibberish g))
+        {
+            return;
+        }
+        TitleLabelField(__instance).SetTextAutoSize(g.Title);
+        DescriptionLabelField(__instance).SetTextAutoSize("[center]" + g.Description + "[/center]");
     }
 }

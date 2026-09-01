@@ -258,9 +258,12 @@ function buildTagChips(){
   mk(document.getElementById("roles"), rolesPresent, state.role, "r-");
 }
 
+// Draftable in a solo run: not a familiar payload (Token), not a spawned chain card (Special), not multiplayer-only.
+const isDraft = c => c.rarity!=="Token" && c.rarity!=="Special" && !c.multiplayer;
+
 function renderMatrix(){
-  // Familiar payloads (Token rarity) aren't draftable cards — exclude from the makeup matrix.
-  const MAT = CARDS.filter(c=>c.rarity!=="Token");
+  // Familiar payloads (Token), spawned chain cards (Special) and multiplayer-only cards aren't part of the solo draft — exclude from the makeup matrix.
+  const MAT = CARDS.filter(isDraft);
   const roles = ROLES.filter(r => MAT.some(c => (c.role||[]).includes(r)));
   const grid = {}; MECH.forEach(m=>{ grid[m]={}; roles.forEach(r=>grid[m][r]=0); });
   const mTot = {}, rTot = {};
@@ -280,15 +283,15 @@ function renderMatrix(){
   const foot = `<tr><td class="lab">Σ</td>${roles.map(r=>`<td><b>${rTot[r]||0}</b></td>`).join("")}<td></td></tr>`;
   document.getElementById("matrix").innerHTML =
     `<table class="matrix"><thead>${head}</thead><tbody>${body}${foot}</tbody></table>` +
-    `<div class="sub" style="margin-top:6px">Cards with multiple tags count in each cell they span, so rows/columns may exceed the card total. Familiar token payloads (Token rarity) are excluded. Red row = core mechanic with no Payoff.</div>`;
+    `<div class="sub" style="margin-top:6px">Cards with multiple tags count in each cell they span, so rows/columns may exceed the card total. Token payloads, Special (spawned) cards and multiplayer-only cards are excluded. Red row = core mechanic with no Payoff.</div>`;
 }
 
 function renderRarityTypeMatrix(){
-  // Familiar payloads (Token rarity) aren't draftable cards — exclude, same as the mechanic matrix.
-  const MAT = CARDS.filter(c=>c.rarity!=="Token");
+  // Same draftable filter as the mechanic matrix.
+  const MAT = CARDS.filter(isDraft);
   const TYPE_ORDER = ["Attack","Skill","Power","Potion","Status","Curse"];
   const types = [...new Set([...TYPE_ORDER, ...MAT.map(c=>c.type)])].filter(t => MAT.some(c=>c.type===t));
-  const rars = [...new Set([...RAR_ORDER, ...MAT.map(c=>c.rarity)])].filter(r => r!=="Token" && MAT.some(c=>c.rarity===r));
+  const rars = [...new Set([...RAR_ORDER, ...MAT.map(c=>c.rarity)])].filter(r => r!=="Token" && r!=="Special" && MAT.some(c=>c.rarity===r));
   const grid = {}, rTot = {}, tTot = {};
   rars.forEach(r=>{ grid[r]={}; types.forEach(t=>grid[r][t]=0); });
   MAT.forEach(c=>{
@@ -307,30 +310,33 @@ function renderRarityTypeMatrix(){
   }).join("")}<td><b>${MAT.length}</b></td></tr>`;
   document.getElementById("rtmatrix").innerHTML =
     `<table class="matrix"><thead>${head}</thead><tbody>${body}${foot}</tbody></table>` +
-    `<div class="sub" style="margin-top:6px">Familiar token payloads (Token rarity) are excluded. Σ row shows each type's share of the draftable pool.</div>`;
+    `<div class="sub" style="margin-top:6px">Token payloads, Special (spawned) cards and multiplayer-only cards are excluded. Σ row shows each type's share of the solo draftable pool.</div>`;
 }
 
 function renderMakeup(){
   // Token-rarity cards (familiar payloads) aren't part of the draftable pool — count them separately.
-  const byRar = {}, byTypeCore = {}, byTypeTok = {};
+  // Multiplayer-only cards are counted separately and shown as a "(+n MP)" parenthetical.
+  const byRar = {}, byRarMp = {}, byTypeCore = {}, byTypeTok = {};
+  let mpCount = 0;
   CARDS.forEach(c=>{
+    if(c.multiplayer){ mpCount++; byRarMp[c.rarity]=(byRarMp[c.rarity]||0)+1; return; }
     byRar[c.rarity]=(byRar[c.rarity]||0)+1;
     const bucket = c.rarity==="Token" ? byTypeTok : byTypeCore;
     bucket[c.type]=(bucket[c.type]||0)+1;
   });
   const rarWanted = RAR_ORDER;
   const typeWanted = ["Attack","Skill","Power","Potion"];
-  const rars = [...new Set([...rarWanted, ...Object.keys(byRar)])].filter(r => byRar[r]);
+  const rars = [...new Set([...rarWanted, ...Object.keys(byRar), ...Object.keys(byRarMp)])].filter(r => byRar[r] || byRarMp[r]);
   const typesOf = (m) => [...new Set([...typeWanted, ...Object.keys(m)])].filter(t => m[t]);
-  const cell = (lab,n) => `<span class="${n?'':'z'}">${lab} <b>${n||0}</b></span>`;
+  const cell = (lab,n,mp) => `<span class="${n?'':'z'}">${lab} <b>${n||0}</b>${mp?` <span class="z" title="multiplayer-only, not in the solo draft">(+${mp} MP)</span>`:''}</span>`;
   const tokenCount = byRar["Token"] || 0;
-  const totalCells = tokenCount
-    ? `${cell('core', CARDS.length - tokenCount)}${cell('+ tokens', tokenCount)}`
+  const totalCells = (tokenCount || mpCount)
+    ? `${cell('core', CARDS.length - tokenCount - mpCount)}${tokenCount?cell('+ tokens', tokenCount):''}${mpCount?cell('+ MP-only', mpCount):''}`
     : cell('cards', CARDS.length);
   const coreTypes = typesOf(byTypeCore);
   let html =
     `<span class="grp"><span class="glab">Total</span>${totalCells}</span>` +
-    `<span class="grp"><span class="glab">Rarity</span>${rars.map(r=>cell(r,byRar[r])).join("")}</span>` +
+    `<span class="grp"><span class="glab">Rarity</span>${rars.map(r=>cell(r,byRar[r],byRarMp[r])).join("")}</span>` +
     `<span class="grp"><span class="glab">${tokenCount?'Type (core)':'Type'}</span>${coreTypes.map(t=>cell(t,byTypeCore[t])).join("")}</span>`;
   if(tokenCount)
     html += `<span class="grp"><span class="glab">Token Type</span>${typesOf(byTypeTok).map(t=>cell(t,byTypeTok[t])).join("")}</span>`;

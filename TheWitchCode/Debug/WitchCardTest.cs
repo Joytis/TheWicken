@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Entities.CardRewardAlternatives;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Multiplayer;
@@ -23,57 +24,115 @@ using TheWitch.TheWitchCode.Character;
 namespace TheWitch.TheWitchCode.Debug;
 
 /// <summary>
-/// Headless smoke test (--witch-cardtest): plays every card the mod defines (all pools) in a throwaway test combat
-/// (TestMode on, no scene), one fresh combat per card, and logs any exception. Per card: play
-/// from hand, draw it, exhaust it, discard it, then play Strike+Defend alongside it — the shape
-/// of Downfall's TestCode harness. Selection prompts auto-pick the first eligible cards.
+/// Headless smoke tests, one fresh throwaway test combat (TestMode on, no scene) per item, any
+/// exception logged as a failure:
+///   --witch-cardtest    plays every card the mod defines (all pools): play from hand, draw it,
+///                       exhaust it, discard it, then play Strike+Defend alongside it — the shape
+///                       of Downfall's TestCode harness.
+///   --witch-potiontest  procures + uses every mod potion (target auto-resolved by TargetType),
+///                       then procures + discards it.
+///   --witch-relictest   obtains EVERY mod relic on the player before the combat is built, then
+///                       runs the card exercise for every card and the potion exercise for every
+///                       potion with the whole relic set equipped.
+///   --witch-testall     all three in sequence (cards, potions, then relics) in one process; one
+///                       combined pass/fail summary + exit code.
+/// Selection prompts auto-pick the first eligible cards.
 /// </summary>
 public static class WitchCardTest
 {
-    private const string Tag = "[witch-cardtest]";
+    public enum Mode { Cards, Potions, Relics, All }
 
-    public static async Task RunAll(string seed)
+    public static string TagFor(Mode mode) => mode switch
     {
+        Mode.Potions => "[witch-potiontest]",
+        Mode.Relics => "[witch-relictest]",
+        Mode.All => "[witch-testall]",
+        _ => "[witch-cardtest]",
+    };
+
+    public static async Task RunAll(string seed, Mode mode = Mode.Cards)
+    {
+        string tag = TagFor(mode);
         bool wasTestMode = TestMode.IsOn;
         TestMode.IsOn = true;
         IDisposable selectorScope = CardSelectCmd.UseSelector(new FirstCardSelector());
-        List<(string card, Exception ex)> failures = [];
+        List<(string item, Exception ex)> failures = [];
         int total = 0;
         try
         {
             if (!Godot.FileAccess.FileExists($"res://{MainFile.ModId}/localization/eng/cards.json"))
             {
-                AutoSlayLog.Warn($"{Tag} mod .pck not loaded (no res://{MainFile.ModId}/localization) — localization-dependent cards will fail; run with Build=Publish");
+                AutoSlayLog.Warn($"{tag} mod .pck not loaded (no res://{MainFile.ModId}/localization) — localization-dependent content will fail; run with Build=Publish");
             }
             CharacterModel witch = ModelDb.Character<Witch>();
+            System.Reflection.Assembly mod = typeof(WitchCardTest).Assembly;
 
             // Every card this assembly defines, whatever pool it sits in: the main Witch pool,
             // the shared familiar-token pool, and the StatusCardPool strays (Ash, Wormy).
             List<CardModel> cards = ModelDb.AllCards
-                .Where(c => c.GetType().Assembly == typeof(WitchCardTest).Assembly)
+                .Where(c => c.GetType().Assembly == mod)
                 .OrderBy(c => c.GetType().Name)
                 .ToList();
-                
-            AutoSlayLog.Action($"{Tag} {cards.Count} cards, seed '{seed}'");
-            foreach (CardModel model in cards)
+            List<PotionModel> potions = ModelDb.AllPotions
+                .Where(p => p.GetType().Assembly == mod)
+                .OrderBy(p => p.GetType().Name)
+                .ToList();
+            List<RelicModel> allRelics = ModelDb.AllRelics
+                .Where(r => r.GetType().Assembly == mod)
+                .OrderBy(r => r.GetType().Name)
+                .ToList();
+
+            Mode[] phases = mode == Mode.All ? [Mode.Cards, Mode.Potions, Mode.Relics] : [mode];
+            foreach (Mode phase in phases)
             {
-                total++;
-                string name = model.GetType().Name;
-                AutoSlayLog.Info($"{Tag} {name}");
-                try
+                List<RelicModel> relics = phase == Mode.Relics ? allRelics : [];
+
+                async Task Run(string name, Func<CombatState, Player, Task> exercise)
                 {
-                    (CombatState combat, Player player) = await NewCombat(witch, seed);
-                    await ExerciseCard(model, combat, player);
+                    total++;
+                    AutoSlayLog.Info($"{tag} {name}");
+                    try
+                    {
+                        (CombatState combat, Player player) = await NewCombat(witch, seed, relics);
+                        await exercise(combat, player);
+                    }
+                    catch (Exception e)
+                    {
+                        Exception actual = e.InnerException ?? e;
+                        failures.Add(($"{phase}/{name}", actual));
+                        AutoSlayLog.Error($"{tag} FAILED {name}: {actual}");
+                    }
+                    finally
+                    {
+                        EndCombat();
+                    }
                 }
-                catch (Exception e)
+
+                switch (phase)
                 {
-                    Exception actual = e.InnerException ?? e;
-                    failures.Add((name, actual));
-                    AutoSlayLog.Error($"{Tag} FAILED {name}: {actual}");
+                    case Mode.Cards:
+                        AutoSlayLog.Action($"{tag} {cards.Count} cards, seed '{seed}'");
+                        break;
+                    case Mode.Potions:
+                        AutoSlayLog.Action($"{tag} {potions.Count} potions, seed '{seed}'");
+                        break;
+                    case Mode.Relics:
+                        AutoSlayLog.Action($"{tag} {relics.Count} relics equipped ({string.Join(", ", relics.Select(r => r.GetType().Name))}) for {cards.Count} cards + {potions.Count} potions, seed '{seed}'");
+                        break;
                 }
-                finally
+                if (phase is Mode.Cards or Mode.Relics)
                 {
-                    EndCombat();
+                    foreach (CardModel model in cards)
+                    {
+                        await Run(model.GetType().Name, (combat, player) => ExerciseCard(model, combat, player));
+                    }
+                }
+                if (phase is Mode.Potions or Mode.Relics)
+                {
+                    foreach (PotionModel model in potions)
+                    {
+                        await Run(model.GetType().Name, (combat, player) => ExercisePotion(model, combat, player));
+                    }
                 }
             }
         }
@@ -83,14 +142,14 @@ public static class WitchCardTest
             TestMode.IsOn = wasTestMode;
             if (failures.Count == 0)
             {
-                AutoSlayLog.Action($"{Tag} all {total} cards passed");
+                AutoSlayLog.Action($"{tag} all {total} items passed");
             }
             else
             {
-                AutoSlayLog.Warn($"{Tag} {failures.Count}/{total} cards failed:");
-                foreach ((string card, Exception ex) in failures)
+                AutoSlayLog.Warn($"{tag} {failures.Count}/{total} items failed:");
+                foreach ((string item, Exception ex) in failures)
                 {
-                    AutoSlayLog.Warn($"  - {card}: {ex.Message}");
+                    AutoSlayLog.Warn($"  - {item}: {ex.Message}");
                 }
             }
             // Same contract as AutoSlay: quit with 0 = all passed, 1 = failures, so a headless
@@ -142,6 +201,48 @@ public static class WitchCardTest
     }
 
     /// <summary>
+    /// Procure the potion into the belt and use it (the real OnUseWrapper path: use-hooks, history,
+    /// removal from the belt), end the turn, then procure it again and discard it.
+    /// </summary>
+    private static async Task ExercisePotion(PotionModel model, CombatState combat, Player player)
+    {
+        BlockingPlayerChoiceContext ctx = new();
+        if (model.Usage == PotionUsage.None)
+        {
+            AutoSlayLog.Info("  (Usage=None; skipping use)");
+            return;
+        }
+
+        PotionModel potion = await Procure(model, player);
+        Creature? target = model.TargetType switch
+        {
+            TargetType.AnyEnemy => combat.HittableEnemies.FirstOrDefault(),
+            TargetType.Self or TargetType.AnyPlayer or TargetType.AnyAlly => player.Creature,
+            _ => null,
+        };
+        if (target != null && !target.IsPlayer)
+        {
+            target.SetMaxHpInternal(9999m);
+            target.SetCurrentHpInternal(9999m);
+        }
+        await potion.OnUseWrapper(ctx, target);
+        await EndTurnAndWait(player);
+
+        PotionModel potion2 = await Procure(model, player);
+        await PotionCmd.Discard(potion2);
+    }
+
+    private static async Task<PotionModel> Procure(PotionModel model, Player player)
+    {
+        PotionProcureResult result = await PotionCmd.TryToProcure(model.ToMutable(), player);
+        if (!result.success)
+        {
+            throw new InvalidOperationException($"could not procure {model.GetType().Name}: {result.failureReason}");
+        }
+        return result.potion;
+    }
+
+    /// <summary>
     /// PlayerCmd.EndTurn only flags the player ready; the enemy turn runs on its own queued task.
     /// Wait for the round-trip back to the Play phase so the next step (and the combat Reset in
     /// EndCombat) doesn't race it — otherwise EndPlayerTurnPhaseTwoInternal NREs on a null state.
@@ -164,7 +265,7 @@ public static class WitchCardTest
         }
     }
 
-    private static async Task<(CombatState, Player)> NewCombat(CharacterModel character, string seed)
+    private static async Task<(CombatState, Player)> NewCombat(CharacterModel character, string seed, IReadOnlyList<RelicModel> relics)
     {
         if (CombatManager.Instance.DebugOnlyGetState() != null)
         {
@@ -177,6 +278,16 @@ public static class WitchCardTest
         RunManager.Instance.SetUpTest(run, new NetSingleplayerGameService(), shouldSave: false);
         LocalContext.NetId = RunManager.Instance.NetService.NetId;
         player = run.Players[0];
+
+        // Relic mode: equip the whole set before the combat exists so BeforeCombatStart / turn
+        // hooks all see it. Starting relics (Large Pockets) are already on the player — skip dupes.
+        foreach (RelicModel relic in relics)
+        {
+            if (player.Relics.All(r => r.Id != relic.Id))
+            {
+                await RelicCmd.Obtain(relic.ToMutable(), player);
+            }
+        }
 
         EncounterModel encounter = ModelDb.AllEncounters.First().ToMutable();
         encounter.DebugRandomizeRng();

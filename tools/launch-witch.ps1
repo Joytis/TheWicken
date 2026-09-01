@@ -41,6 +41,9 @@ param(
     [switch]$FxLab,            # -witch-debug -witch-fxlab: open the SFX/VFX browser scene
     [switch]$IconLab,          # -witch-debug -witch-iconlab: open the relic/potion icon browser scene
     [switch]$CardTest,         # -witch-debug -witch-cardtest: headless smoke test that plays every Witch card (WitchCardTest)
+    [switch]$PotionTest,       # -witch-debug -witch-potiontest: uses + discards every Witch potion
+    [switch]$RelicTest,        # -witch-debug -witch-relictest: equips every Witch relic, then every card + potion
+    [switch]$TestAll,          # -witch-debug -witch-testall: cards, potions, then relics in one run
     [string]$Encounter = "",   # optional encounter id for -WitchBootstrap (e.g. SLIMES_WEAK)
     [switch]$TestUpdatePopup,          # -witch-test-update-popup: show the Workshop-update restart popup (no Steam calls)
     [switch]$ForceWorkshopDownload,    # -witch-force-workshop-download=<id>: force the Workshop download path;
@@ -63,12 +66,15 @@ if ($Build -ne 'none') {
     if ($LASTEXITCODE -ne 0) { throw "dotnet $Build failed (exit $LASTEXITCODE); not launching." }
 }
 
-# --- Card-test report: skim the tailed log, errors loud, passes routine ----------
+# --- Smoke-test report: skim the tailed log, errors loud, passes routine ---------
+# One harness (WitchCardTest) behind three flags; $tag picks the log prefix to parse.
+$SmokeTag = if ($TestAll) { '[witch-testall]' } elseif ($RelicTest) { '[witch-relictest]' } elseif ($PotionTest) { '[witch-potiontest]' } else { '[witch-cardtest]' }
+$SmokeTest = $CardTest -or $PotionTest -or $RelicTest -or $TestAll
 function Write-CardTestReport {
-    param([System.Collections.Generic.List[string]]$lines)
-    $tag = '[witch-cardtest]'
-    $started  = @($lines | Where-Object { $_ -match "\[INFO\] \[AutoSlay\] \[witch-cardtest\] (\w+)$" } | ForEach-Object { $Matches[1] })
-    $failed   = @($lines | Where-Object { $_ -match "\[witch-cardtest\] FAILED (\w+): (.*)$" } |
+    param([System.Collections.Generic.List[string]]$lines, [string]$tag = $SmokeTag)
+    $rtag = [regex]::Escape($tag)
+    $started  = @($lines | Where-Object { $_ -match "\[INFO\] \[AutoSlay\] $rtag (\w+)$" } | ForEach-Object { $Matches[1] })
+    $failed   = @($lines | Where-Object { $_ -match "$rtag FAILED (\w+): (.*)$" } |
                  ForEach-Object { [pscustomobject]@{ Card = $Matches[1]; Message = $Matches[2] } })
     # Stray errors = every [ERROR] line the harness itself did not emit (game-side exceptions,
     # missing resources, ...). Keyed by the first line so a repeated stack trace counts once.
@@ -78,7 +84,7 @@ function Write-CardTestReport {
 
     $red = 'Red'; $yellow = 'Yellow'; $green = 'Green'; $dim = 'DarkGray'
     Write-Host ''
-    Write-Host '================ CARD TEST REPORT ================' -ForegroundColor Cyan
+    Write-Host "================ SMOKE TEST REPORT $tag ================" -ForegroundColor Cyan
     if ($errors.Count -gt 0) {
         Write-Host "!! $($errors.Count) stray [ERROR] line(s) during the run ($($errGroups.Count) distinct):" -ForegroundColor $red
         foreach ($g in $errGroups) {
@@ -88,15 +94,15 @@ function Write-CardTestReport {
         }
     }
     if ($failed.Count -gt 0) {
-        Write-Host "!! $($failed.Count) card(s) FAILED:" -ForegroundColor $red
+        Write-Host "!! $($failed.Count) item(s) FAILED:" -ForegroundColor $red
         foreach ($f in $failed) { Write-Host ("  - {0}: {1}" -f $f.Card, $f.Message) -ForegroundColor $yellow }
     }
     if ($errors.Count -eq 0 -and $failed.Count -eq 0) {
         Write-Host "No errors, no failures." -ForegroundColor $green
     }
-    Write-Host ("Cards: {0} run, {1} passed, {2} failed | stray errors: {3}" -f $started.Count, $passed, $failed.Count, $errors.Count) -ForegroundColor $(if ($failed.Count -or $errors.Count) { $yellow } else { $green })
-    if ($started.Count -eq 0) { Write-Host "(no $tag lines seen - did the harness run? needs -witch-debug -witch-cardtest)" -ForegroundColor $dim }
-    Write-Host '==================================================' -ForegroundColor Cyan
+    Write-Host ("Items: {0} run, {1} passed, {2} failed | stray errors: {3}" -f $started.Count, $passed, $failed.Count, $errors.Count) -ForegroundColor $(if ($failed.Count -or $errors.Count) { $yellow } else { $green })
+    if ($started.Count -eq 0) { Write-Host "(no $tag lines seen - did the harness run? needs -witch-debug $($tag.Trim('[',']') -replace '^', '-'))" -ForegroundColor $dim }
+    Write-Host '=======================================================================' -ForegroundColor Cyan
 }
 
 # --- Resolve the game install folder ---------------------------------------
@@ -133,7 +139,7 @@ Write-Host "Game dir : $gameDir"
 # Solo is the default; multiplayer only when -Players is given explicitly.
 if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
     $gameArgs = @()
-    if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab -or $CardTest) {
+    if ($WitchBootstrap -or $AutoSlay -or $FxLab -or $IconLab -or $SmokeTest) {
         # Game-native dev switch: skips the intro logo (checked once at startup).
         # Child processes inherit the environment, so set it just for this launch.
         $env:STS2_DEV_SKIP = '1'
@@ -154,9 +160,9 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
         $gameArgs += '-witch-iconlab'
     }
-    if ($CardTest) {
+    if ($SmokeTest) {
         if ('-witch-debug' -notin $gameArgs) { $gameArgs += '-witch-debug' }
-        $gameArgs += '-witch-cardtest'
+        $gameArgs += '-' + $SmokeTag.Trim('[', ']')   # -witch-cardtest / -witch-potiontest / -witch-relictest / -witch-testall
     }
     if ($Headless) {
         # Godot engine flag: dummy display server, no window/render/GPU. The game is
@@ -218,12 +224,12 @@ if ($Solo -or -not $PSBoundParameters.ContainsKey('Players')) {
         try {
             while (-not $proc.HasExited) {
                 $line = $sr.ReadLine()
-                if ($null -ne $line) { Write-Host $line; if ($CardTest) { $captured.Add($line) } } else { Start-Sleep -Milliseconds 200 }
+                if ($null -ne $line) { Write-Host $line; if ($SmokeTest) { $captured.Add($line) } } else { Start-Sleep -Milliseconds 200 }
             }
-            while ($null -ne ($line = $sr.ReadLine())) { Write-Host $line; if ($CardTest) { $captured.Add($line) } }
+            while ($null -ne ($line = $sr.ReadLine())) { Write-Host $line; if ($SmokeTest) { $captured.Add($line) } }
         } finally { $sr.Dispose() }
         Write-Host "--- game exited (code $($proc.ExitCode)) ---"
-        if ($CardTest) { Write-CardTestReport $captured }
+        if ($SmokeTest) { Write-CardTestReport $captured }
         if ($Headless) { exit $proc.ExitCode }
     }
     return

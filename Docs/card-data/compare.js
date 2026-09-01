@@ -7,7 +7,7 @@
  * any time (regen.js chains it after the art tracker).
  *
  * Method notes:
- * - Witch Token/Status-rarity cards are excluded from distributions/efficiency and reported
+ * - Witch Token/Status/Special-rarity cards and Multiplayer-only cards are excluded from distributions/efficiency and reported
  *   separately (base classes have no token layer in their pools).
  * - Damage/block stats use only the FLAT bucket. Scaling ("for each"), X-cost, and
  *   conditional-hit cards are counted per class, not averaged — a mean over them is meaningless.
@@ -41,8 +41,9 @@ for (const [cls, file] of CLASSES) {
 
 // ---------- classification ----------
 
-const isToken = (c) => c.rarity === "Token" || c.rarity === "Status";
-const mainPool = (cls) => (cls === "witch" ? pools.witch.filter((c) => !isToken(c)) : pools[cls]);
+// Non-draftable: familiar payloads (Token), statuses, spawned chain cards (Special), multiplayer-only cards.
+const isToken = (c) => c.rarity === "Token" || c.rarity === "Status" || c.rarity === "Special" || c.multiplayer;
+const mainPool = (cls) => pools[cls].filter((c) => !isToken(c)); // every class carries 2 MP-only cards
 const starCost = (c) => (c.sub || []).includes("Stars:Spend");
 
 function sentences(text) {

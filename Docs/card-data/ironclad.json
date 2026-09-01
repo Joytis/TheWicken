@@ -16,6 +16,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -42,6 +43,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -64,6 +66,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -86,6 +89,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -110,6 +114,7 @@
         "Block": 5
       },
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -133,6 +138,7 @@
         "Block": 16
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -160,6 +166,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -188,6 +195,7 @@
         "ExtraDamage": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -213,6 +221,7 @@
         "HpLoss": 1
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -240,6 +249,7 @@
         "Damage": 18
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -264,6 +274,7 @@
       "text": "Play the top card of your Draw Pile and Exhaust it.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -291,6 +302,7 @@
         "Damage": 9
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -316,6 +328,7 @@
         "Block": 5
       },
       "upgrade": "Damage +2, Block +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -338,6 +351,7 @@
         "Damage": 10
       },
       "upgrade": "Damage +4",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -369,6 +383,7 @@
         "ExtraDamage": 2
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -392,6 +407,7 @@
         "Cards": 1
       },
       "upgrade": "Damage +1, Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -417,6 +433,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +2, Strength +1",
+      "multiplayer": false,
       "mechanics": [
         "Strength"
       ],
@@ -440,6 +457,7 @@
         "Cards": 1
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -465,6 +483,7 @@
         "Repeat": 3
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -490,6 +509,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -517,6 +537,7 @@
         "Vulnerable": 3
       },
       "upgrade": "Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -545,6 +566,7 @@
         "Block": 7
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -571,6 +593,7 @@
         "Damage": 5
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -596,6 +619,7 @@
         "ExtraDamage": 3
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -623,6 +647,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -648,6 +673,7 @@
         "Damage": 32
       },
       "upgrade": "Damage +10",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -671,6 +697,7 @@
         "ExtraDamage": 2
       },
       "upgrade": "ExtraDamage +1",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -697,6 +724,7 @@
         "Cards": 2
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -725,6 +753,7 @@
         "Block": 5
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -753,6 +782,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "custom",
+      "multiplayer": true,
       "mechanics": [
         "Self-Harm"
       ],
@@ -782,6 +812,7 @@
         "Damage": 8
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -809,6 +840,7 @@
         "Vulnerable": 1
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Strength",
         "Vulnerable"
@@ -844,6 +876,7 @@
         "Energy": 2
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -872,6 +905,7 @@
         "Block": 8
       },
       "upgrade": "Block +3",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -900,6 +934,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -924,6 +959,7 @@
       "text": "Whenever a card is Exhausted, gain {Power:diff()} Block.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -953,6 +989,7 @@
         "Repeat": 2
       },
       "upgrade": "Damage +1, Strength +1",
+      "multiplayer": false,
       "mechanics": [
         "Strength"
       ],
@@ -981,6 +1018,7 @@
         "Block": 12
       },
       "upgrade": "Block +4",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1003,6 +1041,7 @@
         "Energy": 3
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1032,6 +1071,7 @@
         "Damage": 15
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -1058,6 +1098,7 @@
         "Damage": 16
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1084,6 +1125,7 @@
       "text": "Add a random Attack into your Hand. It's free to play this turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1114,6 +1156,7 @@
         "Inferno": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -1144,6 +1187,7 @@
         "Strength": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Strength"
       ],
@@ -1168,6 +1212,7 @@
       "text": "Add a copy of the third Attack you play each turn into your Hand.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1194,6 +1239,7 @@
         "Damage": 6
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1217,6 +1263,7 @@
       "text": "Whenever you play an Attack this turn, gain {Power:diff()} Block.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1242,6 +1289,7 @@
         "Damage": 9
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1266,6 +1314,7 @@
         "Strength": 1
       },
       "upgrade": "Strength +1",
+      "multiplayer": false,
       "mechanics": [
         "Strength",
         "Self-Harm"
@@ -1295,6 +1344,7 @@
         "Block": 5
       },
       "upgrade": "Block +2",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1324,6 +1374,7 @@
         "Repeat": 2
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -1348,6 +1399,7 @@
       "text": "At the end of your turn, {Power:diff()} random Attacks in your Hand are played against random enemies.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1374,6 +1426,7 @@
         "Damage": 12
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1400,6 +1453,7 @@
         "Plating": 4
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1426,6 +1480,7 @@
         "Block": 7
       },
       "upgrade": "Block +1, Vulnerable +1",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -1452,6 +1507,7 @@
         "Damage": 14
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1477,6 +1533,7 @@
         "Damage": 13
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -1504,6 +1561,7 @@
         "Cards": 1
       },
       "upgrade": "Cards +1",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -1529,6 +1587,7 @@
         "Damage": 5
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1552,6 +1611,7 @@
       "text": "At the start of your turn, put a random Attack from your Discard Pile into your Hand and Upgrade it.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1576,6 +1636,7 @@
       "text": "Block is not removed at the start of your turn.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1602,6 +1663,7 @@
         "HpLoss": 1
       },
       "upgrade": "Strength +1",
+      "multiplayer": false,
       "mechanics": [
         "Strength",
         "Exhaust",
@@ -1632,6 +1694,7 @@
       "text": "Play the top X{IfUpgraded:show:+1} cards of your Draw Pile.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1657,6 +1720,7 @@
         "Repeat": 4
       },
       "upgrade": "Repeat +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1682,6 +1746,7 @@
         "CrimsonMantle": 8
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -1710,6 +1775,7 @@
         "Cruelty": 25
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -1734,6 +1800,7 @@
       "text": "Whenever a card is Exhausted, draw 1 card.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1761,6 +1828,7 @@
         "Strength": 2
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "Strength"
       ],
@@ -1789,6 +1857,7 @@
         "MaxHp": 3
       },
       "upgrade": "Damage +2, MaxHp +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1816,6 +1885,7 @@
         "Damage": 7
       },
       "upgrade": "Damage +3",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -1844,6 +1914,7 @@
       "text": "Whenever you draw a card containing “Strike”, it is played against a random enemy.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1869,6 +1940,7 @@
         "Block": 30
       },
       "upgrade": "Block +10",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1895,6 +1967,7 @@
         "Juggernaut": 6
       },
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1919,6 +1992,7 @@
         "Damage": 15
       },
       "upgrade": "Damage +5",
+      "multiplayer": false,
       "mechanics": [
         "Strength"
       ],
@@ -1943,6 +2017,7 @@
         "Heal": 10
       },
       "upgrade": "Heal +3",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -1972,6 +2047,7 @@
         "Cards": 3
       },
       "upgrade": "Cards +2",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -2001,6 +2077,7 @@
       "text": "This turn, your next {Attacks:cond:>1?{Attacks:diff()} Attacks are|Attack is} played an extra time.",
       "numbers": {},
       "upgrade": "custom",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2027,6 +2104,7 @@
         "Cards": 3
       },
       "upgrade": "Damage +6",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -2052,6 +2130,7 @@
       "text": "Transform all Attacks in your Hand into Giant Rock.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2077,6 +2156,7 @@
         "Energy": 1
       },
       "upgrade": "Energy +1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2100,6 +2180,7 @@
       "text": "Exhaust your Hand. Add 1 random card into your Hand for each card Exhausted.",
       "numbers": {},
       "upgrade": "none",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -2126,6 +2207,7 @@
       "text": "Take double damage from enemies. Allies take half damage from enemies.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": true,
       "mechanics": [
         "None"
       ],
@@ -2153,6 +2235,7 @@
         "CalculationExtra": 1
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Self-Harm"
       ],
@@ -2180,6 +2263,7 @@
         "Damage": 4
       },
       "upgrade": "Damage +2",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],
@@ -2207,6 +2291,7 @@
       "text": "The first time you gain Block from a card each turn, double the amount gained.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "None"
       ],
@@ -2232,6 +2317,7 @@
         "Damage": 20
       },
       "upgrade": "Damage +10, Vulnerable +2",
+      "multiplayer": false,
       "mechanics": [
         "Vulnerable"
       ],
@@ -2256,6 +2342,7 @@
       "text": "Skills cost 0 {energyPrefix:energyIcons(1)}. Whenever you play a Skill, Exhaust it.",
       "numbers": {},
       "upgrade": "Cost -1",
+      "multiplayer": false,
       "mechanics": [
         "Exhaust"
       ],

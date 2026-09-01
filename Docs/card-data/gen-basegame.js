@@ -102,6 +102,7 @@ function parseCard(className, loc) {
     text: renderText(loc[entry + ".description"] || "", vars),
     numbers: Object.fromEntries(vars.map((v) => [v.name, v.value])),
     upgrade: parseUpgrade(src),
+    multiplayer: /MultiplayerConstraint\s*=>\s*CardMultiplayerConstraint\.MultiplayerOnly/.test(src),
     mechanics: [],
     role: [],
     sub: [],

@@ -21,6 +21,6 @@ public sealed class CloakOfMoonlightPower : WitchPower
     public async Task OnHexTriggered()
     {
         Flash();
-        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, null);
+        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
     }
 }
